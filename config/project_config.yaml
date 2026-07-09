@@ -1,0 +1,18 @@
+# The single line to change when moving to BioHPC
+data_root: "/code/lab4-methods-mining-data"
+
+zotero:
+  collection_name: "pubmed-LosonczyA-set"
+
+target_authors:
+  # Add the full list of authors whose pipelines you're extracting
+  - "Gergely F Turi"
+  # - "Asako Noguchi"
+  # - ...
+
+extraction:
+  confidence_levels: ["high", "medium", "low"]
+  attribution_tiers:
+    - "author_contributions_statement"
+    - "methods_text_inference"
+    - "position_heuristic"

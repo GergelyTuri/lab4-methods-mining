@@ -1,0 +1,19 @@
+# raw source documents — never commit copyrighted PDFs/docs
+*.pdf
+*.docx
+*.doc
+
+# data directory should never live here, but guard anyway
+/data/
+**/fulltext_cache/
+**/pdfs/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# local config overrides / secrets
+.env
+*.local.yaml
