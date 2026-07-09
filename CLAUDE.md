@@ -38,6 +38,16 @@ code in `lab3`.
 6. `scripts/06_aggregate.py` — per-author timeline/rollup into
    `outputs/author_pipelines/`
 
+## Stage 5 is interactive, not scripted
+`05_extract_pipeline` is not a standalone script. Extraction happens as an
+interactive Claude Code session: load the isolated methods text for a paper
+(or small batch) from `fulltext_cache/`, extract pipeline steps per
+`schema/pipeline_step.schema.json` and the attribution rules in
+`prompts/author_attribution.md`, write output to
+`outputs/author_pipelines/{zotero_key}.json`, and validate against the
+schema before moving to the next paper. Work in small batches (5-10 papers)
+and spot-check quality before scaling up.
+
 ## Conventions
 - Papers are identified by `zotero_key` throughout, not filename or DOI,
   to keep everything traceable back to the Zotero record.
