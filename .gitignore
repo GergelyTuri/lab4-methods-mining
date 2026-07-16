@@ -17,3 +17,6 @@ venv/
 # local config overrides / secrets
 .env
 *.local.yaml
+
+VSCode settings
+.vscode/settings.json

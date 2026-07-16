@@ -1,5 +1,5 @@
 # The single line to change when moving to BioHPC
-data_root: "/code/lab4-methods-mining-data"
+data_root: "C:\\Users\\gerit\\projects\\lab4-methods-mining-data"
 
 zotero:
   collection_name: "pubmed-LosonczyA-set"
@@ -7,7 +7,7 @@ zotero:
 target_authors:
   # Add the full list of authors whose pipelines you're extracting
   - "Gergely F Turi"
-  # - "Asako Noguchi"
+  - "Asako Noguchi"
   # - ...
 
 extraction:
