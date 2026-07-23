@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pipeline Step Extraction",
+  "description": "One extracted data-analysis pipeline for a single paper, attributed to a single target author. A paper produces one document of this shape per target author for whom there is supporting evidence in the Methods text (per the tiered attribution scheme in prompts/author_attribution.md). Every field must be traceable to the paper's actual text; if a value is unknown or absent from the source, it must be recorded as null rather than inferred or omitted.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["paper_id", "year", "journal", "target_author", "attribution", "pipeline_steps"],
+  "properties": {
+    "paper_id": {
+      "type": "string",
+      "description": "The Zotero item key (8-character alphanumeric ID) for this paper — the canonical identifier used throughout the project instead of filename or DOI."
+    },
+    "year": {
+      "type": "integer",
+      "description": "Publication year of the paper."
+    },
+    "journal": {
+      "type": "string",
+      "description": "Name of the journal the paper was published in."
+    },
+    "target_author": {
+      "type": "string",
+      "description": "Name of the target author this pipeline is attributed to. By convention this should match one of the entries in config/project_config.yaml's target_authors list, but that list may grow over time so it is not enforced here as an enum."
+    },
+    "attribution": {
+      "type": "object",
+      "description": "Evidence basis for attributing this pipeline to target_author, per the tiered attribution scheme in prompts/author_attribution.md.",
+      "additionalProperties": false,
+      "required": ["source", "confidence"],
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": ["author_contributions_statement", "methods_text_inference", "position_heuristic"],
+          "description": "Which tier of evidence supports attributing this pipeline to target_author: an explicit author contributions statement, inference from Methods text (e.g. named responsibility for a technique), or a position-based heuristic (e.g. author order)."
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["high", "medium", "low"],
+          "description": "Confidence in the attribution itself, independent of extraction_confidence on individual steps."
+        }
+      }
+    },
+    "pipeline_steps": {
+      "type": "array",
+      "description": "Ordered sequence of data-analysis pipeline steps extracted from the Methods (and Methods-relevant Supplementary) text.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "step_order",
+          "category",
+          "technique",
+          "software_tool",
+          "tool_version",
+          "parameters",
+          "input_data_type",
+          "output_data_type",
+          "hardware",
+          "source_location",
+          "source_quote",
+          "extraction_confidence"
+        ],
+        "properties": {
+          "step_order": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "1-based position of this step in the pipeline sequence as described in the paper."
+          },
+          "category": {
+            "type": "string",
+            "enum": ["imaging", "electrophysiology", "histology", "behavior", "statistics", "molecular", "surgery", "other"],
+            "description": "Broad category of the technique performed in this step."
+          },
+          "technique": {
+            "type": "string",
+            "description": "Short name of the specific technique or method used in this step (e.g. 'two-photon calcium imaging', 'linear mixed-effects model')."
+          },
+          "software_tool": {
+            "type": ["string", "null"],
+            "description": "Name of the software or tool used to perform this step, if the paper names one. Null if no tool is named."
+          },
+          "tool_version": {
+            "type": ["string", "null"],
+            "description": "Version of software_tool, if the paper reports one. Null if not reported or if software_tool is null."
+          },
+          "parameters": {
+            "type": "object",
+            "description": "Free-form key-value pairs of parameters reported for this step (e.g. frame rate, filter cutoff, sample size). Not schema-constrained beyond being an object, since parameter names vary widely by technique. Use an empty object if no parameters are reported.",
+            "additionalProperties": true
+          },
+          "input_data_type": {
+            "type": ["string", "null"],
+            "description": "Type of data consumed by this step (e.g. 'raw fluorescence video', 'spike times'). Null if not determinable from the text."
+          },
+          "output_data_type": {
+            "type": ["string", "null"],
+            "description": "Type of data produced by this step (e.g. 'deltaF/F traces', 'place field maps'). Null if not determinable from the text."
+          },
+          "hardware": {
+            "type": ["string", "null"],
+            "description": "Hardware used to perform this step, if named (e.g. microscope model, electrode array). Null if not reported."
+          },
+          "source_location": {
+            "type": "string",
+            "enum": ["main_text", "supplement"],
+            "description": "Whether this step was described in the paper's main Methods text or in a Methods-relevant Supplementary section."
+          },
+          "source_quote": {
+            "type": ["string", "null"],
+            "maxLength": 120,
+            "description": "A short verbatim quote from the source text supporting this step, or null if no single quote captures it. The real constraint is <=15 words, which JSON Schema cannot enforce directly (it cannot count words) — the maxLength of 120 characters here is only a rough soft proxy. The 15-word limit must be checked by whoever performs the extraction, not by schema validation."
+          },
+          "extraction_confidence": {
+            "type": "string",
+            "enum": ["high", "medium", "low"],
+            "description": "Confidence that this step was extracted correctly and completely from the source text, independent of attribution.confidence."
+          }
+        }
+      }
+    }
+  }
+}

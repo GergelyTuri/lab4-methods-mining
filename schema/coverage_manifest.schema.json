@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Coverage Manifest Entry",
+  "description": "One per-paper row in the coverage audit report produced by scripts/02_check_coverage.py, recording what source material (main PDF, supplement) exists for a paper and its fulltext extraction status before pipeline extraction (stage 5) begins.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "zotero_key",
+    "doi",
+    "year",
+    "has_main_pdf",
+    "has_supplement",
+    "supplement_type",
+    "fulltext_status",
+    "flag"
+  ],
+  "properties": {
+    "zotero_key": {
+      "type": "string",
+      "description": "The Zotero item key (8-character alphanumeric ID) for this paper — the canonical identifier used throughout the project instead of filename or DOI."
+    },
+    "doi": {
+      "type": ["string", "null"],
+      "description": "DOI of the paper, if known. Null if not recorded in Zotero metadata."
+    },
+    "year": {
+      "type": ["integer", "null"],
+      "description": "Publication year of the paper. Null if not recorded in Zotero metadata."
+    },
+    "has_main_pdf": {
+      "type": "boolean",
+      "description": "Whether a main-text PDF for this paper is present in the data root."
+    },
+    "has_supplement": {
+      "type": "boolean",
+      "description": "Whether any supplementary material for this paper is present in the data root."
+    },
+    "supplement_type": {
+      "type": ["string", "null"],
+      "enum": ["pdf", "docx", "mixed", "none", null],
+      "description": "File format of the supplementary material, if any. 'mixed' means more than one format is present (e.g. both a PDF and a docx supplement). Null or 'none' if has_supplement is false."
+    },
+    "fulltext_status": {
+      "type": "string",
+      "enum": ["ok", "ocr_needed", "missing", "paywalled"],
+      "description": "Status of fulltext extraction for this paper: 'ok' if main text was extracted cleanly, 'ocr_needed' if the PDF is image-based and requires OCR, 'missing' if no source file could be found, 'paywalled' if the source could not be retrieved due to access restrictions."
+    },
+    "flag": {
+      "type": ["string", "null"],
+      "description": "Free-text note for manual review (e.g. 'check manually', 'upload needed'). Null if no manual review is needed."
+    }
+  }
+}
