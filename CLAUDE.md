@@ -2,7 +2,7 @@
 
 ## Purpose
 Extract structured, step-by-step data-analysis pipelines from the Methods
-(and Methods-relevant Supplementary) sections of 83 papers from the
+(and Methods-relevant Supplementary) sections of 82 papers from the
 Losonczy Lab (2010–present), scoped to specific target authors. Output
 feeds a downstream project that matches these pipelines against actual
 code in `lab3`.
@@ -58,7 +58,7 @@ and spot-check quality before scaling up.
   for anything queryable.
 
 ## Current status
-- [ ] Zotero collection `pubmed-LosonczyA-set` populated (83 papers)
+- [ ] Zotero collection `pubmed-LosonczyA-set` populated (82 papers)
 - [ ] Target author list finalized in config/project_config.yaml
 - [ ] Coverage check run
 - [ ] Attribution scheme validated on a small batch
