@@ -51,6 +51,26 @@ MIN_FULLTEXT_CHARS = 200
 SUPPLEMENT_FILENAME_MARKERS = ["supp", "supplementary", "appendix", "si", "s1", "s2", "mmc"]
 SUPPLEMENT_ESM_PATTERN = re.compile(r"(?i)esm[-_]?\d|\d[-_]?esm|_esm(?:[^a-z0-9]|$)")
 
+# Manual curation, not something to infer automatically: papers confirmed
+# (by reading the actual cached fulltext) to be intentionally out of scope
+# for stage 4/5 rather than pending extraction failures — reviews/
+# commentaries and software-description papers with no empirical Methods
+# section, one retracted article whose cached fulltext is just the
+# retraction notice, and one paper manually reviewed and judged not
+# relevant to this project's scope. See the stage-3 full-run reports for
+# how each was confirmed. Tagged via exclusion_reason in manifest.db;
+# their cached text and extraction_method are left untouched.
+EXCLUSION_REASONS = {
+    "4DHCXNES": "review_or_commentary",
+    "642U6I8S": "review_or_commentary",
+    "67UM7LCN": "review_or_commentary",
+    "JH9IHBJH": "review_or_commentary",
+    "I6IQRZTG": "software_description_no_methods",
+    "F6JNRQZA": "software_description_no_methods",
+    "MASWIV2A": "retracted",
+    "UA49IT7M": "not_relevant",
+}
+
 # --- Methods-section header heuristic ---------------------------------
 #
 # Real extracted text from two-column journal PDFs is messy: a section
@@ -64,21 +84,57 @@ SUPPLEMENT_ESM_PATTERN = re.compile(r"(?i)esm[-_]?\d|\d[-_]?esm|_esm(?:[^a-z0-9]
 # ("collapsed") version of each line against known header phrases using
 # startswith() rather than requiring the line to equal the phrase exactly.
 #
-# Bare "methods" and the plain section names below ("results",
-# "discussion", ...) are common English words that could plausibly open
-# an ordinary sentence at the top of a column, so — unlike the more
-# distinctive multi-word/compound phrases — they're only accepted as an
-# exact whole-line match (collapsed line has nothing else glued to it).
+# The plain section names below ("results", "discussion", ...) are common
+# English words that could plausibly open an ordinary sentence at the top
+# of a column, so — unlike the more distinctive multi-word/compound
+# phrases — they're only accepted as an exact whole-line match (collapsed
+# line has nothing else glued to it).
 START_PREFIX_PHRASES = [
     "supplementalexperimentalprocedures",
     "supplementaryexperimentalprocedures",
     "materialsandmethods",
     "methodsandmaterials",
+    "methodsandresults",
     "experimentalprocedures",
     "starmethods",
     "onlinemethods",
 ]
 START_EQUALITY_PHRASES = {"methods"}
+
+# Bare "Methods" gets a second chance beyond the whole-line equality check
+# above: a real "Methods" header that sits at the top of a two-column-PDF
+# column is routinely glued with no separating space to whatever the
+# adjacent column's text happens to be at that point (see
+# "Methods On day 1, RC was carried out..." in KKAPPFAJ, or "Methods step
+# was necessary to obtain a reference z stack..." in RBL2PSLI — the latter
+# glues onto a lowercase word mid-paragraph from elsewhere in the column,
+# not a capitalized sentence start, so this pattern doesn't require the
+# glued word itself to look like a sentence start).
+#
+# It DOES require "Methods"/"METHODS" itself to be capitalized, not plain
+# lowercase "methods" — real section headers are stylistically capitalized
+# in the source PDF, whereas plain "methods" starting a line is more often
+# just the common noun starting a mid-column-wrap sentence. This is not a
+# hypothetical: an earlier, case-insensitive version of this pattern
+# false-matched "methods for histology and microscopy image alignment. Of
+# [...]" in Y9DG73R4 — ordinary Related-Work prose that happened to wrap
+# to the top of a column — before a genuine "2. METHODS" header later in
+# the same document. Case is a cheap, effective discriminator between the
+# two.
+#
+# The two known false-positive traps are rejected upstream regardless,
+# before this pattern is ever consulted: is_candidate_header_line() rejects
+# a leading "("/"[" (catches inline cross-references like "(see Methods)"
+# or "(Online Methods, Fig. 3d...)"), and CITATION_TAIL_PATTERN rejects a
+# trailing "(YEAR)." (catches bibliography lines like "Nat. Methods
+# (2003)." — which this pattern also structurally can't match anyway,
+# since the character right after "Methods " there is "(", not a letter).
+#
+# The optional leading "\d+[.)]?\s+" tolerates a numbered-section prefix
+# (e.g. "2. METHODS Algorithm1:" in Y9DG73R4, a CS-style numbered paper),
+# which the plain collapsed-equality check above can't match once the next
+# subsection title is glued on with no space.
+BARE_METHODS_GLUED_PATTERN = re.compile(r"^(?:\d+[.)]?\s+)?(?:Methods|METHODS)\s+[a-zA-Z]")
 
 END_PREFIX_PHRASES = [
     "authorcontributions",
@@ -202,6 +258,8 @@ def ensure_methods_columns(conn: sqlite3.Connection) -> None:
         "methods_extracted_supp": "INTEGER NOT NULL DEFAULT 0",
         "extraction_method": "TEXT",
         "last_methods_check": "TEXT",
+        "possible_trailing_contamination": "INTEGER NOT NULL DEFAULT 0",
+        "exclusion_reason": "TEXT",
     }
     for col, decl in additions.items():
         if col not in existing:
@@ -209,14 +267,33 @@ def ensure_methods_columns(conn: sqlite3.Connection) -> None:
     conn.commit()
 
 
+def apply_exclusion_reasons(conn: sqlite3.Connection) -> None:
+    """Tag the manually curated EXCLUSION_REASONS papers as intentionally
+    out of scope for stage 4/5. Only touches exclusion_reason — leaves
+    cached fulltext and extraction_method as-is, so this can run every
+    time without disturbing anything else."""
+    conn.executemany(
+        "UPDATE manifest SET exclusion_reason = ? WHERE zotero_key = ?",
+        [(reason, key) for key, reason in EXCLUSION_REASONS.items()],
+    )
+    conn.commit()
+
+
 def is_methods_processed(row: dict) -> bool:
-    """A paper is considered done once a methods-extraction attempt has been
-    recorded for it — success or failure. Unlike stage 1's retry-on-failure
-    semantics, failures here are not auto-retried: this heuristic is
-    deterministic (no network flakiness to blame), and a paper flagged
-    extraction_failed is expected to be picked up by manual review rather
-    than by blindly re-running this script."""
-    return row.get("extraction_method") is not None and row.get("last_methods_check") is not None
+    """A paper is done — skip it on rerun — once it's either manually
+    excluded (see EXCLUSION_REASONS) or its main text has already yielded
+    isolated Methods content.
+
+    A paper whose main-text extraction previously failed is NOT considered
+    done: it's retried every run. This heuristic is deterministic, so an
+    unexcluded failure isn't noise to shrug off — it's a signal that the
+    header heuristic itself has a gap (exactly how the two false-positive
+    traps and the bare-"Methods" glued-header gap got found and fixed).
+    Auto-retrying means a heuristic improvement lands on old failures
+    immediately, without a manual manifest.db reset first."""
+    if row.get("exclusion_reason") is not None:
+        return True
+    return bool(row.get("methods_extracted_main"))
 
 
 def update_manifest_methods(
@@ -227,6 +304,7 @@ def update_manifest_methods(
     methods_extracted_main: bool,
     methods_extracted_supp: bool,
     extraction_method: str,
+    possible_trailing_contamination: bool,
 ) -> None:
     conn.execute(
         """
@@ -235,7 +313,8 @@ def update_manifest_methods(
             methods_extracted_main = ?,
             methods_extracted_supp = ?,
             extraction_method = ?,
-            last_methods_check = ?
+            last_methods_check = ?,
+            possible_trailing_contamination = ?
         WHERE zotero_key = ?
         """,
         (
@@ -244,6 +323,7 @@ def update_manifest_methods(
             int(methods_extracted_supp),
             extraction_method,
             datetime.now(timezone.utc).isoformat(),
+            int(possible_trailing_contamination),
             zotero_key,
         ),
     )
@@ -294,6 +374,8 @@ def find_section_start(lines: list[str]) -> int | None:
             return i
         if any(collapsed.startswith(p) for p in START_PREFIX_PHRASES):
             return i
+        if BARE_METHODS_GLUED_PATTERN.match(stripped):
+            return i
     return None
 
 
@@ -310,6 +392,34 @@ def find_section_end(lines: list[str], start: int) -> int:
         if any(collapsed.startswith(p) for p in END_PREFIX_PHRASES):
             return i
     return len(lines)
+
+
+# --- Trailing-contamination advisory flag ------------------------------
+#
+# The header/footer heuristic above isolates a Methods section by line,
+# but on two-column source PDFs the columns can be interleaved within the
+# same lines (see 03_extract_methods report from the 5-paper test batch:
+# 2LKHNA25's isolated Methods text runs into bibliography entries with no
+# clean header line to stop at). This is a purely advisory smoke-detector
+# for that failure mode: it does not attempt to locate or trim the
+# contamination, only to flag the paper for stage 5's human review.
+TRAILING_CONTAMINATION_FRACTION = 0.15
+TRAILING_CONTAMINATION_MIN_HITS = 3
+ET_AL_PATTERN = re.compile(r"et al\.?", re.IGNORECASE)
+YEAR_PAREN_PATTERN = re.compile(r"\(\d{4}[a-z]?\)")
+
+
+def detect_trailing_contamination(text: str) -> bool:
+    """Flag when the last ~15% of an isolated Methods text (by character
+    count) contains several "et al." / "(YEAR)" citation-style patterns —
+    a density that's atypical for methods prose but exactly what a
+    bibliography looks like."""
+    if not text:
+        return False
+    tail_len = max(1, int(len(text) * TRAILING_CONTAMINATION_FRACTION))
+    tail = text[-tail_len:]
+    hits = len(ET_AL_PATTERN.findall(tail)) + len(YEAR_PAREN_PATTERN.findall(tail))
+    return hits >= TRAILING_CONTAMINATION_MIN_HITS
 
 
 def isolate_methods_main(text: str) -> tuple[str | None, str]:
@@ -421,15 +531,18 @@ def process_paper(
     manifest_row: dict,
     data_root: Path,
     fulltext_dir: Path,
-) -> tuple[bool, bool, bool, str]:
+) -> tuple[bool, bool, bool, str, bool]:
     """Returns (methods_extracted_main, supplement_extracted,
-    methods_extracted_supp, overall_extraction_method)."""
+    methods_extracted_supp, overall_extraction_method,
+    possible_trailing_contamination)."""
     main_text_path = fulltext_dir / f"{zotero_key}_main.txt"
     main_text = main_text_path.read_text(encoding="utf-8")
     isolated_main, main_method = isolate_methods_main(main_text)
     methods_extracted_main = isolated_main is not None
+    possible_trailing_contamination = False
     if methods_extracted_main:
         (fulltext_dir / f"{zotero_key}_methods_main.txt").write_text(isolated_main, encoding="utf-8")
+        possible_trailing_contamination = detect_trailing_contamination(isolated_main)
 
     main_pdf_filename = manifest_row["main_pdf_filename"]
     attachments = find_supplement_attachments(zot, zotero_key, main_pdf_filename)
@@ -459,7 +572,13 @@ def process_paper(
     else:
         overall_method = "failed"
 
-    return methods_extracted_main, supplement_extracted, methods_extracted_supp, overall_method
+    return (
+        methods_extracted_main,
+        supplement_extracted,
+        methods_extracted_supp,
+        overall_method,
+        possible_trailing_contamination,
+    )
 
 
 def main() -> None:
@@ -491,6 +610,7 @@ def main() -> None:
     conn = sqlite3.connect(manifest_path)
     conn.row_factory = sqlite3.Row
     ensure_methods_columns(conn)
+    apply_exclusion_reasons(conn)
     manifest = {row["zotero_key"]: dict(row) for row in conn.execute("SELECT * FROM manifest").fetchall()}
 
     processed = skipped = ok_main = failed_main = 0
@@ -515,7 +635,10 @@ def main() -> None:
             continue
 
         if is_methods_processed(manifest_row):
-            print("    skipped — already processed")
+            if manifest_row.get("exclusion_reason") is not None:
+                print(f"    skipped — excluded ({manifest_row['exclusion_reason']})")
+            else:
+                print("    skipped — main methods already found")
             skipped += 1
             continue
 
@@ -524,6 +647,7 @@ def main() -> None:
             supplement_extracted,
             methods_extracted_supp,
             overall_method,
+            possible_trailing_contamination,
         ) = process_paper(zot, zotero_key, manifest_row, data_root, fulltext_dir)
 
         update_manifest_methods(
@@ -533,6 +657,7 @@ def main() -> None:
             methods_extracted_main=methods_extracted_main,
             methods_extracted_supp=methods_extracted_supp,
             extraction_method=overall_method,
+            possible_trailing_contamination=possible_trailing_contamination,
         )
 
         processed += 1
@@ -545,7 +670,8 @@ def main() -> None:
             f"    main methods: {'Y' if methods_extracted_main else 'N'} | "
             f"supplement extracted: {'Y' if supplement_extracted else 'n/a'} | "
             f"supplement methods: {'Y' if methods_extracted_supp else 'N'} | "
-            f"method={overall_method}"
+            f"method={overall_method} | "
+            f"possible_trailing_contamination={'Y' if possible_trailing_contamination else 'N'}"
         )
 
     conn.close()
