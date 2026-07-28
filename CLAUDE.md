@@ -57,10 +57,50 @@ and spot-check quality before scaling up.
 - Prefer SQLite (`manifest.db`, `pipelines.db`) over scattered flat files
   for anything queryable.
 
+## Known issues and conventions
+
+- **Supplement filename conventions.** Three publisher-specific naming
+  conventions are recognized when identifying supplement attachments:
+  Cell Press "mmc" (e.g. `mmc1.pdf`), Springer/Nature "ESM" (digit-adjacent,
+  e.g. `esm1.pdf`, or the `_ESM` suffix form), and Science "_sm" (e.g.
+  `science.abh4272_sm.pdf` — anchored immediately before the file
+  extension to avoid false positives). This matching logic is
+  duplicated independently in `scripts/02_check_coverage.py` and
+  `scripts/03_extract_methods.py` — if a fourth convention is ever
+  found, both copies need updating.
+- **Manual methods-boundary overrides.** `config/manual_methods_overrides.json`
+  holds human-verified start/end markers for papers where the header
+  heuristic can't isolate Methods at all (currently: SECXDAKS, UMWW7XYA,
+  9U8LL9DE). `scripts/03_extract_methods.py` checks this file before
+  falling back to the heuristic — check it before assuming a paper's
+  `extraction_failed` status is final.
+- **Exclusions.** `exclusion_reason` in manifest.db marks papers
+  intentionally out of scope for stage 4/5 — review/commentary,
+  software-description, retracted, or manually judged not_relevant.
+  Currently 16 papers; the list is stable but may grow as more papers
+  are reviewed.
+- **Attribution initials matching.** `scripts/04_extract_attribution.py`
+  treats dotted initials (e.g. "P.K.") as self-delimiting substrings
+  rather than requiring word boundaries, to handle column-merge
+  artifacts from PDF extraction that glue initials directly onto
+  adjacent prose with no separating space. This carries an
+  acknowledged, not-yet-observed risk of false-matching inside
+  numbered-reference-list citation styles (e.g. "45. P.K. Someone et
+  al."). Flag this for extra scrutiny during any manual spot-check of
+  attribution output.
+
 ## Current status
-- [ ] Zotero collection `pubmed-LosonczyA-set` populated (82 papers)
+- [x] Zotero collection `pubmed-LosonczyA-set` populated (82 papers)
 - [ ] Target author list finalized in config/project_config.yaml
-- [ ] Coverage check run
-- [ ] Attribution scheme validated on a small batch
-- [ ] Extraction prompt validated on a small batch
-- [ ] Full run
+- [x] Coverage check run
+- [x] Methods sections isolated (stage 3) — 66/82 papers recovered
+      (header heuristic, manual override, or Science-supplement
+      detection), 16 excluded as intentionally out of scope, 0
+      genuinely still failing
+- [x] Attribution scheme validated on a small batch (stage 4 — 7-paper
+      test batch, bugs found and fixed during review)
+- [ ] Stage 4 full run — attribution extraction across all 66 recovered
+      papers
+- [ ] Extraction prompt validated on a small batch (stage 5)
+- [ ] Stage 5 full run — interactive pipeline-step extraction
+- [ ] Stage 6 — per-author aggregation
