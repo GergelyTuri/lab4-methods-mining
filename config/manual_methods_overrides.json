@@ -1,0 +1,17 @@
+{
+  "9U8LL9DE": {
+    "start_marker": "nature protocols https://doi.org/10.1038/s41596-024-01099-4",
+    "end_marker": null,
+    "note": "Nature Protocols paper — the entire document body is the method (step-by-step 'Procedure' structure with numbered, timed steps); no single 'Methods' header exists by design. end_marker is null, meaning the slice runs to the end of the cached main text."
+  },
+  "SECXDAKS": {
+    "start_marker": "All experiments involving mice were done according to protocols",
+    "end_marker": "Acknowledgements",
+    "note": "Glued header at line-end ('...function in neurons. Methods') that the automatic heuristic couldn't isolate. Markers were verified against the cached fulltext before finalizing; the originally proposed end_marker ('Data availability The raw imaging data...') was not present verbatim in this extraction, so 'Acknowledgements' (confirmed to occur exactly once) was substituted."
+  },
+  "UMWW7XYA": {
+    "start_marker": "AllexperimentswereconductedinaccordancewithNationalInstitute",
+    "end_marker": "Acknowledgements",
+    "note": "Boxed/tabular Methods layout caused heavy two-column interleaving in extraction; the automatic heuristic found no isolable header. Markers were verified against the cached fulltext before finalizing; the originally proposed markers ('Methods Mice All experiments were conducted...', 'Code availability The software generated...') were not present verbatim in this extraction, so verified unique substrings were substituted."
+  }
+}

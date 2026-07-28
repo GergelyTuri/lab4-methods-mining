@@ -56,10 +56,23 @@ SUPPLEMENT_FILENAME_MARKERS = ["supp", "supplementary", "appendix", "si", "s1", 
 # generator uses (matching the trailing "_ESM" in the long form above).
 SUPPLEMENT_ESM_PATTERN = re.compile(r"(?i)esm[-_]?\d|\d[-_]?esm|_esm(?:[^a-z0-9]|$)")
 
+# Science's supplementary-materials naming convention: a DOI-fragment or
+# author-name stem followed by "_sm" immediately before the extension
+# (e.g. "science.abh4272_sm.pdf", "aaw0445_szonyi_sm.pdf"). Anchored to
+# "_sm" sitting right before the extension (not a bare substring like
+# "mmc") specifically to avoid false positives from ordinary words/names
+# containing "sm" elsewhere in a filename — e.g. "Kosmidis...pdf" or
+# "...transmit...pdf" both contain "sm" but not immediately before the
+# extension, and a corpus-wide scan of all 120 attachments in this
+# collection confirmed zero incidental matches with this anchoring.
+SUPPLEMENT_SM_PATTERN = re.compile(r"(?i)_sm\.[a-z0-9]+\Z")
+
 
 def filename_matches_supplement(filename: str) -> bool:
     lower = filename.lower()
     if any(marker in lower for marker in SUPPLEMENT_FILENAME_MARKERS):
+        return True
+    if SUPPLEMENT_SM_PATTERN.search(filename):
         return True
     return bool(SUPPLEMENT_ESM_PATTERN.search(filename))
 

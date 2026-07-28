@@ -1,0 +1,11 @@
+|Paper title|curation result|
+| ---| --- |
+|Supramammillary regulation of locomotion and hippocampal activity.| method is in a separate pdf in zotero libraty called `science.abh4272_sm`|
+| Compartment-specific tuning of dendritic feature selectivity by intracellular Ca(2+) release. | method is in a separate pdf in zotero libraty called `science.abm1670_sm`|
+| Visually guided in vivo single-cell electroporation for monitoring and manipulating mammalian hippocampal neurons | this is a method paper, so the main body of the article is the method. |
+| Brainstem nucleus incertus controls contextual memory formation. | method is in a separate pdf in zotero libraty called `aaw0445_szonyi_sm` |
+| H9K3DYM4 | exclude |
+| Activity-dependent compartmentalization of dendritic mitochondria morphology through local regulation of fusion-fission balance in neurons in vivo. | The first paragraph of the method is this: `Methods Animals All experiments involving mice were done according to protocols approved by the InstitutionalAnimalCare andUse Committee (IACUC) at Columbia University, Oklahoma Medical Research Foundation` ends with this: `Data availability The raw imaging data will be provided by the corresponding author upon request. The source data generated in this study are provided in the Source Data file. Source data are provided with this paper.` |
+| Hippocampal memory traces are differentially modulated by experience, time, and adult neurogenesis. | exclude |
+| CA1 pyramidal cell diversity enabling parallel information processing in the hippocampus. | review article, exclude |
+| Functional architecture of intracellular oscillations in hippocampal dendrites. | The metyhod section is in the article and starts like this: `Methods Mice All experiments were conducted in accordance with National Institute of Health guidelines and with the approval of the Columbia University Institutional Animal Care and Use Committee. C57Bl/6J non-transgenic mice were used for all experiments.Mice were kept in the vivariumon a reversed 12-h light-dark cycle and were housed with 3–5 mice per cage (temperature, 22-23 °C; humidity, 40%).` ends with this: `Code availability The software generated in this study have been deposited in the Zenodo database as https://doi.org/10.5281/zenodo.11215569.` |

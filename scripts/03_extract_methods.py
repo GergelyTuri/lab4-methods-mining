@@ -20,6 +20,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import sqlite3
 from datetime import datetime, timezone
@@ -32,6 +33,7 @@ import yaml
 from pyzotero import zotero
 
 CONFIG_PATH = Path(__file__).resolve().parent.parent / "config" / "project_config.yaml"
+MANUAL_OVERRIDES_PATH = Path(__file__).resolve().parent.parent / "config" / "manual_methods_overrides.json"
 
 # Local Zotero API convention (see scripts/01_fetch_corpus.py for details):
 # "0" / "user" is the standard placeholder pyzotero/zotero-mcp use to talk
@@ -50,6 +52,10 @@ MIN_FULLTEXT_CHARS = 200
 # stage script in this pipeline is meant to run standalone).
 SUPPLEMENT_FILENAME_MARKERS = ["supp", "supplementary", "appendix", "si", "s1", "s2", "mmc"]
 SUPPLEMENT_ESM_PATTERN = re.compile(r"(?i)esm[-_]?\d|\d[-_]?esm|_esm(?:[^a-z0-9]|$)")
+# Science's supplementary-materials naming convention — see
+# scripts/02_check_coverage.py for the corpus-wide false-positive check
+# that justifies anchoring to "_sm" right before the extension.
+SUPPLEMENT_SM_PATTERN = re.compile(r"(?i)_sm\.[a-z0-9]+\Z")
 
 # Manual curation, not something to infer automatically: papers confirmed
 # (by reading the actual cached fulltext) to be intentionally out of scope
@@ -69,6 +75,14 @@ EXCLUSION_REASONS = {
     "F6JNRQZA": "software_description_no_methods",
     "MASWIV2A": "retracted",
     "UA49IT7M": "not_relevant",
+    "NE32ANTQ": "review_or_commentary",
+    "PG4C3BZX": "review_or_commentary",
+    "WKXA9QZD": "review_or_commentary",
+    "IKWDTTRN": "review_or_commentary",
+    "YB9JEM6T": "software_description_no_methods",
+    "H9K3DYM4": "not_relevant",
+    "6NTFH4CJ": "not_relevant",
+    "BTPMPI4L": "review_or_commentary",
 }
 
 # --- Methods-section header heuristic ---------------------------------
@@ -197,6 +211,8 @@ def find_collection_key(zot: zotero.Zotero, collection_name: str) -> str:
 def filename_matches_supplement(filename: str) -> bool:
     lower = filename.lower()
     if any(marker in lower for marker in SUPPLEMENT_FILENAME_MARKERS):
+        return True
+    if SUPPLEMENT_SM_PATTERN.search(filename):
         return True
     return bool(SUPPLEMENT_ESM_PATTERN.search(filename))
 
@@ -422,6 +438,52 @@ def detect_trailing_contamination(text: str) -> bool:
     return hits >= TRAILING_CONTAMINATION_MIN_HITS
 
 
+# --- Manual methods-boundary overrides ---------------------------------
+#
+# A small number of papers have a genuine Methods section that no
+# reasonable header heuristic can isolate: a Nature Protocols paper whose
+# entire body *is* the method, or a page whose layout got so scrambled by
+# column-interleaving during stage-1 PDF extraction that no header line
+# survives intact anywhere. For these, config/manual_methods_overrides.json
+# records a human-verified start_marker/end_marker pair (exact substrings
+# confirmed present in the cached fulltext) to slice directly, instead of
+# running the heuristic at all.
+
+
+def load_manual_overrides() -> dict:
+    if not MANUAL_OVERRIDES_PATH.exists():
+        return {}
+    with MANUAL_OVERRIDES_PATH.open("r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def apply_manual_override(entry: dict, text: str) -> tuple[str | None, str]:
+    """Slice text between entry's start_marker (inclusive) and end_marker
+    (exclusive) via exact substring match. end_marker of None means "through
+    the end of the text" (used for the whole-document override). Returns
+    (isolated_text_or_None, extraction_method) — extraction_method is
+    "manual_override" on success, "failed" if a marker isn't actually found
+    in this text (a stale override shouldn't silently produce wrong output)."""
+    start_marker = entry["start_marker"]
+    end_marker = entry.get("end_marker")
+
+    start_idx = text.find(start_marker)
+    if start_idx == -1:
+        return None, "failed"
+
+    if end_marker is None:
+        end_idx = len(text)
+    else:
+        end_idx = text.find(end_marker, start_idx + len(start_marker))
+        if end_idx == -1:
+            end_idx = len(text)
+
+    isolated = text[start_idx:end_idx].strip()
+    if not isolated:
+        return None, "failed"
+    return isolated, "manual_override"
+
+
 def isolate_methods_main(text: str) -> tuple[str | None, str]:
     """Main text: header-only, never a whole-doc guess. Returns
     (isolated_text_or_None, extraction_method)."""
@@ -531,13 +593,17 @@ def process_paper(
     manifest_row: dict,
     data_root: Path,
     fulltext_dir: Path,
+    manual_overrides: dict,
 ) -> tuple[bool, bool, bool, str, bool]:
     """Returns (methods_extracted_main, supplement_extracted,
     methods_extracted_supp, overall_extraction_method,
     possible_trailing_contamination)."""
     main_text_path = fulltext_dir / f"{zotero_key}_main.txt"
     main_text = main_text_path.read_text(encoding="utf-8")
-    isolated_main, main_method = isolate_methods_main(main_text)
+    if zotero_key in manual_overrides:
+        isolated_main, main_method = apply_manual_override(manual_overrides[zotero_key], main_text)
+    else:
+        isolated_main, main_method = isolate_methods_main(main_text)
     methods_extracted_main = isolated_main is not None
     possible_trailing_contamination = False
     if methods_extracted_main:
@@ -612,6 +678,7 @@ def main() -> None:
     ensure_methods_columns(conn)
     apply_exclusion_reasons(conn)
     manifest = {row["zotero_key"]: dict(row) for row in conn.execute("SELECT * FROM manifest").fetchall()}
+    manual_overrides = load_manual_overrides()
 
     processed = skipped = ok_main = failed_main = 0
     for i, item in enumerate(items, start=1):
@@ -648,7 +715,7 @@ def main() -> None:
             methods_extracted_supp,
             overall_method,
             possible_trailing_contamination,
-        ) = process_paper(zot, zotero_key, manifest_row, data_root, fulltext_dir)
+        ) = process_paper(zot, zotero_key, manifest_row, data_root, fulltext_dir, manual_overrides)
 
         update_manifest_methods(
             conn,

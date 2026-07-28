@@ -2,9 +2,9 @@
 
 - Total papers in collection: 82
 - Fulltext status (current collection items): ok=82, ocr_needed=0, missing=0, paywalled=0
-- Papers with a supplement found: 31
+- Papers with a supplement found: 36
 - Manifest/collection mismatches: 1 stale manifest row(s) (in manifest.db but no longer in the collection), 0 collection item(s) missing from manifest (run 01_fetch_corpus.py)
-- "Verify manually" flags (supplement-heavy journal, none found locally): 27
+- "Verify manually" flags (supplement-heavy journal, none found locally): 22
 
 | zotero_key | title | year | has_main_pdf | has_supplement | supplement_type | fulltext_status | flag |
 |---|---|---|---|---|---|---|---|
@@ -18,7 +18,7 @@
 | 642U6I8S | Behavioral consequences of GABAergic neuronal div… | 2014 | yes | no | none | ok | no supplement found |
 | 67UM7LCN | Circuits supporting the grid. | 2013 | yes | no | none | ok | no supplement found — this journal commonly has supplementary methods, verify manually on publisher site |
 | 6NTFH4CJ | Hippocampal memory traces are differentially modu… | 2014 | yes | no | none | ok | no supplement found — this journal commonly has supplementary methods, verify manually on publisher site |
-| 6T8UW6LJ | Dendritic inhibition in the hippocampus supports … | 2014 | yes | no | none | ok | no supplement found — this journal commonly has supplementary methods, verify manually on publisher site |
+| 6T8UW6LJ | Dendritic inhibition in the hippocampus supports … | 2014 | yes | yes | pdf | ok |  |
 | 85Y2ALXZ | From Morphology to Computation: How Synaptic Orga… | 2025 | yes | no | none | ok | no supplement found |
 | 8NDG4UEZ | Synaptogenic activity of the axon guidance molecu… | 2021 | yes | yes | pdf | ok |  |
 | 8SKA2ZZG | Inhibitory plasticity supports replay generalizat… | 2024 | yes | yes | pdf | ok |  |
@@ -32,10 +32,10 @@
 | ESKMCXTV | Large-Scale 3D Two-Photon Imaging of Molecularly … | 2020 | yes | yes | pdf | ok |  |
 | ETEC7ELI | Maximally selective single-cell target for circui… | 2021 | yes | no | none | ok | no supplement found — this journal commonly has supplementary methods, verify manually on publisher site |
 | EV4PID4B | Distal tuft dendrites predict properties of new h… | 2025 | yes | yes | pdf | ok |  |
-| F3ELBLNY | Supramammillary regulation of locomotion and hipp… | 2021 | yes | no | none | ok | no supplement found — this journal commonly has supplementary methods, verify manually on publisher site |
+| F3ELBLNY | Supramammillary regulation of locomotion and hipp… | 2021 | yes | yes | pdf | ok |  |
 | F6JNRQZA | A Generative Neighborhood-Based Deep Autoencoder … | 2024 | yes | no | none | ok | no supplement found |
 | FPF3RL6U | 2P-NucTag: on-demand phototagging for molecular a… | 2025 | yes | no | none | ok | no supplement found |
-| GH4CWH6X | Compartment-specific tuning of dendritic feature … | 2022 | yes | no | none | ok | no supplement found — this journal commonly has supplementary methods, verify manually on publisher site |
+| GH4CWH6X | Compartment-specific tuning of dendritic feature … | 2022 | yes | yes | pdf | ok |  |
 | H7G3J9VN | Volumetric Ca(2+) Imaging in the Mouse Brain Usin… | 2019 | yes | no | none | ok | no supplement found — this journal commonly has supplementary methods, verify manually on publisher site |
 | H9K3DYM4 | Improved Synthesis of Caged Glutamate and Caging … | 2018 | yes | no | none | ok | no supplement found |
 | HAD4KPSV | Recruitment and inhibitory action of hippocampal … | 2021 | yes | yes | pdf | ok |  |
@@ -49,7 +49,7 @@
 | K3YPWJ6L | Movement-stabilized three-dimensional optical rec… | 2026 | yes | yes | pdf | ok |  |
 | K433LNFA | Vasoactive Intestinal Polypeptide-Expressing Inte… | 2019 | yes | yes | pdf | ok |  |
 | K73ERVAQ | A transcriptomic axis aligns with in vivo functio… | 2026 | yes | no | none | ok | no supplement found |
-| KE4EERU8 | Brainstem nucleus incertus controls contextual me… | 2019 | yes | no | none | ok | no supplement found — this journal commonly has supplementary methods, verify manually on publisher site |
+| KE4EERU8 | Brainstem nucleus incertus controls contextual me… | 2019 | yes | yes | pdf | ok |  |
 | KKAPPFAJ | Adaptive stimulus selection for consolidation in … | 2022 | yes | no | none | ok | no supplement found — this journal commonly has supplementary methods, verify manually on publisher site |
 | KZYI47XK | E-Cannula reveals anatomical diversity in sharp-w… | 2022 | yes | yes | pdf | ok |  |
 | LB5SX2W3 | A Role for the Locus Coeruleus in Hippocampal CA1… | 2020 | yes | yes | pdf | ok |  |
@@ -90,4 +90,4 @@
 | YCFJ2N9Z | Organization and Plasticity of Inhibition in Hipp… | 2023 | yes | no | none | ok | no supplement found |
 | YU3INJP9 | Distinct Contribution of Adult-Born Hippocampal G… | 2016 | yes | yes | pdf | ok |  |
 | YZESCRFK | Non-parametric Vignetting Correction for Sparse S… | 2021 | yes | no | none | ok | no supplement found |
-| ZIRAQSPC | Parallel independent voltage computing along dend… | 2026 | yes | no | none | ok | no supplement found — this journal commonly has supplementary methods, verify manually on publisher site |
+| ZIRAQSPC | Parallel independent voltage computing along dend… | 2026 | yes | yes | pdf | ok |  |
