@@ -88,6 +88,17 @@ and spot-check quality before scaling up.
   numbered-reference-list citation styles (e.g. "45. P.K. Someone et
   al."). Flag this for extra scrutiny during any manual spot-check of
   attribution output.
+- **Attribution initials matching requires the complete form.** Initials
+  matching requires an exact match of an author's complete initials
+  string, not a prefix/substring match — an earlier version let a
+  shorter variant (e.g. "J.O.") match as a prefix of a different,
+  longer real initials string ("J.O.H."), and separately let one target
+  author's short initials coincidentally match text naming an unrelated
+  person. This was deliberately not engineered into a more general
+  collision-avoidance system, since no current target author's initials
+  are a prefix of another's — if that changes (a new target author is
+  added whose initials collide with or prefix-match an existing one),
+  this matching logic will need revisiting at that time.
 
 ## Current status
 - [x] Zotero collection `pubmed-LosonczyA-set` populated (82 papers)
