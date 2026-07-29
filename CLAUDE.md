@@ -99,6 +99,24 @@ and spot-check quality before scaling up.
   are a prefix of another's — if that changes (a new target author is
   added whose initials collide with or prefix-match an existing one),
   this matching logic will need revisiting at that time.
+- **Attribution notes flag contamination bleed-through.** Because stage
+  3's Methods isolation can bleed a trailing fragment of the real
+  Author Contributions section (or a headerless Acknowledgments/funding
+  paragraph) into the extracted Methods text, `04_extract_attribution.py`
+  now cross-references stage 3's `possible_trailing_contamination` flag:
+  any evidence found in a flagged paper's methods-extracted text gets an
+  explicit note calling that out, and a Tier 2 (methods_text_inference)
+  match is demoted to "low" confidence when its surrounding text reads
+  as Acknowledgments/funding language (e.g. "supported by", "grant",
+  "fellowship") with no task-attribution verbs ("performed", "designed",
+  "analyzed", etc.) — that only confirms authorship, not technique
+  involvement. Two papers, BIWVCPEH and SWL5RJLJ, have
+  contamination-flagged evidence that doesn't cleanly fit either the
+  Ack-vs-task-verb heuristic or the Author-Contributions header
+  detection (BIWVCPEH's match is Nature Reporting Summary boilerplate;
+  SWL5RJLJ's real Contributions header didn't survive extraction into
+  the methods cache at all, only a headerless fragment did) — these are
+  flagged for manual review during stage 5 rather than auto-classified.
 
 ## Current status
 - [x] Zotero collection `pubmed-LosonczyA-set` populated (82 papers)
@@ -110,7 +128,7 @@ and spot-check quality before scaling up.
       genuinely still failing
 - [x] Attribution scheme validated on a small batch (stage 4 — 7-paper
       test batch, bugs found and fixed during review)
-- [ ] Stage 4 full run — attribution extraction across all 66 recovered
+- [x] Stage 4 full run — attribution extraction across all 66 recovered
       papers
 - [ ] Extraction prompt validated on a small batch (stage 5)
 - [ ] Stage 5 full run — interactive pipeline-step extraction

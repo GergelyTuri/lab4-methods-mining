@@ -17,12 +17,25 @@ re-queried every run.
 
 ## Tiered attribution scheme
 
-1. author_contributions_statement (highest confidence): the paper's main
-   text has an "Author Contributions" / "CRediT" section, and the target
-   author's name or initials appear in it.
-2. methods_text_inference: no CRediT statement (or the author isn't
-   named in it), but the isolated Methods text itself names the author
-   or their initials next to a specific technique description.
+1. author_contributions_statement (highest confidence): an "Author
+   Contributions" / "CRediT" section names the target author. Checked in
+   two locations, both counted as this tier: (1a) the primary location,
+   the paper's main text; (1b) a bleed-through fallback — the same
+   header search repeated against the methods-extracted text cache, for
+   cases where stage 3's Methods isolation captured a trailing fragment
+   of the real Author Contributions section instead of leaving it in
+   the main text (see possible_trailing_contamination in manifest.db).
+   1b evidence gets a note flagging it as bleed-through so this is
+   visible without cross-referencing manifest.db.
+2. methods_text_inference: no CRediT statement found in either location
+   above, but the isolated Methods text itself names the author or
+   their initials next to a specific technique description ("medium"
+   confidence). The same contamination that produces 1b matches can
+   also drop a headerless Acknowledgments/funding-disclosure fragment
+   into the methods text — that only confirms authorship, not technique
+   involvement, so a match whose surrounding clause reads as
+   funding/acknowledgment language (and not task-attribution language)
+   is demoted to "low" instead.
 3. position_heuristic (fallback, always "low" confidence): neither of
    the above found anything. Falls back to the author's position
    (first/last/middle) in the byline as a weak signal. This project's
@@ -88,6 +101,26 @@ CONTRIBUTIONS_END_MARKERS = [
 
 CONTRIBUTIONS_HEADER_PATTERN = re.compile(
     r"(?i)author\s*contributions|credit\s*authorship\s*contribution\s*statement|\bcredit\s*statement\b"
+)
+
+# Tier-2 (methods_text_inference) evidence quality signal: a match whose
+# surrounding clause reads like Acknowledgments/funding-disclosure prose
+# ("supported by", "fellowship", "grant") confirms authorship but is not
+# evidence the author performed any specific technique — genuinely weaker
+# than a match surrounded by CRediT-style task-attribution verbs
+# ("performed", "designed", "analyzed"), which is what Tier 2 was designed
+# to catch. Both shapes turn up in Tier 2 because stage 3's Methods
+# isolation sometimes captures a trailing Acknowledgments/CRediT fragment
+# along with the real Methods text (see possible_trailing_contamination
+# in manifest.db) — this doesn't try to fully separate the two sections,
+# just flags the weaker shape so it isn't reported at the same confidence
+# as a real technique description.
+ACK_KEYWORD_PATTERN = re.compile(
+    r"(?i)acknowledg|supported\s+by|\bfunding\b|\bfellowship\b|\bscholarship\b|\bgrant\b|\bfoundation\b"
+)
+TASK_VERB_KEYWORD_PATTERN = re.compile(
+    r"(?i)\b(?:performed|designed|analyz\w*|conceiv\w*|develop\w*|collect\w*|wrote|built|construct\w*|"
+    r"provid\w*|investigat\w*|curat\w*|supervis\w*|generat\w*|valid\w*)\b"
 )
 
 # A last-name match is only real attribution evidence if it's not actually
@@ -400,6 +433,8 @@ def attribute_author(
     contributions_window: str | None,
     methods_text: str,
     n_authors: int,
+    methods_contributions_window: str | None = None,
+    contamination_flagged: bool = False,
 ) -> dict:
     """Apply the three-tier attribution scheme for a single matched
     target author. Always returns a record — every matched author gets
@@ -413,9 +448,19 @@ def attribute_author(
     # the form the paper itself credits the author with.
     search_name = match["creator_name"]
 
-    # Tier 1: author contributions statement. Citation-guarded too, not
-    # just Tier 2 — the same column-merge extraction artifacts that bleed
-    # reference-list text into isolated Methods sections (see stage 3's
+    def with_contamination_note(note: str) -> str:
+        if contamination_flagged:
+            return (
+                f"{note} — paper flagged possible_trailing_contamination in stage 3; "
+                "evidence found in likely-contaminated region, cross-check against the "
+                "full paper before relying on it"
+            )
+        return note
+
+    # Tier 1a: author contributions statement, primary location (the main
+    # narrative text). Citation-guarded too, not just Tier 2 — the same
+    # column-merge extraction artifacts that bleed reference-list text
+    # into isolated Methods sections (see stage 3's
     # possible_trailing_contamination flag) can just as easily bleed a
     # citation into a captured contributions window.
     if contributions_window:
@@ -430,19 +475,64 @@ def attribute_author(
                 "notes": f"matched via {matched_form!r} in the Author Contributions / CRediT statement",
             }
 
-    # Tier 2: methods-text inference. Capped at "medium" even for a
-    # longer/distinctive initials match — this tier is inherently less
-    # formal evidence than a real contributions statement.
+    # Tier 1b: same Author Contributions / CRediT header search, but
+    # widened to the methods-extracted text cache. Stage 3's Methods
+    # isolation sometimes captures a trailing fragment of the real
+    # Author Contributions section (the paper's own boundary heuristic
+    # cut into it, or PDF column-merge glued it onto the Methods tail —
+    # see possible_trailing_contamination). That's still genuine Tier-1
+    # evidence, just displaced — treating it as Tier 2 (as a prior
+    # version of this script did) understated its reliability and
+    # mislabeled the note as an ordinary Methods-text mention.
+    if methods_contributions_window:
+        evidence = find_name_evidence(methods_contributions_window, search_name)
+        if evidence:
+            matched_form, clause = evidence
+            note = (
+                f"matched via {matched_form!r} in an Author Contributions / CRediT-style "
+                "statement found via bleed-through into the isolated Methods text, not "
+                "the primary Author Contributions section"
+            )
+            return {
+                "target_author": target_author,
+                "attribution_source": "author_contributions_statement",
+                "attribution_confidence": classify_match_confidence(matched_form),
+                "evidence_quote": truncate_to_words(clause),
+                "notes": with_contamination_note(note),
+            }
+
+    # Tier 2: methods-text inference. Capped at "medium" for a genuine
+    # technique-description mention — this tier is inherently less formal
+    # evidence than a real contributions statement. But the same
+    # contamination that produces Tier 1b matches can also drop a
+    # headerless Acknowledgments/funding-disclosure fragment into the
+    # methods text (no "Author Contributions"/"Acknowledgments" header
+    # survived isolation to anchor a window on) — that confirms
+    # authorship, not that the author performed a specific technique, so
+    # it's demoted to "low" rather than reported at the same confidence
+    # as a real technique description.
     if methods_text:
         evidence = find_name_evidence(methods_text, search_name)
         if evidence:
             matched_form, clause = evidence
+            is_ack_like = bool(ACK_KEYWORD_PATTERN.search(clause)) and not TASK_VERB_KEYWORD_PATTERN.search(clause)
+            if is_ack_like:
+                confidence = "low"
+                note = (
+                    f"matched via {matched_form!r} in what appears to be Acknowledgments/"
+                    "funding-disclosure text bled into the isolated Methods extraction, "
+                    "not a technique description — confirms authorship/funding but not "
+                    "involvement in a specific technique"
+                )
+            else:
+                confidence = "medium"
+                note = f"matched via {matched_form!r} directly in the isolated Methods text"
             return {
                 "target_author": target_author,
                 "attribution_source": "methods_text_inference",
-                "attribution_confidence": "medium",
+                "attribution_confidence": confidence,
                 "evidence_quote": truncate_to_words(clause),
-                "notes": f"matched via {matched_form!r} directly in the isolated Methods text",
+                "notes": with_contamination_note(note),
             }
 
     # Tier 3: position heuristic. Always "low" confidence, never a
@@ -585,9 +675,19 @@ def main() -> None:
         main_text = main_text_path.read_text(encoding="utf-8") if main_text_path.exists() else ""
         contributions_window = find_contributions_window(main_text)
         methods_text = read_methods_text(fulltext_dir, zotero_key)
+        methods_contributions_window = find_contributions_window(methods_text)
+        contamination_flagged = bool(manifest_row.get("possible_trailing_contamination"))
 
         records = [
-            attribute_author(match, contributions_window, methods_text, len(author_creators)) for match in matches
+            attribute_author(
+                match,
+                contributions_window,
+                methods_text,
+                len(author_creators),
+                methods_contributions_window=methods_contributions_window,
+                contamination_flagged=contamination_flagged,
+            )
+            for match in matches
         ]
 
         out_path = fulltext_dir / f"{zotero_key}_attribution.json"
