@@ -95,18 +95,23 @@ CONTRIBUTIONS_HEADER_PATTERN = re.compile(
 # "as previously described (Turi et al., 2019)", or a reference-list entry
 # "Kaifosh,P.,Lovett-Barron,M.,Turi,G.F.,Reardon,T.R.,Losonczy,A.,2013."
 # (this exact string was caught misattributing RJ39DEXI's Methods content
-# to Turi during test-batch review — a real bug, not a hypothetical: the
-# year sits ~35 characters past the name once several more co-authors are
-# listed first, well past a short fixed lookahead). Two independent
-# signals are checked: an immediate "et al"/bare year (the narrative-
-# citation shape), or — regardless of how far away the year ends up being
-# — the name being immediately followed by ", Initial." reference-list
-# formatting (the bibliography shape itself, which prose attribution
-# never uses; nobody writing "Turi performed the surgeries" writes
-# "Turi, G.F.," instead).
-CITATION_TAIL_PATTERN = re.compile(
-    r"\A\s*(?:et\s*al\.?|\(?\s*\d{4}|,\s*[A-Z]\.(?:\s*[A-Z]\.)*\s*,)"
-)
+# to Turi during test-batch review — a real bug, not a hypothetical).
+#
+# The general signal used for the reference-list shape: a surname is
+# essentially never followed immediately (no space) by a comma in
+# attribution prose — nobody writing "Turi performed the surgeries"
+# writes "Turi, performed..." — but that's exactly how this corpus's
+# bibliography entries always start ("Surname,Initials.,NextSurname,...").
+# An earlier, narrower version of this guard only matched a comma
+# introducing a strict run of "Initial." blocks, which a suffix in the
+# middle of the run breaks: "Lewis,T.L.Jr.,Courchet,J.&Polleux,F...."
+# (a real reference-list entry) slipped through and misattributed
+# SECXDAKS's Methods content to Tommy Lewis during the same round of
+# test-batch review that caught the Turi bug above — a second confirmed
+# instance of the same underlying shape, not a hypothetical either.
+# Checking for the bare immediate comma, with no assumption about what
+# follows it, catches both.
+CITATION_TAIL_PATTERN = re.compile(r"\A\s*(?:et\s*al\.?|\(?\s*\d{4}|,)")
 
 
 def load_config() -> dict:
@@ -245,18 +250,46 @@ def find_near_miss_matches(target_authors: list[str], author_creators: list[dict
 
 
 def generate_initials_variants(full_name: str) -> list[str]:
-    """All plausible initials shorthand for a name, as CRediT-style
-    statements typically write them (e.g. "G.T." or "GT" for "Gergely F
-    Turi", both first+last-only and every-token forms since papers are
-    inconsistent about whether middle initials are included)."""
-    tokens = [t for t in re.split(r"[\s\-]+", full_name) if t]
+    """The complete (every name-part) initials for a name, dotted and
+    bare — e.g. "J.O.H." / "JOH" for "Justin O'Hare", "M.L.-B." / "MLB"
+    for "Matthew Lovett-Barron". Splits on whitespace, hyphens, AND
+    apostrophes so a compound or apostrophe surname contributes one
+    initial per part, and the dotted form preserves a hyphen where the
+    split came from one. Both conventions are confirmed against real
+    CRediT text found in this corpus: 9U8LL9DE literally writes O'Hare's
+    initials as "J.O.H.", and F3ELBLNY writes Lovett-Barron's as
+    "M.L.-B." (hyphen intact).
+
+    Deliberately generates ONLY the complete form now, not a truncated
+    first+last-only shorthand (e.g. the old "M.B." for "Matthew
+    Lovett-Barron") — a short form can silently prefix-match a longer
+    real initials run (e.g. "J.O." matching inside the real "J.O.H."),
+    or worse, coincidentally collide with a completely unrelated name
+    ("M.B." turned out to match an unrelated citation to "M.B. Moser"
+    during test-batch review, not any evidence about Lovett-Barron)."""
+    parts = re.split(r"([\s\-']+)", full_name)
+    tokens: list[tuple[str, str]] = []  # (separator_before, initial_letter)
+    sep = ""
+    for part in parts:
+        if not part:
+            continue
+        if re.fullmatch(r"[\s\-']+", part):
+            sep = part
+        else:
+            tokens.append((sep, part[0].upper()))
+            sep = ""
     if not tokens:
         return []
-    first_last = (tokens[0][0] + tokens[-1][0]).upper()
-    all_tokens = "".join(t[0] for t in tokens).upper()
-    bare = {first_last, all_tokens}
-    dotted = {".".join(list(v)) + "." for v in bare}
-    return sorted(bare | dotted)
+
+    bare = "".join(letter for _, letter in tokens)
+    dotted_pieces = []
+    for i, (sep_before, letter) in enumerate(tokens):
+        if i > 0 and "-" in sep_before:
+            dotted_pieces.append("-")
+        dotted_pieces.append(letter)
+        dotted_pieces.append(".")
+    dotted = "".join(dotted_pieces)
+    return [dotted, bare]
 
 
 def truncate_to_words(text: str, max_words: int = EVIDENCE_QUOTE_MAX_WORDS) -> str:
@@ -285,7 +318,7 @@ def find_name_evidence(text: str, full_name: str) -> tuple[str, str] | None:
     and skipped — see CITATION_TAIL_PATTERN."""
     for variant in generate_initials_variants(full_name):
         if "." in variant:
-            # Dotted forms (e.g. "P.K.", "G.F.T.") are self-delimiting —
+            # Dotted forms (e.g. "P.K.", "J.O.H.") are self-delimiting —
             # every genuine Tier-1 match found during test-batch review
             # used this dotted form, and column-merge extraction routinely
             # glues it directly onto adjacent lowercase prose with no
@@ -296,15 +329,21 @@ def find_name_evidence(text: str, full_name: str) -> tuple[str, str] | None:
             # searched as a plain substring instead.
             pattern = re.compile(re.escape(variant))
         else:
-            # Bare undotted forms (e.g. "GT", "PK") still need a boundary
-            # check — unlike the dotted form they could otherwise match as
-            # a fragment of an unrelated longer uppercase run (e.g. "GT"
-            # inside "GTPase") — but only against another uppercase
-            # letter, not against the glued lowercase prose that's normal
-            # for this corpus.
+            # Bare undotted forms still need a boundary check — unlike
+            # the dotted form they could otherwise match as a fragment of
+            # an unrelated longer uppercase run (e.g. "GT" inside
+            # "GTPase") — but only against another uppercase letter, not
+            # against the glued lowercase prose that's normal for this
+            # corpus.
             pattern = re.compile(r"(?<![A-Z])" + re.escape(variant) + r"(?![A-Z])")
-        m = pattern.search(text)
-        if m:
+        for m in pattern.finditer(text):
+            # Defense in depth against exactly the bug that motivated
+            # generating only the complete initials form above: if this
+            # match is immediately followed by another "X." initial
+            # block, it's a truncated prefix of a longer real sequence,
+            # not the actual complete match — skip it and keep looking.
+            if re.match(r"[A-Z]\.", text[m.end() : m.end() + 2]):
+                continue
             start = max(0, m.start() - 80)
             end = min(len(text), m.end() + 120)
             return variant, text[start:end].strip()
@@ -367,6 +406,12 @@ def attribute_author(
     one, per the stage-4 spec — the tiers differ in evidence strength,
     not in whether a record exists at all."""
     target_author = match["target_author"]
+    # Search using the author's name as Zotero has it FOR THIS PAPER, not
+    # the config's canonical target_authors string — they can differ (the
+    # config's "Justin K O'Hare" carries a middle initial this paper's own
+    # Zotero record doesn't have), and the paper's text will only ever use
+    # the form the paper itself credits the author with.
+    search_name = match["creator_name"]
 
     # Tier 1: author contributions statement. Citation-guarded too, not
     # just Tier 2 — the same column-merge extraction artifacts that bleed
@@ -374,7 +419,7 @@ def attribute_author(
     # possible_trailing_contamination flag) can just as easily bleed a
     # citation into a captured contributions window.
     if contributions_window:
-        evidence = find_name_evidence(contributions_window, target_author)
+        evidence = find_name_evidence(contributions_window, search_name)
         if evidence:
             matched_form, clause = evidence
             return {
@@ -389,7 +434,7 @@ def attribute_author(
     # longer/distinctive initials match — this tier is inherently less
     # formal evidence than a real contributions statement.
     if methods_text:
-        evidence = find_name_evidence(methods_text, target_author)
+        evidence = find_name_evidence(methods_text, search_name)
         if evidence:
             matched_form, clause = evidence
             return {
