@@ -91,7 +91,7 @@ and spot-check quality before scaling up.
 
 ## Current status
 - [x] Zotero collection `pubmed-LosonczyA-set` populated (82 papers)
-- [ ] Target author list finalized in config/project_config.yaml
+- [x] Target author list finalized in config/project_config.yaml
 - [x] Coverage check run
 - [x] Methods sections isolated (stage 3) — 66/82 papers recovered
       (header heuristic, manual override, or Science-supplement
