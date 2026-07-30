@@ -33,6 +33,16 @@ Before extracting anything, read:
 - The `manifest.db` row's `possible_trailing_contamination` flag — see
   §6 before trusting the tail of the methods text.
 
+**Don't stop at the truncated `evidence_quote`.** Stage 4's evidentiary
+window is intentionally narrow, and in practice the captured quote often
+cuts off mid-sentence or mid-word (especially in column-merged PDF
+extractions — see §6). Before extracting, search the main text yourself
+for the complete Author Contributions statement (or equivalent CRediT
+text) surrounding that quote. The full statement often says
+considerably more than the truncated fragment shows — including,
+sometimes, an explicit division of labor among co-authors that should
+narrow your extraction (see §4).
+
 ## 2. What counts as a pipeline step
 
 A pipeline step is a **discrete data-analysis operation**, specific
@@ -134,6 +144,20 @@ empty `pipeline_steps` array.** Do not force steps onto a paper/author
 pair just to produce non-empty output — an empty array with an honest
 attribution record is a valid, useful result. Padding it out defeats
 the purpose of the tiered attribution scheme.
+
+**Explicit division of labor narrows what Tier 1 licenses.** A Tier 1
+(`author_contributions_statement`) match means the paper explicitly
+said this author did *something* — it does not automatically mean
+every step in the Methods section belongs to them. If the full
+statement you read per §1 divides labor among named co-authors — e.g.
+"P.K. designed and built hardware and software for imaging, behavior
+and motion-correction, and performed analyses. M.L.-B., G.F.T. and A.L.
+performed experiments." — scope `pipeline_steps` specifically to what's
+credited to your target author, and do not extend that Tier 1 license
+into work the same statement explicitly credits to someone else, even
+though it's described in the same Methods section. When the statement
+doesn't divide labor this explicitly, the default (extract normally
+across the section) still applies.
 
 ## 5. `source_location` and `source_quote`
 

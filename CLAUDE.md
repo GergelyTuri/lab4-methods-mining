@@ -117,6 +117,20 @@ and spot-check quality before scaling up.
   SWL5RJLJ's real Contributions header didn't survive extraction into
   the methods cache at all, only a headerless fragment did) — these are
   flagged for manual review during stage 5 rather than auto-classified.
+- **Contamination isn't only a tail phenomenon.** `possible_trailing_contamination`
+  was named, and stage 3's detection logic was built, around the
+  originally observed tail-only bibliography bleed-through shape. Real
+  stage 5 extraction work has since surfaced a second shape: recurring
+  mid-document copyright-footer/journal-boilerplate artifacts appearing
+  at page breaks throughout the document, not just at the tail (observed
+  in 4UQQ3CM5 — a Nature Neuroscience paper whose page-footer copyright
+  block was extracted character-reversed and interleaved mid-paragraph
+  at multiple page breaks, not only at the end). The flag name and
+  stage 3's detection logic remain tail-focused and have not been
+  generalized to catch this shape. Stage 5 extractors should be aware
+  contamination artifacts can appear anywhere in a flagged paper's
+  document, not only at the end — don't assume clean text just because
+  you're not near the tail of the file.
 
 ## Current status
 - [x] Zotero collection `pubmed-LosonczyA-set` populated (82 papers)
