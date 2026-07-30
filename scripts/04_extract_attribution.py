@@ -48,6 +48,10 @@ It does not do pipeline-step extraction (stage 5's job).
 Usage:
   python scripts/04_extract_attribution.py              # full collection
   python scripts/04_extract_attribution.py --limit 5     # first 5 items by zotero_key
+  python scripts/04_extract_attribution.py --reprocess-authors "Justin K O'Hare"
+                                                          # only these authors, even on
+                                                          # already-processed papers; merges
+                                                          # into existing per-paper output
 """
 
 from __future__ import annotations
@@ -283,46 +287,88 @@ def find_near_miss_matches(target_authors: list[str], author_creators: list[dict
 
 
 def generate_initials_variants(full_name: str) -> list[str]:
-    """The complete (every name-part) initials for a name, dotted and
-    bare — e.g. "J.O.H." / "JOH" for "Justin O'Hare", "M.L.-B." / "MLB"
-    for "Matthew Lovett-Barron". Splits on whitespace, hyphens, AND
-    apostrophes so a compound or apostrophe surname contributes one
-    initial per part, and the dotted form preserves a hyphen where the
-    split came from one. Both conventions are confirmed against real
-    CRediT text found in this corpus: 9U8LL9DE literally writes O'Hare's
-    initials as "J.O.H.", and F3ELBLNY writes Lovett-Barron's as
-    "M.L.-B." (hyphen intact).
+    """All plausible initials abbreviations for a name, dotted and bare.
 
-    Deliberately generates ONLY the complete form now, not a truncated
-    first+last-only shorthand (e.g. the old "M.B." for "Matthew
-    Lovett-Barron") — a short form can silently prefix-match a longer
-    real initials run (e.g. "J.O." matching inside the real "J.O.H."),
-    or worse, coincidentally collide with a completely unrelated name
-    ("M.B." turned out to match an unrelated citation to "M.B. Moser"
-    during test-batch review, not any evidence about Lovett-Barron)."""
-    parts = re.split(r"([\s\-']+)", full_name)
-    tokens: list[tuple[str, str]] = []  # (separator_before, initial_letter)
-    sep = ""
-    for part in parts:
-        if not part:
-            continue
-        if re.fullmatch(r"[\s\-']+", part):
-            sep = part
-        else:
-            tokens.append((sep, part[0].upper()))
-            sep = ""
-    if not tokens:
+    Splits into whitespace-separated segments first (each a real name
+    part — first, middle, surname, or a stray suffix like "Jr"). Within
+    a segment, a hyphen or apostrophe (a compound or apostrophe surname
+    like "Lovett-Barron" or "O'Hare") is then split further into
+    sub-parts.
+
+    Two abbreviation conventions are both confirmed in this corpus's
+    real Author Contributions text, so both are generated:
+      1. Complete decomposition — every sub-part, in every segment,
+         contributes its own initial (dotted form preserves a hyphen
+         where the split came from one): "J.O.H." for "Justin O'Hare"
+         (9U8LL9DE), "M.L.-B." for "Matthew Lovett-Barron" (F3ELBLNY).
+      2. Collapsed compound segment — a segment with an internal
+         hyphen/apostrophe instead contributes only ONE initial (its
+         first sub-part's first letter), while every other segment
+         still contributes its own: "J.K.O." for "Justin K O'Hare"
+         (EV4PID4B writes it this way, not "J.K.O.H." — this was a
+         confirmed false negative before this variant was added, since
+         the paper's own abbreviation never matched the complete form).
+         Generated one segment at a time (not combinatorially) since no
+         current target author has more than one compound segment.
+
+    This is NOT the same as the old, deliberately removed truncated
+    first+last-only shorthand (e.g. "M.B." for "Matthew Lovett-Barron",
+    dropping the "Lovett" segment entirely) — that collapsed *across*
+    whole name segments and caused a real collision (matched an
+    unrelated citation to "M.B. Moser"). The collapse here only ever
+    shortens a single compound segment's own internal sub-parts; every
+    segment (first name, middle initial, etc.) still contributes its
+    own initial in every variant."""
+    segments = full_name.split()
+    if not segments:
         return []
 
-    bare = "".join(letter for _, letter in tokens)
-    dotted_pieces = []
-    for i, (sep_before, letter) in enumerate(tokens):
-        if i > 0 and "-" in sep_before:
-            dotted_pieces.append("-")
-        dotted_pieces.append(letter)
-        dotted_pieces.append(".")
-    dotted = "".join(dotted_pieces)
-    return [dotted, bare]
+    # Per segment: list of (separator_before_this_subpart, initial_letter)
+    # sub-part tokens, e.g. "O'Hare" -> [("", "O"), ("'", "H")].
+    segment_subparts: list[list[tuple[str, str]]] = []
+    for segment in segments:
+        parts = re.split(r"([\-']+)", segment)
+        toks: list[tuple[str, str]] = []
+        sep = ""
+        for part in parts:
+            if not part:
+                continue
+            if re.fullmatch(r"[\-']+", part):
+                sep = part
+            else:
+                toks.append((sep, part[0].upper()))
+                sep = ""
+        segment_subparts.append(toks)
+
+    def render(token_lists: list[list[tuple[str, str]]]) -> tuple[str, str]:
+        flat = [tok for seg in token_lists for tok in seg]
+        bare = "".join(letter for _, letter in flat)
+        dotted_pieces = []
+        for i, (sep_before, letter) in enumerate(flat):
+            if i > 0 and "-" in sep_before:
+                dotted_pieces.append("-")
+            dotted_pieces.append(letter)
+            dotted_pieces.append(".")
+        return "".join(dotted_pieces), bare
+
+    variants: list[str] = []
+
+    def add(token_lists: list[list[tuple[str, str]]]) -> None:
+        for form in render(token_lists):
+            if form not in variants:
+                variants.append(form)
+
+    # 1. Complete decomposition (existing, validated behavior).
+    add(segment_subparts)
+
+    # 2. Collapsed-compound-segment variants (additive — see docstring).
+    for j, subparts in enumerate(segment_subparts):
+        if len(subparts) > 1:
+            collapsed = list(segment_subparts)
+            collapsed[j] = [subparts[0]]
+            add(collapsed)
+
+    return variants
 
 
 def truncate_to_words(text: str, max_words: int = EVIDENCE_QUOTE_MAX_WORDS) -> str:
@@ -602,6 +648,18 @@ def update_manifest_attribution(
     conn.commit()
 
 
+def merge_attribution_records(existing: list[dict], new_records: list[dict]) -> list[dict]:
+    """Merge freshly computed records into a paper's existing attribution
+    list for a --reprocess-authors run: replace the record for any
+    target_author covered by new_records, leave every other author's
+    existing record untouched. dict preserves insertion order, so an
+    author being replaced keeps their original position and a genuinely
+    new author is appended at the end."""
+    by_author = {r["target_author"]: r for r in existing}
+    by_author.update({r["target_author"]: r for r in new_records})
+    return list(by_author.values())
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -610,10 +668,38 @@ def main() -> None:
         default=None,
         help="Only consider the first N collection items, sorted by zotero_key (for test runs).",
     )
+    parser.add_argument(
+        "--reprocess-authors",
+        nargs="+",
+        default=None,
+        metavar="TARGET_AUTHOR",
+        help=(
+            "Recompute attribution for only these target_authors (must match "
+            "project_config.yaml's target_authors entries verbatim) instead of "
+            "the full list, and reprocess papers even if already marked "
+            "attribution_extracted. For each paper this touches, the result is "
+            "merged into the existing _attribution.json (and manifest.db's "
+            "target_authors_matched) rather than overwriting it, so records for "
+            "every other target author are left exactly as they were. Use this "
+            "to pick up a matching-logic fix (e.g. a generate_initials_variants "
+            "change) for specific authors without re-running the full corpus."
+        ),
+    )
     args = parser.parse_args()
 
     config = load_config()
     target_authors = config["target_authors"]
+
+    if args.reprocess_authors is not None:
+        unknown = [a for a in args.reprocess_authors if a not in target_authors]
+        if unknown:
+            raise SystemExit(
+                "--reprocess-authors name(s) not found verbatim in "
+                f"project_config.yaml's target_authors: {unknown}"
+            )
+        target_authors = args.reprocess_authors
+        print(f"Reprocessing mode: restricting to {target_authors}; ignoring attribution_extracted.")
+
     data_root = Path(config["data_root"])
     collection_name = config["zotero"]["collection_name"]
     fulltext_dir = data_root / "fulltext_cache"
@@ -653,7 +739,7 @@ def main() -> None:
             print("    skipped — no methods content available")
             skipped += 1
             continue
-        if is_attribution_processed(manifest_row):
+        if is_attribution_processed(manifest_row) and args.reprocess_authors is None:
             print("    skipped — already processed")
             skipped += 1
             continue
@@ -665,6 +751,15 @@ def main() -> None:
             print(f"    NOTE — near-miss (not matched): {nm}")
 
         if not matches:
+            if args.reprocess_authors is not None:
+                # None of the reprocessed authors are on this paper — leave
+                # its existing manifest row / attribution.json exactly as
+                # they were. (Calling update_manifest_attribution with an
+                # empty list here would wipe out target_authors_matched for
+                # any OTHER author already correctly matched on this paper
+                # by a prior full run.)
+                skipped += 1
+                continue
             update_manifest_attribution(conn, zotero_key, target_authors_matched=[])
             processed += 1
             without_matches += 1
@@ -678,7 +773,7 @@ def main() -> None:
         methods_contributions_window = find_contributions_window(methods_text)
         contamination_flagged = bool(manifest_row.get("possible_trailing_contamination"))
 
-        records = [
+        new_records = [
             attribute_author(
                 match,
                 contributions_window,
@@ -691,6 +786,11 @@ def main() -> None:
         ]
 
         out_path = fulltext_dir / f"{zotero_key}_attribution.json"
+        if args.reprocess_authors is not None and out_path.exists():
+            existing_records = json.loads(out_path.read_text(encoding="utf-8"))
+            records = merge_attribution_records(existing_records, new_records)
+        else:
+            records = new_records
         out_path.write_text(json.dumps(records, indent=2), encoding="utf-8")
 
         matched_names = [r["target_author"] for r in records]
