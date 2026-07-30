@@ -43,6 +43,61 @@ considerably more than the truncated fragment shows — including,
 sometimes, an explicit division of labor among co-authors that should
 narrow your extraction (see §4).
 
+### Sanity-check `_methods_main.txt` before trusting it
+
+Stage 3's Methods isolation can fail in ways that don't look like an
+error — the file exists, `manifest.db` shows `methods_extracted_main = 1`,
+and it isn't flagged `possible_trailing_contamination`, yet its content
+isn't the paper's real Methods section at all. Treat this as a live
+possibility, not a hypothetical edge case: real batch-1 extractions hit
+three different shapes of it —
+
+- `ESKMCXTV`: the isolated file was only the STAR★Methods
+  table-of-contents outline (13 lines), not the ~250 lines of actual
+  method content that followed later in `_main.txt`.
+- `NAXFDQ32`: the same TOC-stub shape, independently confirmed on a
+  second, unrelated paper.
+- `YZESCRFK`: the isolated file was a fragment of the *Results* section
+  plus Acknowledgments — the real "2 Method" section was never captured
+  at all, apparently because stage 3's header heuristic didn't
+  recognize a bare, numbered, singular "Method" heading.
+
+**When to suspect this** — before extracting, skim `_methods_main.txt`
+against these rough signals:
+
+- it's suspiciously short (rough guide: under ~500 words);
+- it reads like a table of contents or a bare list of section headings
+  rather than prose;
+- it doesn't contain any recognizable methods-content markers — a named
+  technique, a specific parameter or measurement, a piece of equipment
+  or software.
+
+Any one of these is reason enough to treat the file as a likely
+isolation failure rather than a genuinely short Methods section — a
+paper can genuinely have a short Methods section, but it still reads as
+prose about techniques, not an outline or a Results fragment.
+
+**What to do about it** — open
+`data_root/fulltext_cache/{zotero_key}_main.txt` directly and search for
+the real Methods section using the same header phrases stage 3's own
+heuristic looks for (`materials and methods`, `methods and materials`,
+`methods and results`, `experimental procedures`, `STAR Methods` /
+`STAR+METHODS`, `online methods`, `supplemental`/`supplementary
+experimental procedures`, or a bare `Methods` heading) — but be more
+liberal than stage 3's strict, automatable heuristic, since you're doing
+this by eye: also check for a numbered heading like `2 Method`
+(singular, no "Materials and"), since that's exactly the form stage 3
+missed in `YZESCRFK`. Once you find the real section, extract from there
+instead of the isolated file — this is genuine paper text, just
+mis-isolated upstream, not something you're fabricating by looking
+elsewhere.
+
+**Report it.** Whenever you use this fallback, say so explicitly in your
+response for that paper — which failure shape it looked like, roughly —
+not in the pipeline JSON itself (the schema has no field for this). This
+is how the pattern gets tracked across batches without needing a
+dedicated stage-3 audit script run for every one.
+
 ## 2. What counts as a pipeline step
 
 A pipeline step is a **discrete data-analysis operation**, specific
