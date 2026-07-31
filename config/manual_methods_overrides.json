@@ -13,5 +13,10 @@
     "start_marker": "AllexperimentswereconductedinaccordancewithNationalInstitute",
     "end_marker": "Acknowledgements",
     "note": "Boxed/tabular Methods layout caused heavy two-column interleaving in extraction; the automatic heuristic found no isolable header. Markers were verified against the cached fulltext before finalizing; the originally proposed markers ('Methods Mice All experiments were conducted...', 'Code availability The software generated...') were not present verbatim in this extraction, so verified unique substrings were substituted."
+  },
+  "N9FA3VEL": {
+    "start_marker": "SUPPLEMENTAL INFORMATION\nMethods",
+    "end_marker": "Figure S1. Signal processing.",
+    "note": "bioRxiv preprint places genuine Methods content in a 'Supplemental Information' appendix AFTER the References section — stage 3's heuristic doesn't search past References; confirmed 1-in-66 occurrence via corpus-wide check, manual override chosen over a general fix. Both markers verified as exact, unique (count()==1) substrings in the cached N9FA3VEL_main.txt before finalizing; the slice runs ~400 lines from the 'Methods'/'Animals' heading through the end of the 'Statistics' section, stopping just before the Supplementary Figure legends begin."
   }
 }

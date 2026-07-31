@@ -71,9 +71,30 @@ and spot-check quality before scaling up.
 - **Manual methods-boundary overrides.** `config/manual_methods_overrides.json`
   holds human-verified start/end markers for papers where the header
   heuristic can't isolate Methods at all (currently: SECXDAKS, UMWW7XYA,
-  9U8LL9DE). `scripts/03_extract_methods.py` checks this file before
-  falling back to the heuristic — check it before assuming a paper's
-  `extraction_failed` status is final.
+  9U8LL9DE) or found the wrong content entirely (N9FA3VEL — a bioRxiv
+  preprint whose genuine Methods content sits in a "Supplemental
+  Information" appendix *after* the References section, which stage
+  3's heuristic never searches past). `scripts/03_extract_methods.py`
+  checks this file before falling back to the heuristic — check it
+  before assuming a paper's `extraction_failed` status is final.
+  **Adding an override for a paper that already has
+  `methods_extracted_main = 1`** (i.e. it "succeeded" with the *wrong*
+  content, as N9FA3VEL did, rather than failing outright) doesn't take
+  effect on its own: `is_methods_processed()` skips any paper with that
+  flag already set, so a plain re-run silently protects the old, wrong
+  extraction instead of applying the new override. Manually reset that
+  one paper's `methods_extracted_main` to 0 in manifest.db before
+  re-running stage 3 — this is a targeted, reversible data reset (not a
+  script-logic change); every other field gets correctly rewritten by
+  the normal `update_manifest_methods()` call once the row is
+  reprocessed.
+- **EV4PID4B's cached Methods text has a word-gluing defect.** Its
+  `_methods_main.txt` (the published Neuron STAR★Methods companion of
+  N9FA3VEL's bioRxiv preprint) has no spaces between words throughout —
+  a column-merge PDF-extraction artifact in the same general family as
+  UMWW7XYA's, but a distinct symptom (glued-together text rather than
+  interleaved/scrambled text). Flagged here for awareness before this
+  paper's stage 5 pass; not yet fixed.
 - **Exclusions.** `exclusion_reason` in manifest.db marks papers
   intentionally out of scope for stage 4/5 — review/commentary,
   software-description, retracted, manually judged not_relevant, or
