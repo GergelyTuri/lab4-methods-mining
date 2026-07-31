@@ -76,9 +76,55 @@ and spot-check quality before scaling up.
   `extraction_failed` status is final.
 - **Exclusions.** `exclusion_reason` in manifest.db marks papers
   intentionally out of scope for stage 4/5 — review/commentary,
-  software-description, retracted, or manually judged not_relevant.
-  Currently 16 papers; the list is stable but may grow as more papers
-  are reviewed.
+  software-description, retracted, manually judged not_relevant, or
+  `superseded_duplicate`: one processed record for a study (e.g. a
+  bioRxiv preprint) that's since been superseded by another, canonical
+  record for the same study (e.g. its published version) — both stay in
+  manifest.db, only the superseded one is marked out of scope, to avoid
+  duplicate stage 5 extractions of the same underlying paper. A related
+  but distinct `defunct_zotero_key` reason marks rows whose zotero_key
+  no longer resolves in the live Zotero library at all (see the
+  zotero_key-instability note below) — these aren't "out of scope," the
+  row is just retained as a historical record. Currently 18 papers
+  excluded (16 substantive + 5TKU4RYR as superseded_duplicate +
+  IBUNAE3Y as defunct_zotero_key); the substantive-exclusion list is
+  stable but may grow as more papers are reviewed.
+- **`zotero_key`s are not guaranteed stable.** Manual Zotero library
+  maintenance (trash/restore, duplicate-merge) can retire a key
+  entirely rather than just relabeling it. Observed concretely with
+  IBUNAE3Y: it started as a correct-metadata-wrong-PDF duplicate of
+  5TKU4RYR (the bioRxiv preprint of the same study), got trashed during
+  manual cleanup of that problem, and was then *permanently* removed
+  from the library — a direct key lookup now 404s — while a brand-new
+  item, LKVXCUIR, appeared via a fresh ScienceDirect fetch with the
+  correct PDF and a `dc:replaces` relation pointing at IBUNAE3Y.
+  LKVXCUIR was onboarded as the canonical record (re-run through
+  stages 1/3/4; same three target authors matched at the same
+  tier/confidence as the preprint) and 5TKU4RYR was marked
+  `superseded_duplicate`; IBUNAE3Y's row was kept but marked
+  `defunct_zotero_key` rather than deleted, so the history isn't lost.
+  **If a paper's expected zotero_key 404s, search by title/author for
+  its replacement rather than assuming it's been removed from the
+  collection.** A second row, 2FGQLRRH, was also found to no longer be
+  present in the live `pubmed-LosonczyA-set` collection during this
+  same audit — this one is not a new mystery, though: it's the same
+  stale-row artifact already flagged by stage 2's original coverage
+  audit (see `outputs/coverage_report.md`, "stale manifest row — item
+  removed from collection"), predating the IBUNAE3Y episode. Noted here
+  only so it isn't mistaken for a plain extraction failure, not as an
+  open investigation.
+  Separately, stage 1's `find_pdf_attachment()` tie-break (prefer the
+  attachment with the longer `md5` string) is a no-op when *neither*
+  candidate PDF has an md5 populated — this bit LKVXCUIR's own fetch,
+  which initially saved the supplement as `main_pdf_filename` instead
+  of the actual article; caught by inspecting the fetched PDF's size/
+  content rather than trusting the manifest row, and corrected as a
+  manual data fix (correct PDF copied in from Zotero's local storage,
+  fulltext re-extracted, manifest row corrected) rather than a change
+  to the tie-break logic itself. Worth a sanity-check (does
+  `main_pdf_filename` actually look like the paper, not a supplement?)
+  on any future paper with multiple PDF attachments and no md5 on
+  either.
 - **Attribution initials matching.** `scripts/04_extract_attribution.py`
   treats dotted initials (e.g. "P.K.") as self-delimiting substrings
   rather than requiring word boundaries, to handle column-merge
@@ -133,17 +179,27 @@ and spot-check quality before scaling up.
   you're not near the tail of the file.
 
 ## Current status
-- [x] Zotero collection `pubmed-LosonczyA-set` populated (82 papers)
+
+- [x] Zotero collection `pubmed-LosonczyA-set` populated (84 rows in
+      manifest.db: the current 82-paper live collection plus two rows
+      no longer present in the live collection — IBUNAE3Y, confirmed
+      permanently removed from Zotero and marked `defunct_zotero_key`,
+      and 2FGQLRRH, a pre-existing stale row already flagged by stage
+      2's original coverage audit (see "zotero_keys are not guaranteed
+      stable" above) — not a newly-discovered issue)
 - [x] Target author list finalized in config/project_config.yaml
 - [x] Coverage check run
-- [x] Methods sections isolated (stage 3) — 66/82 papers recovered
+- [x] Methods sections isolated (stage 3) — 64/84 rows recovered
       (header heuristic, manual override, or Science-supplement
-      detection), 16 excluded as intentionally out of scope, 0
-      genuinely still failing
+      detection), 18 excluded as intentionally out of scope or defunct,
+      4 genuinely still failing/unresolved (2FGQLRRH, F3ELBLNY,
+      GH4CWH6X, KE4EERU8)
 - [x] Attribution scheme validated on a small batch (stage 4 — 7-paper
       test batch, bugs found and fixed during review)
-- [x] Stage 4 full run — attribution extraction across all 66 recovered
-      papers
+- [x] Stage 4 full run — attribution extraction across all recovered,
+      non-excluded papers (including LKVXCUIR, onboarded as the
+      canonical record for the Kong et al. CA3 recurrent-connectivity
+      study in place of 5TKU4RYR's preprint)
 - [ ] Extraction prompt validated on a small batch (stage 5)
 - [ ] Stage 5 full run — interactive pipeline-step extraction
 - [ ] Stage 6 — per-author aggregation

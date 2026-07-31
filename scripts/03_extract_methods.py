@@ -62,10 +62,14 @@ SUPPLEMENT_SM_PATTERN = re.compile(r"(?i)_sm\.[a-z0-9]+\Z")
 # for stage 4/5 rather than pending extraction failures — reviews/
 # commentaries and software-description papers with no empirical Methods
 # section, one retracted article whose cached fulltext is just the
-# retraction notice, and one paper manually reviewed and judged not
-# relevant to this project's scope. See the stage-3 full-run reports for
-# how each was confirmed. Tagged via exclusion_reason in manifest.db;
-# their cached text and extraction_method are left untouched.
+# retraction notice, one paper manually reviewed and judged not
+# relevant to this project's scope, one preprint superseded by its own
+# published version (see "superseded_duplicate" below), and one dead
+# Zotero key retained only as a historical record (see
+# "defunct_zotero_key" below). See the stage-3 full-run reports for how
+# each was confirmed.
+# Tagged via exclusion_reason in manifest.db; their cached text and
+# extraction_method are left untouched.
 EXCLUSION_REASONS = {
     "4DHCXNES": "review_or_commentary",
     "642U6I8S": "review_or_commentary",
@@ -83,6 +87,35 @@ EXCLUSION_REASONS = {
     "H9K3DYM4": "not_relevant",
     "6NTFH4CJ": "not_relevant",
     "BTPMPI4L": "review_or_commentary",
+    # IBUNAE3Y's Zotero metadata was the correct published-Neuron record
+    # (DOI 10.1016/j.neuron.2026.06.010) for "Recurrent connectivity
+    # shapes spatial coding in hippocampal CA3 subregions," but its PDF
+    # attachment (key IFEIH9U9, titled "Accepted Version") actually
+    # pointed to the bioRxiv preprint URL — the real Elsevier-published
+    # PDF was never fetched under this key. During manual Zotero cleanup
+    # of that wrong-attachment problem, IBUNAE3Y was trashed and then
+    # permanently removed from the library (a direct key lookup now
+    # 404s); a new item, LKVXCUIR, was created via the ScienceDirect
+    # connector with the correct PDF and marked (via a `dc:replaces`
+    # relation) as superseding IBUNAE3Y. IBUNAE3Y's manifest.db row is
+    # kept only so this history isn't lost — it is not an active
+    # exclusion decision, since the paper itself is not out of scope,
+    # only this particular zotero_key is dead. See the "zotero_keys are
+    # not guaranteed stable" note in CLAUDE.md's Known issues section.
+    "IBUNAE3Y": (
+        "defunct_zotero_key — item no longer exists in Zotero library "
+        "(merged/replaced by LKVXCUIR during manual duplicate cleanup); "
+        "row retained as historical record only, not an active exclusion "
+        "decision"
+    ),
+    # 5TKU4RYR is the bioRxiv preprint of the same study now published as
+    # LKVXCUIR (see IBUNAE3Y above for how LKVXCUIR came to be the
+    # canonical Zotero record). Both versions were fully processed
+    # through stage 4 with the same three matched target authors (Eunji
+    # Kong, Zhenrui Liao, Tristan Geiller) at the same tier/confidence —
+    # LKVXCUIR is canonical going forward; 5TKU4RYR is excluded from
+    # stage 5 to avoid duplicate pipeline extractions of the same study.
+    "5TKU4RYR": "superseded_duplicate",
 }
 
 # --- Methods-section header heuristic ---------------------------------
