@@ -88,13 +88,29 @@ and spot-check quality before scaling up.
   script-logic change); every other field gets correctly rewritten by
   the normal `update_manifest_methods()` call once the row is
   reprocessed.
-- **EV4PID4B's cached Methods text has a word-gluing defect.** Its
-  `_methods_main.txt` (the published Neuron STAR★Methods companion of
-  N9FA3VEL's bioRxiv preprint) has no spaces between words throughout —
-  a column-merge PDF-extraction artifact in the same general family as
-  UMWW7XYA's, but a distinct symptom (glued-together text rather than
-  interleaved/scrambled text). Flagged here for awareness before this
-  paper's stage 5 pass; not yet fixed.
+- **Word-gluing is a common, corpus-wide extraction defect, not a
+  per-paper curiosity.** Some papers' cached text (`_main.txt` and/or
+  `_methods_main.txt`) has no spaces between words across long
+  stretches — `"Allexperimentswereconductedinaccordance..."` — a
+  PDF-extraction column-merge artifact. First noticed on EV4PID4B and
+  D5I4EKZM, a corpus-wide audit (`outputs/word_gluing_audit.md`) then
+  confirmed it affects 35 of the 66 recovered papers (53%), strongly
+  correlated with Cell Press/STAR★Methods format (86% of Cell Press
+  papers affected) but also present in Nature Communications, Science,
+  and bioRxiv papers — and confirmed independent of the
+  `possible_trailing_contamination` flag (no meaningful correlation)
+  and only partially overlapping with the STAR★Methods TOC-stub
+  isolation failure documented in `prompts/pipeline_extraction.md`'s
+  sanity-check subsection (3 of 4 known TOC-stub papers are also glued;
+  one, LKVXCUIR, is not). **Deliberately not fixed at the code
+  level**: an automated de-gluing heuristic risks corrupting technical
+  terms, gene names, and
+  units (e.g. splitting "CamKII" or failing to preserve "in vivo" vs.
+  "invivo") more than it helps. Per-paper careful reading during stage
+  5 has proven sufficient so far — see the "Word-gluing is common"
+  note in `prompts/pipeline_extraction.md`. Revisit only if a future
+  paper's severity genuinely blocks accurate extraction, not just
+  slows it.
 - **Exclusions.** `exclusion_reason` in manifest.db marks papers
   intentionally out of scope for stage 4/5 — review/commentary,
   software-description, retracted, manually judged not_relevant, or

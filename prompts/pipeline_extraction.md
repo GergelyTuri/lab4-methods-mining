@@ -98,6 +98,28 @@ not in the pipeline JSON itself (the schema has no field for this). This
 is how the pattern gets tracked across batches without needing a
 dedicated stage-3 audit script run for every one.
 
+### Word-gluing is common — expect it, don't flag it as broken
+
+Separately from the isolation failures above, a large fraction of this
+corpus's cached text has **no spaces between words** across long
+stretches — `"Allexperimentswereconductedinaccordance..."` — a
+PDF-extraction column-merge artifact, not a stage-3 bug. A corpus-wide
+audit (`outputs/word_gluing_audit.md`) confirmed this affects roughly
+half of the 66 recovered papers (35/66, 53%), correlated with but not
+exclusive to Cell Press/STAR★Methods-format journals (86% of Cell Press
+papers show it, but so do some Nature Communications, Science, and
+bioRxiv papers).
+
+This is **expected, not a red flag** — encountering it doesn't mean
+isolation failed or that you should fall back to `_main.txt` the way
+you would for the TOC-stub/mis-isolation shapes above (unless it's
+*also* one of those shapes; the two are correlated but independent —
+check separately). Read through glued text carefully rather than
+treating its presence as a sign something's wrong. Do **not** attempt
+to "clean up" or reformat it yourself (inserting spaces, guessing word
+boundaries) — extract the technique/parameter content directly from the
+glued text the same way you would from normal prose, just more slowly.
+
 ## 2. What counts as a pipeline step
 
 A pipeline step is a **discrete data-analysis operation**, specific
