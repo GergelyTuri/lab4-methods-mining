@@ -193,13 +193,49 @@ and spot-check quality before scaling up.
   as Acknowledgments/funding language (e.g. "supported by", "grant",
   "fellowship") with no task-attribution verbs ("performed", "designed",
   "analyzed", etc.) — that only confirms authorship, not technique
-  involvement. Two papers, BIWVCPEH and SWL5RJLJ, have
-  contamination-flagged evidence that doesn't cleanly fit either the
-  Ack-vs-task-verb heuristic or the Author-Contributions header
-  detection (BIWVCPEH's match is Nature Reporting Summary boilerplate;
-  SWL5RJLJ's real Contributions header didn't survive extraction into
-  the methods cache at all, only a headerless fragment did) — these are
-  flagged for manual review during stage 5 rather than auto-classified.
+  involvement. **Update**: the SWL5RJLJ shape below is now handled
+  automatically (see the "Tier 1c" bullet just below) — this note is
+  kept for the still-open BIWVCPEH case and for context on why Tier 1c
+  exists. BIWVCPEH has contamination-flagged evidence that doesn't
+  cleanly fit either the Ack-vs-task-verb heuristic or the
+  Author-Contributions header detection: its only match for Andres D
+  Grosmark comes from Nature Reporting Summary boilerplate ("Corresponding
+  author(s): Andres Grosmark"), not the real Author Contributions
+  statement, and Fraser T Sparks gets no match at all despite both
+  authors' correct initials being clearly present in the paper's real
+  statement ("A.D.G., F.T.S. and M.J.D. performed the experiments").
+  Root cause (diagnosed, not fixed): `find_contributions_window()`
+  anchors on the *first* case-insensitive "author contributions" match
+  in the whole document, and BIWVCPEH has an earlier false positive — a
+  Discussion-section sentence mentioning "...author contributions and
+  competing interests..." as a generic phrase, not a real section
+  heading — which then gets its search window truncated to 143
+  characters by an end-marker hit in the very same sentence, so the
+  real section (~1,200 lines later) is never reached. This is a
+  different bug from Tier 1c below (header-anchor selection, not
+  interleaved-content classification) and remains flagged for manual
+  review / targeted reprocessing rather than fixed generically.
+- **Tier 1c: promoting contamination-displaced Author Contributions
+  text found in the methods cache.** SWL5RJLJ and UMWW7XYA share a
+  distinct shape from the note above: a two-column page break splits
+  the real Author Contributions statement mid-sentence, leaving the
+  header and first half in `_main.txt` while a *headerless* second-half
+  fragment — containing the target author's initials, glued to
+  unrelated STAR-Methods-table or reference-list text — bleeds into the
+  methods-text cache on its own. With no header there for the existing
+  Tier 1b bleed-through check to anchor on, this fragment used to only
+  ever surface as weaker Tier 2 (`methods_text_inference`) evidence.
+  `04_extract_attribution.py` now promotes it to Tier 1
+  (`author_contributions_statement`) when both prerequisites hold: a
+  real Contributions section was independently confirmed elsewhere in
+  the same paper's main text (Tier 1a succeeded), and the paper is
+  flagged `possible_trailing_contamination` — and only when the match
+  itself is a dotted-initials form (e.g. "J.C.B."), not a bare surname,
+  since a bare-surname match is exactly BIWVCPEH's shape above and
+  isn't reliable enough evidence on its own. Verified corpus-wide via
+  `--reprocess-authors`: promotes exactly the 4 known affected pairs
+  (John C Bowler, Satoshi Terada, Fraser T Sparks on SWL5RJLJ; Kevin C
+  Gonzalez on UMWW7XYA) and changes nothing else in the corpus.
 - **Contamination isn't only a tail phenomenon.** `possible_trailing_contamination`
   was named, and stage 3's detection logic was built, around the
   originally observed tail-only bibliography bleed-through shape. Real

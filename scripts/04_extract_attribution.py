@@ -19,14 +19,34 @@ re-queried every run.
 
 1. author_contributions_statement (highest confidence): an "Author
    Contributions" / "CRediT" section names the target author. Checked in
-   two locations, both counted as this tier: (1a) the primary location,
-   the paper's main text; (1b) a bleed-through fallback — the same
-   header search repeated against the methods-extracted text cache, for
-   cases where stage 3's Methods isolation captured a trailing fragment
-   of the real Author Contributions section instead of leaving it in
-   the main text (see possible_trailing_contamination in manifest.db).
-   1b evidence gets a note flagging it as bleed-through so this is
-   visible without cross-referencing manifest.db.
+   three ways, all counted as this tier: (1a) the primary location, the
+   paper's main text; (1b) a bleed-through fallback — the same header
+   search repeated against the methods-extracted text cache, for cases
+   where stage 3's Methods isolation captured a trailing fragment of the
+   real Author Contributions section (its header included) instead of
+   leaving it in the main text (see possible_trailing_contamination in
+   manifest.db); (1c) a narrower bleed-through promotion for cases where
+   the header did NOT survive into the methods cache alongside its body
+   text — a dotted-initials match (e.g. "J.C.B.", not a bare surname)
+   found directly in the methods-text cache is still counted here, but
+   only when a real Author Contributions section was independently
+   confirmed elsewhere in the paper's main text (1a's search succeeded)
+   AND the paper is flagged possible_trailing_contamination. Confirmed
+   on SWL5RJLJ and UMWW7XYA: in both, a two-column page break splits the
+   real statement mid-sentence, leaving the header and first half in the
+   main text while a headerless second-half fragment (containing the
+   target author's initials, glued to unrelated STAR-Methods-table or
+   reference-list text) bleeds into the methods cache on its own — with
+   no header there for 1b to anchor on, that fragment would otherwise
+   only ever surface as weaker Tier-2 evidence. 1b and 1c evidence both
+   get a note flagging them as bleed-through so this is visible without
+   cross-referencing manifest.db. (Deliberately does NOT cover
+   BIWVCPEH's Grosmark/Sparks pairs — a bare-surname match from an
+   unrelated Reporting Summary section, not a dotted-initials
+   continuation of the real statement; the real cause there is stage 4
+   anchoring its 1a search on an earlier false-positive "author
+   contributions" phrase mention rather than the real header, a
+   different bug not fixed here — see CLAUDE.md.)
 2. methods_text_inference: no CRediT statement found in either location
    above, but the isolated Methods text itself names the author or
    their initials next to a specific technique description ("medium"
@@ -149,6 +169,29 @@ TASK_VERB_KEYWORD_PATTERN = re.compile(
 # Checking for the bare immediate comma, with no assumption about what
 # follows it, catches both.
 CITATION_TAIL_PATTERN = re.compile(r"\A\s*(?:et\s*al\.?|\(?\s*\d{4}|,)")
+
+# A narrow exemption from the citation-tail guard above: some journals'
+# CRediT statements (confirmed so far only in QQIBRBDR, an eLife paper)
+# credit each contributor by FULL NAME followed immediately by a
+# comma-separated list of the CRediT taxonomy's own 14 standard role
+# terms — "Zhenrui Liao, Software, Investigation, Methodology, ..." —
+# which has the exact same "Surname," shape CITATION_TAIL_PATTERN was
+# built to reject (a reference-list entry like
+# "Turi,G.F.,Reardon,T.R.,..."). Checked FIRST, before the citation
+# guard, so a genuine full-name CRediT credit isn't discarded as a false
+# positive of that guard. Deliberately scoped to only the bare-last-name
+# fallback path in find_name_evidence (i.e. only consulted once
+# initials-based matching has already failed for this author) rather
+# than changing how names are matched generally — confirmed to affect
+# only one paper in this corpus so far (see
+# outputs/creditnamestyle_audit.md), so a narrow, additive exemption is
+# preferred over a broader rework of the matching path.
+CREDIT_ROLE_PATTERN = re.compile(
+    r"(?i)\A\s*,\s*(?:conceptuali[sz]ation|methodology|software|validation|"
+    r"formal\s*analysis|investigation|resources|data\s*curation|writing|"
+    r"visuali[sz]ation|supervision|project\s*administration|"
+    r"funding\s*acquisition)\b"
+)
 
 
 def load_config() -> dict:
@@ -430,6 +473,14 @@ def find_name_evidence(text: str, full_name: str) -> tuple[str, str] | None:
     # Bare last name, case-insensitive, word-bounded.
     for m in re.finditer(r"(?i)\b" + re.escape(full_name.split()[-1]) + r"\b", text):
         tail = text[m.end() : m.end() + 25]
+        if CREDIT_ROLE_PATTERN.match(tail):
+            # Full-name CRediT credit ("Liao, Software, Investigation,
+            # ...") — checked before the citation guard below since it
+            # has the same surface shape as a reference-list entry but is
+            # real, strong attribution evidence, not a citation.
+            start = max(0, m.start() - 80)
+            end = min(len(text), m.end() + 150)
+            return text[m.start() : m.end()], text[start:end].strip()
         if CITATION_TAIL_PATTERN.match(tail):
             continue
         start = max(0, m.start() - 80)
@@ -561,6 +612,37 @@ def attribute_author(
         evidence = find_name_evidence(methods_text, search_name)
         if evidence:
             matched_form, clause = evidence
+
+            # Tier 1c promotion (see the module docstring's "Tiered
+            # attribution scheme" section for the full mechanism):
+            # methods_contributions_window came up empty above — no
+            # "Author Contributions" header sits near this match inside
+            # the methods-text cache — but contributions_window (1a)
+            # already independently proved a real Contributions section
+            # exists in this paper's main text, and the paper is
+            # contamination-flagged. Under those two conditions, a
+            # dotted-initials match (not a bare surname — that shape is
+            # excluded, see BIWVCPEH in the docstring) is treated as a
+            # displaced continuation of the confirmed statement rather
+            # than an ordinary Methods-text mention.
+            if contributions_window is not None and contamination_flagged and "." in matched_form:
+                note = (
+                    f"matched via {matched_form!r} directly in the isolated Methods text; "
+                    "promoted to author_contributions_statement (Tier 1c) because a real "
+                    "Author Contributions section was independently confirmed elsewhere in "
+                    "this paper's main text and stage 3 flagged possible_trailing_contamination "
+                    "— this dotted-initials match is very likely a displaced continuation of "
+                    "that statement (split across a two-column page break) rather than an "
+                    "unrelated mention"
+                )
+                return {
+                    "target_author": target_author,
+                    "attribution_source": "author_contributions_statement",
+                    "attribution_confidence": classify_match_confidence(matched_form),
+                    "evidence_quote": truncate_to_words(clause),
+                    "notes": note,
+                }
+
             is_ack_like = bool(ACK_KEYWORD_PATTERN.search(clause)) and not TASK_VERB_KEYWORD_PATTERN.search(clause)
             if is_ack_like:
                 confidence = "low"
