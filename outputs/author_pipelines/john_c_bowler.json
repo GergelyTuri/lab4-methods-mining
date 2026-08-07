@@ -1,0 +1,686 @@
+{
+  "target_author": "John C Bowler",
+  "total_papers": 5,
+  "total_steps": 32,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "U7L3RARN",
+      "year": 2016,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "UTJ3YW3R",
+      "year": 2017,
+      "journal": "Nature Neuroscience",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "SWL5RJLJ",
+      "year": 2021,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 4,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection of GCaMP6s/GCaMP6f into LEC, MEC, CA2, or CA3 for axon labeling in CA1",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "targets": "LEC, MEC, CA2, CA3",
+            "volume": "64 nL rAAV per site, multiple dorsoventral locations"
+          },
+          "input_data_type": null,
+          "output_data_type": "GCaMP-expressing axon terminals in CA1",
+          "hardware": "Nanoject syringe",
+          "source_location": "main_text",
+          "source_quote": "stereotaxically injecting 64 nL of rAAV",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "imaging",
+          "technique": "Two-photon axon imaging in CA1 during head-fixed treadmill running with cue-based behavior",
+          "software_tool": "BehaviorMate",
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8-kHz resonant scanner (Bruker)",
+            "acquisition": "512x512 pixels at 30 Hz, 920 nm excitation"
+          },
+          "input_data_type": null,
+          "output_data_type": "axonal calcium imaging movies",
+          "hardware": "16x/40x Nikon objectives, GaAsP PMT",
+          "source_location": "main_text",
+          "source_quote": "Axon imaging was conducted using a two-photon microscope",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "imaging",
+          "technique": "Suite2p-based ROI identification, neuropil-corrected fluorescence extraction, and manual curation of axon/bouton ROIs",
+          "software_tool": "Suite2p",
+          "tool_version": null,
+          "parameters": {
+            "exclusion": "ROIs with no identified calcium events removed"
+          },
+          "input_data_type": "axonal calcium imaging movies",
+          "output_data_type": "curated axon/bouton ROI fluorescence traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "Suite2p software package was used to identify ROIs",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "statistics",
+          "technique": "Calcium-event detection (\u0394F/F thresholding) and run-stop responsiveness analysis of axonal signals",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "onset_threshold": "DF/F > 2 SD above median",
+            "offset_threshold": "DF/F < 0.5 SD beyond baseline",
+            "min_duration": "250 ms (GCaMP6f) or 1000 ms (GCaMP6s)"
+          },
+          "input_data_type": "axon/bouton ROI fluorescence traces",
+          "output_data_type": "detected calcium events, run-stop-responsive ROI calls",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "calcium events were identified by finding imaging frames where DF/F",
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "D5I4EKZM",
+      "year": 2022,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 3,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "other",
+          "technique": "Custom behavior-control system synchronizing water delivery, lick-port sensing, and imaging-system triggering via a PC-driven GPIO circuit",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "control_computer": "Intel NUC i5 mini-PC",
+            "communication": "custom GPIO circuit on the behavior apparatus; all system elements connected via high-speed Ethernet using UDP message passing"
+          },
+          "input_data_type": null,
+          "output_data_type": "synchronized water delivery, lick, and imaging-trigger event streams",
+          "hardware": "Intel NUC i5 mini-PC; custom GPIO circuit",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "other",
+          "technique": "Running-wheel position tracking via a rotary encoder and custom quadrature-decoding circuit feeding position updates to the behavior-control computer",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "wheel": "low-friction, lightweight running wheel",
+            "encoder": "rotary encoder on wheel axle, custom circuit decoding and buffering quadrature data"
+          },
+          "input_data_type": null,
+          "output_data_type": "animal position updates transmitted to the behavior-control PC",
+          "hardware": "rotary encoder; custom quadrature-decoding circuit",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "other",
+          "technique": "Multi-monitor virtual-reality rendering system built from single-board computers, driving a half-octagon 5-screen display authored in the Unity game engine",
+          "software_tool": "Unity",
+          "tool_version": null,
+          "parameters": {
+            "displays": "5 LCD monitors (Acer SB230, 23-inch IPS), half-octagon arrangement, ~220 degrees of visual field",
+            "rendering_boards": "ODROID-C2 single-board computers running Android 6.0.1, one per monitor",
+            "update_mechanism": "continuous Ethernet instructions from behavior-control computer to update VR scene as animal position advances"
+          },
+          "input_data_type": "animal position updates",
+          "output_data_type": "real-time rendered virtual-reality environment synchronized to animal position",
+          "hardware": "5x Acer SB230 monitors; ODROID-C2 single-board computers",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "UF5YJ4HS",
+      "year": 2022,
+      "journal": "Cell Reports",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "XM7ZNKAL",
+      "year": 2023,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 21,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection into LEC or MEC for axonal GCaMP6s expression, with sparse tdTomato labeling of CA1 pyramidal cells, plus a separate DREADD-inactivation injection cohort",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "ec_virus": "2/3 rAAV1-Synapsin-GCaMP6s + 1/3 rAAV9-hSynapsin-DIO-tdTomato/h56d-Cre mixture",
+            "ec_coordinates": "LEC: 3.0 mm posterior, 4.7 mm lateral, -2.6/-2.5/-2.4 mm ventral to Bregma; MEC: 0.2 mm anterior of transverse sinus, 3.2 mm lateral, -1.3/-1.2/-1.1 mm ventral",
+            "ec_volume": "2 pulses of 28.8 nL per DV location via Nanoject syringe",
+            "ca1_label": "50x-diluted CamKII-NLS-tdTomato, 2.3 mm posterior, -1.5 mm lateral, -1.1/-1.0/-0.9 mm ventral; 2 pulses of 32.2 nL per DV location",
+            "dreadd_cohort": "bilateral 5x-diluted AAVretro-hSynapsin-Cre into CA1 plus 2x-diluted AAV-hSynapsin-DIO-hM4D(Gi)-mCherry into LEC or MEC (80 nL per DV location, 1 nL/s); tdTomato-only controls at LEC coordinates"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Craniotomy with chronic imaging window/cannula implantation over left dorsal CA1 and headpost fixation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "recovery_before_surgery": "3 days after viral injection",
+            "window": "3 mm imaging window and cannula, per previously described procedures",
+            "headpost": "custom 3D-printed titanium head-fixation bar, attached with dental acrylic",
+            "dreadd_cohort_variant": "no craniotomy performed; headpost attached immediately after viral injection surgery instead"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "behavior",
+          "technique": "Head-fixed virtual-reality treadmill training with progressive reward-zone shaping",
+          "software_tool": "Unity",
+          "tool_version": null,
+          "parameters": {
+            "apparatus": "running wheel driving position on 5 surrounding LCD monitors displaying VR cues",
+            "water_restriction": "at least 80% of pre-restriction body weight",
+            "shaping": "reward across entire track initially, narrowed to a single fixed 20 cm reward zone",
+            "reward_duration_shaping": "10-15 s initially, reduced as animals learned the task, down to 2 s at proficiency",
+            "proficiency_criterion": ">=50 laps in 20 minutes at 2 s reward duration",
+            "track": "400 cm VR environments with start/end tunnels and a 2 s inter-lap timeout with cues darkened"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "behavior",
+          "technique": "VR Navigation task comparing cue-off and cue-on blocks with a fixed reward zone",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "vr_off_block": "25 laps with only the reward zone as a spatial cue, fixed at 360 cm",
+            "vr_on_block": "subsequent 25 laps with visual cues restored, same fixed reward location",
+            "excluded_data": "trailing VR-Off block after VR-On excluded from analysis except the lap-by-lap correlation plot"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "behavior",
+          "technique": "Reward Alternation task switching between two fixed reward zones in blocks",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "reward_zones": "RZ1 at 360 cm, RZ2 at 110 cm on the virtual track",
+            "block_structure": "10 laps at RZ1, 10 at RZ2, 10 at RZ1, 10 at RZ2",
+            "cueing": "no visual cue indicating which reward zone was active"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "behavior",
+          "technique": "Novel Reward Learning task with chemogenetic DREADD inactivation of EC-to-CA1 projections via DCZ",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "task": "6 m virtual environment, 3 novel reward locations per day (cued on first lap, then requiring licking), each location held 15 laps, 45 laps total",
+            "scoring": "percentage of non-cued laps in which the animal successfully found the rewarded location",
+            "pharmacology": "saline i.p. during training and the first 3 test days; 1 mg/kg DCZ i.p. (0.1 mg/mL in saline) on test day 4; 1 additional washout day"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "behavior",
+          "technique": "Context Alternation task using two fully distinct visual-cue sets at a fixed reward location",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "block_structure": "Context A for 10 laps, Context B for 10 laps, then A and B again for 10 laps each",
+            "reward_location": "fixed at 360 cm for both contexts"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "behavior",
+          "technique": "Random Foraging task with an optional multi-sensory (tone and odor) manipulation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "task": "novel VR environment, single reward location moved to a new position every lap, cued by an initial water drop",
+            "multisensory_manipulation": "5 kHz tone at 265 cm (20 cm zone) via a speaker; odor cue (carvone in mineral oil vs. mineral oil control) at 50 cm (10 cm zone) via a custom 3D-printed nose-cone with vacuum evacuation"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "imaging",
+          "technique": "In vivo two-photon imaging of EC axons in CA1 during VR behavior",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8 kHz resonant scanner (Bruker)",
+            "laser": "920 nm (Coherent), 50-125 mW at the objective, power/alignment verified daily",
+            "objective": "16x Nikon water immersion (0.8 NA, 3.0 mm WD) at 3.5x digital zoom, FOV 240x240 um",
+            "acquisition_params": "30 Hz, 512x512 px",
+            "detection": "green (GCaMP6s) / red (tdTomato) split via HQ525/70m-2p and HQ607/45m-2p filters with 575dcxr dichroic, GaAsP PMTs (Hamamatsu 7422P-40), custom dual-stage preamp (1.4x10^5 dB, Bruker)"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw two-photon GCaMP6s/tdTomato time series",
+          "hardware": "Bruker 8 kHz resonant-scanning two-photon microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "imaging",
+          "technique": "Motion correction using a modified NoRMCorre algorithm with corrupted-frame/patch rejection",
+          "software_tool": "SIMA",
+          "tool_version": null,
+          "parameters": {
+            "algorithm": "custom NoRMCorre implementation, modified to drop low-correlation patches or entire frames corrupted by z-motion (identified as outliers in the template correlation step)",
+            "quality_metric": "frame stability reported in some cases as frame-to-time-average correlation"
+          },
+          "input_data_type": "raw two-photon time series",
+          "output_data_type": "motion-corrected time series",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "imaging",
+          "technique": "ROI detection, neuropil subtraction, and signal extraction for axonal boutons/segments via Suite2p",
+          "software_tool": "Suite2p",
+          "tool_version": null,
+          "parameters": {
+            "roi_definition": "axon ROIs taken as individual boutons or small axon segments",
+            "quality_control": "all ROIs visually inspected via the Suite2p interface to exclude spurious components"
+          },
+          "input_data_type": "motion-corrected two-photon time series",
+          "output_data_type": "per-ROI raw fluorescence traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 12,
+          "category": "imaging",
+          "technique": "dF/F calculation with correlation-based merging of over-segmented axon ROIs",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "smoothing": "Savitzky-Golay filter (window length 51, polynomial order 3)",
+            "baseline": "max-min filter (window size 500, sigma 10)",
+            "merging_criterion": "Pearson pairwise correlation between dF/F traces of all ROI pairs in a FOV; pairs with r > 0.7 considered the same axon segment and merged"
+          },
+          "input_data_type": "per-ROI raw fluorescence traces",
+          "output_data_type": "dF/F traces with merged axon-segment ROIs",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 13,
+          "category": "imaging",
+          "technique": "Calcium transient detection with iterative noise re-estimation and low-quality axon exclusion",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "onset_offset_thresholds": "onset when dF/F surpasses 2 sigma (noise SD), offset when signal drops below 1 sigma; transient must reach 2.5 sigma and last >=1 s",
+            "iterative_reestimation": "transients removed and sigma re-estimated iteratively to reduce skew from within-transient periods",
+            "exclusion_criteria": "axons with <0.25 transients/min, or median within-transient max fluorescence <3.25 sigma or <0.35 dF/F, excluded from analysis"
+          },
+          "input_data_type": "dF/F traces",
+          "output_data_type": "detected calcium transient events per axon ROI",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 14,
+          "category": "statistics",
+          "technique": "General hypothesis-testing conventions for group comparisons",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "paired_data": "two-sided t-tests unless otherwise indicated",
+            "unpaired_data": "Welch's unequal-variances t-test (e.g. LEC vs. MEC comparisons)",
+            "multi_group": "multi-factor ANOVA when more than two groups compared",
+            "significance_levels": "*p<0.05, **p<0.01, ***p<0.001, n.s. = not significant"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 15,
+          "category": "statistics",
+          "technique": "Classification of axons as spatially tuned via a shuffled spatial-information null distribution",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "metric": "spatial information computed from Ca2+ transient onset times per ROI",
+            "null_distribution": "circular shuffle of transient positions per lap, spatial information recomputed",
+            "significance_criterion": "spatial information score above 95% of shuffles (p<0.05)",
+            "conditions_tested_separately": "VR-On/VR-Off, RZ1/RZ2, Context A/Context B, and Visual-Only/Multi-Sensory foraging"
+          },
+          "input_data_type": "calcium transient onset times aligned to position",
+          "output_data_type": "per-axon spatially-tuned classification",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 16,
+          "category": "statistics",
+          "technique": "Spatial field (place field) detection and boundary/width estimation for tuned axons",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "occupancy_normalized_tuning": "computed for epochs with velocity >5 cm/s",
+            "null_distribution": "1000 within-lap circularly shuffled tuning curves",
+            "candidate_field_criterion": "tuning exceeding 95% of shuffled data for at least 4 cm",
+            "field_center_width": "Gaussian fit to animal position at each transient event (center = distribution mean, width = 2 sigma)",
+            "minimum_activity": "at least 3 Ca2+ transients within the field"
+          },
+          "input_data_type": "spatially-tuned axon tuning curves",
+          "output_data_type": "place field center, width, and boundaries per axon per condition",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 17,
+          "category": "statistics",
+          "technique": "Position decoding from EC axon population activity using a multi-class support vector machine",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "model": "one-vs-one multi-class SVM",
+            "binning": "track split into 4 cm position bins as class labels",
+            "cross_validation": "2 laps held out and tested per fold, rotated across all laps",
+            "roi_counts": "1000 ROIs/FOV for VR navigation and random foraging; 900 for reward alternation; 750 for context change tasks (3 pseudo-random splits)",
+            "excluded_regions": "0-25 cm and 375-400 cm excluded (cues blocked by end tunnels)"
+          },
+          "input_data_type": "per-axon calcium transient activity",
+          "output_data_type": "decoded position estimates per time bin",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 18,
+          "category": "statistics",
+          "technique": "Running-speed decoding from axonal calcium activity using Lasso regression",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "model": "Lasso regression on dF/F from a random subset of 1000 axonal ROIs per mouse",
+            "validation": "leave-one-lap-out cross-validation"
+          },
+          "input_data_type": "per-axon dF/F traces",
+          "output_data_type": "decoded running speed per time bin",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 19,
+          "category": "statistics",
+          "technique": "Decoding of previous lap's context or reward zone from inter-lap axonal activity using a linear SVM",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "input_window": "2 s inter-lap timeout period (VR screens dark)",
+            "feature": "Gaussian-smoothed (sigma=0.27 s) vector of Ca2+ transient onset times",
+            "train_test_split": "trained on 36 laps, tested on 4 (one per context/reward-zone block)"
+          },
+          "input_data_type": "inter-lap calcium transient onset times",
+          "output_data_type": "decoded previous-lap context/reward-zone label",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 20,
+          "category": "statistics",
+          "technique": "Grid-cell-like tuning classification and 2D grid-lattice model fitting for spatially tuned axons",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "candidate_criteria": "5 criteria adapted from prior grid-classification work: >=2 spatial fields, transition count relative to track length and mean field width, widest field <5x mean width, >=30% of bins assignable in/out-of-field, in-field activity >=2x out-of-field activity",
+            "model_fit": "1D tuning curves fit to idealized linear slices through a 2D grid lattice (sum of three 2D sine waves), parameters (origin, period, angle) estimated via Fourier spectral peaks then refined by gradient-descent numerical optimization",
+            "control_comparison": "LEC axons used as a non-grid control population"
+          },
+          "input_data_type": "spatially-tuned axon tuning curves",
+          "output_data_type": "grid-like classification and fitted grid parameters (spacing, angle, phase) per axon",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 21,
+          "category": "statistics",
+          "technique": "Logistic regression model relating calcium transient probability to position, running, licking, reward, and time features",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "feature_groups": "position (100 one-hot spatial bins), running (velocity, run start/stop, running vs. non-running), licking (binary lick events), reward (binary availability, start/stop events), time (lap time, experiment time, lap count)",
+            "time_bins": "200 ms bins, features Gaussian-smoothed (sigma=0.8 ms)",
+            "lags": "0-1.6 s added to running features, +/-1.6 s to licking features",
+            "model_selection": "leave-one-out cross-validation; models built up from single-feature-group to the full 5-variable model, retaining a group only if it significantly improved held-out log-likelihood over the mean-rate model (one-sided signed t-test, p=0.05)",
+            "task_specific_features": "distance-to-reward feature for reward/context alternation tasks; separate position variables per context in the context alternation task"
+          },
+          "input_data_type": "per-axon calcium transient times and behavioral feature traces",
+          "output_data_type": "per-axon feature-group model assignment and fitted logistic regression weights",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "R27V283A",
+      "year": 2024,
+      "journal": "bioRxiv",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 2,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "other",
+          "technique": "behaviorMate PC-based user interface software: event-driven control application implementing a Context/Context-List stimulus-scheduling architecture, JSON/UDP messaging to hardware components, and time-stamped experiment data logging",
+          "software_tool": "Java, JavaFX",
+          "tool_version": null,
+          "parameters": {
+            "architecture": "event-driven main loop over enabled Contexts; setup, main-loop, and termination phases",
+            "versions": "long-term-support (LTS) release plus a streamlined JavaFX beta rewrite",
+            "configuration": "user-generated JSON settings files (manual or script-generated)",
+            "logging": "time-stamped streaming text file of hardware state for offline analysis",
+            "host": "Intel NUC mini PC, i5-1135G7, 16GB RAM, Windows 10"
+          },
+          "input_data_type": null,
+          "output_data_type": "behaviorMate UI software controlling and logging behavioral experiments",
+          "hardware": "Intel NUC mini PC",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "other",
+          "technique": "GPIO/Behavior Controller firmware: Arduino-based JSON-routed action-message architecture for reward/cue device control and TTL synchronization with imaging or electrophysiology hardware",
+          "software_tool": "Arduino (C/C++)",
+          "tool_version": null,
+          "parameters": {
+            "messaging": "JSON-formatted 'action'/'route' message protocol, human-readable and simulatable on the PC for debugging",
+            "io": "13 digital / 5 analog I/O connectors for sensors and actuators, Ethernet adapter for LAN communication",
+            "synchronization": "bidirectional TTL trigger (3.3 V) generation/reception for microscope or other recording-device sync"
+          },
+          "input_data_type": null,
+          "output_data_type": "firmware controlling reward/cue devices and generating synchronization triggers",
+          "hardware": "Arduino-based Behavior Controller PCB",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "QQIBRBDR",
+      "year": 2025,
+      "journal": "eLife",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 2,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "other",
+          "technique": "behaviorMate PC-based user interface software: event-driven control application implementing a Context/Context-List stimulus-scheduling architecture, JSON/UDP messaging to hardware components, and time-stamped experiment data logging",
+          "software_tool": "Java, JavaFX",
+          "tool_version": null,
+          "parameters": {
+            "architecture": "event-driven main loop over enabled Contexts; setup, main-loop, and termination phases",
+            "versions": "long-term-support (LTS) release plus a streamlined JavaFX beta rewrite",
+            "configuration": "user-generated JSON settings files (manual or script-generated)",
+            "logging": "time-stamped streaming text file of hardware state for offline analysis",
+            "host": "Intel NUC mini PC, i5-1135G7, 16GB RAM, Windows 10"
+          },
+          "input_data_type": null,
+          "output_data_type": "behaviorMate UI software controlling and logging behavioral experiments",
+          "hardware": "Intel NUC mini PC",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "other",
+          "technique": "GPIO/Behavior Controller firmware: Arduino-based JSON-routed action-message architecture for reward/cue device control and TTL synchronization with imaging or electrophysiology hardware",
+          "software_tool": "Arduino (C/C++)",
+          "tool_version": null,
+          "parameters": {
+            "messaging": "JSON-formatted 'action'/'route' message protocol, human-readable and simulatable on the PC for debugging",
+            "io": "13 digital / 5 analog I/O connectors for sensors and actuators, Ethernet adapter for LAN communication",
+            "synchronization": "bidirectional TTL trigger (3.3 V) generation/reception for microscope or other recording-device sync"
+          },
+          "input_data_type": null,
+          "output_data_type": "firmware controlling reward/cue devices and generating synchronization triggers",
+          "hardware": "Arduino-based Behavior Controller PCB",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    }
+  ]
+}

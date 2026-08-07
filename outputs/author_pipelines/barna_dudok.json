@@ -1,0 +1,559 @@
+{
+  "target_author": "Barna Dudok",
+  "total_papers": 2,
+  "total_steps": 29,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "F3ELBLNY",
+      "year": 2021,
+      "journal": "Science",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "HAD4KPSV",
+      "year": 2021,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 24,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "molecular",
+          "technique": "Generation of Unc5b-2A-CreERT2 knock-in mouse line",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "targeting": "T2A-CreERT2 cassette inserted in-frame immediately before the Unc5b stop codon via PCR-based targeting vector cloning",
+            "es_cells": "linearized vectors transfected into a 129SVj/B6 F1 hybrid ES cell line (V6.5), positive clones used to derive heterozygous founders",
+            "cassette_removal": "Frt-Neo-Frt cassette removed by breeding with Actin-Flpe transgenic mice"
+          },
+          "input_data_type": null,
+          "output_data_type": "Unc5b-2A-CreERT2 knock-in mouse line",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection for cell-type labeling and functional/optogenetic constructs in CA1",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "coordinates": "dorsal CA1 (2.3 mm posterior, 1.5 mm lateral, 1.45-1.35 mm ventral to bregma) or ventral CA1 (-3.5 mm posterior, 3.4 mm lateral, 3.5 mm ventral)",
+            "viruses": "one or more of AAV1.Syn.Flex.GCaMP6f, AAV5-EF1a-DIO-mCherry, AAV5-EF1a-DIO-hChR2(H134R)-mCherry, AAV9-CAG-DIO-ChroME-ST-P2A-H2B-mRuby3, AAV1.Syn.NES-jRGECO1a, AAVDJ-CaMKIIa-GCaMP6f, AAV1.Syn.Flex.NES-jRGECO1a (300-400 nL each, full titer), bilateral for anatomy/physiology or right-hemisphere only for calcium imaging",
+            "optogenetics_cohort": "AAV1.Syn.GCaMP6f combined with AAV1-Ef1a-DIO-ChRmine-mScarlet or AAV1-Ef1a-DIO-eNpHR3.0-EYFP via Nanoject syringe, 64 nL per site across 4 dorsoventral depths",
+            "anesthesia": "isoflurane with meloxicam analgesia"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice expressing cell-type-restricted functional indicators and/or optogenetic actuators in CA1",
+          "hardware": "Hamilton syringe; Nanoject syringe",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "molecular",
+          "technique": "Tamoxifen induction of CreER-dependent expression",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "dose": "100 mg/kg tamoxifen in corn oil (20 mg/mL), intraperitoneal, under isoflurane anesthesia",
+            "imaging_cohort_schedule": "single injection once running performance was sufficient; expression checked 2 days later with a second dose if needed; recordings begun 4 days after the first injection",
+            "other_cohorts_schedule": "injected on days 2, 5, and 8 after virus injection"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice with induced Cre-dependent expression in Unc5b+ cells",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "surgery",
+          "technique": "Chronic hippocampal imaging window surgery",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "window": "3.0 mm glass window attached to a 3.0 mm diameter, 1.5 mm height stainless steel cannula with Norland optical adhesive",
+            "procedure": "3.0 mm biopsy-punch craniotomy, dura and cortical layers removed with ice-cold PBS/cortex buffer flushing, cannula secured with Vetbond and UV-curable glue, stainless steel headpost attached with dental cement",
+            "anesthesia_analgesia": "isoflurane with meloxicam, or bupivacaine and buprenorphine",
+            "recovery": "monitored 3 days postoperatively"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice with chronic hippocampal imaging window and headpost",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "surgery",
+          "technique": "Chronic silicon-probe implantation for combined two-photon and LFP recording",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "probe": "single-shank 4-channel linear silicone probe (NeuroNexus) or tungsten bipolar wire electrode (0.5 mm tip separation)",
+            "placement": "lowered into dorsal CA1 mirroring the virus injection site during quiet wakefulness on a spherical treadmill, guided by continuous LFP monitoring for SPW-R events, secured at the site of maximal ripple amplitude with UV-curable glue and dental cement"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice with chronic silicon probe for correlated 2p imaging and LFP recording",
+          "hardware": "NeuroNexus linear silicone probe; A-M Systems bipolar electrode",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "electrophysiology",
+          "technique": "In vitro whole-cell patch-clamp recording of Unc5b-CreER neurons",
+          "software_tool": "pClamp",
+          "tool_version": null,
+          "parameters": {
+            "slicing": "300 micron coronal slices in ice-cold NMDG-based protective recovery solution, 12 min recovery incubation at 35\u00b0C, then room-temperature aCSF",
+            "visualization": "DIC illumination (Olympus BX61WI, Flash4.0 LT+ camera) with mercury-lamp epifluorescence to identify mCherry+ neurons",
+            "recording": "Multiclamp 700B amplifier, low-pass filtered at 2 kHz, digitized at 10 kHz (Digidata 1440A); internal solution 126 mM K-gluconate, 10 mM HEPES, 4 mM KCl, 4 mM Mg-ATP, 0.3 mM Na-GTP, 10 mM phosphocreatine, 0.2% biocytin",
+            "protocol": "firing properties assessed with -100 to 350 pA current-injection steps (1 s), repeated twice per neuron at a resting potential near -65 mV"
+          },
+          "input_data_type": null,
+          "output_data_type": "whole-cell current-clamp recordings from identified Unc5b-CreER neurons",
+          "hardware": "Multiclamp 700B amplifier; Digidata 1440A; Olympus BX61WI microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "electrophysiology",
+          "technique": "In vivo extracellular recording with optogenetic photoidentification",
+          "software_tool": "OpenEphys",
+          "tool_version": null,
+          "parameters": {
+            "probe": "32-channel or 128-channel silicon probe with attached optical fiber lowered into dorsal CA1",
+            "acquisition": "30 kHz continuous acquisition via RHD2132/RHD2164 headstage (Intan Technologies)",
+            "photostimulation": "blue laser pulses (430-490 nm, 4.5 mW), 20 ms duration at 2 Hz",
+            "spike_sorting": "MountainSort and Kilosort2, followed by manual visual inspection in Phy; units with max spike amplitude <50 microvolts excluded"
+          },
+          "input_data_type": "raw extracellular voltage traces",
+          "output_data_type": "sorted single-unit spike trains with light-evoked response classification",
+          "hardware": "32/128-channel silicon probe with optical fiber; Intan RHD2132/RHD2164 headstage",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging with correlated locomotion, video, and LFP recording",
+          "software_tool": "Scanbox",
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8 kHz resonant scanner (Neurolabware), 16x 0.8 NA water-immersion objective",
+            "behavior_tracking": "quadrature encoder for treadmill movement; eye/whisker video (Allied Vision Mako) captured at frame start/middle",
+            "lfp": "single silicon-probe channel amplified (NPI ELC-03XS) and digitized (National Instruments DAC), or bipolar electrodes via a differential amplifier",
+            "sensory_stimuli": "visual: moving horizontal line on an LED matrix (8.5 deg/s, 3 s); tactile: motor-mounted whisker probe rotating 360\u00b0 in 3 s, both triggered by a random process"
+          },
+          "input_data_type": null,
+          "output_data_type": "correlated calcium imaging, behavioral video, and LFP recordings",
+          "hardware": "Neurolabware 8 kHz resonant scanner; Allied Vision Mako camera; LED matrix stimulus display",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging with optogenetic manipulation during a spatial navigation task",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8 kHz resonant scanner (Bruker), 16x 0.8 NA water-immersion objective (Nikon), 1.5x digital zoom",
+            "excitation": "920 nm (Coherent Ultra II) for imaging; 1030 nm (same laser) or 1070 nm (Coherent Fidelity) for putative axo-axonic cell identification depending on opsin",
+            "optogenetic_stimulation": "620 nm ultrafast LED (Prizmatix)",
+            "behavior": "random-foraging training on a clueless burlap belt, then imaging on a 2-m cue-rich belt"
+          },
+          "input_data_type": null,
+          "output_data_type": "calcium imaging data with optogenetic AAC manipulation during navigation",
+          "hardware": "Bruker 8 kHz resonant scanner; Coherent Ultra II and Fidelity lasers; Prizmatix LED",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "histology",
+          "technique": "Transcardial perfusion and tissue fixation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "anesthesia": "isoflurane then i.p. ketamine (100 mg/kg)/xylazine (10 mg/kg)",
+            "perfusion": "saline or ice-cold PBS followed by 4% PFA (with or without 0.2% picric acid); EM samples additionally fixed with 0.5% glutaraldehyde",
+            "post_fix": "2 h at RT (EM) or 24 h at 4\u00b0C (other), sectioned at 60-75 microns on a vibratome"
+          },
+          "input_data_type": null,
+          "output_data_type": "fixed, sectioned brain tissue",
+          "hardware": "Leica VT1200S vibratome",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "histology",
+          "technique": "Fluorescent immunostaining and confocal imaging",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "primary_antibodies": "chicken anti-mCherry, chicken anti-GFP, rabbit anti-phospho-IkBa, guinea pig or chicken anti-parvalbumin, rabbit anti-SATB1",
+            "pv_satb1_double_stain": "sequential blocking/permeabilization and 2-day 4\u00b0C primary incubation for double PV/SATB1 labeling",
+            "imaging": "Zeiss LSM710/LSM800 or Nikon A1 confocal microscope, 10x/0.45NA, 20x/0.8NA, or 63x/1.4NA objectives"
+          },
+          "input_data_type": "fixed brain sections",
+          "output_data_type": "confocal images of immunolabeled hippocampal sections",
+          "hardware": "Zeiss LSM710/LSM800; Nikon A1 confocal microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 12,
+          "category": "histology",
+          "technique": "Electron microscopy sample preparation and serial-section synaptic bouton tracing",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "preparation": "GFP immunostaining with DAB/osmium/uranyl acetate processing, embedded in acetonitrile/EMbed 812",
+            "sectioning": "50 nm ultrathin serial sections on an ultramicrotome (Leica), lead citrate contrast",
+            "imaging": "transmission electron microscope (JEM-1400, JEOL) with a OneView (Gatan) camera, 5000-20000x magnification",
+            "analysis": "immunopositive boutons identified by synaptic vesicles, followed through serial sections to identify somatic/dendritic/AIS postsynaptic targets by ultrastructural criteria"
+          },
+          "input_data_type": "GFP-immunostained ultrathin sections",
+          "output_data_type": "serially traced synaptic boutons with identified postsynaptic target compartments",
+          "hardware": "JEM-1400 transmission electron microscope; Gatan OneView camera; Leica ultramicrotome",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 13,
+          "category": "statistics",
+          "technique": "Confocal image analysis: laminar cell-body distribution and AAC-AIS 3D distance quantification",
+          "software_tool": "FIJI/ImageJ; Python (cv2, pysal, scipy)",
+          "tool_version": null,
+          "parameters": {
+            "laminar_distribution": "cell-body positions marked on maximum-intensity projections relative to manually drawn layer borders, fluorescence intensity normalized to the maximum observed across animals",
+            "3d_distance": "OTSU thresholding (mCherry channel) and local Moran's I spatial clustering (p-IkBa channel) to identify positive voxels, converted to point clouds and compared via kd-tree nearest-neighbor distance (3 micron threshold)"
+          },
+          "input_data_type": "confocal z-stacks",
+          "output_data_type": "laminar cell distribution and 3D AAC-process-to-AIS distances",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 14,
+          "category": "statistics",
+          "technique": "Quantification of Unc5b-AAC-innervated AIS ratio",
+          "software_tool": "ImageJ macros",
+          "tool_version": null,
+          "parameters": {
+            "method": "AISs labeled blind to reporter channel via freehand lines, converted to 5-micron-thick measurement areas; fluorescence intensity and thresholded (Huang method) positive-pixel counts measured pre/post 90\u00b0 rotation for normalization",
+            "classification": "AIS reporter intensity normalized to the average across all AIS objects in the image; normalized values >1 (with PV-pixel ratio threshold 0.2) classified as axo-axonic-innervated"
+          },
+          "input_data_type": "thin z-stacks of AAC reporter and PV/p-IkBa immunostaining",
+          "output_data_type": "classified AAC-innervated vs. non-innervated AISs",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 15,
+          "category": "statistics",
+          "technique": "In vitro electrophysiology intrinsic-property analysis and PCA-based classification",
+          "software_tool": "Clampfit; custom Python scripts",
+          "tool_version": null,
+          "parameters": {
+            "metrics": "input resistance, sag, AP threshold (dV/dt exceeding 3 SD), AP width, afterhyperpolarization, rheobase, upstroke/downstroke velocity, adaptation score, burstiness score, fast/medium AHP",
+            "exclusion": "neurons with resting potential above -55 mV or input resistance >500 MOhm excluded",
+            "pca": "principal component analysis performed across the full set of extracted intrinsic-property features"
+          },
+          "input_data_type": "whole-cell current-clamp recordings",
+          "output_data_type": "intrinsic electrophysiological feature set and PCA-based cell characterization",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 16,
+          "category": "statistics",
+          "technique": "Spike-waveform-based cell-type classification and optical photoidentification",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "classification": "2D Gaussian mixture model fit to spike width and valley-to-peak time to classify putative pyramidal neurons (n=495) vs. interneurons (n=128); ambiguous units (n=82) excluded",
+            "photoidentification": "parameter-free ZETA test (Montijn et al., 2020) on event-aligned spike-time cumulative distributions; peak/trough response latency 1-50 ms required for significance (p<0.01)"
+          },
+          "input_data_type": "sorted single-unit spike trains",
+          "output_data_type": "classified cell types and optically identified putative axo-axonic cells",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 17,
+          "category": "imaging",
+          "technique": "Calcium movie preprocessing, ROI segmentation, and cross-session tracking for combined imaging/LFP experiments",
+          "software_tool": "SIMA",
+          "tool_version": null,
+          "parameters": {
+            "segmentation": "Unc5b-AAC ROIs segmented via SIMA's STICA method or manually; other neurons segmented via SIMA's PlaneCA1PC method",
+            "tracking": "AACs matched and assigned unique IDs across multiple imaging sessions of the same FOV; unitary response properties computed from all events across sessions"
+          },
+          "input_data_type": "raw two-photon calcium movies",
+          "output_data_type": "motion-corrected, segmented, cross-session-tracked \u0394F/F traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 18,
+          "category": "statistics",
+          "technique": "Event-triggered average response analysis (whisking, sharp-wave ripples, running)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "whisking_detection": "motion-energy map from video, z-scored, positive frames (z>1) clustered via DBSCAN (eps=1s) to define whisking event onsets",
+            "spwr_detection": "automatic LFP-based SPW-R detection with manual curation, blind to calcium responses; response quantified from max dF/dt in a 0-100 ms window post-ripple onset vs. 1,000 matched random control events",
+            "averaging_rule": "non-overlapping event windows (400 ms minimum gap) averaged first per-ROI then per-cell-type; automated to remove investigator bias"
+          },
+          "input_data_type": "\u0394F/F traces, LFP traces, and behavioral video",
+          "output_data_type": "event-triggered average calcium responses to whisking, SPW-Rs, and running onset",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 19,
+          "category": "statistics",
+          "technique": "Unit-unit and population-population correlation analysis",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "unit_unit": "Pearson correlation between full \u0394F/F traces; time-resolved via rolling \u00b11 s windows",
+            "population_population": "z-scored \u0394F/F averaged by cell type, resampled into variable-size bins (0.1-10 s) with a temporal shift (-10 to 10 s) applied before binning; correlation computed per bin size/offset after sorting"
+          },
+          "input_data_type": "per-cell-type \u0394F/F traces",
+          "output_data_type": "unit-unit and AAC-vs-Other population correlation metrics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 20,
+          "category": "imaging",
+          "technique": "Calcium movie preprocessing and ROI segmentation for optogenetics experiments",
+          "software_tool": "SIMA; Suite2p; TreFiDe",
+          "tool_version": null,
+          "parameters": {
+            "motion_correction": "whole-frame registration",
+            "segmentation": "Suite2p spatial-mask ROI detection with cross-ROI/neuropil contamination correction, curated post hoc in the Suite2p GUI to exclude non-somatic components"
+          },
+          "input_data_type": "raw two-photon calcium movies",
+          "output_data_type": "motion-corrected, segmented \u0394F/F traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 21,
+          "category": "statistics",
+          "technique": "Stimulation responsiveness and calcium-event quantification",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "responsiveness_metric": "difference between the activity metric inside the stimulus window and an identical-width pre-stimulus window",
+            "transient_definition": "\u0394F/F exceeding 150% of baseline",
+            "model": "linear mixed-effects model (Transients ~ Stim + (1|Animal)) compared to a null model via ANOVA"
+          },
+          "input_data_type": "\u0394F/F traces around optogenetic stimulus onsets",
+          "output_data_type": "per-cell stimulation responsiveness and transient-rate change significance",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 22,
+          "category": "statistics",
+          "technique": "Identification of spatially tuned cells and place-field detection",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "tuning_curve": "2-m belt divided into 100 bins, mean \u0394F/F per bin per lap during running epochs, Gaussian-smoothed (sigma=3 bins) and averaged across laps",
+            "null_model": "100 shuffles of lap-by-lap tuning curves; bins exceeding the 99th percentile of the shuffle distribution classified as place fields",
+            "consistency_filter": "place fields required in the same location on at least 3 laps"
+          },
+          "input_data_type": "per-lap spatial \u0394F/F tuning curves",
+          "output_data_type": "detected place fields",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 23,
+          "category": "statistics",
+          "technique": "Place-field remapping and turnover analysis in response to AAC manipulation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "pv_correlation": "population vector correlation computed for every pair of spatial bins across PRE/STIM/POST lap blocks",
+            "remapping_quantification": "average Pearson correlation of PRE population vectors with POST counterparts, compared against unstimulated control sessions",
+            "turnover_analysis": "2x2 contingency tables of place-field presence in PRE vs. POST for the stimulation-zone quintile, tested with the McNemar-Bowker test"
+          },
+          "input_data_type": "detected place fields across PRE/STIM/POST lap blocks",
+          "output_data_type": "remapping magnitude and place-field turnover significance",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 24,
+          "category": "statistics",
+          "technique": "General statistical and modeling framework",
+          "software_tool": "Python; R",
+          "tool_version": null,
+          "parameters": {
+            "test_selection": "appropriate tests selected per study design, assumptions checked via Q-Q or residual plots",
+            "reporting": "mean \u00b1 SEM unless otherwise specified, two-sided tests unless noted",
+            "mixed_models": "linear mixed-effects models (e.g. Response ~ CellType + Sex + (1|Animal)) compared to null models via ANOVA"
+          },
+          "input_data_type": null,
+          "output_data_type": "statistical significance results",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "SWL5RJLJ",
+      "year": 2021,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 5,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection of ChR-eYFP or eYFP-only control into bilateral dorsal CA1, followed by metal headbar implantation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "target": "both hemispheres of dorsal CA1",
+            "mouse_line": "Sncg-Flp"
+          },
+          "input_data_type": null,
+          "output_data_type": "opsin/reporter-expressing CA1 neurons, head-fixable mouse",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "Sncg-Flp mice were injected with a virus expressing either ChR-eYFP or eYFP",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "electrophysiology",
+          "technique": "Craniotomy and chronic silicon-probe (with attached optical fiber) lowering into dorsal CA1 for in vivo extracellular recording",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "probe": "Buzsaki32 or Poly10mm (NeuroNexus)",
+            "timing": "at least 3 weeks post virus injection"
+          },
+          "input_data_type": null,
+          "output_data_type": "positioned silicon probe in dorsal CA1",
+          "hardware": "Buzsaki32/Poly10mm silicon probe with optical fiber",
+          "source_location": "main_text",
+          "source_quote": "silicon probe with an attached optical fiber was gradually lowered",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "electrophysiology",
+          "technique": "Continuous 30-kHz extracellular recording with optogenetic light-pulse identification of light-responsive single units",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "sampling_rate": "30 kHz",
+            "light_pulses": "20-ms blue laser pulses (430-490 nm, 4.5 mW) at 2 Hz"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw extracellular voltage traces",
+          "hardware": "OpenEphys recording system, Intan 32-channel headstages",
+          "source_location": "main_text",
+          "source_quote": "OpenEphys recording system was used together with Intan 32 channel headstages",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "electrophysiology",
+          "technique": "Offline spike sorting and visual-inspection curation of single units",
+          "software_tool": "MountainSort, Phy",
+          "tool_version": null,
+          "parameters": {
+            "inclusion_criterion": "mean firing rate above 1 Hz"
+          },
+          "input_data_type": "raw extracellular voltage traces",
+          "output_data_type": "sorted single-unit spike trains",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "Offline spike sorting was performed using MountainSort",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "statistics",
+          "technique": "Light-triggered average firing-rate analysis with z-score normalization to estimate light-driven suppression",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "smoothing": "Gaussian kernel, sigma = 3 ms",
+            "bin_size": "1 ms"
+          },
+          "input_data_type": "sorted single-unit spike trains",
+          "output_data_type": "normalized light-triggered average firing rates",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "average firing rates for each unit were then normalized with z-scoring",
+          "extraction_confidence": "high"
+        }
+      ]
+    }
+  ]
+}

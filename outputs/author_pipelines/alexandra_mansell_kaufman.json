@@ -1,0 +1,274 @@
+{
+  "target_author": "Alexandra Mansell Kaufman",
+  "total_papers": 1,
+  "total_steps": 13,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "LB5SX2W3",
+      "year": 2020,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 13,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "molecular",
+          "technique": "Cre-dependent viral construct strategy for locus coeruleus (LC) indicator/opsin expression and CA1 pyramidal cell indicator expression",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "lc_indicator": "rAAV2/1:Ef1a-(GCaMP6s)Cre in Th-IRES-Cre mice",
+            "lc_opsins": "Cre-dependent bReaChES (rAAV2/9:Ef1a-(bReaChes-tdTomato)Cre) or ArchT-tdTomato (rAAV2/1:Ef1a-(ArchT-tdTomato)Cre)",
+            "ca1_indicator": "rAAV2/1:hSyn-GCaMP6f or rAAV2/1:CaMKII-GCaMP6f (non-Cre-dependent)",
+            "mouse_lines": "Th-IRES-Cre (from Kandel lab) and VIP-IRES-Cre x Th-IRES-Cre crosses",
+            "mixture_ratio": "1:1 for viral mixtures"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Bilateral LC viral injection, unilateral dorsal CA1 injection, and hippocampal imaging window/headpost implantation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "lc_coordinates": "bilateral, AP -5.45 mm, ML +/-1.28 mm, DV -3.65 mm, 150-300 nL virus",
+            "ca1_coordinates": "left hemisphere, AP -2.1/-2.2, ML -1.5/-1.75, DV -1.2/-1.1/-1.0, 50-64 nL per DV site",
+            "window": "3.0 mm diameter, 1.5 mm height imaging window over left dorsal-intermediate hippocampus, stainless-steel or brass headpost",
+            "cannula_construction": "3 mm glass coverslip (Warner 64-0720) adhered to steel cannula (Ziggy's tubes and wires) with Norland optical adhesive",
+            "craniotomy": "3 mm hole; bone, dura, and cortical layers removed with ice-cold cortex buffer irrigation; cannula secured with Vetbond",
+            "postop_monitoring": "3 days"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging of LC axons and CA1 pyramidal cells with concurrent optogenetic capability",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8 kHz resonant scanner (Bruker) with piezo-coupled objective for fast Z displacement",
+            "objective": "Nikon 40x NIR water immersion, 0.8 NA, 3.5 mm working distance",
+            "laser": "920 nm (50-100 mW, Coherent Ultra II); 1070 nm (Coherent Fidelity) interlaced for structural red imaging",
+            "detection": "GaAsP PMTs (Hamamatsu R3896), preamp (1.4x10^5 dB, Bruker)",
+            "acquisition_params": "1x/1.2x/1.4x digital zoom, 512x512 px; CA1PCs: 2 planes 20-30 um apart at ~8 Hz; axons: 2-5 planes 2 um apart"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw two-photon GCaMP/tdTomato time series",
+          "hardware": "Bruker two-photon resonant-scanning microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "other",
+          "technique": "625 nm LED optogenetic photostimulation of LC axons synchronized to the imaging scan cycle",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "led": "ultrafast high-power collimated LED, 625 nm (Prizmatix)",
+            "gating": "triggered by an Arduino board gating the inverse photostimulation signal of the Pockels cell, off briefly during mirror turnaround and piezo direction reversal",
+            "power": "35-70 mW measured under the objective",
+            "optics": "dichroic mirror passing red light in and reflecting green fluorescence to the PMT"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": "Prizmatix 625 nm LED; Arduino board",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "behavior",
+          "technique": "Goal-oriented learning (GOL) treadmill task with multisensory cues for CA1 imaging",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "training": "cue-free burlap belt, water deprivation starting 3-4 days post-surgery, reward schedule reduced from 15 locations to 3 rewards per 2 m belt over ~10 days",
+            "imaging_belt": "unfamiliar cued belt with multiple fabrics/cues",
+            "ca1_multisensory_cues": "constant pinene-scented air, blinking UV LED, constant tone (omitted for LC imaging sessions)",
+            "session_structure": "three 10-minute sessions per day, separated by >=45 minutes",
+            "reward_availability": "up to 2 s per rewarded location entry"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "behavior",
+          "technique": "Random foraging paradigm with LED stimulation, novel-cue addition, and VIP-interneuron co-stimulation manipulations",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "habituation": "3x, 1 day, for maximally stable place fields, then 3x 10-minute sessions/day for three days",
+            "led_schedule": "beginning on the third session of the first imaging day, continuing for 5-6 sessions",
+            "performance_metric": "proportion of licks in the 35 cm zone preceding the reward zone",
+            "manipulation_variants": "LED stimulation inside vs. outside the reward zone; cue addition paired with LED; VIP-interneuron co-stimulation via bReaChES in a Th-IRES-Cre x VIP-Cre cross"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "histology",
+          "technique": "Post-imaging perfusion, sectioning, and immunohistochemistry to validate LC and CA1 labeling",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "fixation": "transcardial 0.1 M PBS then 4% PFA, overnight post-fix",
+            "sectioning": "vibratome, 50 um (LC) or 50-70 um (hippocampus)",
+            "primary_antibodies": "anti-GFP (chicken), anti-dsRed (rabbit), anti-Th (chicken or rabbit)",
+            "mounting": "Aquamount, imaged on a confocal microscope"
+          },
+          "input_data_type": null,
+          "output_data_type": "confocal images of immunostained LC and hippocampal sections",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "imaging",
+          "technique": "Calcium imaging preprocessing: motion correction, cell/axon segmentation, cross-session tracking, dF/F calculation, and transient detection",
+          "software_tool": "SIMA",
+          "tool_version": null,
+          "parameters": {
+            "motion_correction_qc": "frames discarded if similarity to the time-averaged image fell below threshold",
+            "segmentation": "hand-segmented using an in-lab data visualization server program; same cells/axons tracked across sessions with a unique ID",
+            "df_f_baseline": "adapted from Jia et al. 2011, smoothing window t1=3s, baseline window t2=60s",
+            "transient_detection": "statistically significant transients detected per previously described method, used for place-field calculations"
+          },
+          "input_data_type": "raw two-photon time series",
+          "output_data_type": "motion-corrected, segmented, cross-session-tracked dF/F traces and detected transients",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "imaging",
+          "technique": "Axon-specific signal processing: correlation-based inclusion threshold and single-trace reduction via PCA",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "synchrony_check": "mean pairwise correlation coefficient per session per ROI, compared to a shuffle distribution built from the same axon across different sessions",
+            "inclusion_threshold": "99th percentile of the shuffle distribution, per animal",
+            "trace_reduction": "first principal component of the included axons per session",
+            "detrending_smoothing": "linear trend removed over 80 s chunks; Savitzky-Golay filter (21-frame window, polynomial degree 6)"
+          },
+          "input_data_type": "per-axon raw calcium traces",
+          "output_data_type": "single reduced, detrended, smoothed population trace per session",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "statistics",
+          "technique": "Place cell classification, place field detection via Gaussian fitting, and reward-zone enrichment analysis",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "spatial_information": "computed from transients during running bouts >=1s (Skaggs et al. 1993), shuffled 1000 times for a null distribution, place cell if above the 95th percentile",
+            "rate_map": "100 spatial bins, transient count normalized by occupancy, Gaussian-smoothed (sigma=3 bins)",
+            "field_detection": "local maxima fit with Gaussian curves; fields discarded if area under the curve was <50% of the largest Gaussian",
+            "enrichment_metric": "proportion of place-field centroids in the region from 25 cm before to the end of the reward zone",
+            "transient_properties": "frequency, duration (normalized by frame rate), amplitude (peak dF/F), and area under the curve computed per significant transient"
+          },
+          "input_data_type": "dF/F traces and detected transients aligned to position",
+          "output_data_type": "place cell classifications, place field locations, and reward-zone enrichment metrics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "statistics",
+          "technique": "Generalized linear model (ridge regression) predicting LC axon calcium activity from behavioral variables",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "predictors": "velocity, licking (Gaussian-smoothed, sigma=50 ms), and position (100 non-overlapping binary spatial bins)",
+            "fitting_method": "ridge regression to manage predictor collinearity and avoid overfitting",
+            "cross_validation": "leave-one-lap-out; regularization penalty optimized via cross-validation on the training set",
+            "fit_quality": "coefficient of determination (R2) between predicted and actual calcium activity",
+            "variable_importance": "log-likelihood ratio (base-2, bits/sample) between full and reduced (leave-one-variable-out) models, estimated on held-out test data"
+          },
+          "input_data_type": "reduced LC population calcium trace and behavioral variable traces",
+          "output_data_type": "fitted GLM weights, cross-validated R2, and per-variable information-gain estimates",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 12,
+          "category": "statistics",
+          "technique": "Linear regression between running velocity and LC calcium signal near the reward zone",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "window": "-35 cm to 0 cm before the reward",
+            "output_metric": "slope of the fitted linear relationship between velocity and the calcium trace"
+          },
+          "input_data_type": "LC population calcium trace and velocity trace",
+          "output_data_type": "regression slope quantifying LC-velocity coupling near the reward zone",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 13,
+          "category": "statistics",
+          "technique": "General hypothesis-testing conventions applied across analyses",
+          "software_tool": "Python",
+          "tool_version": "2.7.15",
+          "parameters": {
+            "alpha": "0.05",
+            "normality_check": "Kolmogorov-Smirnov test",
+            "normal_data": "two-tailed paired-sample or unpaired t-test",
+            "non_normal_data": "two-tailed paired Wilcoxon signed-rank test or two-tailed unpaired Mann-Whitney U test",
+            "small_sample_rule": "non-parametric test used if fewer than 5 data points, regardless of normality test result",
+            "sample_size_determination": "no a priori statistical power analysis; sample sizes matched to prior publications"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    }
+  ]
+}

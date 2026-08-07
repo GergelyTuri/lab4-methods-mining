@@ -1,0 +1,578 @@
+{
+  "target_author": "Jingcheng Shi",
+  "total_papers": 2,
+  "total_steps": 29,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "FPF3RL6U",
+      "year": 2025,
+      "journal": "bioRxiv",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 17,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "molecular",
+          "technique": "Molecular cloning of photoactivatable reporter constructs (GCaMP7f-P2A-H2B-PAmCherry; Cre-dependent Kir2.2-T2A-mRuby3 WT and non-conducting mutant) via Gibson assembly/enzymatic ligation, validated by Sanger sequencing and packaged into AAVDJ",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "gcamp_construct": "pAAV-CW3SL-GCaMP7f-4Ala-H2B-PAmCherry, titer 7.26E15",
+            "kir22_constructs": "pAAV-hSyn-FLEX-Kir2.2(WT/Mut)-T2A-mRuby3, titer 1E13",
+            "pamcherry_only": "pAAV-EF1a-H2B-PAmCherry, titer 3.96E13"
+          },
+          "input_data_type": null,
+          "output_data_type": "packaged AAVDJ viral vectors",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection and chronic hippocampal CA1 imaging window/headpost implantation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "coordinates": "-2.2 AP, -1.75 ML, -1.2/-1.1/-1.0/-0.9 DV relative to dura",
+            "injection_volume": "75 nl per depth (population imaging) or 100 nl (Kir2.2/dual-virus experiments)",
+            "recovery_before_implant_days": 3,
+            "cannula": "3 mm imaging cannula with 3 mm glass coverslip",
+            "headpost": "custom titanium, secured with C&B Metabond and dental acrylic"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronic optical access window over dorsal CA1",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection and cranial window implantation over primary visual cortex",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "coordinates": "-2.7 AP, -2.5 ML, -0.3 DV",
+            "injection": "2-3 injections of 300 nl, 65 nl/min, beveled glass micropipette, layer 2/3",
+            "craniotomy_mm": 4,
+            "headpost": "custom 3D-printed, black-painted"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronic optical access window over V1",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "behavior",
+          "technique": "Head-fixed virtual-reality linear-track behavioral training with progressive reward-zone shaping",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "track_length_m": 4,
+            "training_duration_days": "10-14",
+            "reward": "5% sucrose, reward count reduced from 30 to 2 over training",
+            "recording_session_length_min": "18-40 (mean 26+/-3), n=9 mice"
+          },
+          "input_data_type": null,
+          "output_data_type": "trained mice performing a VR linear-track foraging task",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "imaging",
+          "technique": "In vivo two-photon population calcium imaging of dorsal CA1 with dual-channel GCaMP7f/PAmCherry acquisition, preprocessed with SIMA and Suite2p/Cellpose ROI detection",
+          "software_tool": "SIMA, Suite2p, Cellpose",
+          "tool_version": "Suite2p v0.14.2",
+          "parameters": {
+            "scanner": "8 kHz resonant (Bruker)",
+            "objective": "16x NIR water immersion, 0.8 NA, 3.0 mm WD (Nikon)",
+            "excitation": "940 nm (Chameleon Ultra II, Coherent), 45-91 mW after objective",
+            "fov": "700x700 um (Fig 2/S12) or 420x420 um (Fig S13)",
+            "acquisition": "30 Hz, 512x512 px",
+            "roi_detection": "Suite2p run with Cellpose 'anatomical_only' mode, pre-trained cyto2 model"
+          },
+          "input_data_type": null,
+          "output_data_type": "structured, ROI-extracted GCaMP7f/PAmCherry fluorescence traces aligned to behavior",
+          "hardware": "Bruker 8kHz resonant 2-photon microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging of primary visual cortex with receptive-field mapping and drifting-grating visual stimulation",
+          "software_tool": "Suite2p, custom MATLAB software",
+          "tool_version": null,
+          "parameters": {
+            "scanner": "12 kHz resonant-galvo (Bergamo, ThorLabs)",
+            "laser": "Ti:Sapphire (MaiTai DeepSee, Spectra Physics)",
+            "receptive_field_stimuli": "drifting sinusoidal gratings, 3x4 grid, 1 s presentation, 0.04 cpd, 4 s ISI",
+            "main_stimuli": "full-field drifting bar gratings, 2 Hz temporal frequency, 30-degree spacing directions, 24-25 repetitions, 1 s/4 s ISI"
+          },
+          "input_data_type": null,
+          "output_data_type": "neuropil-corrected, stimulus-aligned fluorescence traces from V1 neurons",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "molecular",
+          "technique": "In vivo two-photon phototagging: targeted photoactivation of individual PAmCherry-expressing neurons using a 3D acousto-optical (3D-AOD) microscope, matched to the functional-imaging field of view",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "microscope": "3D-AOD (3D Atlas, Femtonics)",
+            "photoactivation_wavelength_nm": 810,
+            "scan_pattern": "7x7 um, 0.1 um/pixel, 1.3 ms dwell time/pixel, 40 mW, 6370 ms total scan time per cell",
+            "readout_wavelength_nm": 1040,
+            "visual_cortex_variant": "405 nm LED illumination, 30 s, for bulk photoactivation"
+          },
+          "input_data_type": null,
+          "output_data_type": "spatially targeted photoactivated (mCherry-bright) neurons matched to functionally identified cells",
+          "hardware": "3D-AOD microscope (Femtonics); Alcor 1040-5W laser (Spark Lasers)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "molecular",
+          "technique": "Tissue dissociation, nuclei isolation, and NeuN/DAPI antibody labeling in preparation for FACS",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "dissection": "3-mm biopsy punch of dorsal CA1, snap-frozen in liquid nitrogen",
+            "homogenization": "dounce homogenizer, 10 mM Tris/250 mM sucrose/25 mM KCl/5 mM MgCl2 buffer",
+            "antibody": "CoraLite Plus 488-conjugated NeuN (Proteintech), 4C 30 min",
+            "nuclear_stain": "DAPI, 0.001 mg/ml"
+          },
+          "input_data_type": "dissected CA1 tissue",
+          "output_data_type": "labeled, filtered nuclei suspension ready for sorting",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "molecular",
+          "technique": "Fluorescence-activated sorting of photoactivated (bright mCherry+) nuclei",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "sorter": "MoFlo Astrios Cell Sorter (Beckman Coulter)",
+            "event_rate": "5000-10000 events/sec",
+            "lasers_used": "488 nm (NeuN), 561 nm (mCherry), 405 nm (DAPI)",
+            "gating": "bright/dim mCherry gates set after first 5000 DAPI+ events; two sequential sorting passes to enrich ultra-sparse bright population"
+          },
+          "input_data_type": "labeled nuclei suspension",
+          "output_data_type": "sorted photoactivated nuclei in SMART-Seq lysis buffer",
+          "hardware": "MoFlo Astrios Cell Sorter",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "molecular",
+          "technique": "Meso-seq single-nucleus RNA library preparation and sequencing from sorted nuclei",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "reverse_transcription": "SMART-Seq mRNA LP protocol",
+            "cdna_amplification": "17-18 PCR cycles",
+            "library_amplification": "14 PCR cycles",
+            "sequencer": "Illumina NextSeq 2000, P2-100 reagents"
+          },
+          "input_data_type": "sorted nuclei",
+          "output_data_type": "sequenced single-nucleus RNA libraries",
+          "hardware": "Illumina NextSeq 2000; Qubit3.0; Bioanalyzer",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "electrophysiology",
+          "technique": "Ex vivo phototag-guided whole-cell patch-clamp recording in acute hippocampal slices, with confocal confirmation of tagged-cell identity",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "slicing": "300 um coronal sections, sucrose cutting solution, Leica VT1200S vibratome",
+            "recording_temp_c": 32,
+            "amplifier": "MultiClamp 700B, Clampex10, Axon Digidata 1550B",
+            "pipette_resistance_MOhm": "3-5",
+            "identification": "mCherry nuclear fluorescence via pE-300 white LED + Olympus Cy5 filter cube",
+            "colocalization_check": "Alexa 594 Hydrazide in internal solution, confocal imaging of PFA-fixed slices",
+            "intrinsic_properties": "1.2 s current steps, 20 pA increments"
+          },
+          "input_data_type": null,
+          "output_data_type": "whole-cell current-clamp recordings from confirmed phototagged neurons",
+          "hardware": "MultiClamp 700B amplifier",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 12,
+          "category": "histology",
+          "technique": "Tissue fixation, sectioning, and RNAScope fluorescent in situ hybridization for Kcnj12 and Pcdha8 transcripts",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "fixation": "4% PFA perfusion, 24 h post-fix, sucrose gradient (10/20/30%), OCT-embedded",
+            "sectioning": "20 um cryostat sections",
+            "kit": "RNAScope Multiplex Fluorescent Reagent Kit v2",
+            "probes": "Kcnj12 (C3), Pcdha8 (C1)",
+            "fluorophore": "TSA Vivid Fluorophore 650, 1:2000",
+            "imaging": "Nikon A1 HD25 confocal, 20x, 3 um z-steps"
+          },
+          "input_data_type": "fixed frozen brain sections",
+          "output_data_type": "RNAScope fluorescence images",
+          "hardware": "Nikon A1 HD25 confocal microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 13,
+          "category": "statistics",
+          "technique": "Calcium event deconvolution and spatial tuning curve/place-field detection with shuffle-based significance testing",
+          "software_tool": "OASIS",
+          "tool_version": null,
+          "parameters": {
+            "deconvolution_threshold": "3 MAD above raw trace, 400 ms decay constant",
+            "spatial_bins": "100 bins (4 cm) over 4 m track",
+            "smoothing_kernel_cm": 12,
+            "shuffle_test": "1000 circular shifts, 95th percentile threshold (p<0.05)",
+            "place_field_criteria": "width 8 cm to 1.3 m, active on >=20 laps",
+            "silent_cell_criterion": "no OASIS-detected events"
+          },
+          "input_data_type": "GCaMP fluorescence traces",
+          "output_data_type": "deconvolved event trains, spatial tuning curves, place-cell/silent-cell classification",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 14,
+          "category": "imaging",
+          "technique": "In vivo/ex vivo 3D volumetric image reconstruction, wavelet/Fourier de-striping, and non-rigid registration pipeline to align phototagged nuclei across imaging modalities",
+          "software_tool": "MATLAB, FIJI, Napari, Cellpose",
+          "tool_version": null,
+          "parameters": {
+            "destriping": "combined wavelet (Symlet 20, 2-5 decomposition levels) and Fourier filtering",
+            "registration_steps": "manual common-cell selection (Napari), automatic scaling/affine transform, Gaussian-smoothed deformation transform (kernel 100 down to <10)",
+            "voxel_resolution_um": 1
+          },
+          "input_data_type": "in vivo and ex vivo z-stack image volumes",
+          "output_data_type": "co-registered in vivo/ex vivo volumetric images",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 15,
+          "category": "statistics",
+          "technique": "Fluorescence-based quantification of phototagging efficacy and specificity (PAmCherry background/tagged/off-target signal, GCaMP transient kinetics) and visually evoked response / orientation-selectivity analysis",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "tagging_quantification": "Cellpose-segmented masks, percentile-filtered DF/F relative to local background",
+            "transient_kinetics": "amplitude, half-rise time, half-decay time from aligned average transients",
+            "visual_responsiveness_test": "Kruskal-Wallis vs. baseline, Wilcoxon rank-sum preferred-stimulus vs. ISI (p<0.05)",
+            "orientation_selectivity": "global OSI (gOSI) and double-Gaussian tuning curve fit"
+          },
+          "input_data_type": "segmented fluorescence images and stimulus-aligned traces",
+          "output_data_type": "phototagging efficacy metrics and visual tuning properties",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 16,
+          "category": "statistics",
+          "technique": "RNA-seq differential expression analysis and gene set enrichment analysis comparing place, silent, and randomly tagged nuclei",
+          "software_tool": "STAR, HTSeq, PyDESeq2, gseapy",
+          "tool_version": "Python 3.11 (gseapy)",
+          "parameters": {
+            "alignment_genome": "mm39",
+            "normalization": "trimmed mean of M values (TMM)",
+            "de_test": "Wald test, Benjamini-Hochberg FDR correction",
+            "gsea": "50 MSigDB hallmark pathways, t-test with 1000 permutations",
+            "filtering": "genes expressed in <3 samples discarded"
+          },
+          "input_data_type": "aligned RNA-seq read counts",
+          "output_data_type": "differentially expressed genes and enriched pathways",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 17,
+          "category": "statistics",
+          "technique": "RNAScope FISH signal detection and quantification comparing tagged versus non-tagged cells",
+          "software_tool": "Cellpose, QuPath",
+          "tool_version": "QuPath v0.5.1",
+          "parameters": {
+            "cell_detection": "Cellpose on DAPI staining, manually curated",
+            "signal_quantification": "QuPath Subcellular Detection tool",
+            "statistical_test": "Mann-Whitney U test",
+            "control_selection": "random non-tagged cells matched by tissue section and CA1 sublayer"
+          },
+          "input_data_type": "RNAScope fluorescence images",
+          "output_data_type": "per-cell RNA transcript counts and group comparison statistics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "K73ERVAQ",
+      "year": 2026,
+      "journal": "bioRxiv",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "VMWYLLBS",
+      "year": 2026,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 12,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic AAV injection (GCaMP7f-P2A-H2B-PAmCherry) and imaging cannula/headpost implant over dorsal CA1",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "coordinates": "-2.2 AP, -1.75 ML, four DV depths relative to dura",
+            "virus": "AAVDJ-CW3SL-GCaMP7f-4Ala-H2B-PAmCherry, 75 nl per depth"
+          },
+          "input_data_type": null,
+          "output_data_type": "GCaMP7f/H2B-PAmCherry-expressing CA1 neurons, chronic imaging window",
+          "hardware": "Nanoject (Drummond Scientific)",
+          "source_location": "main_text",
+          "source_quote": "viruses were injected unilaterally in the left dorsal CA1",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 2,
+          "category": "behavior",
+          "technique": "Water-restricted virtual-reality corridor training with progressively sparse sucrose-reward schedule",
+          "software_tool": "Psychophysics toolbox",
+          "tool_version": null,
+          "parameters": {
+            "environment": "4-m-long linear VR corridor",
+            "reward_schedule": "reduced from 30 to 2 rewards per lap over 10-14 days"
+          },
+          "input_data_type": null,
+          "output_data_type": "trained mice running the VR corridor for reward",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "mice were trained to run through the virtual environment",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 3,
+          "category": "imaging",
+          "technique": "In vivo two-photon functional calcium imaging of dorsal CA1 during VR navigation, with Suite2p/Cellpose-based ROI detection",
+          "software_tool": "SIMA, Suite2p, Cellpose",
+          "tool_version": "Suite2p v0.14.2",
+          "parameters": {
+            "scanner": "8-kHz resonant scanner (Bruker)",
+            "acquisition": "30 Hz, 512x512 pixels, 940-nm laser"
+          },
+          "input_data_type": null,
+          "output_data_type": "CA1 ROI fluorescence traces",
+          "hardware": "Nikon 16x NIR objective, GaAsP PMT (7422P-40)",
+          "source_location": "main_text",
+          "source_quote": "CA1 ROIs were detected using the Suite2p",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 4,
+          "category": "imaging",
+          "technique": "On-demand 2P phototagging of functionally identified neurons via targeted PAmCherry photoactivation (3D-AOD microscope)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "photoactivation": "810-nm excitation, 7x7 \u00b5m scanning pattern per cell, up to 10 cells at a time, 40 mW",
+            "microscope": "3D Atlas AOD microscope (Femtonics)"
+          },
+          "input_data_type": null,
+          "output_data_type": "photoactivated PAmCherry-tagged nuclei in functionally identified neurons",
+          "hardware": "3D-AOD microscope, Alcor 1040-5W laser",
+          "source_location": "main_text",
+          "source_quote": "Photoactivation was conducted using a three-dimensional random-access",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 5,
+          "category": "molecular",
+          "technique": "Tissue dissociation, nuclei isolation, and fluorescence-activated cell sorting (FACS) of photoactivated nuclei",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "sorter": "MoFlo Astrios Cell Sorter",
+            "gating": "NeuN, mCherry, DAPI"
+          },
+          "input_data_type": "dorsal CA1 tissue",
+          "output_data_type": "sorted photoactivated ('Bright' mCherry) nuclei",
+          "hardware": "MoFlo Astrios Cell Sorter (Beckman Coulter)",
+          "source_location": "main_text",
+          "source_quote": "The sorting was performed at the Zuckerman Institute Flow Cytometry Core",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 6,
+          "category": "molecular",
+          "technique": "Meso-seq low-input RNA sequencing library preparation and sequencing of sorted nuclei",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "amplification": "17-18 PCR cycles cDNA, 14 PCR cycles library",
+            "sequencer": "NextSeq 2000, P2-100 reagents"
+          },
+          "input_data_type": "sorted nuclei",
+          "output_data_type": "RNA-sequencing libraries",
+          "hardware": "NextSeq 2000 (Illumina)",
+          "source_location": "main_text",
+          "source_quote": "We followed the previously published Meso-seq protocol",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 7,
+          "category": "electrophysiology",
+          "technique": "Ex vivo whole-cell patch-clamp recording of phototagged neurons in acute hippocampal slices to validate tagging",
+          "software_tool": "Clampex 10",
+          "tool_version": null,
+          "parameters": {
+            "identification": "mCherry nuclear fluorescence",
+            "current_steps": "1.2-s current steps, 20 pA increments"
+          },
+          "input_data_type": null,
+          "output_data_type": "intrinsic electrophysiological properties of tagged neurons",
+          "hardware": "Multiclamp 700B amplifier, Axon Digidata 1550B",
+          "source_location": "main_text",
+          "source_quote": "Whole-cell patch-clamp recordings were performed in aCSF",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 8,
+          "category": "histology",
+          "technique": "RNAScope fluorescent in situ hybridization for Kcnj12/Pcdha8 transcripts on phototagged tissue sections",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "kit": "RNAScope Multiplex Fluorescent Reagent Kit v2",
+            "imaging": "confocal, 20x, 3-\u00b5m z-steps"
+          },
+          "input_data_type": null,
+          "output_data_type": "RNAScope FISH images",
+          "hardware": "A1 HD25 confocal (Nikon)",
+          "source_location": "main_text",
+          "source_quote": "RNAScope Multiplex Fluorescent Reagent Kit",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 9,
+          "category": "statistics",
+          "technique": "OASIS-based event deconvolution, spatial tuning-curve construction, and shuffle-based place-cell/silent-cell detection",
+          "software_tool": "OASIS",
+          "tool_version": null,
+          "parameters": {
+            "bins": "100 bins (4 cm)",
+            "shuffles": "1000 circular shifts for significance threshold"
+          },
+          "input_data_type": "CA1 ROI fluorescence traces",
+          "output_data_type": "classified place cells and silent cells",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "Fluorescence GCaMP traces were deconvolved using OASIS",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 10,
+          "category": "imaging",
+          "technique": "In vivo/ex vivo volumetric image registration for linking functional recordings to transcriptomic tissue sections",
+          "software_tool": "Fiji, custom Python (Napari GUI)",
+          "tool_version": null,
+          "parameters": {
+            "registration": "scaling, affine, and deformation transformation using manually selected common-cell landmarks"
+          },
+          "input_data_type": "in vivo and ex vivo image stacks",
+          "output_data_type": "registered in vivo/ex vivo volumetric images",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "The in vivo and ex vivo registration was carried out using a non-rigid",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 11,
+          "category": "statistics",
+          "technique": "Differential gene expression and gene set enrichment analysis of place, silent, and randomly tagged nuclei RNA-seq data",
+          "software_tool": "STAR, HTSeq, PyDESeq2, GSEApy",
+          "tool_version": null,
+          "parameters": {
+            "alignment": "mouse genome mm39",
+            "normalization": "trimmed mean of M values"
+          },
+          "input_data_type": "RNA-sequencing reads",
+          "output_data_type": "differentially expressed genes, enriched pathways",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "RNA-seq reads were aligned to the mouse genome",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 12,
+          "category": "statistics",
+          "technique": "General statistical hypothesis testing across imaging, electrophysiology, and sequencing datasets",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "tests": "Mann-Whitney U test, Wald test with Benjamini-Hochberg correction, Kruskal-Wallis"
+          },
+          "input_data_type": null,
+          "output_data_type": "statistical significance results",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "For comparisons between two populations with non-normal distributions",
+          "extraction_confidence": "medium"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,698 @@
+{
+  "target_author": "Sebi V Rolotti",
+  "total_papers": 4,
+  "total_steps": 34,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "8NDG4UEZ",
+      "year": 2021,
+      "journal": "Cell Reports",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 6,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "imaging",
+          "technique": "Motion correction of concatenated cross-session two-photon GCaMP6f imaging data using Suite2p's rigid motion-correction strategy",
+          "software_tool": "Suite2p",
+          "tool_version": null,
+          "parameters": {
+            "concatenation": "all imaging sessions for a given field of view concatenated before correction",
+            "channel_used_for_motion_estimation": "GCaMP6f channel only"
+          },
+          "input_data_type": "raw two-photon GCaMP6f/mCherry time-series (per session)",
+          "output_data_type": "motion-corrected, cross-session-concatenated time-series",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "imaging",
+          "technique": "Manual ROI selection over putative CA1 pyramidal cell somata on the cross-session GCaMP6f time-average image, with post hoc tagging of Robo2 knockout cells via the mCherry channel",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "roi_drawing_reference": "cross-session GCaMP6f-channel time-average image only; red (mCherry) channel withheld during drawing to avoid bias",
+            "ko_cell_tagging": "ROIs cross-referenced against the mCherry channel only after all ROIs were drawn; when red wasn't recorded simultaneously, an affine-transformed red-only reference image acquired just prior to imaging was used instead"
+          },
+          "input_data_type": "motion-corrected, cross-session time-average GCaMP6f image",
+          "output_data_type": "hand-drawn ROI set with KO/WT cell identity tags",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "imaging",
+          "technique": "Extraction of dynamic GCaMP6f fluorescence signals from ROIs for each imaging session using SIMA",
+          "software_tool": "SIMA",
+          "tool_version": null,
+          "parameters": {
+            "quality_control": "one session with dropped data during the final >1 minute of recording was excluded from analysis"
+          },
+          "input_data_type": "motion-corrected time-series and ROI set",
+          "output_data_type": "per-ROI, per-session raw fluorescence time series",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "imaging",
+          "technique": "Deconvolution of fluorescence traces into spike trains using OASIS under an AR1 model, with a custom baseline-subtraction and adaptive noise-threshold procedure",
+          "software_tool": "OASIS",
+          "tool_version": null,
+          "parameters": {
+            "baseline_estimation": "Gaussian-smoothed trace (std=5 frames, window=30s), then rolling minimum (window=30s), then rolling maximum (window=30s)",
+            "deconvolution_model": "AR1 with penalty, decay parameter fixed to 400 ms GCaMP6f decay time",
+            "noise_threshold": "median + 1.5x median absolute deviation (MAD) of the baseline-subtracted trace at putative noise-only (no-spike) timepoints",
+            "final_pass": "spike train recomputed with minimum spike size set to the noise threshold and sparsity parameter set to 3"
+          },
+          "input_data_type": "per-ROI raw fluorescence time series",
+          "output_data_type": "deconvolved spike trains per ROI per session",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "statistics",
+          "technique": "Spatial tuning analysis and place-field identification via a shuffled null distribution, restricted to running-defined epochs",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "running_epoch_definition": "consecutive frames of forward locomotion >=1 s duration with peak speed >=5 cm/s; epochs separated by <0.5 s merged",
+            "position_binning": "100 bins of 2 cm each",
+            "spike_smoothing": "Gaussian filter (std=1 frame), then binarized",
+            "null_distribution": "position vector cyclically permuted by a random offset and tuning vector recomputed; repeated 1000 times",
+            "tuning_vector_smoothing": "Gaussian (std=3 position bins), applied to both true and null tuning vectors",
+            "place_field_criterion": "at least 5 consecutive position bins above the 95th percentile of the null distribution, with the cell firing on at least 15% of laps"
+          },
+          "input_data_type": "deconvolved spike trains aligned to position/running signal",
+          "output_data_type": "spatial tuning vectors and place-field calls per cell",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "statistics",
+          "technique": "Statistical testing of imaging-derived metrics using the field of view, not individual cells, as the unit of analysis",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "unit_of_analysis": "field of view (FOV); metrics aggregated across all cells and sessions per FOV",
+            "paired_comparisons": "paired Student's t-test, n-1 degrees of freedom",
+            "decoding_analysis_test": "repeated-measures two-way ANOVA with interaction, testing subpopulation means across surrogate population sizes"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "D5I4EKZM",
+      "year": 2022,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "GH4CWH6X",
+      "year": 2022,
+      "journal": "Science",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "NHDBUGYK",
+      "year": 2022,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 15,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection into dorsal CA1 followed by headpost and chronic imaging-window implantation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "virus_delivery": "50 nL (10 nL pulses) of rAAV at three DV locations via Nanoject syringe",
+            "coordinates": "-2.1 mm AP; -1.5 mm ML; -0.9/-1.05/-1.2 mm DV relative to Bregma",
+            "recovery_before_implant": "3 days",
+            "headpost": "custom metal headpost (stainless steel or titanium)",
+            "imaging_window": "3.0 mm diameter, 1.5-2.3 mm height steel cannula with 3 mm glass coverslip (Warner 64-0720), bonded with Narland optical adhesive",
+            "craniotomy": "3 mm hole; dura and cortical layers removed under visual guidance with ice-cold cortex buffer irrigation",
+            "postop_care": "monitoring and meloxicam analgesia for 3 days"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "In vivo single-cell electroporation of plasmid DNA into individual CA1 pyramidal cells through the imaging cannula",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "cannula_variant": "custom 316L stainless steel cannula (InterPRO), 1.9 mm height x 3.0 mm diameter, angled side with a 0.15x0.35 mm pipette-access opening sealed with a 0.02 mm silicone layer (J-B Weld)",
+            "plasmids": "pCAGGS-GCaMP7b and pCAGGS-ChRmine-mScarlet, each at 50 ng/uL",
+            "electroporation_solution": "155 mM K-gluconate, 10 mM KCl, 10 mM HEPES, 4 mM KOH (pH 7.3, 316 mOsm) plus 0.33 mM Alexa Fluor 488",
+            "pipette": "long-taper borosilicate (Warner G200-3) pulled with a Zeitz DMZ puller, tip resistance 2.5-6 MOhm",
+            "stimulation": "1 s, 100 Hz, 0.5 ms, 5 V pulse train via an A.M.P.I. ISO-Flex stimulus isolator, generated in Clampex 10.7 through a Digidata 1550B and a Dagan BVC-700A amplifier",
+            "targeting_depth": "~150 um below brain surface, pipette at a 32-degree angle",
+            "throughput": "3-5 neurons electroporated per mouse per session; ~30-40% expression success confirmed 1-2 days later"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": "Dagan BVC-700A amplifier; Digidata 1550B; A.M.P.I. ISO-Flex stimulus isolator",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "molecular",
+          "technique": "Combinatorial Cre/Flp-dependent viral construct strategy for opsin, indicator, and DREADD expression across cell types",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "opsins": "Cre-dependent ChRmine (AAV8 or AAV2/1.Ef1a.DIO.ChRmine.oScarlet.WPRE) for CA1 pyramidal cells; Cre-ON/Flp-OFF ChRmine (AAV8.nEF.Con/Foff.2.0) in VGAT-Flp mice to avoid direct interneuron stimulation; Cre-dependent bReaChES (AAV2/9.Ef1a.FLEX.Breaches.tdTomato)",
+            "indicators": "GCaMP6f (AAV1.Syn.GCaMP6f.WPRE.SV40, or Cre-dependent AAV1.Syn.FLEX.GCaMP6f)",
+            "inhibition_suppression_constructs": "GiDREADD (AAV2/1.h56D.HA-hM4D(Gi).mCherry) or FlpO with Flp-dependent tdTomato, or Flp-ON/Cre-OFF Arch3.3-eYFP, under the h56D GABAergic-selective promoter",
+            "induction": "tamoxifen-inducible Cre under the CaMKIIa promoter (AAV2/1.CaMKII.Cre.ERT2); 125 uL of 5 mg/mL tamoxifen or 4-hydroxytamoxifen, i.p., at least 48 h before experiments"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "behavior",
+          "technique": "Head-fixed treadmill training and goal-oriented/place-field-induction behavioral paradigms",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "treadmill": "1.94 m belt with water delivery port, lick sensor, and custom electronics for position/licking",
+            "water_restriction": "85-90% pre-deprivation weight",
+            "initial_training": "cue-deficient burlap belt, non-operant reward, progressively restrictive schedule from 12-15 down to 1 reward zone per lap over 1-2 weeks",
+            "induction_protocol": "15 min baseline, >15 min break, 20 min induction session (photostimulation on a fixed stimulation zone for 5 consecutive laps after lap 1), 15 min follow-up sessions at 24 h intervals up to 72 h",
+            "goal_oriented_learning": "10 cm hidden reward zone at least 10 cm from the nearest tactile cue; up to 2 sessions/day for 4 days, reward zone moved every 24 h",
+            "hygiene_control": "belts cleaned with 70% ethanol between sessions"
+          },
+          "input_data_type": null,
+          "output_data_type": "position, licking, and reward-event traces synchronized to imaging",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging acquisition through the chronic CA1 window",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "microscope": "8 kHz resonant-scanning two-photon microscope (Bruker)",
+            "objective": "40x NIR water immersion (Nikon, 0.8 NA, 3.5 mm WD) for SCE/2p-stimulation experiments; 16x NIR (0.8 NA, 3.0 mm WD) for LED-stimulation/control experiments",
+            "laser": "920 nm, 50-100 mW at objective back aperture (Coherent), power regulated by a Pockels cell (Conoptics)",
+            "detectors": "GaAsP (Hamamatsu 7422P-40) and Multi-Alkali (Hamamatsu R3896) PMTs; green/red split via HQ525/70m-2p and HQ607/45m-2p filters with a 575dcxr dichroic",
+            "acquisition_params": "1-2x digital zoom, ~166-330 um (40x) or ~550-880 um (16x) field of view, 512x512 px at 30 Hz",
+            "head_alignment": "goniometers (+/-10 degree range, Edmund Optics)"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw two-photon fluorescence time series",
+          "hardware": "Bruker two-photon microscope; Hamamatsu PMTs",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "other",
+          "technique": "Widefield LED optogenetic photostimulation integrated with the two-photon imaging path",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "led": "UHP-T-620-SR (Prizmatix), ultrafast high-power collimated red LED with a 629/56 nm excitation cleanup filter (Semrock)",
+            "beam_combining": "775 nm shortpass dichroic (ZT775sp-2p) and 561 nm longpass dichroic (Di02-R561-25x36)",
+            "timing": "LED gated by the imaging Pockels-cell blanking signal, pulsed during galvanometer flyback between frames (~30 Hz)",
+            "power": "~30 mW after the objective (~54 mW/mm^2 before the coverglass)",
+            "protocol": "1 s pulse on stimulation-zone entry for 5 consecutive laps (induction), or every 20-24 s at random times (random-stimulation experiments)"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": "UHP-T-620-SR LED (Prizmatix)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "other",
+          "technique": "Two-photon targeted (spiral-scan) optogenetic photostimulation of individually selected or densely labeled CA1 cell ensembles",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "system": "dual scan-head microscope (Ultima, Bruker): resonant-galvo pair for imaging, galvo-galvo pair for photostimulation",
+            "laser": "1040 nm femtosecond fiber laser (FidelityHP, Coherent; 140 fs pulses, 80 MHz repetition rate)",
+            "beam_combining": "1030 nm shortpass dichroic (T1030SP)",
+            "cell_targeting": "pre-selected by visual confirmation of opsin-reporter expression and functional light response on a separate uncued training belt",
+            "scan_pattern": "~1 s spiral scan, 15-20 um outer diameter, 15 rotations per spiral, repeated 31 times",
+            "power": "typically 80 mW after the objective at >250 um depth (range 60-120 mW)"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": "Ultima dual scan-head microscope (Bruker); FidelityHP fiber laser (Coherent)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "molecular",
+          "technique": "Chemogenetic suppression of CA1 interneuron activity via CNO activation of virally delivered GiDREADD",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "construct": "GiDREADD (hM4D(Gi)) delivered virally to CA1 interneurons",
+            "drug": "10 mg/kg CNO in saline (Cayman Chemical), i.p., or saline control, 20-30 min before the baseline session"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "surgery",
+          "technique": "Bilateral optical fiber implantation and optogenetic manipulation of CA1 during the goal-oriented learning task",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "virus_mixture": "tamoxifen-inducible Cre, Cre-dependent ChRmine, h56D-FlpO, and Flp-ON/Cre-OFF Arch (or Flp-dependent tdTomato in ChRmine-only controls)",
+            "injection": "64 nL per site, bilateral, at +/-2.1/+/-1.4, +/-2.3/+/-1.5, +/-2.6/+/-1.5 mm AP/ML with -0.9/-1.05/-1.2 mm DV relative to Bregma",
+            "implant": "bilateral optical fiber cannulae (200 um core, 0.37 NA) plus stainless-steel headpost",
+            "stimulation": "532 nm laser (50 mW, OptoEngine) via a splitter patch cable, 1 s of 30 Hz bilateral stimulation (20 mW) on laps 6-10 of session 2, at a stimulation zone at least 400 cm from the reward zone"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": "OptoEngine 532 nm laser",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "imaging",
+          "technique": "Image preprocessing: motion correction, ROI/signal generation, and manual curation",
+          "software_tool": "Suite2p, SIMA",
+          "tool_version": null,
+          "parameters": {
+            "motion_correction": "Suite2p rigid motion correction, all sessions per FOV concatenated",
+            "roi_generation": "Suite2p ROI/signal generation with neuropil correction",
+            "curation": "manual curation via GUI to exclude non-somatic components"
+          },
+          "input_data_type": "raw two-photon time series",
+          "output_data_type": "motion-corrected, neuropil-corrected ROI fluorescence traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "statistics",
+          "technique": "Signal processing and event detection via adaptive-threshold OASIS deconvolution",
+          "software_tool": "OASIS",
+          "tool_version": null,
+          "parameters": {
+            "detrending": "linear detrend; negative outliers >3 MAD below median replaced with median",
+            "baseline": "Gaussian filter (std=5 frames, 30 s window), rolling min then rolling max (30 s windows)",
+            "deconvolution": "OASIS, AR1 model, L1 penalty, decay 400 ms (GCaMP6f) or 2 s (GCaMP6s)",
+            "adaptive_threshold": "noise threshold = median + 3 MAD of no-spike baseline periods, used as explicit minimum spike size with sparsity lambda=7"
+          },
+          "input_data_type": "neuropil-corrected fluorescence traces",
+          "output_data_type": "deconvolved spike trains",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 12,
+          "category": "statistics",
+          "technique": "Spatial tuning analysis and place-field detection via shuffled null distribution",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "running_criterion": ">=1 cm/s",
+            "spatial_bins": "100 bins, 1.94 cm each",
+            "smoothing": "Gaussian, sigma=1 frame (spikes), sigma=3 position bins (tuning vector)",
+            "shuffle_test": "1000 cyclic permutations of position vector, 95th percentile threshold",
+            "place_field_criteria": ">=5 consecutive significant bins, active on >=15% of laps, edges extended to half-peak, overlapping fields merged"
+          },
+          "input_data_type": "deconvolved spikes with position labels",
+          "output_data_type": "spatial tuning vectors and detected place fields",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 13,
+          "category": "statistics",
+          "technique": "Stimulated-cell detection via significance, reliability, and magnitude criteria on peri-stimulation fluorescence",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "windows": "1 s pre-stim, 0.5 s post-stim, averaged across 5 stimulations",
+            "significance": "post-minus-pre PSTH change vs. 1000 null draws of non-overlapping frames, 95th percentile threshold",
+            "reliability": "z-scored post-stim fluorescence >=1 SD above pre-stim for >=3 of 5 stimulations",
+            "magnitude": "post-stim PSTH mean >1.5 SD above baseline",
+            "spatial_criterion": "targeted stimulation only: within 75 um of stimulation radius",
+            "exclusion": "cells with a pre-existing place field overlapping the stimulation zone excluded (applied symmetrically to unstimulated cells)"
+          },
+          "input_data_type": "peri-stimulation fluorescence traces",
+          "output_data_type": "classified stimulated vs. unstimulated cells",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 14,
+          "category": "statistics",
+          "technique": "Template-based remapping analysis comparing pre- and post-stimulation spatial tuning",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "templates": "mean tuning vector over last 10 PRE laps and first 10 (of laps 6-15) POST laps",
+            "score": "difference between mean per-lap Pearson correlation to pre- vs. post-stimulation template",
+            "inclusion": "trial-to-trial spatial reliability r>0.25 with the relevant template"
+          },
+          "input_data_type": "per-lap spatial tuning vectors",
+          "output_data_type": "per-cell remapping score",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 15,
+          "category": "statistics",
+          "technique": "Offline pairwise reactivation correlation analysis relating place-field-peak distance to immobility-period fluorescence correlation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "period": "immobility during POST",
+            "comparison": "place-field peak distance vs. Pearson correlation of baselined fluorescence, per cell pair"
+          },
+          "input_data_type": "detected place fields and baselined fluorescence traces",
+          "output_data_type": "pairwise reactivation correlation vs. place-field distance relationship",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "SZXKSZY9",
+      "year": 2022,
+      "journal": "Nature",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 2,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Development of the two-photon-guided single-cell electroporation protocol for starter-cell plasmid delivery (TVA-HA, rabies glycoprotein, GCaMP7s, opsin, Cre-mRuby)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "pipette": "borosilicate glass, 5-10 M\u03a9",
+            "pulse": "single pulse train, -5 V, 100 Hz, 0.5 ms pulse width, 1 s duration"
+          },
+          "input_data_type": null,
+          "output_data_type": "electroporated starter CA1 pyramidal cell protocol",
+          "hardware": "micromanipulator (Scientifica), ISO-Flex stimulator, Axon Digidata 1550B",
+          "source_location": "main_text",
+          "source_quote": "Two-photon guided electroporation was adapted from previously",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "behavior",
+          "technique": "Development of the optogenetic place-field induction protocol (targeted illumination of the starter cell during running)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "opsins": "bReaChES-mRuby3 or ChRmine-mScarlet",
+            "light": "625-nm LED, 35-70 mW under objective, Arduino-gated Pockels cell, 1-1.5 s pulse over 4-6 laps"
+          },
+          "input_data_type": null,
+          "output_data_type": "induced place field at a randomly chosen belt location",
+          "hardware": "Prizmatix 625-nm LED, Arduino-gated Pockels cell",
+          "source_location": "main_text",
+          "source_quote": "a pulse of light of 1-1.5 s duration was delivered",
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "WSSZP72M",
+      "year": 2022,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 11,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "In utero electroporation targeting hippocampal CA1 pyramidal-neuron progenitors with Cre and FLEX-tdTomato/mCherry plasmids",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "timepoint": "E15.5",
+            "pulses": "5 pulses at 45V, 50 ms duration, 500 ms interpulse interval"
+          },
+          "input_data_type": null,
+          "output_data_type": "sparsely labeled CA1 pyramidal neurons for dendritic tracing",
+          "hardware": "triple-electrode probe",
+          "source_location": "main_text",
+          "source_quote": "In utero electroporation targeting the hippocampus was performed",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection of Cre-dependent GCaMP6f into dorsal CA1",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "virus": "AAV1.Syn.FLEX.GCaMP6f, 32 nl per site",
+            "coordinates": "-2.1 mm AP, -1.5 mm ML, three DV depths"
+          },
+          "input_data_type": null,
+          "output_data_type": "GCaMP6f-expressing CA1 pyramidal neurons",
+          "hardware": "Nanoject syringe",
+          "source_location": "main_text",
+          "source_quote": "Viral delivery to hippocampal area CA1 was done as described",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "surgery",
+          "technique": "Imaging window and contralateral silicon-probe/electrode implantation over dorsal CA1",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "window": "3.0-mm diameter, 1.5-mm height",
+            "probe": "single-shank 4-channel linear silicon probe (Q-trode, Neuronexus), 45\u00b0 angle"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronic imaging window with contralateral LFP electrode",
+          "hardware": "Q-trode silicon probe",
+          "source_location": "main_text",
+          "source_quote": "surgically implanted with an imaging window",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "behavior",
+          "technique": "Random Foraging and Goal-Oriented Learning treadmill behavioral paradigms with water reward",
+          "software_tool": "lab custom-written behavior software",
+          "tool_version": null,
+          "parameters": {
+            "water_restriction": ">90% pre-deprivation weight",
+            "belt": "1.9-2.05 m, three joined fabric ribbons"
+          },
+          "input_data_type": null,
+          "output_data_type": "position, lick, and water-delivery behavioral data",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "mice were water restricted (>90% pre-deprivation weight)",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "imaging",
+          "technique": "Multiplane in vivo two-photon calcium imaging of CA1 dendrites and somata during behavior",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "2-photon 8-kHz resonant scanning microscope (Bruker)",
+            "planes": "3 planes at 7.2 Hz, or 7 planes at 3.5 Hz"
+          },
+          "input_data_type": null,
+          "output_data_type": "multiplane dendritic/somatic calcium imaging movies",
+          "hardware": "40x NIR water-immersion objective (Nikon), GaAsP/Multi-Alkali PMTs",
+          "source_location": "main_text",
+          "source_quote": "All imaging was conducted using a 2-photon 8 kHz resonant scanning",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "imaging",
+          "technique": "Motion correction and structural-functional registration for dendritic ROI generation",
+          "software_tool": "SIMA, Simple Neurite Tracer (Fiji)",
+          "tool_version": null,
+          "parameters": {
+            "tracing": "manual tracing of cells in structural stacks, projected onto functional planes via affine transform"
+          },
+          "input_data_type": "raw multiplane imaging data",
+          "output_data_type": "registered dendritic and somatic ROIs",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "All cells in time-averaged structural stacks were manually traced",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "imaging",
+          "technique": "Calcium signal extraction and statistically significant transient detection",
+          "software_tool": "SIMA",
+          "tool_version": null,
+          "parameters": {
+            "df_f": "described in Jia et al., 2011"
+          },
+          "input_data_type": "registered ROI fluorescence",
+          "output_data_type": "significant calcium transients per ROI",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "Dynamic GCaMP6f fluorescence signals were extracted for each",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "statistics",
+          "technique": "Spatial tuning analysis and day-to-day place-field stability (centroid shift) analysis",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "criterion": "spatial information (Danielson et al., 2016; Zaremba et al., 2017)"
+          },
+          "input_data_type": "calcium transients, position data",
+          "output_data_type": "spatially tuned ROIs, place field stability classification",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "Spatially tuned ROIs were detected based on spatial information",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "electrophysiology",
+          "technique": "LFP acquisition and sharp-wave ripple (SWR) detection",
+          "software_tool": "custom MATLAB supervised algorithm",
+          "tool_version": null,
+          "parameters": {
+            "sampling": "20 kHz, downsampled to 1250 Hz",
+            "detection": "k-nearest-neighbor embedding on wavelet-derived SWR features"
+          },
+          "input_data_type": "raw LFP signal",
+          "output_data_type": "detected SWR events",
+          "hardware": "Intan RHD digital acquisition system",
+          "source_location": "main_text",
+          "source_quote": "All LFP data were recorded and processed exactly as described",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "statistics",
+          "technique": "Peri-SWR fluorescence analysis and behavior/network-state epoch delineation (RUN/REST/SWR)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "run_epoch": ">=1s duration, peak speed >=5 cm/s"
+          },
+          "input_data_type": "\u0394F/F traces, SWR event times",
+          "output_data_type": "peri-SWR z-scored fluorescence, epoch labels",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "Running epochs ('RUN') were defined as periods at least 1s",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "statistics",
+          "technique": "Bootstrap-based and mixed-model statistical testing (branch spike prevalence, linear models)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "bootstrap": "1000 resamples with replacement",
+            "model": "linear model r_i = b1*a_i + b2*t_i + b3*a_i*t_i"
+          },
+          "input_data_type": "per-ROI event metrics",
+          "output_data_type": "statistical significance results",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "Confidence intervals in Figures 2G and 2H were computed via bootstrap",
+          "extraction_confidence": "high"
+        }
+      ]
+    }
+  ]
+}

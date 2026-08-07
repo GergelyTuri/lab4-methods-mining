@@ -1,0 +1,753 @@
+{
+  "target_author": "James B Priestley",
+  "total_papers": 4,
+  "total_steps": 36,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "K433LNFA",
+      "year": 2019,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "KE4EERU8",
+      "year": 2019,
+      "journal": "Science",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "DAVL9W98",
+      "year": 2020,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 10,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "imaging",
+          "technique": "Image preprocessing: motion correction (HMM for dual-plane, Suite2p non-rigid registration for single-plane), ROI detection and fluorescence/neuropil-corrected extraction, manual curation",
+          "software_tool": "SIMA, Suite2p",
+          "tool_version": null,
+          "parameters": {
+            "dual_plane_motion_correction": "modified 2D hidden Markov model, re-initialized per plane to account for piezo settling time",
+            "single_plane_motion_correction": "Suite2p non-rigid registration",
+            "residual_motion_handling": "trials with inadequately corrected motion discarded after visual assessment",
+            "roi_curation": "manual post-hoc curation via Suite2p GUI to exclude non-somatic components"
+          },
+          "input_data_type": "raw two-photon time-series",
+          "output_data_type": "motion-corrected, curated per-ROI fluorescence traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "imaging",
+          "technique": "Cross-session ROI registration via affine transformation of fields of view and Hungarian-algorithm optimal matching of ROI pairs by Jaccard spatial overlap, with manual curation of unmatched ROIs",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "reference_session_choice": "session with the largest number of detected neurons",
+            "auto_accept_threshold": "Jaccard distance < 0.5",
+            "manual_curation_tool": "custom IPython notebook",
+            "auto_new_roi_threshold": "current-ROI centroid > 50 pixels from any unpaired reference ROI"
+          },
+          "input_data_type": "per-session ROI masks and fluorescence traces",
+          "output_data_type": "cross-session-registered common ROI pool with per-session identity",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "statistics",
+          "technique": "Event detection via OASIS non-negative deconvolution, amplitude thresholding, and per-frame discretization of activity",
+          "software_tool": "OASIS",
+          "tool_version": null,
+          "parameters": {
+            "amplitude_threshold": "events below 4 median absolute deviations of the raw trace discarded",
+            "discretization_rationale": "prevents cross-session variation in imaging parameters from biasing calcium-event scale"
+          },
+          "input_data_type": "neuropil-corrected fluorescence traces",
+          "output_data_type": "discretized per-frame putative-event traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "statistics",
+          "technique": "General population decoding framework using linear-kernel support vector machines with repeated cross-validation and shuffled-label null distributions",
+          "software_tool": "scikit-learn",
+          "tool_version": null,
+          "parameters": {
+            "classifier": "linear SVM",
+            "cv_split": "75/25% train/test, 100 repeats with random subdivisions",
+            "class_balancing": "subsampling of overrepresented class",
+            "null_model": "classifier retrained on shuffled surrogate data"
+          },
+          "input_data_type": "discretized neural population activity",
+          "output_data_type": "cross-validated decoding accuracy and null-distribution comparison",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "statistics",
+          "technique": "Decoding of elapsed trial time from population activity via a one-vs-one ensemble of pairwise linear time-bin classifiers, at multiple time resolutions",
+          "software_tool": "scikit-learn",
+          "tool_version": null,
+          "parameters": {
+            "trial_window_s": 35,
+            "fine_resolution": "2.5 s bins (14 population vectors/trial), 91 pairwise classifiers",
+            "coarse_resolution": "5 s bins (7 population vectors/trial)",
+            "alternate_classifier": "nonlinear SVM with RBF kernel",
+            "null_model": "1000 surrogate datasets with per-trial randomized time-bin order",
+            "grouping": "computed separately for CS+ and CS-, and for Pre- vs. Post-Learning blocks"
+          },
+          "input_data_type": "binned population activity vectors",
+          "output_data_type": "time-decoding accuracy matrices and null comparison",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "statistics",
+          "technique": "Decoding of CS stimulus identity from instantaneous and average population firing rates, including cross-time-period generalization analysis",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "instantaneous_bin_s": 1,
+            "average_rate_windows": "Pre-CS (-10 to 0 s), CS (0-20 s), Trace (20-35 s), US (35-40 s), Post-US (40-170 s), and combined CS+Trace (0-35 s)",
+            "null_model": "1000 surrogate datasets with shuffled CS trial labels",
+            "cross_period_analysis": "classifiers trained on one trial period tested on all other periods, forming a pairwise train/test accuracy matrix"
+          },
+          "input_data_type": "binned population activity vectors",
+          "output_data_type": "stimulus-identity decoding accuracy over time and across trial periods",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "statistics",
+          "technique": "Single-neuron CS-selectivity index analysis with shuffle-based significance testing",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "formula": "SI = (f+ - f-) / (f+ + f-), bounded [-1, 1]",
+            "null_model": "1000 surrogate datasets with shuffled trial-type labels",
+            "grouping": "computed separately for Pre- and Post-Learning trials"
+          },
+          "input_data_type": "per-neuron average activity by trial type",
+          "output_data_type": "per-neuron selectivity index and significance",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "statistics",
+          "technique": "Neural sequence score analysis based on peak-firing-latency ordering and pairwise Spearman rank correlation across trials",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "window": "CS and trace periods, 0-35 s",
+            "correlation_metric": "Spearman rank correlation of peak-latency firing order between trial pairs",
+            "null_model": "1000 surrogate datasets with per-neuron, per-trial randomized event timing",
+            "grouping": "computed separately for CS+ and CS- trials"
+          },
+          "input_data_type": "per-neuron peak-latency firing times",
+          "output_data_type": "sequence score and significance",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "statistics",
+          "technique": "Hidden Markov model analysis of population activity: Baum-Welch model fitting across a range of state counts, Viterbi-path state-transition-matrix similarity analysis, and CS decoding from HMM state frequencies",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "observation_model": "independent Bernoulli process per neuron per latent state",
+            "fitting_algorithm": "Baum-Welch expectation-maximization, minimum activity rate 0.001 Hz regularization",
+            "initialization": "modified K-means clustering of neural data",
+            "n_states_swept": "K in {5...50}, 12 random-initialization fits per K, best-likelihood model retained",
+            "grouping": "separate models trained per mouse for Pre-Learning and Post-Learning trials",
+            "transition_analysis": "Viterbi-decoded per-trial transition matrices (diagonal zeroed), correlated pairwise across trials, compared to a time-bin-shuffled null",
+            "cs_decoding": "linear SVM trained on per-trial HMM state frequencies (0-35 s window) to decode CS identity"
+          },
+          "input_data_type": "discretized population activity",
+          "output_data_type": "fitted HMM states/transitions and CS-decoding accuracy from state frequencies",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 10,
+          "category": "statistics",
+          "technique": "Ensemble overlap analysis between trial pairs via Jaccard similarity of active-neuron sets, z-normalized against a matched-activity-rate shuffled null",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "metric": "Jaccard similarity index of active-neuron sets between trial pairs",
+            "null_model": "1000 surrogate scores per trial pair, randomly assigned active/inactive labels matched to observed active-neuron fraction"
+          },
+          "input_data_type": "per-trial active-neuron sets",
+          "output_data_type": "z-normalized ensemble overlap score per trial pair",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "D5I4EKZM",
+      "year": 2022,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 22,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Viral injection for GCaMP6f expression in dorsal CA1",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "virus": "rAAV1-Syn-GCaMP6f-WPRE-SV40 (Addgene/Penn Vector Core)",
+            "coordinates": "-2 mm AP; -1.5 mm ML; -1.2 mm DV relative to bregma",
+            "volume": "500 nL via Nanoject syringe",
+            "recovery": "3 days in home cage following viral infusion"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice expressing GCaMP6f in dorsal CA1 pyramidal neurons",
+          "hardware": "Nanoject syringe",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Chronic hippocampal imaging window and headpost implantation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "procedure": "cortex overlying left dorsal hippocampus aspirated; 3-mm glass-bottomed stainless steel cannula implanted for imaging access; titanium headpost cemented to skull",
+            "analgesia": "buprenorphine or meloxicam as needed, continued 3 days postoperatively"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice with chronic hippocampal imaging window and headpost",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "behavior",
+          "technique": "Head-fixed virtual-reality behavioral apparatus and position-tracking system",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "wheel": "low-friction lightweight running wheel with an axle-coupled rotary encoder; quadrature data decoded/buffered and transmitted to an Intel NUC i5 mini-PC",
+            "control_architecture": "custom PC software communicating with a custom GPIO circuit for water delivery, lick-port sensing, and imaging synchronization; all elements connected via high-speed Ethernet using UDP message passing",
+            "display": "5 LCD monitors (Acer SB230 23'' IPS) in a half-octagon covering ~220\u00b0 of the visual field, each driven by an ODROID-C2 single-board computer running Android 6.0.1 to render a fraction of the VR scene",
+            "vr_engine": "Unity game engine"
+          },
+          "input_data_type": null,
+          "output_data_type": "rendered virtual-reality environment and synchronized position/behavior signals",
+          "hardware": "Intel NUC i5 mini-PC; ODROID-C2 single-board computers; Acer SB230 LCD monitors",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "behavior",
+          "technique": "Water-restricted reward training on the VR track",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "habituation": "starting 7 days post-surgery, handling/head-fixation habituation, then 2 days of free running before VR exposure",
+            "water_restriction": "85-90% of starting body weight",
+            "reward": "5% sucrose solution, ~4 mm per reward",
+            "training_progression": "rewards initially dispersed randomly, reduced over 1-2 weeks to two fixed reward zones (~1.2 m and 2.7 m on the track)",
+            "criterion": "consistently running more than 130 trials using the two fixed reward zones within an hour"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice trained to run and lick for reward in a fixed VR track",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "behavior",
+          "technique": "Familiar-novel context-switching paradigm",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "session_structure": "4 blocks per session: 40 trials Familiar, 30 trials Novel, 30 trials Familiar, 30 trials Novel",
+            "repetition": "same contexts repeated across 3 days per experiment sequence; sequence repeated with a second novel context per mouse",
+            "reward_positions": "fixed sucrose reward distances of 1.2 m and 2.7 m in all trials and contexts"
+          },
+          "input_data_type": null,
+          "output_data_type": "imaging and behavioral data across familiar/novel context blocks",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "imaging",
+          "technique": "In vivo two-photon Ca2+ imaging acquisition",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8 kHz resonant scanner (Bruker)",
+            "objective": "16x NIR water immersion, 0.8 NA, 3 mm WD (Nikon)",
+            "laser": "920 nm, 50-100 mW at objective back aperture (Coherent)",
+            "detection": "emission filter (HQ525/70m-2p) to a GaAsP PMT (Hamamatsu 7422P-40), custom dual-stage preamp (Bruker)",
+            "acquisition": "512x512 pixels at 10 Hz, 1.2-2x digital zoom"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw two-photon Ca2+ fluorescence video",
+          "hardware": "Bruker 8-kHz resonant scanner; Nikon 16x NIR objective; Hamamatsu GaAsP PMT 7422P-40",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "imaging",
+          "technique": "Motion correction and ROI detection/extraction with Suite2p",
+          "software_tool": "Suite2p",
+          "tool_version": null,
+          "parameters": {
+            "organization": "imaging data organized with the SIMA software package prior to processing",
+            "motion_correction": "Suite2p non-rigid registration mode",
+            "roi_detection": "Suite2p 'sparse mode' followed by standard fluorescence extraction and neuropil correction",
+            "curation": "ROIs curated post-hoc via Suite2p's graphical interface to exclude non-somatic components"
+          },
+          "input_data_type": "raw two-photon Ca2+ fluorescence video",
+          "output_data_type": "motion-corrected video with curated somatic ROI fluorescence traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "imaging",
+          "technique": "Event deconvolution via OASIS",
+          "software_tool": "OASIS",
+          "tool_version": null,
+          "parameters": {
+            "algorithm": "fast non-negative deconvolution",
+            "threshold": "events with amplitude below 4 median absolute deviations of the raw trace discarded",
+            "output": "binarized per-frame active/inactive signal, not treated as true spike times"
+          },
+          "input_data_type": "extracted fluorescence traces",
+          "output_data_type": "binarized putative-event trains",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "statistics",
+          "technique": "Spatial tuning curve calculation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "binning": "virtual track discretized into 100 evenly spaced 3-cm bins",
+            "normalization": "event histogram normalized for animal occupancy",
+            "smoothing": "convolved with a Gaussian kernel, \u03c3 = 9 cm"
+          },
+          "input_data_type": "binarized event trains and animal position",
+          "output_data_type": "per-neuron, per-trial spatial tuning curves",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "statistics",
+          "technique": "Population decoding of animal position via an ensemble of support vector machines",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "model": "ensemble of SVMs, one-vs-one multi-class decoding",
+            "training_scheme_A": "trained per context block, tested on all remaining context blocks to generate position error matrices",
+            "training_scheme_B": "trial-by-trial decoding accuracy assessed for the first 10 trials of each context block, trained on the remaining trials"
+          },
+          "input_data_type": "population spatial tuning curves",
+          "output_data_type": "decoded animal position and error matrices",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "statistics",
+          "technique": "Population cross-correlation analysis for trial-to-trial spatial drift",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "method": "population vector correlation between concatenated spatial tuning curves of all neurons for each trial pair, computed across a range of spatial lags",
+            "summary_metric": "center-of-mass of the spatial cross-correlation curve summarizes shift direction and distance",
+            "visualization": "antisymmetric shift matrix across all trial pairs; per-trial shift from averaging rows/columns of the symmetrized matrix",
+            "exclusion": "trial pairs with peak cross-correlation below 0.1 excluded; experiments with more than one-third of pairs excluded were omitted"
+          },
+          "input_data_type": "per-trial spatial tuning curves for a neural population",
+          "output_data_type": "trial-pair spatial shift matrix and per-trial shift estimates",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 12,
+          "category": "statistics",
+          "technique": "Simulation of place-field accumulation dynamics for validating the drift analysis",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "population": "300 simulated neurons, 0.2 probability of acquiring a place field, fields accumulated over 30 trials via a geometric process with mean 6",
+            "field_model": "Gaussian bump activity (\u03c3 = 5 bins) at uniformly sampled field centers",
+            "btsp_condition": "fixed BTSP probability per simulation; BTSP fields shifted 0-0.25x environment length on the first trial with gain sampled 1-3x",
+            "drift_condition": "fixed drifting probability per simulation; drift slope sampled 0-3 cm/trial",
+            "noise": "out-of-field Gaussian noise bumps (probability 0.2) and per-trial multiplicative gain noise ~N(1, 0.05)"
+          },
+          "input_data_type": null,
+          "output_data_type": "simulated place-field datasets for validating the cross-correlation drift metric",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 13,
+          "category": "statistics",
+          "technique": "Place-field detection via shuffled null distribution",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "null_construction": "each trial's activity circularly shifted by an independent random distance, smoothed trial-averaged tuning curve recomputed; repeated 1,000 times per neuron",
+            "threshold": "95th percentile of null tuning values at each spatial bin (p < 0.05)",
+            "field_criteria": "candidate fields = contiguous segments exceeding the null threshold; width restricted to less than 1 m (one-third of the track); required activity within field bounds on at least 15 trials"
+          },
+          "input_data_type": "spatial tuning curves",
+          "output_data_type": "detected place fields with significance-tested boundaries",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 14,
+          "category": "statistics",
+          "technique": "Ensemble overlap (Jaccard similarity) analysis across context blocks",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "vector": "binary per-neuron vector of significant place-field presence per context block",
+            "metric": "Jaccard similarity between each pair of context blocks",
+            "normalization": "z-scored against a shuffle distribution from 10,000 random permutations of each block's place-cell vector"
+          },
+          "input_data_type": "per-block place-cell identity vectors",
+          "output_data_type": "normalized ensemble overlap scores between context blocks",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 15,
+          "category": "statistics",
+          "technique": "Normalized spatial tuning score via KL-divergence",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "raw_score": "KL-divergence between the normalized spatial tuning curve (treated as a pseudo-probability mass function) and the uniform distribution",
+            "normalization": "standardized relative to a null distribution of tuning scores computed on the null tuning curves generated for place-field detection"
+          },
+          "input_data_type": "spatial tuning curves and their null-shuffle counterparts",
+          "output_data_type": "normalized per-neuron spatial tuning scores",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 16,
+          "category": "statistics",
+          "technique": "Place-field formation characterization",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "formation_trial": "first trial within the first 5-trial window where the neuron was active in the field on at least 3 trials (following Sheffield et al., 2017); active = amplitude at least 5% of peak activity",
+            "activity_displacement": "spatial shift between peak firing location on the formation trial and peak of the average tuning of all subsequent trials",
+            "formation_gain": "peak activity rate on the formation trial divided by peak activity rate in the average tuning of subsequent active trials",
+            "perifield_velocity": "average animal velocity within the place-field boundaries during the formation trial"
+          },
+          "input_data_type": "detected place fields and per-trial activity",
+          "output_data_type": "formation trial, activity displacement, gain, and perifield velocity per place field",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 17,
+          "category": "statistics",
+          "technique": "Velocity-field width correlation with permutation testing",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "model": "linear model predicting place-field width from perifield formation velocity, fit per trial block per day",
+            "comparison": "slope difference (Novel minus Familiar) computed per context switch",
+            "significance": "10,000 shuffles of context labels per condition; p-value from the Gaussian CDF fit to the null slope-difference distribution, reported as -log10(p)"
+          },
+          "input_data_type": "per-field width and perifield formation velocity",
+          "output_data_type": "context-dependent velocity-width slope estimates and significance",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 18,
+          "category": "statistics",
+          "technique": "LNP network model of BTSP-mediated place-field formation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "architecture": "linear-nonlinear-Poisson (LNP) cascade model of a CA1 neuron receiving input from 300 simulated CA3 place cells (Gaussian tuning, width \u03c3=10 cm, max rate 30 Hz, evenly distributed field centers)",
+            "output_nonlinearity": "CA1 instantaneous firing rate as an exponential function of summed weighted CA3 input, scaled to a 30 Hz maximum",
+            "trial_structure": "16 simulated trials (1 pre-plasticity, 15 post-plasticity), 1-ms timesteps, 2-s inter-trial interval, constant velocity per simulation",
+            "spike_to_fluorescence": "200 unique Poisson spike trains per condition convolved with an idealized calcium kernel (\u03c4_decay=0.7 s, \u03c4_rise=0.07 s), subsampled to 10 Hz, corrupted with additive Gaussian noise at SNR in {0.5,1,2,4,8,16}, then passed through the same deconvolution workflow used on real data",
+            "btsp_plasticity_rule": "asymmetric double-exponential plasticity kernel (Bittner et al., 2017) applied to CA3-CA1 weights at a fixed plateau-onset location (200 cm)"
+          },
+          "input_data_type": "simulated CA3 place-cell firing rates",
+          "output_data_type": "simulated CA1 spike trains, fluorescence traces, and inferred activity shifts",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 19,
+          "category": "statistics",
+          "technique": "NMF decomposition and K-means clustering of place-field trial-dynamics patterns",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "feature_construction": "150-cm (50-bin) activity window around each place field's center, concatenated across the first 10 trials from the formation trial, yielding a 500-element vector per field",
+            "decomposition": "non-negative matrix factorization minimizing the Frobenius norm of X - WH, with n=11 components chosen at the loss-curve elbow",
+            "clustering": "K-means clustering (K=2) on the 11 NMF weight patterns to partition fields into 'BTSP-like' and 'other' groups"
+          },
+          "input_data_type": "aligned per-trial place-field activity profiles",
+          "output_data_type": "NMF component weights and BTSP-like/other cluster assignments",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 20,
+          "category": "statistics",
+          "technique": "SVM-based decoding validation of BTSP vs. Other place-field classification",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "features": "4 features per place field: first-to-later-trial tuning shift, field width, stability (even/odd trial correlation), first-trial activity gain",
+            "model": "linear-kernel support vector machine",
+            "validation": "10 stratified 50/50 train/test splits per mouse with inverse-frequency sample weighting; null distribution from 1,000 permutations of BTSP labels, significance from the 95% interval of the null accuracy distribution"
+          },
+          "input_data_type": "secondary place-field activity features and NMF/K-means cluster labels",
+          "output_data_type": "cross-validated decoding accuracy for BTSP vs. Other classification",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 21,
+          "category": "statistics",
+          "technique": "Linear model of place-field density as a function of velocity history",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "predictors": "exponentially filtered spatial velocity profile at multiple time constants (\u03c4 in {0.01, 0.025, 0.05, 0.1, 0.25} spatial bins) to capture short-term history effects"
+          },
+          "input_data_type": "spatial velocity profile and place-field density",
+          "output_data_type": "fitted velocity filters predicting place-field density",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 22,
+          "category": "statistics",
+          "technique": "Next-trial place-field distance analysis",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "metric": "average distance from each place field to fields forming on the immediately following trial, computed only between fields of the same BTSP classification",
+            "null_model": "distances standardized against a null formed by randomly permuting place-field formation-trial assignments within each BTSP classification and trial block; repeated 200 times per field"
+          },
+          "input_data_type": "place-field formation trials and BTSP classifications",
+          "output_data_type": "standardized next-trial field-distance measure",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "WSSZP72M",
+      "year": 2022,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "R27V283A",
+      "year": 2024,
+      "journal": "bioRxiv",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 2,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "other",
+          "technique": "VRMate virtual-reality rendering system: Unity/C# application running on one ODROID C4 single-board computer per display, receiving UDP position updates from the behaviorMate UI and rendering the virtual environment independently per display for scalability",
+          "software_tool": "Unity, C#",
+          "tool_version": null,
+          "parameters": {
+            "sbc": "ODROID C4 (Amlogic S905X3 Quad-Core Cortex-A55, 4 GiB RAM, Mali-G31 MP2 GPU), one per display, Android OS",
+            "protocol": "UDP packets carrying position updates from behaviorMate UI",
+            "scalability": "independent per-display rendering avoids frame-rate/resolution loss when adding displays"
+          },
+          "input_data_type": null,
+          "output_data_type": "rendered VR scene synchronized to animal virtual position",
+          "hardware": "ODROID C4 single-board computers",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "other",
+          "technique": "Imaging-compatible custom Unity shader programs suppressing green/red color channels in rendered VR scenes to minimize fluorescence-imaging artifacts",
+          "software_tool": "Unity",
+          "tool_version": null,
+          "parameters": {
+            "mechanism": "custom shader programs editing per-pixel color values prior to rendering, enabled via the behaviorMate UI",
+            "use_case": "zeroing the green or red pixel component to reduce artifacts during GFP/RFP-based calcium imaging"
+          },
+          "input_data_type": null,
+          "output_data_type": "imaging-artifact-minimized VR display output",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "QQIBRBDR",
+      "year": 2025,
+      "journal": "eLife",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 2,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "other",
+          "technique": "VRMate virtual-reality rendering system: Unity/C# application running on one ODROID C4 single-board computer per display, receiving UDP position updates from the behaviorMate UI and rendering the virtual environment independently per display for scalability",
+          "software_tool": "Unity, C#",
+          "tool_version": null,
+          "parameters": {
+            "sbc": "ODROID C4 (Amlogic S905X3 Quad-Core Cortex-A55, 4 GiB RAM, Mali-G31 MP2 GPU), one per display, Android OS",
+            "protocol": "UDP packets carrying position updates from behaviorMate UI",
+            "scalability": "independent per-display rendering avoids frame-rate/resolution loss when adding displays"
+          },
+          "input_data_type": null,
+          "output_data_type": "rendered VR scene synchronized to animal virtual position",
+          "hardware": "ODROID C4 single-board computers",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "other",
+          "technique": "Imaging-compatible custom Unity shader programs suppressing green/red color channels in rendered VR scenes to minimize fluorescence-imaging artifacts",
+          "software_tool": "Unity",
+          "tool_version": null,
+          "parameters": {
+            "mechanism": "custom shader programs editing per-pixel color values prior to rendering, enabled via the behaviorMate UI",
+            "use_case": "zeroing the green or red pixel component to reduce artifacts during GFP/RFP-based calcium imaging"
+          },
+          "input_data_type": null,
+          "output_data_type": "imaging-artifact-minimized VR display output",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    }
+  ]
+}

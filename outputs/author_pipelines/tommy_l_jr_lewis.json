@@ -1,0 +1,30 @@
+{
+  "target_author": "Tommy L Jr Lewis",
+  "total_papers": 0,
+  "total_steps": 0,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "NYAYJKM8",
+      "year": 2016,
+      "journal": "Current Biology",
+      "attribution": {
+        "source": "position_heuristic",
+        "confidence": "low"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "SECXDAKS",
+      "year": 2024,
+      "journal": "Nature Communications",
+      "attribution": {
+        "source": "position_heuristic",
+        "confidence": "low"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    }
+  ]
+}

@@ -1,0 +1,339 @@
+{
+  "target_author": "Mohsin S Ahmed",
+  "total_papers": 2,
+  "total_steps": 15,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "DAVL9W98",
+      "year": 2020,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 6,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "molecular",
+          "technique": "Viral injection for optogenetic (ArchT or tdTomato control) or Cre-dependent GCaMP6f imaging expression in dorsal CA1",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "optogenetic_viruses": "rAAV2/1-Syn-ArchT or rAAV2/1-Syn-tdTom (gift of B. Zemelman)",
+            "imaging_virus": "rAAV1-Syn-Flex-GCaMP6f-WPRE-SV40 (Addgene/Penn Vector Core), in CaMKIIa-Cre transgenic mice",
+            "coordinates": "-2.3 mm AP, -1.5 mm ML, -0.9/-1.05/-1.2 mm DV relative to bregma",
+            "volume": "50 nL (10 nL pulses) via Nanoject syringe"
+          },
+          "input_data_type": null,
+          "output_data_type": "ArchT/tdTomato- or GCaMP6f-expressing dorsal CA1 pyramidal neurons",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Chronic surgical implantation of bilateral optical fiber cannulae (optogenetics) or an imaging window and headpost (imaging), over dorsal CA1",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "imaging_window": "3.0 mm diameter, 1.5 or 2.3 mm height, glass coverslip (64-0720, Warner) adhered to steel cannula with Narland optical adhesive",
+            "analgesia": "buprenorphine or meloxicam, continued 3 days postoperatively",
+            "recovery_before_further_procedures_days": 3,
+            "exclusion_criteria": "implant entering the hippocampus, incomplete viral infection in dorsal CA1, or optical-fiber damage compromising light delivery"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronic optogenetic or imaging access implant over dorsal CA1",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "behavior",
+          "technique": "Head-fixed behavioral apparatus combining microcontroller-driven stimulus presentation (tone, air-puff, water reward) and behavioral readout, synchronized to imaging or optogenetic laser delivery",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "microcontroller": "Arduino",
+            "restraint": "body tube chamber with interchangeable textured fabric lining",
+            "reward_sensor": "capacitive lick sensor on metal water port",
+            "sync": "analog-to-digital converter, common trigger pulse shared with optogenetic laser or 2-photon imaging"
+          },
+          "input_data_type": null,
+          "output_data_type": "synchronized behavioral/stimulus/imaging or laser-trigger event streams",
+          "hardware": "Arduino microcontroller",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "behavior",
+          "technique": "Head-fixed trace fear conditioning with a differential CS+/CS- learning paradigm (Pre-Learning, Learning, Post-Learning phases)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "habituation_start": "3-7 d after surgical implantation",
+            "water_restriction": "85-90% of starting body weight",
+            "cs": "20 s tone, either 10 kHz constant or 2 kHz pulsed at 1 Hz",
+            "us": "air-puff, 200 ms, 5 puffs at 1 Hz",
+            "trace_interval_s": 15,
+            "conditioning_schedule": "3 consecutive days for optogenetic paradigm",
+            "differential_paradigm": "Pre-Learning (10-15 trials/cue over 2-3 d), Learning (3-day US-paired conditioning with CS+/CS- alternation), Post-Learning (~20-25 trials/cue over 2-3 d with continued CS+ reinforcement)",
+            "contextual_cue_randomization": "chamber fabric and background odor (70% ethanol or 2% acetic acid) randomized across Pre/Post-Learning trials"
+          },
+          "input_data_type": null,
+          "output_data_type": "licking-behavior traces and trial-labeled behavioral sessions",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "other",
+          "technique": "Head-fixed closed-loop optogenetic inhibition (ArchT) of CA1 during the CS-trace-US sequence, with experimenter blinding to viral condition",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "fiber": "200 um core, 0.37 NA multimode optical fiber",
+            "laser": "532 nm, 50 mW (OptoEngine), coupled via splitter patch cable",
+            "stimulation_power_mw": 10,
+            "stimulation_window": "continuous from end of 10 s pre-CS period through the entire CS-trace-US sequence",
+            "blinding": "experimenters blinded to subject viral injection"
+          },
+          "input_data_type": null,
+          "output_data_type": "behavioral/neural data under optogenetic CA1 inhibition vs. control",
+          "hardware": "532 nm DPSS laser (OptoEngine); bilateral optical fiber cannulae",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging of CA1 pyramidal neurons (single- or dual-plane) during the behavioral task",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "2-photon 8 kHz resonant scanner (Bruker)",
+            "objective": "40x NIR water immersion (Nikon, 0.8 NA, 3.5 mm WD)",
+            "dual_plane": "piezoelectric objective coupling for rapid z displacement, n=3 mice, 20 um plane separation, ~8 Hz (30 ms piezo settling time)",
+            "single_plane": "n=3 mice, 30 Hz",
+            "excitation": "920 nm laser, 50-100 mW at objective back aperture (Coherent)",
+            "emission_filter": "HQ525/70m-2p",
+            "detector": "GaAsP PMT (Hamamatsu 7422P-40)",
+            "frame_size": "512x512 pixels",
+            "fov_um": "~166-332 per imaging plane",
+            "zoom": "1-2x digital zoom"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw single- or dual-plane two-photon GCaMP6f time-series",
+          "hardware": "Bruker 2-photon resonant scanning microscope; piezoelectric z-crystal (dual-plane)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "NHDBUGYK",
+      "year": 2022,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 9,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection into dorsal CA1 followed by headpost and chronic imaging-window implantation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "virus_delivery": "50 nL (10 nL pulses) of rAAV at three DV locations via Nanoject syringe",
+            "coordinates": "-2.1 mm AP; -1.5 mm ML; -0.9/-1.05/-1.2 mm DV relative to Bregma",
+            "recovery_before_implant": "3 days",
+            "headpost": "custom metal headpost (stainless steel or titanium)",
+            "imaging_window": "3.0 mm diameter, 1.5-2.3 mm height steel cannula with 3 mm glass coverslip (Warner 64-0720), bonded with Narland optical adhesive",
+            "craniotomy": "3 mm hole; dura and cortical layers removed under visual guidance with ice-cold cortex buffer irrigation",
+            "postop_care": "monitoring and meloxicam analgesia for 3 days"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "In vivo single-cell electroporation of plasmid DNA into individual CA1 pyramidal cells through the imaging cannula",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "cannula_variant": "custom 316L stainless steel cannula (InterPRO), 1.9 mm height x 3.0 mm diameter, angled side with a 0.15x0.35 mm pipette-access opening sealed with a 0.02 mm silicone layer (J-B Weld)",
+            "plasmids": "pCAGGS-GCaMP7b and pCAGGS-ChRmine-mScarlet, each at 50 ng/uL",
+            "electroporation_solution": "155 mM K-gluconate, 10 mM KCl, 10 mM HEPES, 4 mM KOH (pH 7.3, 316 mOsm) plus 0.33 mM Alexa Fluor 488",
+            "pipette": "long-taper borosilicate (Warner G200-3) pulled with a Zeitz DMZ puller, tip resistance 2.5-6 MOhm",
+            "stimulation": "1 s, 100 Hz, 0.5 ms, 5 V pulse train via an A.M.P.I. ISO-Flex stimulus isolator, generated in Clampex 10.7 through a Digidata 1550B and a Dagan BVC-700A amplifier",
+            "targeting_depth": "~150 um below brain surface, pipette at a 32-degree angle",
+            "throughput": "3-5 neurons electroporated per mouse per session; ~30-40% expression success confirmed 1-2 days later"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": "Dagan BVC-700A amplifier; Digidata 1550B; A.M.P.I. ISO-Flex stimulus isolator",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "molecular",
+          "technique": "Combinatorial Cre/Flp-dependent viral construct strategy for opsin, indicator, and DREADD expression across cell types",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "opsins": "Cre-dependent ChRmine (AAV8 or AAV2/1.Ef1a.DIO.ChRmine.oScarlet.WPRE) for CA1 pyramidal cells; Cre-ON/Flp-OFF ChRmine (AAV8.nEF.Con/Foff.2.0) in VGAT-Flp mice to avoid direct interneuron stimulation; Cre-dependent bReaChES (AAV2/9.Ef1a.FLEX.Breaches.tdTomato)",
+            "indicators": "GCaMP6f (AAV1.Syn.GCaMP6f.WPRE.SV40, or Cre-dependent AAV1.Syn.FLEX.GCaMP6f)",
+            "inhibition_suppression_constructs": "GiDREADD (AAV2/1.h56D.HA-hM4D(Gi).mCherry) or FlpO with Flp-dependent tdTomato, or Flp-ON/Cre-OFF Arch3.3-eYFP, under the h56D GABAergic-selective promoter",
+            "induction": "tamoxifen-inducible Cre under the CaMKIIa promoter (AAV2/1.CaMKII.Cre.ERT2); 125 uL of 5 mg/mL tamoxifen or 4-hydroxytamoxifen, i.p., at least 48 h before experiments"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "behavior",
+          "technique": "Head-fixed treadmill training and goal-oriented/place-field-induction behavioral paradigms",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "treadmill": "1.94 m belt with water delivery port, lick sensor, and custom electronics for position/licking",
+            "water_restriction": "85-90% pre-deprivation weight",
+            "initial_training": "cue-deficient burlap belt, non-operant reward, progressively restrictive schedule from 12-15 down to 1 reward zone per lap over 1-2 weeks",
+            "induction_protocol": "15 min baseline, >15 min break, 20 min induction session (photostimulation on a fixed stimulation zone for 5 consecutive laps after lap 1), 15 min follow-up sessions at 24 h intervals up to 72 h",
+            "goal_oriented_learning": "10 cm hidden reward zone at least 10 cm from the nearest tactile cue; up to 2 sessions/day for 4 days, reward zone moved every 24 h",
+            "hygiene_control": "belts cleaned with 70% ethanol between sessions"
+          },
+          "input_data_type": null,
+          "output_data_type": "position, licking, and reward-event traces synchronized to imaging",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging acquisition through the chronic CA1 window",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "microscope": "8 kHz resonant-scanning two-photon microscope (Bruker)",
+            "objective": "40x NIR water immersion (Nikon, 0.8 NA, 3.5 mm WD) for SCE/2p-stimulation experiments; 16x NIR (0.8 NA, 3.0 mm WD) for LED-stimulation/control experiments",
+            "laser": "920 nm, 50-100 mW at objective back aperture (Coherent), power regulated by a Pockels cell (Conoptics)",
+            "detectors": "GaAsP (Hamamatsu 7422P-40) and Multi-Alkali (Hamamatsu R3896) PMTs; green/red split via HQ525/70m-2p and HQ607/45m-2p filters with a 575dcxr dichroic",
+            "acquisition_params": "1-2x digital zoom, ~166-330 um (40x) or ~550-880 um (16x) field of view, 512x512 px at 30 Hz",
+            "head_alignment": "goniometers (+/-10 degree range, Edmund Optics)"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw two-photon fluorescence time series",
+          "hardware": "Bruker two-photon microscope; Hamamatsu PMTs",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "other",
+          "technique": "Widefield LED optogenetic photostimulation integrated with the two-photon imaging path",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "led": "UHP-T-620-SR (Prizmatix), ultrafast high-power collimated red LED with a 629/56 nm excitation cleanup filter (Semrock)",
+            "beam_combining": "775 nm shortpass dichroic (ZT775sp-2p) and 561 nm longpass dichroic (Di02-R561-25x36)",
+            "timing": "LED gated by the imaging Pockels-cell blanking signal, pulsed during galvanometer flyback between frames (~30 Hz)",
+            "power": "~30 mW after the objective (~54 mW/mm^2 before the coverglass)",
+            "protocol": "1 s pulse on stimulation-zone entry for 5 consecutive laps (induction), or every 20-24 s at random times (random-stimulation experiments)"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": "UHP-T-620-SR LED (Prizmatix)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "other",
+          "technique": "Two-photon targeted (spiral-scan) optogenetic photostimulation of individually selected or densely labeled CA1 cell ensembles",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "system": "dual scan-head microscope (Ultima, Bruker): resonant-galvo pair for imaging, galvo-galvo pair for photostimulation",
+            "laser": "1040 nm femtosecond fiber laser (FidelityHP, Coherent; 140 fs pulses, 80 MHz repetition rate)",
+            "beam_combining": "1030 nm shortpass dichroic (T1030SP)",
+            "cell_targeting": "pre-selected by visual confirmation of opsin-reporter expression and functional light response on a separate uncued training belt",
+            "scan_pattern": "~1 s spiral scan, 15-20 um outer diameter, 15 rotations per spiral, repeated 31 times",
+            "power": "typically 80 mW after the objective at >250 um depth (range 60-120 mW)"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": "Ultima dual scan-head microscope (Bruker); FidelityHP fiber laser (Coherent)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "molecular",
+          "technique": "Chemogenetic suppression of CA1 interneuron activity via CNO activation of virally delivered GiDREADD",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "construct": "GiDREADD (hM4D(Gi)) delivered virally to CA1 interneurons",
+            "drug": "10 mg/kg CNO in saline (Cayman Chemical), i.p., or saline control, 20-30 min before the baseline session"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "surgery",
+          "technique": "Bilateral optical fiber implantation and optogenetic manipulation of CA1 during the goal-oriented learning task",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "virus_mixture": "tamoxifen-inducible Cre, Cre-dependent ChRmine, h56D-FlpO, and Flp-ON/Cre-OFF Arch (or Flp-dependent tdTomato in ChRmine-only controls)",
+            "injection": "64 nL per site, bilateral, at +/-2.1/+/-1.4, +/-2.3/+/-1.5, +/-2.6/+/-1.5 mm AP/ML with -0.9/-1.05/-1.2 mm DV relative to Bregma",
+            "implant": "bilateral optical fiber cannulae (200 um core, 0.37 NA) plus stainless-steel headpost",
+            "stimulation": "532 nm laser (50 mW, OptoEngine) via a splitter patch cable, 1 s of 30 Hz bilateral stimulation (20 mW) on laps 6-10 of session 2, at a stimulation zone at least 400 cm from the reward zone"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": "OptoEngine 532 nm laser",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    }
+  ]
+}

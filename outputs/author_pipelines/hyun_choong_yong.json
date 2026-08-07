@@ -1,0 +1,641 @@
+{
+  "target_author": "Hyun Choong Yong",
+  "total_papers": 3,
+  "total_steps": 30,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "R27V283A",
+      "year": 2024,
+      "journal": "bioRxiv",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 7,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection of jGCaMP8m and chronic hippocampal imaging window/headpost implantation for experimental validation of the behaviorMate system",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "virus": "rAAV1-syn-GCaMP8m-WPRE (Addgene 162375-AAV1), dorsal CA1",
+            "coordinates": "AP 2.1, ML 1.4, DV 1.3/1.2/1.1, 100 nl/site",
+            "recovery_before_implant_days": 7,
+            "mouse_lines": "Unc5b x C57Bl/6 (n=5), VGAT-Cre x Ai9 (n=1); 3 female, 3 male"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice with GCaMP8m-expressing dorsal CA1 neurons and chronic imaging access",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "behavior",
+          "technique": "Head-fixed VR/treadmill behavioral training with a familiar-novel context-switch paradigm, run via the behaviorMate/VRMate system",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "vr_track_length_m": "3 (4 for one animal)",
+            "tm_belt_length_m": 2,
+            "reward_shaping": "random locations reduced to 1-2 fixed zones once criterion (>=60 VR laps or >=30 TM laps) was met",
+            "context_switch_vr": "single session, switch to novel context after 30 familiar laps, >=30 more novel laps",
+            "context_switch_tm": "across 2 days (day 1 familiar, day 2 novel)"
+          },
+          "input_data_type": null,
+          "output_data_type": "trained mice performing context-switch VR/treadmill navigation",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging of dorsal CA1 during behaviorMate-controlled VR/treadmill sessions",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8 kHz resonant scanner (Bruker)",
+            "objective": "16x Nikon water immersion, 0.8 NA, 3 mm WD",
+            "excitation": "920 nm, <=100 mW at objective tip (Coherent)",
+            "detector": "GaAsP PMT (Hamamatsu 7422P-40)",
+            "acquisition": "512x512 px, 1-1.4x digital zoom"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw two-photon GCaMP8m time series",
+          "hardware": "Bruker 8 kHz resonant two-photon microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "imaging",
+          "technique": "Calcium signal preprocessing: motion correction, ROI/neuropil extraction, and DeltaF/F calculation",
+          "software_tool": "SIMA, Suite2p",
+          "tool_version": null,
+          "parameters": {
+            "motion_correction_roi": "Suite2p for motion correction, signal/neuropil extraction, ROI detection",
+            "curation": "manual curation via Suite2p GUI to exclude non-somatic ROIs"
+          },
+          "input_data_type": "raw two-photon time series",
+          "output_data_type": "motion-corrected, neuropil-corrected DeltaF/F traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "statistics",
+          "technique": "Event binarization via OASIS deconvolution and shuffle-based place-cell/spatial-tuning classification",
+          "software_tool": "OASIS",
+          "tool_version": null,
+          "parameters": {
+            "deconvolution_threshold": "events >4 MAD of raw trace",
+            "binning": "4 cm bins, Gaussian smoothing SD=2",
+            "shuffle_test": "1000 circular shuffles, 99th percentile threshold",
+            "place_field_criteria": "3-25 consecutive significant bins (12-100 cm), event detected in >=50% of trials"
+          },
+          "input_data_type": "DeltaF/F traces",
+          "output_data_type": "binarized event trains, tuning curves, and place-cell classification",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "statistics",
+          "technique": "Cross-day ROI registration (CellReg) and rate-map/remapping correlation analysis between familiar and novel contexts",
+          "software_tool": "CellReg",
+          "tool_version": null,
+          "parameters": {
+            "registration": "spatial mask correlation across days for treadmill sessions, manually curated in Suite2p GUI",
+            "correlation": "Pearson correlation between average familiar/novel tuning curves",
+            "tm_shift_correction": "circular shift maximizing population vector correlation applied uniformly to novel-context ROIs"
+          },
+          "input_data_type": "cross-session tuning curves",
+          "output_data_type": "cross-day registered ROIs and remapping/rate-map correlation values",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "statistics",
+          "technique": "Naive Bayesian decoding of animal position from population calcium activity",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "model": "naive Bayesian classifier, per-frame per-spatial-bin posterior",
+            "cross_validation": "trained on n-1 trials, tested on held-out trial",
+            "chance_level": "shuffled cell labels (VR) or track-length/4 (TM)",
+            "roi_matching": "500 randomly selected ROIs, decoding accuracy computed over 50 iterations"
+          },
+          "input_data_type": "binned population activity",
+          "output_data_type": "decoded position and decoding accuracy vs. chance",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "9U8LL9DE",
+      "year": 2025,
+      "journal": "Nature Protocols",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "FPF3RL6U",
+      "year": 2025,
+      "journal": "bioRxiv",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "QQIBRBDR",
+      "year": 2025,
+      "journal": "eLife",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 7,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection of jGCaMP8m and chronic hippocampal imaging window/headpost implantation for experimental validation of the behaviorMate system",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "virus": "rAAV1-syn-GCaMP8m-WPRE (Addgene 162375-AAV1), dorsal CA1",
+            "coordinates": "AP 2.1, ML 1.4, DV 1.3/1.2/1.1, 100 nl/site",
+            "recovery_before_implant_days": 7,
+            "mouse_lines": "Unc5b x C57Bl/6 (n=5), VGAT-Cre x Ai9 (n=1); 3 female, 3 male"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice with GCaMP8m-expressing dorsal CA1 neurons and chronic imaging access",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "behavior",
+          "technique": "Head-fixed VR/treadmill behavioral training with a familiar-novel context-switch paradigm, run via the behaviorMate/VRMate system",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "vr_track_length_m": "3 (4 for one animal)",
+            "tm_belt_length_m": 2,
+            "reward_shaping": "random locations reduced to 1-2 fixed zones once criterion (>=60 VR laps or >=30 TM laps) was met",
+            "context_switch_vr": "single session, switch to novel context after 30 familiar laps, >=30 more novel laps",
+            "context_switch_tm": "across 2 days (day 1 familiar, day 2 novel)"
+          },
+          "input_data_type": null,
+          "output_data_type": "trained mice performing context-switch VR/treadmill navigation",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging of dorsal CA1 during behaviorMate-controlled VR/treadmill sessions",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8 kHz resonant scanner (Bruker)",
+            "objective": "16x Nikon water immersion, 0.8 NA, 3 mm WD",
+            "excitation": "920 nm, <=100 mW at objective tip (Coherent)",
+            "detector": "GaAsP PMT (Hamamatsu 7422P-40)",
+            "acquisition": "512x512 px, 1-1.4x digital zoom"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw two-photon GCaMP8m time series",
+          "hardware": "Bruker 8 kHz resonant two-photon microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "imaging",
+          "technique": "Calcium signal preprocessing: motion correction, ROI/neuropil extraction, and DeltaF/F calculation",
+          "software_tool": "SIMA, Suite2p",
+          "tool_version": null,
+          "parameters": {
+            "motion_correction_roi": "Suite2p for motion correction, signal/neuropil extraction, ROI detection",
+            "curation": "manual curation via Suite2p GUI to exclude non-somatic ROIs"
+          },
+          "input_data_type": "raw two-photon time series",
+          "output_data_type": "motion-corrected, neuropil-corrected DeltaF/F traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "statistics",
+          "technique": "Event binarization via OASIS deconvolution and shuffle-based place-cell/spatial-tuning classification",
+          "software_tool": "OASIS",
+          "tool_version": null,
+          "parameters": {
+            "deconvolution_threshold": "events >4 MAD of raw trace",
+            "binning": "4 cm bins, Gaussian smoothing SD=2",
+            "shuffle_test": "1000 circular shuffles, 99th percentile threshold",
+            "place_field_criteria": "3-25 consecutive significant bins (12-100 cm), event detected in >=50% of trials"
+          },
+          "input_data_type": "DeltaF/F traces",
+          "output_data_type": "binarized event trains, tuning curves, and place-cell classification",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "statistics",
+          "technique": "Cross-day ROI registration (CellReg) and rate-map/remapping correlation analysis between familiar and novel contexts",
+          "software_tool": "CellReg",
+          "tool_version": null,
+          "parameters": {
+            "registration": "spatial mask correlation across days for treadmill sessions, manually curated in Suite2p GUI",
+            "correlation": "Pearson correlation between average familiar/novel tuning curves",
+            "tm_shift_correction": "circular shift maximizing population vector correlation applied uniformly to novel-context ROIs"
+          },
+          "input_data_type": "cross-session tuning curves",
+          "output_data_type": "cross-day registered ROIs and remapping/rate-map correlation values",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "statistics",
+          "technique": "Naive Bayesian decoding of animal position from population calcium activity",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "model": "naive Bayesian classifier, per-frame per-spatial-bin posterior",
+            "cross_validation": "trained on n-1 trials, tested on held-out trial",
+            "chance_level": "shuffled cell labels (VR) or track-length/4 (TM)",
+            "roi_matching": "500 randomly selected ROIs, decoding accuracy computed over 50 iterations"
+          },
+          "input_data_type": "binned population activity",
+          "output_data_type": "decoded position and decoding accuracy vs. chance",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "K73ERVAQ",
+      "year": 2026,
+      "journal": "bioRxiv",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 16,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection and chronic hippocampal CA1 imaging window/headpost implantation in VGAT-Cre mice",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "virus": "AAV1-hSyn-FLEX-jGCaMP8s (Addgene 162377-AAV1), 600 nL total across 6 sites",
+            "coordinates": "AP 2.25 mm, ML 1.45 mm, DV -1.55 to -1.05 mm, 100 nl/site, 100 um steps",
+            "craniotomy_mm": 1.7,
+            "cannula": "1.7 mm cannula with 1.7 mm glass coverslip",
+            "recovery_before_behavior_days": 7
+          },
+          "input_data_type": null,
+          "output_data_type": "GCaMP8s-expressing GABAergic CA1 interneurons with chronic imaging access",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "behavior",
+          "technique": "Head-fixed virtual-reality spatial navigation training with a familiar-novel context-switch paradigm",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "track_length_m": 3,
+            "reward_shaping": "25 random rewards progressively reduced to 2 fixed reward zones, criterion 100 laps/30 min",
+            "context_switch": "familiar vs. novel environment blocks, switched every 10 laps for 60 laps total",
+            "sessions": "two sessions per animal (stratum oriens, stratum pyramidale), each with a distinct novel context, >=3 days apart"
+          },
+          "input_data_type": null,
+          "output_data_type": "trained mice performing context-switch VR navigation",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "imaging",
+          "technique": "In vivo multiplane two-photon calcium imaging of CA1 interneurons",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8 kHz resonant scanner (Bruker)",
+            "objective": "16x Nikon water immersion, 0.8 NA, 3 mm WD",
+            "excitation": "920 nm (Coherent), <=100 mW at objective tip",
+            "fov": "820x820 um, 512x512 px",
+            "multiplane": "piezo objective scanner, ~30 um plane spacing, ~6 Hz/plane"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw multiplane two-photon GCaMP8s time series",
+          "hardware": "Bruker 8 kHz resonant two-photon microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "imaging",
+          "technique": "Calcium imaging preprocessing: motion correction, ROI detection/curation, and DeltaF/F calculation",
+          "software_tool": "SIMA, Suite2p, Cellpose2",
+          "tool_version": null,
+          "parameters": {
+            "motion_correction_extraction": "Suite2p",
+            "roi_curation": "manual curation via Cellpose2 and Suite2p GUI",
+            "baseline": "7th percentile of neuropil-corrected signal over the full recording",
+            "smoothing": "exponential filter"
+          },
+          "input_data_type": "raw two-photon time series",
+          "output_data_type": "motion-corrected, curated DeltaF/F traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "statistics",
+          "technique": "Ridge-regression removal of velocity-related activity from neuropil-corrected calcium signals",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "model": "ridge regression of velocity against neuropil-corrected signal",
+            "downstream_use": "velocity-regressed DeltaF/F used for all analyses except velocity-modulation analysis itself"
+          },
+          "input_data_type": "neuropil-corrected fluorescence traces",
+          "output_data_type": "velocity-regressed DeltaF/F traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "statistics",
+          "technique": "Calculation of physiological tuning features: velocity modulation, context-mean activity, spatial rate maps, rate-map correlation/split-half reliability, sparsity, and reward selectivity/modulation indices",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "velocity_modulation": "Pearson correlation between running velocity and max-normalized DeltaF/F",
+            "immobility_exclusion": "frames with velocity <5 cm/s excluded",
+            "rate_maps": "5 cm spatial bins, Gaussian smoothing SD=10 cm",
+            "sparsity": "spatial sparsity formula over rate-map bins",
+            "reward_selectivity": "normalized difference in pre-reward-zone activity between the two reward zones"
+          },
+          "input_data_type": "velocity-regressed DeltaF/F traces with position/context labels",
+          "output_data_type": "per-cell physiological feature set",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "statistics",
+          "technique": "Generalized linear model PCA (GLM-PCA) of the cell-by-gene expression matrix to derive a transcriptomic axis (tPC2)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "input": "raw integer gene-count matrix, 610 cells x 500 genes",
+            "component_selection": "second principal component (tPC2) identified as major transcriptomic continuum axis"
+          },
+          "input_data_type": "cell-by-gene raw count matrix",
+          "output_data_type": "per-cell tPC2 transcriptomic score",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "statistics",
+          "technique": "Random-forest classification of interneuron subclass from physiological features, with leave-one-animal-out cross-validation and balanced bagging",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "features": "30 physiological features, percentile-normalized per animal",
+            "classes": "Pvalb, Sst, Lamp5, Vip/Chrm2 (merged due to low n)",
+            "cross_validation": "leave-one-animal-out (train on 3, test on 1)",
+            "ensemble": "500 bagged random forests, balanced downsampling per iteration, 600 trees, max depth 10, min leaf size 5",
+            "margin_metric": "one-vs-rest predicted-probability margin along tPC2"
+          },
+          "input_data_type": "per-cell physiological feature vectors",
+          "output_data_type": "predicted interneuron subclass and classification accuracy metrics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "imaging",
+          "technique": "High-resolution in vivo two-photon z-stack acquisition for cross-modal cell registration",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "fields_of_view": "4 overlapping FOVs for stitching",
+            "resolution": "1024x1024 px, 1.2x digital zoom, 3 um z-step"
+          },
+          "input_data_type": null,
+          "output_data_type": "composite in vivo structural z-stack",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "histology",
+          "technique": "Perfusion and cryoprotection/tissue processing for downstream MERFISH sectioning",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "perfusion": "20-25 mL cold 4% PFA",
+            "cryoprotection": "15% then 30% sucrose gradient",
+            "embedding": "OCT, frozen in prechilled 2-methylbutane, stored at -80C"
+          },
+          "input_data_type": null,
+          "output_data_type": "cryoprotected, OCT-embedded brain tissue",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "molecular",
+          "technique": "MERFISH spatial transcriptomics experiment on fixed-frozen sections with GFP co-immunostaining",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "sectioning": "12 um cryostat sections",
+            "ex_vivo_imaging": "spinning-disk confocal (W1-Yokogawa), 10x, DAPI + GFP channels",
+            "immunostaining": "anti-GFP (rat, Abcam ab255886; chicken, Abcam ab300644)",
+            "panel": "500-gene panel, 48 h hybridization",
+            "instrument": "MERSCOPE (Vizgen), manually selected ROIs"
+          },
+          "input_data_type": "fixed frozen sections",
+          "output_data_type": "MERFISH spatial transcriptomic images",
+          "hardware": "MERSCOPE instrument (Vizgen); W1-Yokogawa spinning-disk confocal",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 12,
+          "category": "imaging",
+          "technique": "MERSCOPE image segmentation using custom-trained Cellpose2 models",
+          "software_tool": "Cellpose2, Vizgen Post-processing Tool (VPT)",
+          "tool_version": null,
+          "parameters": {
+            "models": "PolyT+cell-boundary model and DAPI-only model, trained on manually segmented image snippets",
+            "z_levels": "3, 6, 9, 12 um"
+          },
+          "input_data_type": "MERSCOPE images",
+          "output_data_type": "segmented cell masks",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 13,
+          "category": "imaging",
+          "technique": "Semi-automated cross-modal 3D registration pipeline aligning in vivo functional imaging, ex vivo section imaging, and MERSCOPE data into a common coordinate frame",
+          "software_tool": "MATLAB, Napari",
+          "tool_version": null,
+          "parameters": {
+            "in_vivo_stitching": "custom MATLAB code, x/y/z stitching of 4 overlapping FOVs with sharpening and z-scoring",
+            "registration_steps": "iterative common-cell selection, scaling, affine, and deformable transformation between MERSCOPE-ex vivo and ex vivo-in vivo pairs",
+            "verification": "Napari-based 3D manual visual confirmation"
+          },
+          "input_data_type": "in vivo z-stack, ex vivo section images, MERSCOPE images",
+          "output_data_type": "co-registered 3D volumes across imaging modalities",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 14,
+          "category": "statistics",
+          "technique": "Cross-modal cell matching linking in vivo functional imaging masks to MERSCOPE cell identities via ex vivo intermediate registration and IoU-based overlap matching",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "matching_criterion": "IoU > 0.25, minimum centroid distance for best match",
+            "manual_verification": "Napari-based 3D visualization of all modalities"
+          },
+          "input_data_type": "registered segmentation masks across modalities",
+          "output_data_type": "CSV table linking in vivo cell IDs to MERSCOPE entity IDs",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 15,
+          "category": "statistics",
+          "technique": "MERFISH data quality control: transcript/gene count filtering, blank-probe contamination filtering, volume filtering, normalization, and doublet detection",
+          "software_tool": "Scrublet",
+          "tool_version": null,
+          "parameters": {
+            "gene_count_threshold": ">=15 unique genes, >=40 total transcripts",
+            "blank_probe_threshold": "<=5% of counts from blank probes",
+            "volume_range_um3": "100-5000",
+            "outlier_removal": "1st-99th percentile of scaled total counts",
+            "doublet_detection": "Scrublet on raw counts, up to 20 PCs, score cutoff 0.25"
+          },
+          "input_data_type": "raw MERFISH cell-by-gene count matrix",
+          "output_data_type": "QC-filtered cell-by-gene matrix",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 16,
+          "category": "statistics",
+          "technique": "Unbiased hierarchical cell-type clustering and subtype assignment from MERSCOPE transcriptomic profiles",
+          "software_tool": "Scanpy",
+          "tool_version": null,
+          "parameters": {
+            "preprocessing": "per-cell normalization, log-transform, scaling, PCA (top 20 PCs), kNN graph (k=10)",
+            "resolution_selection": "stability analysis across 30-50 seeds, resolutions 0.1-1.0, silhouette score and adjusted Rand index",
+            "clustering": "Leiden algorithm, 3 hierarchical levels (class, subclass, type)",
+            "visualization": "UMAP embedding",
+            "deg_test": "Wilcoxon rank-sum test, adjusted p<0.05",
+            "annotation": "manual annotation referencing published hippocampal IN atlases, yielding 14 molecularly distinct IN types"
+          },
+          "input_data_type": "QC-filtered MERFISH expression data",
+          "output_data_type": "hierarchical cell-class/subclass/type taxonomy with marker genes",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "VMWYLLBS",
+      "year": 2026,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    }
+  ]
+}

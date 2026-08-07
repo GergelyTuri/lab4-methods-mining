@@ -1,0 +1,481 @@
+{
+  "target_author": "Wenke Li",
+  "total_papers": 4,
+  "total_steps": 22,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "K433LNFA",
+      "year": 2019,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 17,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "molecular",
+          "technique": "Cre-dependent viral strategy for cell-type-specific labeling and bidirectional optogenetic manipulation of VIP+ (and comparison PV+/SOM+) interneurons",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "indicator": "rAAV2/1:EF1a-(GCaMP6f)Cre",
+            "inhibition": "rAAV2/1:Syn-(ArchT-tdTomato)Cre",
+            "activation": "rAAV2/1:Syn-(ChR2-GFP)Cre or rAAV2/9:EF1a-(bReaChES-tdTomato)Cre",
+            "controls": "rAAV2/1:Syn-(GFP)Cre or rAAV2/1:Syn-(tdTomato)Cre",
+            "pyramidal_cell_label": "rAAV2/1:CaMKII-GCaMP6f",
+            "mouse_lines": "VIP-IRES-Cre, Pvalb-IRES-Cre, Som-IRES-Cre, crossed with Ai9 tdTomato reporter"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice with cell-type-restricted GCaMP6f/opsin expression",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection and chronic hippocampal CA1 imaging window/headpost implantation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "coordinates": "-2.2 AP, 1.6 ML, -1.2/-1.1/-1.0 DV relative to bregma",
+            "injection": "20-30 nl per DV site via Nanoject II",
+            "window": "3.0 mm diameter, 1.5 mm height cannula with 3 mm glass coverslip",
+            "recovery_before_implant_days": 3
+          },
+          "input_data_type": null,
+          "output_data_type": "chronic optical access over dorso-intermediate hippocampus",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "surgery",
+          "technique": "Bilateral chronic optical fiber implantation for head-fixed optogenetic manipulation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "fiber": "200 um core, 0.37 NA multimode (Thorlabs)",
+            "laser_sources": "593.5 nm or 473 nm laser diode (CrystaLaser), 20 mW at fiber tip",
+            "target": "dorsal hippocampal CA1, bilateral"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice with chronic bilateral optical access for CA1 photostimulation",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging of VIP+ interneurons and/or CA1 pyramidal cells during head-fixed behavior",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8 kHz resonant scanner (Bruker)",
+            "excitation": "50-100 mW, 920 nm (Chameleon Ultra II) or 940 nm (Insight X3)",
+            "emission_filters": "HQ525/70m-2p (green), HQ607/45m-2p (red), 575dcxr dichroic",
+            "detector": "GaAsP PMT (Hamamatsu 7422P-40)"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw two-photon GCaMP6f/tdTomato time series",
+          "hardware": "Bruker 8 kHz resonant two-photon microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "electrophysiology",
+          "technique": "Simultaneous two-photon calcium imaging and local field potential recording via a contralateral chronic silicon probe",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "probe": "4-site silicon probe (Qtrode, Neuronexus), 45 degree angle, contralateral CA1",
+            "coordinates": "-2.3 mm AP, 2.75 mm ML, -0.975 mm DV",
+            "recording": "Intan Technologies multichannel system, 25 kHz downsampled to 1250 Hz, synchronized with 2P microscope",
+            "verification": "sharp-wave ripple presence and/or histology"
+          },
+          "input_data_type": null,
+          "output_data_type": "synchronized VIP+ IN calcium activity and CA1 LFP",
+          "hardware": "Qtrode silicon probe; Intan Technologies recording system",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "imaging",
+          "technique": "Simultaneous two-photon calcium imaging and LED photostimulation for causal manipulation of VIP+ IN activity during imaging",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "led": "620 nm, fast-response (Prizmatix), 10-20 mW under objective",
+            "synchronization": "custom electronics triggering light pulses during galvanometer flyback (no active acquisition)",
+            "virus_combinations": "bReaChES-tdTomato+CaMKII-GCaMP6f (activation) or ArchT-tdTomato+CaMKII-GCaMP6f (inhibition), vs. tdTomato+CaMKII-GCaMP6f control"
+          },
+          "input_data_type": null,
+          "output_data_type": "CA1 pyramidal cell calcium activity under VIP+ IN optogenetic activation/inhibition",
+          "hardware": "Prizmatix 620 nm LED",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "electrophysiology",
+          "technique": "In vitro whole-cell current-clamp recording from CA1 pyramidal cells with ArchT-mediated optogenetic silencing of VIP+ IN input during Schaffer-collateral stimulation",
+          "software_tool": "MATLAB",
+          "tool_version": null,
+          "parameters": {
+            "slicing": "400 um transverse sections, Leica VT1200S vibratome, high-sucrose dissection solution",
+            "recording_temp_c": 32,
+            "internal_solution": "130 mM K-gluconate, 8 mM KCl, 10 mM HEPES, 4 mM NaCl, 4 mM Mg2ATP, 0.3 mM Tris2GTP, 14 mM phosphocreatine",
+            "amplifier": "MultiClamp 700B, Digidata 1440A, 50 kHz digitization, 1 kHz low-pass filter",
+            "stimulation": "Schaffer-collateral electrical stimulation paired with 532 nm laser (OptoEngine) on alternating sweeps"
+          },
+          "input_data_type": null,
+          "output_data_type": "whole-cell IPSP recordings with/without VIP+ IN silencing",
+          "hardware": "MultiClamp 700B amplifier; Digidata 1440A",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "behavior",
+          "technique": "Head-fixed treadmill behavior tasks: Random Foraging (RF) and Goal-Oriented Learning (GOL) with cued/cue-less belts and a multisensory context",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "apparatus": "2-m treadmill belt with water port and lick/position recording electronics",
+            "rf_task": "randomly delivered rewards, 3x10 min sessions/day for 2-3 days",
+            "gol_task": "fixed 10-cm reward zone (>=10 cm from nearest tactile cue), 3x10 min sessions/day for 3 days",
+            "cued_belt": "3 fabric segments with distinct tactile cues",
+            "multisensory_context": "constant odor, blinking red LED (1 Hz), 2 kHz auditory tone"
+          },
+          "input_data_type": null,
+          "output_data_type": "trained mice performing RF/GOL tasks with recorded lick/position data",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "other",
+          "technique": "Optogenetic manipulation protocol during GOL behavior to test effects of VIP+ IN activity on learning, with safety timeout",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "stimulation_zone": "70 cm segment centered on reward zone",
+            "archt_protocol": "continuous illumination",
+            "chr2_protocol": "20 Hz, 50% duty cycle",
+            "safety": "15 s timeout to shut off light if mouse remained in reward zone",
+            "cuing_control": "continuous matching-color ambient LED to prevent light cuing"
+          },
+          "input_data_type": null,
+          "output_data_type": "behavioral and imaging data under VIP+ IN optogenetic modulation during learning",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "histology",
+          "technique": "Post hoc neurochemical identification of imaged VIP+ interneurons via CCK/calretinin immunostaining registered to the two-photon field of view",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "antibodies": "anti-GFP (1:2000), anti-pro-CCK (1:250-1:500), anti-calretinin (1:200)",
+            "sectioning": "50 um horizontal vibratome sections",
+            "imaging": "Leica SP5 confocal, Z-stack visually matched to recorded FOV"
+          },
+          "input_data_type": "fixed brain sections",
+          "output_data_type": "neurochemical identity (CCK+/CR+) of individually imaged VIP+ INs",
+          "hardware": "Leica SP5 confocal microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "histology",
+          "technique": "Immunocytochemical validation of VIP-IRES-Cre mouse line specificity via VIP/RFP double labeling",
+          "software_tool": "ImageJ",
+          "tool_version": null,
+          "parameters": {
+            "antigen_retrieval": "10 mM sodium citrate + 0.05% Tween-20, pH 6.0, 95C 45 min",
+            "primary_antibodies": "rabbit anti-VIP 1:8000, goat anti-RFP 1:3000",
+            "amplification": "biotin-tyramide (TSA kit)",
+            "detection": "avidin-Cy5, Alexa Fluor 594 anti-goat",
+            "imaging": "Leica SP5 confocal, 633/543 nm",
+            "quantification": "double-labeled cell counts on max Z-projections, 3-4 slices/mouse"
+          },
+          "input_data_type": "fixed coronal sections",
+          "output_data_type": "quantified VIP/Cre-reporter double-labeling specificity",
+          "hardware": "Leica SP5 confocal microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 12,
+          "category": "molecular",
+          "technique": "Monosynaptic retrograde rabies tracing of inputs to VIP+ interneurons",
+          "software_tool": "ImageJ",
+          "tool_version": null,
+          "parameters": {
+            "priming": "AAV2/1:EF1a-(TVA-mCherry)Cre + AAV2/1-pAM-CAGGS:H2B-(3xHA-P2A-N2cG)Cre",
+            "rabies": "EnvA-pseudotyped CVS-N2cdG-GFP, injected 2 weeks after priming",
+            "survival": "2 weeks post-rabies injection before perfusion",
+            "quantification": "GFP+ cell counting on stereoscope images (Nikon SMZ18) referenced to Paxinos atlas; starter cells counted on confocal Z-stacks"
+          },
+          "input_data_type": "fixed brain sections",
+          "output_data_type": "mapped presynaptic input neurons to VIP+ IN starter cells",
+          "hardware": "Nikon SMZ18 stereoscope; Leica SP5 confocal microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 13,
+          "category": "imaging",
+          "technique": "Calcium imaging preprocessing: motion correction, ROI segmentation, neuropil correction, and DF/F calculation",
+          "software_tool": "SIMA, FISSA",
+          "tool_version": null,
+          "parameters": {
+            "motion_correction": "SIMA package, uncorrected frames discarded",
+            "roi_segmentation": "hand-segmented on time-averaged images in ROI Buddy or ImageJ",
+            "neuropil_correction": "FISSA, 6 neuropil subregions, alpha=0.2, 7 signal components (CA1PC ROIs)",
+            "df_f_baseline": "Jia et al. method, tau1=1s (PC)/10s (IN) smoothing, tau2=15s (PC)/100s (IN) baseline window"
+          },
+          "input_data_type": "raw two-photon time series",
+          "output_data_type": "motion-corrected, neuropil-corrected DF/F traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 14,
+          "category": "statistics",
+          "technique": "Behavioral-event-triggered response quantification (locomotion, reward, running-stop) and transient area-under-curve analysis, with bootstrap significance testing",
+          "software_tool": "Python 2.7",
+          "tool_version": null,
+          "parameters": {
+            "response_window": "3 s pre/post event, mean DF/F post minus pre",
+            "auc": "sum of Ca2+ signal over transient duration, normalized by frame rate",
+            "bootstrap": "3000-iteration resampling with replacement, two-tailed 99% confidence interval for significance"
+          },
+          "input_data_type": "DF/F traces with behavioral event timestamps",
+          "output_data_type": "per-cell event response magnitudes and significance calls",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 15,
+          "category": "statistics",
+          "technique": "Velocity cross-correlation analysis and classification of VIP+ INs into positively/negatively velocity-modulated (PVM/NVM) groups",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "smoothing": "Gaussian kernel, sigma=0.05 s",
+            "lag_window": "-5 s to +10 s",
+            "classification": "PVM if peak cross-correlation positive, NVM if negative",
+            "cross_session_averaging": "cross-registered cells averaged across recording sessions"
+          },
+          "input_data_type": "DF/F traces and velocity traces",
+          "output_data_type": "PVM/NVM classification and peak/lag values per cell",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 16,
+          "category": "statistics",
+          "technique": "Ridge-regression generalized linear model of VIP+ IN activity from behavioral covariates with cross-validated log-likelihood-ratio variable-group importance",
+          "software_tool": "scikit-learn",
+          "tool_version": null,
+          "parameters": {
+            "predictors": "velocity, running-start, running-stop, licking, position (100 binary spatial bins), reward",
+            "temporal_shift": "+/-3 s to account for lag",
+            "model": "ridge regression, 10-fold cross-validation on 100 s blocks/10 s intervals",
+            "variable_importance": "base-2 log-likelihood ratio between full and reduced (variable-group-excluded) models on held-out data, normalized by information gained (bits/sample)"
+          },
+          "input_data_type": "DF/F traces and behavioral covariate time series",
+          "output_data_type": "GLM fit quality (r2) and per-variable-group information gain",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 17,
+          "category": "statistics",
+          "technique": "Place-cell detection, place-field fitting, and reward-zone enrichment analysis",
+          "software_tool": "GraphPad Prism",
+          "tool_version": "8.0.0",
+          "parameters": {
+            "spatial_info_test": "Skaggs spatial information, 1000-iteration shuffle, 95th percentile threshold",
+            "rate_map": "100 spatial bins, Gaussian-smoothed sigma=3 bins",
+            "place_field_fitting": "Gaussian curve fit to each local rate-map maximum, fields <50% of largest Gaussian area discarded",
+            "enrichment_test": "one-sample t-test on fraction of place cells within 15% of belt nearest reward vs. expected uniform fraction",
+            "group_comparison": "two-way ANOVA with paired/unpaired t-test and Bonferroni correction"
+          },
+          "input_data_type": "DF/F traces with position labels",
+          "output_data_type": "detected place fields and reward-zone enrichment statistics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "RFR8U95R",
+      "year": 2019,
+      "journal": "Cell Reports",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "PSG2BFK8",
+      "year": 2020,
+      "journal": "Nature Communications",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 1,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "electrophysiology",
+          "technique": "Design of custom electrophysiology hardware: monopolar hippocampal LFP/EMG electrode and a custom multichannel video-EEG recording system for simultaneous monitoring of up to 16 mice",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "electrode": "custom monopolar electrode for hippocampal LFP and neck EMG signals",
+            "recording_system": "custom analog multichannel recording system (NeuraLynx-based), customized for simultaneous recording of up to 16 mice"
+          },
+          "input_data_type": null,
+          "output_data_type": "custom electrophysiology recording hardware",
+          "hardware": "custom monopolar electrode; NeuraLynx-based multichannel recording system",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "paper_id": "R27V283A",
+      "year": 2024,
+      "journal": "bioRxiv",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 2,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "other",
+          "technique": "Custom PCB design for the GPIO/Behavior Controller (voltage regulation, sensor/actuator connectors, Ethernet adapter for the Arduino)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "function": "voltage regulation and connector routing for downstream reward/cue devices and sensors",
+            "io": "13 digital and 5 analog I/O connectors, Ethernet adapter for LAN communication"
+          },
+          "input_data_type": null,
+          "output_data_type": "custom Behavior Controller printed circuit board",
+          "hardware": "custom PCB (Behavior Controller)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "other",
+          "technique": "Custom PCB design for the Position Controller (quadrature decoder circuit, 16-bit tick counter, oscillator)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "components": "onboard quadrature decoder, 16-bit counter, 10 MHz oscillator",
+            "performance": "capable of counting >4096-tick/turn encoders at >1000 RPM",
+            "microcontroller": "Arduino Nano"
+          },
+          "input_data_type": null,
+          "output_data_type": "custom Position Controller printed circuit board",
+          "hardware": "custom PCB (Position Controller); Arduino Nano",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "QQIBRBDR",
+      "year": 2025,
+      "journal": "eLife",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 2,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "other",
+          "technique": "Custom PCB design for the GPIO/Behavior Controller (voltage regulation, sensor/actuator connectors, Ethernet adapter for the Arduino)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "function": "voltage regulation and connector routing for downstream reward/cue devices and sensors",
+            "io": "13 digital and 5 analog I/O connectors, Ethernet adapter for LAN communication"
+          },
+          "input_data_type": null,
+          "output_data_type": "custom Behavior Controller printed circuit board",
+          "hardware": "custom PCB (Behavior Controller)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "other",
+          "technique": "Custom PCB design for the Position Controller (quadrature decoder circuit, 16-bit tick counter, oscillator)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "components": "onboard quadrature decoder, 16-bit counter, 10 MHz oscillator",
+            "performance": "capable of counting >4096-tick/turn encoders at >1000 RPM",
+            "microcontroller": "Arduino Nano"
+          },
+          "input_data_type": null,
+          "output_data_type": "custom Position Controller printed circuit board",
+          "hardware": "custom PCB (Position Controller); Arduino Nano",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    }
+  ]
+}

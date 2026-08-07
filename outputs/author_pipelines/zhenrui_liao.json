@@ -1,0 +1,1060 @@
+{
+  "target_author": "Zhenrui Liao",
+  "total_papers": 7,
+  "total_steps": 49,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "UTJ3YW3R",
+      "year": 2017,
+      "journal": "Nature Neuroscience",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "K433LNFA",
+      "year": 2019,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "PSG2BFK8",
+      "year": 2020,
+      "journal": "Nature Communications",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 10,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "molecular",
+          "technique": "Tamoxifen-induced Cre-dependent tdTomato labeling of adult-born granule cells, kainic-acid induction of the chronic temporal lobe epilepsy model, and viral GCaMP6f injection into dorsal dentate gyrus",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "mouse_line": "Nestin-CreERT2 x ROSA26-CAG-stopflox-tdTomato (Ai9)",
+            "tamoxifen": "3 mg IP/day for 5 consecutive days, 2 weeks before KA injection",
+            "ka_injection": "into ventral hippocampus to induce epilepsy model",
+            "virus": "AAV2/1:hSyn-GCaMP6f (Addgene 100837-AAV1, >=1x10^12 titer), dorsal DG, -2.3 AP/1.5 ML/-1.8,-1.65,-1.5 DV, 64 nl/site in 32 nl increments"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronically epileptic mice with tdTomato-labeled abGCs and GCaMP6f-expressing DG neurons",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Chronic hippocampal imaging window, LFP electrode, and EMG electrode implantation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "window": "2.0 mm diameter, 2.3 mm height cannula with 2 mm glass coverslip, 100-200 um above the hippocampal fissure",
+            "craniotomy_mm": 2.0,
+            "electrode": "custom monopolar electrode for hippocampal LFP and neck EMG",
+            "anesthesia": "isoflurane 3.5% induction/1.5-2.0% maintenance",
+            "analgesia": "Metacam 5 mg/kg IP, bupivacaine 2 mg/kg SC"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice with chronic imaging window and LFP/EMG electrodes",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "behavior",
+          "technique": "Continuous multichannel video-EEG monitoring for seizure and interictal event tracking",
+          "software_tool": "MATLAB",
+          "tool_version": "R2011b",
+          "parameters": {
+            "system": "custom analog multichannel recording system (NeuraLynx), up to 16 mice simultaneously",
+            "acquisition": "custom MATLAB seizure recording/detection algorithm",
+            "outputs": "offline determination of interictal epileptiform discharges (IEDs), seizure frequency and duration"
+          },
+          "input_data_type": null,
+          "output_data_type": "continuous video-EEG recordings with seizure/IED annotations",
+          "hardware": "NeuraLynx multichannel recording system",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "imaging",
+          "technique": "In vivo two-photon dual-channel (GCaMP6f/tdTomato) calcium imaging with simultaneous hippocampal LFP recording in head-fixed mice on a treadmill",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "excitation": "920 nm, 50-100 mW (Chameleon Ultra II, Coherent)",
+            "objective": "40x NIR water immersion, 0.8 NA, 3.5 mm WD (Nikon)",
+            "acquisition": "512x512 px, 225x225 um FOV, 8-30 Hz depending on plane count",
+            "lfp_sync": "Intan Technologies system, 25 kHz, synchronized to microscope frame-start signal",
+            "habituation": "1 h/day for 3 days before experiment start"
+          },
+          "input_data_type": null,
+          "output_data_type": "synchronized two-photon calcium imaging and LFP recordings",
+          "hardware": "Bruker two-photon microscope; Intan Technologies recording system",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "imaging",
+          "technique": "Calcium imaging data preprocessing: whole-frame motion correction and Suite2p ROI detection with neuropil correction",
+          "software_tool": "SIMA, Suite2p",
+          "tool_version": null,
+          "parameters": {
+            "roi_curation": "post-hoc Suite2p GUI curation to exclude non-somatic components",
+            "cross_session_tracking": "same-FOV recordings concatenated before Suite2p spatial mask calculation"
+          },
+          "input_data_type": "raw two-photon time series",
+          "output_data_type": "motion-corrected, neuropil-corrected ROI fluorescence traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "statistics",
+          "technique": "Running-modulation calculation with bootstrap significance testing of event-triggered calcium responses",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "response_magnitude": "mean post-event minus mean pre-event DF/F",
+            "bootstrap": "3000 resampling iterations with replacement, 99% confidence interval"
+          },
+          "input_data_type": "event-triggered DF/F traces",
+          "output_data_type": "per-cell significant positive/negative/non-significant response classification",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "statistics",
+          "technique": "Detection of sharp-wave ripple (SPW-R) events from LFP via a supervised template-matching classifier",
+          "software_tool": "MATLAB",
+          "tool_version": "R2019a",
+          "parameters": {
+            "downsampling": "25 Hz wide-band signal downsampled to 1250 Hz",
+            "channel_selection": "wire with greatest ripple-band (100-225 Hz) Gabor wavelet power",
+            "template": "k-nearest-neighbor embedding on wavelet-derived SPW-R features, trained on hand-labeled ground truth from 4 separate mice",
+            "threshold": "within-event ripple-band wavelet power >=12 MAD above session median",
+            "inclusion": "immobility periods >=3 s only; visually verified"
+          },
+          "input_data_type": "raw hippocampal LFP",
+          "output_data_type": "detected SPW-R events",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "statistics",
+          "technique": "Semi-supervised classification of interictal epileptiform discharges (IEDs) via an Online Kernelized Perceptron with iterative human-in-the-loop annotation, and Random Forest cross-validation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "feature": "FFT magnitude spectrum of the LFP snippet per imaging frame",
+            "classifier": "Online Kernelized Perceptron, Gaussian RBF kernel, sigma=1",
+            "validation": "Random Forest (scikit-learn), 100 decision trees, 10-fold cross-validation"
+          },
+          "input_data_type": "frame-aligned LFP magnitude spectra",
+          "output_data_type": "per-frame IED classification",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 9,
+          "category": "statistics",
+          "technique": "Classification of adult-born versus mature granule cells (abGC vs. mGC) from IED response profiles via logistic regression and supervised UMAP dimensionality reduction",
+          "software_tool": "scikit-learn, UMAP-learn",
+          "tool_version": "scikit-learn 0.23.1",
+          "parameters": {
+            "responsiveness_metric": "mean post-event minus pre-event activity in a fixed 3 s window",
+            "classifier": "L2-regularized logistic regression, 80/20 train/test split by cell",
+            "dimensionality_reduction": "supervised UMAP, cross-validated on 80%/20% held-out cells"
+          },
+          "input_data_type": "per-cell IED response profile matrix",
+          "output_data_type": "abGC/mGC classification accuracy and UMAP embedding",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "other",
+          "technique": "Latent ensemble recruitment modeling: a Bayesian generative model estimating sparse cell-ensemble recruitment by interictal spikes and network synchrony events",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "activation_binarization": "bootstrap procedure, 10,000 resampled trigger frames excluding IEDs/seizures, 95th percentile threshold",
+            "model_structure": "Dirichlet-distributed ensemble-recruitment probability vector per event, Bernoulli indicator per cell-event pair, Gaussian-distributed responsiveness conditional on activation state",
+            "synchrony_events": "identified via spectral analysis of simultaneous single-channel ipsilateral CA1 LFP"
+          },
+          "input_data_type": "per-cell event responsiveness and LFP-derived synchrony events",
+          "output_data_type": "inferred latent cell ensembles and their event-recruitment probabilities",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "low"
+        }
+      ]
+    },
+    {
+      "paper_id": "ETEC7ELI",
+      "year": 2021,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 4,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "molecular",
+          "technique": "Zebrafish acute chemoconvulsant seizure induction via pentylenetetrazol (PTZ) bath application",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "animal": "Tg(elavl3:H2B-GCaMP6s) zebrafish, 7 dpf",
+            "mounting": "2.5% low-melting-point agarose, dorsal side up",
+            "ptz_concentration_mM": 15,
+            "baseline_before_ptz_min": 5
+          },
+          "input_data_type": null,
+          "output_data_type": "zebrafish exhibiting spontaneous PTZ-induced seizures",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "imaging",
+          "technique": "In vivo two-photon volumetric calcium imaging of whole zebrafish brain during baseline and PTZ-induced seizure states, with atlas registration and NMF-based signal extraction",
+          "software_tool": "CaImAn, CMTK",
+          "tool_version": null,
+          "parameters": {
+            "microscope": "Olympus FVMPE multiphoton, resonant scanner",
+            "objective": "16x, 0.8 NA (Nikon)",
+            "acquisition": "1.2x zoom (1.44 um/px), 15 z-planes (15 um spacing), 0.59 s/volume, 2500 volumes",
+            "protocol": "5 min baseline, then 15 mM PTZ bath application, 20 min continued imaging",
+            "registration": "Z-Brain atlas Tg(elavl3:H2B-RFP) volume via Computational Morphometry Toolkit (CMTK)",
+            "signal_extraction": "non-negative matrix factorization (NMF)-based denoising (CaImAn)"
+          },
+          "input_data_type": null,
+          "output_data_type": "single-cell functional calcium dynamics registered to a common brain atlas",
+          "hardware": "Olympus FVMPE multiphoton microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "surgery",
+          "technique": "Mouse intrahippocampal kainic-acid model of chronic temporal lobe epilepsy: tamoxifen-induced adult-born granule cell labeling, kainic acid injection, viral GCaMP6f injection, chronic imaging window and LFP electrode implantation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "mouse_line": "Nestin-CreERT2 x ROSA26-CAG-stopflox-tdTomato (Ai9)",
+            "tamoxifen": "3 mg IP/day for 5 consecutive days, 2 weeks before KA injection",
+            "ka_injection": "kainic acid into ventral hippocampus to induce epilepsy",
+            "virus": "rAAV(Syn-GCaMP6f) into dorsal dentate gyrus, ipsilateral to KA injection",
+            "implants": "chronic imaging window over dorsal dentate gyrus; LFP electrode adjacent to KA injection site",
+            "monitoring": "continuous video-EEG for ictogenesis, individually housed",
+            "imaging_start": "3 weeks post-KA injection, after video-EEG-verified TLE"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronically epileptic mice with dentate gyrus imaging/LFP access",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "imaging",
+          "technique": "Concurrent two-photon calcium imaging of dentate gyrus granule cells and LFP recording in head-fixed epileptic and control mice",
+          "software_tool": "OASIS",
+          "tool_version": null,
+          "parameters": {
+            "frame_rate_hz": 4,
+            "excitation": "920 nm, 50-100 mW (Chameleon Ultra II, Coherent)",
+            "objective": "40x NIR water immersion, 0.8 NA, 3.5 mm WD (Nikon)",
+            "channels": "green GCaMP6f (HQ525/70m-2p), red tdTomato (HQ607/45m-2p)",
+            "frame_size": "512x512 px, 225x225 um FOV",
+            "denoising": "OASIS",
+            "recording_duration_min": 60,
+            "control_data_source": "healthy control recordings from Danielson et al. 2016, matched dentate gyrus location"
+          },
+          "input_data_type": null,
+          "output_data_type": "denoised calcium traces and concurrent LFP recordings",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "HAD4KPSV",
+      "year": 2021,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 12,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "statistics",
+          "technique": "Confocal image analysis: laminar cell-body distribution and AAC-AIS 3D distance quantification",
+          "software_tool": "FIJI/ImageJ; Python (cv2, pysal, scipy)",
+          "tool_version": null,
+          "parameters": {
+            "laminar_distribution": "cell-body positions marked on maximum-intensity projections relative to manually drawn layer borders, fluorescence intensity normalized to the maximum observed across animals",
+            "3d_distance": "OTSU thresholding (mCherry channel) and local Moran's I spatial clustering (p-IkBa channel) to identify positive voxels, converted to point clouds and compared via kd-tree nearest-neighbor distance (3 micron threshold)"
+          },
+          "input_data_type": "confocal z-stacks",
+          "output_data_type": "laminar cell distribution and 3D AAC-process-to-AIS distances",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "statistics",
+          "technique": "Quantification of Unc5b-AAC-innervated AIS ratio",
+          "software_tool": "ImageJ macros",
+          "tool_version": null,
+          "parameters": {
+            "method": "AISs labeled blind to reporter channel via freehand lines, converted to 5-micron-thick measurement areas; fluorescence intensity and thresholded (Huang method) positive-pixel counts measured pre/post 90 degree rotation for normalization",
+            "classification": "AIS reporter intensity normalized to the average across all AIS objects in the image; normalized values >1 (with PV-pixel ratio threshold 0.2) classified as axo-axonic-innervated"
+          },
+          "input_data_type": "thin z-stacks of AAC reporter and PV/p-IkBa immunostaining",
+          "output_data_type": "classified AAC-innervated vs. non-innervated AISs",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "statistics",
+          "technique": "In vitro electrophysiology intrinsic-property analysis and PCA-based classification",
+          "software_tool": "Clampfit; custom Python scripts",
+          "tool_version": null,
+          "parameters": {
+            "metrics": "input resistance, sag, AP threshold (dV/dt exceeding 3 SD), AP width, afterhyperpolarization, rheobase, upstroke/downstroke velocity, adaptation score, burstiness score, fast/medium AHP",
+            "exclusion": "neurons with resting potential above -55 mV or input resistance >500 MOhm excluded",
+            "pca": "principal component analysis performed across the full set of extracted intrinsic-property features"
+          },
+          "input_data_type": "whole-cell current-clamp recordings",
+          "output_data_type": "intrinsic electrophysiological feature set and PCA-based cell characterization",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "statistics",
+          "technique": "Spike-waveform-based cell-type classification and optical photoidentification",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "classification": "2D Gaussian mixture model fit to spike width and valley-to-peak time to classify putative pyramidal neurons (n=495) vs. interneurons (n=128); ambiguous units (n=82) excluded",
+            "photoidentification": "parameter-free ZETA test (Montijn et al., 2020) on event-aligned spike-time cumulative distributions; peak/trough response latency 1-50 ms required for significance (p<0.01)"
+          },
+          "input_data_type": "sorted single-unit spike trains",
+          "output_data_type": "classified cell types and optically identified putative axo-axonic cells",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "imaging",
+          "technique": "Calcium movie preprocessing, ROI segmentation, and cross-session tracking for combined imaging/LFP experiments",
+          "software_tool": "SIMA",
+          "tool_version": null,
+          "parameters": {
+            "segmentation": "Unc5b-AAC ROIs segmented via SIMA's STICA method or manually; other neurons segmented via SIMA's PlaneCA1PC method",
+            "tracking": "AACs matched and assigned unique IDs across multiple imaging sessions of the same FOV; unitary response properties computed from all events across sessions"
+          },
+          "input_data_type": "raw two-photon calcium movies",
+          "output_data_type": "motion-corrected, segmented, cross-session-tracked dF/F traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "statistics",
+          "technique": "Event-triggered average response analysis (whisking, sharp-wave ripples, running)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "whisking_detection": "motion-energy map from video, z-scored, positive frames (z>1) clustered via DBSCAN (eps=1s) to define whisking event onsets",
+            "spwr_detection": "automatic LFP-based SPW-R detection with manual curation, blind to calcium responses; response quantified from max dF/dt in a 0-100 ms window post-ripple onset vs. 1,000 matched random control events",
+            "averaging_rule": "non-overlapping event windows (400 ms minimum gap) averaged first per-ROI then per-cell-type; automated to remove investigator bias"
+          },
+          "input_data_type": "dF/F traces, LFP traces, and behavioral video",
+          "output_data_type": "event-triggered average calcium responses to whisking, SPW-Rs, and running onset",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "statistics",
+          "technique": "Unit-unit and population-population correlation analysis",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "unit_unit": "Pearson correlation between full dF/F traces; time-resolved via rolling +/-1 s windows",
+            "population_population": "z-scored dF/F averaged by cell type, resampled into variable-size bins (0.1-10 s) with a temporal shift (-10 to 10 s) applied before binning; correlation computed per bin size/offset after sorting"
+          },
+          "input_data_type": "per-cell-type dF/F traces",
+          "output_data_type": "unit-unit and AAC-vs-Other population correlation metrics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "imaging",
+          "technique": "Calcium movie preprocessing and ROI segmentation for optogenetics experiments",
+          "software_tool": "SIMA; Suite2p; TreFiDe",
+          "tool_version": null,
+          "parameters": {
+            "motion_correction": "whole-frame registration",
+            "segmentation": "Suite2p spatial-mask ROI detection with cross-ROI/neuropil contamination correction, curated post hoc in the Suite2p GUI to exclude non-somatic components"
+          },
+          "input_data_type": "raw two-photon calcium movies",
+          "output_data_type": "motion-corrected, segmented dF/F traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "statistics",
+          "technique": "Stimulation responsiveness and calcium-event quantification",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "responsiveness_metric": "difference between the activity metric inside the stimulus window and an identical-width pre-stimulus window",
+            "transient_definition": "dF/F exceeding 150% of baseline",
+            "model": "linear mixed-effects model (Transients ~ Stim + (1|Animal)) compared to a null model via ANOVA"
+          },
+          "input_data_type": "dF/F traces around optogenetic stimulus onsets",
+          "output_data_type": "per-cell stimulation responsiveness and transient-rate change significance",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "statistics",
+          "technique": "Identification of spatially tuned cells and place-field detection",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "tuning_curve": "2-m belt divided into 100 bins, mean dF/F per bin per lap during running epochs, Gaussian-smoothed (sigma=3 bins) and averaged across laps",
+            "null_model": "100 shuffles of lap-by-lap tuning curves; bins exceeding the 99th percentile of the shuffle distribution classified as place fields",
+            "consistency_filter": "place fields required in the same location on at least 3 laps"
+          },
+          "input_data_type": "per-lap spatial dF/F tuning curves",
+          "output_data_type": "detected place fields",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "statistics",
+          "technique": "Place-field remapping and turnover analysis in response to AAC manipulation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "pv_correlation": "population vector correlation computed for every pair of spatial bins across PRE/STIM/POST lap blocks",
+            "remapping_quantification": "average Pearson correlation of PRE population vectors with POST counterparts, compared against unstimulated control sessions",
+            "turnover_analysis": "2x2 contingency tables of place-field presence in PRE vs. POST for the stimulation-zone quintile, tested with the McNemar-Bowker test"
+          },
+          "input_data_type": "detected place fields across PRE/STIM/POST lap blocks",
+          "output_data_type": "remapping magnitude and place-field turnover significance",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 12,
+          "category": "statistics",
+          "technique": "General statistical and modeling framework",
+          "software_tool": "Python; R",
+          "tool_version": null,
+          "parameters": {
+            "test_selection": "appropriate tests selected per study design, assumptions checked via Q-Q or residual plots",
+            "reporting": "mean +/- SEM unless otherwise specified, two-sided tests unless noted",
+            "mixed_models": "linear mixed-effects models (e.g. Response ~ CellType + Sex + (1|Animal)) compared to null models via ANOVA"
+          },
+          "input_data_type": null,
+          "output_data_type": "statistical significance results",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "KKAPPFAJ",
+      "year": 2022,
+      "journal": "Nature",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "8SKA2ZZG",
+      "year": 2024,
+      "journal": "Nature Neuroscience",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 7,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "statistics",
+          "technique": "Stimulated-cell detection via trial-averaged peri-stimulation time histograms (PSTH), PCA of PSTHs across imaged cells, and k-means clustering to classify cells by stimulation/response status",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "clustering_axes": "PC1(stim) vs PC1(unstim)",
+            "clustering_method": "k-means"
+          },
+          "input_data_type": "trial-averaged fluorescence PSTHs per cell",
+          "output_data_type": "cell classification by stimulated/unstimulated and odor responding/non-responding",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "statistics",
+          "technique": "Detection and comparison of sharp-wave-ripple (SWR)-associated highly synchronous events (HSEs) from smoothed population dF/F, with PCA-based comparison of SWR component coefficients between pre- and post-stimulation rest sessions",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "smoothing": "5-bin window Gaussian filter",
+            "hse_threshold": "population-average transient exceeding mean by >= 3 s.d.",
+            "exclusion": "frames associated with locomotion removed"
+          },
+          "input_data_type": "unstimulated-cell dF/F traces",
+          "output_data_type": "peri-SWR-HSE PSTHs and SWR principal component coefficients per condition/subarea",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 3,
+          "category": "other",
+          "technique": "Spiking network model of a CA3 subnetwork (leaky integrate-and-fire neurons with adaptation, random Erdos-Renyi connectivity) implementing a spike-timing-dependent inhibitory plasticity (sSTDP) rule, to generate spontaneous replay",
+          "software_tool": "Brian 2",
+          "tool_version": null,
+          "parameters": {
+            "n_pyramidal_cells": 8000,
+            "n_interneurons": 150,
+            "ee_connection_probability": 0.1,
+            "ie_connection_probability": 0.25,
+            "place_cell_fraction": "50% of PCs, place field covers 10% of track, peak firing rate 20 Hz",
+            "cue_cell_fraction": "15% of neurons",
+            "baseline_poisson_rate_hz": 0.1,
+            "refractory_period_ms": 5,
+            "offline_input": "random low-level (0.1 Hz) Poisson spiking input during replay phase"
+          },
+          "input_data_type": null,
+          "output_data_type": "simulated spontaneous replay sequences",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 4,
+          "category": "other",
+          "technique": "Biophysical multi-compartment model of a CA3 microcircuit with realistic ion-channel conductances and afferent input from MEC, LEC, and dentate gyrus, run in the NEURON simulation environment",
+          "software_tool": "NEURON",
+          "tool_version": null,
+          "parameters": {
+            "n_pyramidal_cells": 260,
+            "n_interneurons": "30 fast-spiking perisomatic-targeting",
+            "compartments": "soma, basal dendrites, apical dendrites, placed across SLM/SR/SL/SP/SO strata",
+            "timestep_ms": 0.1,
+            "place_field_coverage": "10% of track, peak firing rate 20 Hz"
+          },
+          "input_data_type": null,
+          "output_data_type": "simulated intracellular voltage traces and network replay dynamics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 5,
+          "category": "other",
+          "technique": "Abstract schema-based sequence-replay model with a feedforward-inhibition plasticity term, used to formalize the REPLAY estimator and the effect of inhibitory-plasticity parameter alpha on replay fidelity",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "example_alpha_value": 1.5
+          },
+          "input_data_type": null,
+          "output_data_type": "simulated replay sequence estimates under varying inhibition strength",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "low"
+        },
+        {
+          "step_order": 6,
+          "category": "statistics",
+          "technique": "Offline cue-place aggregate analysis: binning simulation/imaging time into 100-ms windows, 2D cue-cell vs. place-cell spike-count histograms, Pearson correlation and two-tailed t-test for cue-place functional connectivity, and peri-event z-score analysis around HSEs",
+          "software_tool": "Python",
+          "tool_version": "3.8",
+          "parameters": {
+            "bin_size_ms": 100,
+            "significance_threshold": 0.05,
+            "hse_z_score_threshold": 1,
+            "peri_event_window_s": "-2 to +2 relative to HSE onset"
+          },
+          "input_data_type": "binned spike counts / dF/F traces",
+          "output_data_type": "cue-place correlation statistics and peri-HSE z-scored histograms",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "statistics",
+          "technique": "General statistical testing framework across the study: normality-dependent choice of paired/unpaired t-test versus Mann-Whitney U-test, two-sided tests, and a priori exclusion criteria for imaging/behavioral quality",
+          "software_tool": "Python",
+          "tool_version": "3.8",
+          "parameters": {
+            "exclusion_criteria": "poor imaging windows (low-quality viral expression or scarring); absence of clear SWRs in LFP; failure to progress through behavioral paradigm",
+            "blinding": "investigators not blinded during experiments or outcome assessment",
+            "significance_thresholds": "*P<0.05; **P<0.01; ***P<0.001"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "No statistical methods were used to predetermine sample sizes",
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "LBKM3N66",
+      "year": 2024,
+      "journal": "bioRxiv",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 9,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "electrophysiology",
+          "technique": "Hippocampal LFP measurement and preprocessing (resampling to imaging frame rate)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "acquisition": "RHD2132 16-channel amplifier + RHD2000 interface board (Intan Technologies), 10 kHz, with laser-scanning frame trigger and treadmill sync",
+            "resampling": "offline resampled to ~440 Hz (occasionally 220 Hz) in sync with imaging frames"
+          },
+          "input_data_type": "raw LFP signal",
+          "output_data_type": "frame-synchronized LFP trace",
+          "hardware": "RHD2132 amplifier; RHD2000 interface board (Intan Technologies)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "statistics",
+          "technique": "Behavioral state classification (rest vs. walking/running) from treadmill velocity, and depolarizing-event (DE) rate estimation by state",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "rest_threshold": "velocity <2 mm/s for >=1 s",
+            "run_threshold": "velocity >10 mm/s for >=1 s",
+            "de_rate": "event count divided by time spent in each behavioral state, concatenated across scans within a segment, epochs >=1 s only"
+          },
+          "input_data_type": "velocity trace and detected DEs",
+          "output_data_type": "behavioral state labels and per-state DE rates",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "statistics",
+          "technique": "Theta-band phase/amplitude modulation analysis of dendritic membrane-potential fluorescence using a DFT-based sinusoidal parameter estimator, and DE theta-phase preference via circular (Rayleigh) statistics",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "theta_filter": "zero-phase Butterworth bandpass, 5-10 Hz",
+            "phase_assignment": "0 deg at LFP theta troughs, linear interpolation between troughs",
+            "amplitude_estimator": "discrete Fourier transform (DFT) estimator of sinusoidal parameters under additive white Gaussian noise",
+            "significance": "amplitude estimate > 1.645x its estimated SD",
+            "de_phase_preference": "mean resultant vector of unit-modulus phase values per DE; Rayleigh test, p<0.05"
+          },
+          "input_data_type": "theta-filtered LFP and dendritic fluorescence traces",
+          "output_data_type": "per-segment theta amplitude/phase estimates and DE phase-preference statistics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 4,
+          "category": "statistics",
+          "technique": "Detection of hippocampal sharp-wave ripples from LFP recorded during behaviorally still periods",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "filter": "zero-phase 4th-order 80-220 Hz Butterworth bandpass",
+            "power_smoothing": "squared filtered signal, zero-phase 4th-order 25 Hz low-pass",
+            "thresholding": "Tukey IQR score >10 for onset, expanded until IQR <2",
+            "merge_exclude": "events <15 ms discarded; events <15 ms apart merged"
+          },
+          "input_data_type": "LFP recorded during still periods",
+          "output_data_type": "detected ripple epochs",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "statistics",
+          "technique": "Estimation of theta phase gradient along the dendritic basal-tuft axis via parametric and rank-based nonparametric regression against soma path distance",
+          "software_tool": "statsmodels",
+          "tool_version": null,
+          "parameters": {
+            "somatic_phase_reference": "linear regression of basal-dendrite phase vs. path distance, intercept used as somatic phase reference",
+            "parametric": "least-squares linear regression of relative phase vs. path distance",
+            "nonparametric": "rank-regression of soma path distance rank vs. 20-bin theta phase of minimum membrane potential",
+            "oblique_trunk_decomposition": "OLS regression of phase against axial and radial distance components (statsmodels regression.linear_model.OLS)"
+          },
+          "input_data_type": "per-segment theta phase and path-distance-to-soma",
+          "output_data_type": "phase-gradient regression coefficients and significance, and basal-oblique/basal-tuft phase span",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 6,
+          "category": "statistics",
+          "technique": "Phase modulation of DE amplitude via linear-circular sinusoidal fit",
+          "software_tool": "statsmodels",
+          "tool_version": null,
+          "parameters": {
+            "model": "least-squares fit of A(theta) = alpha*sin(theta+phi) + beta to empirical DE amplitude-vs-phase histograms"
+          },
+          "input_data_type": "DE amplitudes and theta phases",
+          "output_data_type": "fitted amplitude-phase modulation parameters and significance",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 7,
+          "category": "statistics",
+          "technique": "Peri-ripple analysis of DE rate, DE waveform/amplitude, and membrane-potential trough relative to sharp-wave ripples",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "rate_stat": "standardized Poisson rate-difference z-statistic comparing in-ripple vs. out-of-ripple DE rate",
+            "waveform": "5-point moving-averaged -dF/F in a +/-100 ms window aligned to DE time",
+            "trough_identification": "minimum membrane potential in an expanded +/-200 ms window around ripple power peak"
+          },
+          "input_data_type": "DE times/amplitudes and ripple epochs",
+          "output_data_type": "peri-ripple DE rate modulation, waveform, and membrane-potential trough metrics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 8,
+          "category": "statistics",
+          "technique": "Spatial tuning analysis of dendritic depolarizing events, including significance testing via a nonuniformity (H) statistic and circular Wasserstein distance between tuning curves",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "tuning_curve": "track divided into 100 position bins, average DE rate during locomotion per bin",
+            "significance": "H statistic of nonuniformity vs. 10,000-permutation shuffle null, p<0.05",
+            "distance_metric": "circular Wasserstein (earth mover's) distance between tuning curves"
+          },
+          "input_data_type": "position-binned DE rates",
+          "output_data_type": "spatially tuned dendritic segments and tuning-curve distance metrics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 9,
+          "category": "statistics",
+          "technique": "Reconstruction of somatic spatial tuning curves as a non-negative linear combination of dendritic tuning curves (NNLS), and tuning resultant-vector analysis of place-field-induction-related tuning changes",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "reconstruction": "non-negative least squares fit of somatic tuning curve to a basis set of spatially-tuned dendritic curves, evaluated via Spearman's rho against circular Gaussian models",
+            "resultant_vector": "complex-number position encoding per DE, normalized [0,1] magnitude as tuning strength; circular SD as tuning variability/diversity"
+          },
+          "input_data_type": "dendritic and somatic spatial tuning curves",
+          "output_data_type": "somatic-tuning reconstruction quality and resultant-vector tuning metrics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "paper_id": "R27V283A",
+      "year": 2024,
+      "journal": "bioRxiv",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "UMWW7XYA",
+      "year": 2024,
+      "journal": "Nature Communications",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 4,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "statistics",
+          "technique": "Spatial tuning-curve analysis of dendritic depolarizing-event rates with shuffle-based significance testing",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "bins": "100 place bins",
+            "significance": "H-statistic of nonuniformity vs. 10,000-permutation shuffle null"
+          },
+          "input_data_type": "detected depolarizing events, position data",
+          "output_data_type": "spatially tuned dendritic segments",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "Tuning curves were calculated by binning the track into 100",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 2,
+          "category": "statistics",
+          "technique": "Theta-phase modulation analysis of dendritic membrane-potential oscillations (DFT-based amplitude/phase estimation, phase-gradient regression)",
+          "software_tool": "Python (statsmodels)",
+          "tool_version": null,
+          "parameters": {
+            "filter": "5-10 Hz zero-phase Butterworth theta filter",
+            "estimator": "discrete Fourier transform sinusoidal parameter estimator"
+          },
+          "input_data_type": "theta-band LFP phase, dendritic fluorescence traces",
+          "output_data_type": "phase/amplitude of membrane-potential theta modulation per segment",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "Theta-band LFP phase was determined by first applying",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 3,
+          "category": "statistics",
+          "technique": "Peri-ripple depolarizing-event rate and waveform analysis",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "ripple_detection": "80-220 Hz band-pass filter, IQR-based thresholding of LFP power",
+            "waveform_window": "\u00b1100 ms around detected DE"
+          },
+          "input_data_type": "LFP ripple events, depolarizing-event traces",
+          "output_data_type": "peri-ripple rate modulation and waveform amplitudes",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "Ripple detection was done by",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 4,
+          "category": "statistics",
+          "technique": "General statistical hypothesis testing across experiments",
+          "software_tool": "Python (SciPy, statsmodels)",
+          "tool_version": null,
+          "parameters": {
+            "tests": "two-sided z-tests, ordinary least squares regression, Rayleigh test"
+          },
+          "input_data_type": null,
+          "output_data_type": "statistical significance results",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "Significance was determined by a two-sided z-test",
+          "extraction_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "paper_id": "HU4D65CV",
+      "year": 2025,
+      "journal": "Nature",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "QQIBRBDR",
+      "year": 2025,
+      "journal": "eLife",
+      "attribution": {
+        "source": "position_heuristic",
+        "confidence": "low"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "LKVXCUIR",
+      "year": 2026,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 3,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "other",
+          "technique": "Recurrent neural network (RNN) modeling of sparse (proximal) and dense (distal) CA3 subnetworks trained on path-integration and context-switching tasks with L1-regularized recurrent connectivity",
+          "software_tool": "TensorFlow/Keras",
+          "tool_version": null,
+          "parameters": {
+            "architecture": "100 tanh rate units (LSTM package) recurrent layer, 1-2 dense linear output units",
+            "inputs": "instantaneous speed and initial position (path integration); additional noisy binary context signal (multitasking network, Gaussian noise SD=0.3)",
+            "regularization": "L1 penalty on recurrent weights, lambda_sparse=0.1, lambda_dense=0.001",
+            "training": "Adam optimizer, learning rate 1e-4, minimum batch size 8",
+            "hidden_layer_sizes": "100 neurons (primary), 30 neurons (replication)"
+          },
+          "input_data_type": null,
+          "output_data_type": "trained sparse/dense RNN models and their unit tuning/decoding properties",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "other",
+          "technique": "Hopfield network modeling of associative memory storage and recall at varying connectivity sparsity",
+          "software_tool": "Python",
+          "tool_version": "3.8",
+          "parameters": {
+            "network_size": "N=1000 binary neurons (varied in a subset of simulations)",
+            "training_rule": "binary Hebbian learning rule",
+            "dynamics": "classical Hopfield sign-update dynamics until convergence or max iterations",
+            "sparsity_model": "Erdos-Renyi structural connectivity matrix at connection probability p, elementwise-masked effective weight matrix",
+            "discrimination_test": "storage/recall accuracy (Pearson correlation to ground truth) across varying numbers of stored patterns M",
+            "generalization_test": "recall accuracy across varying fraction of flipped neurons at fixed M"
+          },
+          "input_data_type": null,
+          "output_data_type": "sparse vs. dense Hopfield network storage/recall/generalization performance",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "other",
+          "technique": "Sensitivity analysis of manifold-dimensionality sparsity gradient using a small rate-RNN simulation swept across connectivity sparsity levels",
+          "software_tool": "Python",
+          "tool_version": null,
+          "parameters": {
+            "network": "N=10 unit rate RNN, ReLU activation, spectral radius rescaled to 0.95",
+            "input": "2D sinusoidal drive, f1=0.005, f2=0.011 cycles/step",
+            "simulation": "22,000 time steps (200 discarded as burn-in), 10 independent networks per sparsity level, sparsity swept 0-100% in 0.5% increments (201 levels)",
+            "metrics": "participation ratio, k90, EV5 dimensionality measures",
+            "regime_comparison": "dense (2-20% sparsity) vs. sparse (85-100%) regimes, two-sided permutation test (5000 shuffles), Cohen's d effect size"
+          },
+          "input_data_type": null,
+          "output_data_type": "sparsity-dependent manifold dimensionality gradient surface and regime comparison statistics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    }
+  ]
+}

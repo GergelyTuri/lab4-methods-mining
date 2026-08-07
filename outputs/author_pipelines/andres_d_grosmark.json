@@ -1,0 +1,321 @@
+{
+  "target_author": "Andres D Grosmark",
+  "total_papers": 3,
+  "total_steps": 12,
+  "flags": [
+    {
+      "paper_id": "RBL2PSLI",
+      "flag": "possible_duplicate_study",
+      "note": "Flagged during the stage-5 extraction session as possibly representing the same underlying study as YCFJ2N9Z (preprint/published pair or otherwise closely related work) \u2014 both are included here independently, not merged; review manually before downstream use."
+    }
+  ],
+  "papers": [
+    {
+      "paper_id": "UTJ3YW3R",
+      "year": 2017,
+      "journal": "Nature Neuroscience",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "K433LNFA",
+      "year": 2019,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "PSG2BFK8",
+      "year": 2020,
+      "journal": "Nature Communications",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 1,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "statistics",
+          "technique": "Collection and detection of sharp-wave ripple (SPW-R) events from control-condition LFP recordings via the paper's supervised template-matching classifier",
+          "software_tool": "MATLAB",
+          "tool_version": "R2019a",
+          "parameters": {
+            "downsampling": "25 Hz wide-band signal downsampled to 1250 Hz",
+            "channel_selection": "wire with greatest ripple-band (100-225 Hz) Gabor wavelet power",
+            "template": "k-nearest-neighbor embedding on wavelet-derived SPW-R features, trained on hand-labeled ground truth from 4 separate mice",
+            "threshold": "within-event ripple-band wavelet power >=12 MAD above session median",
+            "inclusion": "immobility periods >=3 s only; visually verified"
+          },
+          "input_data_type": "control-condition hippocampal LFP",
+          "output_data_type": "detected control-condition SPW-R events",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "paper_id": "BIWVCPEH",
+      "year": 2021,
+      "journal": "Nature Neuroscience",
+      "attribution": {
+        "source": "methods_text_inference",
+        "confidence": "medium"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "KZYI47XK",
+      "year": 2022,
+      "journal": "Cell Reports",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 7,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "imaging",
+          "technique": "Motion correction, ROI extraction, and neuropil-corrected \u0394F/F calculation",
+          "software_tool": "Suite2p",
+          "tool_version": null,
+          "parameters": {
+            "preprocessing": "SIMA software package used for initial motion correction, as previously described",
+            "roi_and_df_f": "ROIs detected, fluorescence extracted, and neuropil-decontaminated \u0394F/F calculated using Suite2p's built-in neuropil subtraction",
+            "curation": "ROIs curated post-hoc via Suite2p's graphical interface to exclude non-somatic components"
+          },
+          "input_data_type": "raw two-photon Ca2+ fluorescence video",
+          "output_data_type": "motion-corrected, neuropil-corrected \u0394F/F traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "electrophysiology",
+          "technique": "Sharp-wave ripple (SWR) detection and spike sorting from E-Cannula recordings",
+          "software_tool": "Kilosort2; Phy",
+          "tool_version": null,
+          "parameters": {
+            "swr_filtering": "raw signal band-pass filtered 120-250 Hz (4th-order Butterworth, zero-phase forward-reverse), Hilbert transform to extract the ripple-band envelope",
+            "swr_threshold": "candidate events flagged at 4.5 SD above the mean; start/end defined where the envelope returns to the mean; events with inter-event interval <10 ms merged, events <20 ms duration discarded",
+            "array_level_events": "start/end times taken as the earliest/latest across all channels detecting the SWR, followed by manual curation to discard artifacts",
+            "spike_sorting": "Kilosort2 run across all same-day recordings pooled together; manual curation in Phy checking waveforms and auto/cross-correlograms, with merge/split as needed; surviving clusters labeled multi-unit activity"
+          },
+          "input_data_type": "raw E-Cannula electrophysiological recordings (20 kHz)",
+          "output_data_type": "detected SWR events and sorted multi-unit spike clusters",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "statistics",
+          "technique": "Detection of synchronous calcium events (SCEs) and their co-occurrence with SWRs",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "sce_detection": "deconvolved spikes thresholded at 3 SD per cell to define firing intervals; per-frame firing-cell count computed over adjacent 5-frame (~160 ms) windows; significance threshold from the 95th percentile of a 20x circular-shuffle null distribution",
+            "co_occurrence": "SWR and SCE labeled co-occurring within a 200 ms window; significance from 1,000 random permutations of SWR timing"
+          },
+          "input_data_type": "deconvolved calcium event trains and detected SWR events",
+          "output_data_type": "SCE timestamps and SWR-SCE co-occurrence significance",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "statistics",
+          "technique": "Clustering of SWR events by spatiotemporal features",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "features": "per-channel ripple-band envelope time delays (via cross-correlation with the mean envelope across 16 channels; events discarded if fewer than 13 channels had a resolvable delay) and normalized per-channel ripple-band power, after discarding events with complex, non-single-peaked envelope shapes via dynamic time warping",
+            "clustering": "K-means clustering with cluster count chosen by the within-cluster sum-of-squares 'elbow', repeated 10 times to select the best result",
+            "group_labeling": "clusters further grouped into stationary-local, stationary-global, traveling-local, and traveling-global based on maximum channel-wise time delay (>5 ms = traveling) and number of active channels at >0.6 normalized power (>10 channels = global)"
+          },
+          "input_data_type": "per-channel ripple-band envelopes for detected SWR events",
+          "output_data_type": "SWR spatiotemporal cluster assignments and cluster templates",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "statistics",
+          "technique": "SVM-based decoding of SWR spatiotemporal cluster type from calcium activity",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "features": "mean \u0394F/F activity of each neuron in a [-150, +150] ms window around SWR onset",
+            "class_balancing": "SWR events subsampled per cluster to match the smallest cluster's event count",
+            "feature_selection": "recursive feature elimination in steps of 50 neurons to identify the most discriminative neurons and reduce overfitting",
+            "validation": "10-fold cross-validation; accuracy, precision, and recall compared against a random classifier",
+            "control_analyses": "shuffled assembly labels (1,000x) and holding-vs-in-order neuron-subsampling controls to test dependence on assembly identity and spatial dispersion"
+          },
+          "input_data_type": "per-SWR-event population \u0394F/F activity",
+          "output_data_type": "decoded SWR spatiotemporal cluster labels and decoding performance metrics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "statistics",
+          "technique": "Detection of cell assemblies and their firing ratio under different SWR clusters",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "activity_binarization": "\u0394F/F in a [-150, +150] ms window around each SWR onset thresholded at 30% of each cell's mean \u0394F/F to label active/silent",
+            "similarity": "Jaccard similarity computed between each neuron pair to build a similarity matrix",
+            "null_and_threshold": "surrogate similarity matrices from 200 shuffles of per-cell active-SWR identity; pairwise similarities below the resulting chance level set to zero",
+            "assembly_detection": "community detection clustering on the thresholded similarity matrix; assemblies retained only if larger than the 99th percentile of surrogate cluster sizes",
+            "control": "holding vs. in-order neuron-subsampling comparison (200 repeats) to assess the effect of assembly relationships on SWR decoding"
+          },
+          "input_data_type": "per-SWR-event, per-cell binarized activity",
+          "output_data_type": "identified cell assemblies and their per-SWR-cluster firing ratios",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "statistics",
+          "technique": "Group-level statistical testing framework",
+          "software_tool": "MATLAB",
+          "tool_version": null,
+          "parameters": {
+            "tests": "two-tailed statistical tests, significance threshold p=0.05, error bars/shaded regions as \u00b1 SEM unless noted; test selection guided by inspecting data-distribution histograms",
+            "multiple_comparisons": "Benjamini-Hochberg correction"
+          },
+          "input_data_type": null,
+          "output_data_type": "statistical significance results",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "UF5YJ4HS",
+      "year": 2022,
+      "journal": "Cell Reports",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "NAXFDQ32",
+      "year": 2023,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "RBL2PSLI",
+      "year": 2023,
+      "journal": "Nature Neuroscience",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 4,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "imaging",
+          "technique": "Calcium imaging preprocessing: whole-frame motion correction, manual ROI drawing, and neuropil-corrected \u0394F/F extraction",
+          "software_tool": "SIMA, FISSA",
+          "tool_version": null,
+          "parameters": {
+            "neuropil_correction": "six patches at 50% of ROI size",
+            "baseline": "first percentile in rolling 30-s window"
+          },
+          "input_data_type": "raw calcium imaging movies",
+          "output_data_type": "\u0394F/F traces per cell",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "motion corrected independently using a whole-frame cross-correlation algorithm",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 2,
+          "category": "statistics",
+          "technique": "Spatial tuning-curve and place-field analysis for interneurons and pyramidal cells (shuffle-based significance, Gaussian place-field fitting)",
+          "software_tool": "Python 2.7",
+          "tool_version": null,
+          "parameters": {
+            "shuffles": "1,000 iterations",
+            "bins": "100 spatial bins over the belt"
+          },
+          "input_data_type": "\u0394F/F traces, position data",
+          "output_data_type": "spatial tuning curves, place fields, spatial information",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "cell was considered to be a place cell if its spatial information",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 3,
+          "category": "statistics",
+          "technique": "Peri-SWR analysis: peri-SWR time histograms, SWR activity index, SWR duration/power/modulation by interneuron subtype",
+          "software_tool": "Python 2.7",
+          "tool_version": null,
+          "parameters": {
+            "window": "-3 s to +3 s around SWR onset"
+          },
+          "input_data_type": "\u0394F/F traces, SWR event times",
+          "output_data_type": "peri-SWR modulation metrics per subtype",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "cell's \u0394F/F trace was z scored in a -3-s to +3-s window",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 4,
+          "category": "statistics",
+          "technique": "Generalized linear (ridge regression) model of calcium activity from behavioral predictors, plus general statistical hypothesis testing",
+          "software_tool": "Python 2.7.15",
+          "tool_version": null,
+          "parameters": {
+            "predictors": "velocity, position, reward, licking, with time-shifted copies",
+            "tests": "one-way ANOVA with Tukey correction, paired/unpaired t-test, Mann-Whitney U"
+          },
+          "input_data_type": "\u0394F/F traces, behavioral variables",
+          "output_data_type": "predictor significance per cell; statistical comparisons",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "multivariate linear regression model to predict each cell's fluorescence",
+          "extraction_confidence": "medium"
+        }
+      ]
+    }
+  ]
+}

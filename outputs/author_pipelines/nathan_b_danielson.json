@@ -1,0 +1,766 @@
+{
+  "target_author": "Nathan B Danielson",
+  "total_papers": 4,
+  "total_steps": 38,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "6T8UW6LJ",
+      "year": 2014,
+      "journal": "Science",
+      "attribution": {
+        "source": "position_heuristic",
+        "confidence": "low"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "N5AUJWGX",
+      "year": 2014,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 2,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection and chronic hippocampal imaging window implantation for PVBC axonal bouton imaging",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "virus": "rAAV serotype 1 (rep/cap 2/1), Synapsin-GCaMP5-Cre, into dorsal CA1 of PV-TOM mice",
+            "implant_timing": "chronic hippocampal imaging window implanted over left dorsal CA1, 2 weeks post-injection"
+          },
+          "input_data_type": null,
+          "output_data_type": "PV-TOM mice with GCaMP5-expressing PV+ boutons and chronic imaging access",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging of PV+ basket-cell axonal boutons, including functional imaging during behavior and anatomical bouton-density z-stack imaging under anesthesia",
+          "software_tool": "PrairieView",
+          "tool_version": null,
+          "parameters": {
+            "laser": "Ti:Sapphire, 920 nm (Coherent)",
+            "objective": "40x, 0.8 NA (Nikon)",
+            "microscope": "two-photon laser-scanning microscope (Prairie)",
+            "functional_full_field": "256x128 px, 1.6 ms dwell, 2000-2400 frames, 165x165 um FOV, 7.63 Hz",
+            "functional_bouton_roi": "82x82 um or 41x41 um FOV, 9.7 Hz or 10.2 Hz",
+            "anatomical_zstack": "ketamine/xylazine anesthesia, 82x82 um FOV, 512x512 px, 6 ms dwell, 100 frames, 3-6 mm z-stacks, superficial and deep locations",
+            "synchronization": "custom-designed hardware/software for behavioral readout synchronized with imaging data"
+          },
+          "input_data_type": null,
+          "output_data_type": "functional GCaMP5 bouton imaging data and anatomical bouton-density z-stacks",
+          "hardware": "Prairie two-photon laser-scanning microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "U7L3RARN",
+      "year": 2016,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 14,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection for GCaMP6f expression in dorsal CA1",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "virus": "rAAV1/2(CaMKII-GCaMP6f) for broad GCaMP6f expression in CA1 stratum pyramidale",
+            "delivery": "Nanoject syringe, 60 nL (6x10 nL pulses) per site at three dorsoventral locations",
+            "coordinates": "-2.3 mm AP, -1.5 mm ML, -0.9/-1.05/-1.2 mm DV relative to cortical surface"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice expressing GCaMP6f in CA1 pyramidal neurons",
+          "hardware": "Nanoject syringe",
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Hippocampal imaging window and headpost implantation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "window": "3.0-mm diameter, 1.5-mm height glass-bottomed steel cannula over left dorso-intermediate hippocampus, coverslip (64-0720, Warner) adhered with Norland optical adhesive",
+            "craniotomy": "3 mm craniotomy via fine-tipped dental drill; dura removed, cortex aspirated until external capsule fibers visible",
+            "anesthesia_analgesia": "isoflurane (3% induction, 1.5-2.0% maintenance), buprenorphine 0.05-0.1 mg/kg",
+            "headpost": "stainless-steel headpost affixed with dental cement",
+            "recovery": "mice active within 15 min post-surgery; analgesia continued 3 days postoperatively"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice with chronic hippocampal imaging window and headpost",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "behavior",
+          "technique": "Random foraging (RF) behavioral training",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "water_restriction": ">90% pre-deprivation body weight",
+            "apparatus": "cue-deplete burlap treadmill belt",
+            "reward_schedule": "progressively restrictive schedule from 40 to 3 randomly placed rewards per lap over 1-2 weeks",
+            "criterion": "20 min daily until regularly running at least 1 lap/min"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice trained for random-foraging water reward on the treadmill",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "behavior",
+          "technique": "Goal-oriented learning (GOL) behavioral training",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "water_restriction": ">90% pre-deprivation body weight",
+            "operant_shaping": "mice first trained to lick operantly at a capacitance-sensing water port, then required to advance the treadmill for reward eligibility (e.g. 5 steps forward = 5 s reward availability)",
+            "progressive_schedule": "number, spatial extent, and time-limit of reward zones per lap gradually decreased until a single randomly placed 10 cm reward zone with a 3 s time limit"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice trained to run and lick for a randomly relocated reward zone",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "behavior",
+          "technique": "Multisensory context construction and treadmill position-tracking system",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "contexts": "contexts A and B share the same 3-fabric-ribbon treadmill belt order, distinguished by visual/auditory/tactile/olfactory stimuli; 6 tactile cues (silver glitter tape, green pompoms, velcro, glue-gun spikes, pink foam strips, jewels) shuffled in position between belts",
+            "position_tracking": "RFID registration anchors (16 mm, 125 kHz, SparkFun) read by a fixed RFID reader (ID-12LA, SparkFun), interpolated using a quadrature-encoded movement signal from offset tick marks read by paired photodiodes (SparkFun SEN-0024), <0.5 cm resolution"
+          },
+          "input_data_type": null,
+          "output_data_type": "multisensory context stimuli and continuous belt-position signal",
+          "hardware": "RFID buttons and reader (SparkFun); photodiode quadrature encoder (SparkFun SEN-0024)",
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "imaging",
+          "technique": "In vivo dual-plane (deep/superficial CA1) two-photon Ca2+ imaging acquisition",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8 kHz resonant scanner (Bruker)",
+            "objective": "40x NIR water immersion, 0.8 NA, 3.5 mm WD (Nikon)",
+            "axial_toggling": "piezoelectric crystal on the objective for rapid z-displacement between deep and superficial planes, separated by 25 microns; 40 ms settle time after each plane switch",
+            "head_alignment": "two goniometers (\u00b110\u00b0, Edmund Optics) used to align the CA1 pyramidal layer with the imaging plane",
+            "laser": "920 nm, 50-100 mW (Coherent)",
+            "detection": "emission cube set (green HQ525/70m-2p; red HQ607/45m-2p; 575dcxr, Chroma) to GaAsP PMT (Hamamatsu 7422P-40, green) and multi-alkali PMT (Hamamatsu R3896, red tdTomato)",
+            "acquisition": "2x digital zoom, 150x150 micron FOV, 512x512 pixels per plane, ~7 Hz effective dual-plane frame rate",
+            "superficial_plane_definition": "first complete layer of CA1 PC somata above the stratum pyramidale/radiatum border (10-15 microns from border); deep plane 25 microns above"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw dual-plane two-photon Ca2+ fluorescence video",
+          "hardware": "Bruker 8 kHz resonant scanner; Nikon 40x NIR objective; Hamamatsu GaAsP PMT 7422P-40 and R3896; Coherent 920 nm laser",
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "imaging",
+          "technique": "Motion correction via modified 2D Hidden Markov Model with per-plane re-initialization",
+          "software_tool": "SIMA",
+          "tool_version": "1.3",
+          "parameters": {
+            "reinitialization": "model re-initialized each plane to account for the 40 ms piezo settling time, permitting discontinuous displacements across planes",
+            "qc": "data discarded when motion artifacts were not adequately corrected"
+          },
+          "input_data_type": "raw dual-plane Ca2+ fluorescence video",
+          "output_data_type": "motion-corrected imaging data",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "imaging",
+          "technique": "Manual ROI segmentation and cross-session registration",
+          "software_tool": "SIMA; ImageJ",
+          "tool_version": null,
+          "parameters": {
+            "segmentation": "manual outlining of CA1 PC somata in ImageJ on time-averaged, motion-corrected images for one session per FOV",
+            "registration": "polygons imported into SIMA and assigned unique labels; affine registration between the segmented session and each unsegmented session via SIMA's ROI Buddy GUI, applied to warp ROIs onto the target session, with minor post-hoc manual adjustment"
+          },
+          "input_data_type": "motion-corrected, time-averaged imaging frames",
+          "output_data_type": "cross-session-registered somatic ROIs",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "imaging",
+          "technique": "\u0394F/F signal extraction with iterative baseline re-estimation and transient detection",
+          "software_tool": "SIMA",
+          "tool_version": null,
+          "parameters": {
+            "df_f_calc": "uniform smoothing window t1 = 3 s, baseline size t2 = 60 s",
+            "transient_definition": "transient start = first frame with mean fluorescence >= 2\u03c3 of baseline SD; offset = first frame with mean fluorescence <= 0.5\u03c3",
+            "iterative_refinement": "baseline recalculated after masking frames identified during significant transients, \u0394F/F and transients re-estimated; repeated 3 iterations to remove transient contamination from baseline",
+            "exclusion": "transients shorter than 1 s removed as likely false positives"
+          },
+          "input_data_type": "registered ROI fluorescence time series",
+          "output_data_type": "\u0394F/F traces and detected Ca2+ transients per ROI",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "statistics",
+          "technique": "Identification of spatially tuned cells via tuning specificity and spatial information",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "running_epoch_definition": "consecutive forward-locomotion frames >=1 s duration with peak speed >=5 cm/s; epochs separated by <0.5 s merged",
+            "tuning_specificity": "magnitude of the spatial tuning vector (1 - circular variance of occupancy-normalized transients); significance via 100,000 shuffles of transient onset times within running frames",
+            "spatial_information": "Skaggs spatial information content computed across bin counts N = {2,4,5,8,10,20,25,100}; bias-corrected by subtracting the mean of 100,000 shuffled-onset null distributions; final estimate maximized over bin sizes for true and shuffled data",
+            "classification": "cells classified as place cells separately by each metric based on shuffle-derived p-values"
+          },
+          "input_data_type": "Ca2+ transient onset times restricted to running epochs",
+          "output_data_type": "classified place cells with tuning specificity and spatial information scores",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "statistics",
+          "technique": "Cross-session remapping analysis: population vector correlation, centroid shift, and tuning curve correlation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "rate_maps": "100 position bins, Gaussian-smoothed (\u03c3 = 3 bins), transients per bin normalized by occupancy",
+            "pv_correlation": "1D rate maps of all cells per sublayer stacked into population vectors; same-bin correlation averaged across bins between two sessions, all cells included regardless of tuning",
+            "centroid_shift": "angle (radians) between spatial tuning vectors across sessions, restricted to cells classified as place cells by tuning specificity in both sessions",
+            "tuning_curve_correlation": "Pearson correlation between rate maps across sessions, restricted to cells classified as place cells by spatial information in both sessions"
+          },
+          "input_data_type": "cross-session rate maps and tuning vectors",
+          "output_data_type": "PV correlation, centroid shift, and tuning curve correlation values",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 12,
+          "category": "statistics",
+          "technique": "Deep-vs-superficial task-modulation shuffle analysis (RF vs. GOL)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "shuffle_1": "null distribution of \u0394 task modulation from randomizing deep/superficial cell identity within each experiment (100,000 shuffles)",
+            "shuffle_2": "null distribution from shuffling RF/GOL experiment identity while preserving each cell's sublayer identity (100,000 shuffles)"
+          },
+          "input_data_type": "per-cell task-modulation metrics by sublayer",
+          "output_data_type": "significance of sublayer difference in task modulation",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 13,
+          "category": "statistics",
+          "technique": "Reward-representation-versus-performance regression and shuffle analysis",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "regression": "linear regression of GOL task performance (fraction of licks in the reward zone) on covariates including day of experiment, fit by ordinary least squares",
+            "comparison_metric": "absolute difference between correlation coefficients (r-values) for the two sublayers",
+            "null_model": "null distribution of r-value differences from randomizing cell identity within each experiment and recomputing sublayer r-values (100,000 shuffles)"
+          },
+          "input_data_type": "per-cell reward-zone representation strength and behavioral performance",
+          "output_data_type": "regression coefficients and significance of sublayer difference in reward encoding",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 14,
+          "category": "statistics",
+          "technique": "Group-level statistical testing framework",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "primary_test": "paired two-sample t-test wherever possible to compare population means across animals",
+            "nonparametric_alternative": "Mann-Whitney U test when a paired t-test was not applicable",
+            "repeated_measures": "ANOVA to compare behavior across sessions and days",
+            "aggregation": "comparisons two-sided, data aggregated by mouse except where indicated"
+          },
+          "input_data_type": null,
+          "output_data_type": "statistical significance results",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "YU3INJP9",
+      "year": 2016,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 10,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection of GCaMP6f into dorsal dentate gyrus",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "virus": "AAV1.Syn.GCaMP6f.WPRE.SV40, titer 2-4x10^13",
+            "coordinates": "-1.5 mm AP, -2.3 mm ML, three DV depths"
+          },
+          "input_data_type": null,
+          "output_data_type": "GCaMP6f-expressing dentate granule cells",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "dorsal DG of male mice was stereotactically injected",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Hippocampal imaging window and headpost implantation over dorsal DG",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "window": "over left dorsal DG"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronic imaging window over dorsal DG",
+          "hardware": "stainless-steel headpost",
+          "source_location": "main_text",
+          "source_quote": "surgically implanted with an imaging window over the left dorsal DG",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "surgery",
+          "technique": "Optic fiber implantation over dorsal DG for optogenetic inhibition experiments",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "coordinates": "+/-1 mm ML, -1.5 mm AP, -1.7 mm DV"
+          },
+          "input_data_type": null,
+          "output_data_type": "fiber-optic-implanted mice for Arch-mediated abGC inhibition",
+          "hardware": "fiber optics",
+          "source_location": "main_text",
+          "source_quote": "surgically implanted with fiber optics targeted to the dorsal DG",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging of dentate granule cells during head-fixed treadmill behavior",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8 kHz resonant galvanometer (Bruker) addition",
+            "acquisition": "1024x1024 pixels, 300x300 micron FOV, 15 Hz"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw dentate granule cell calcium imaging movies",
+          "hardware": "Nikon 40x NIR water-immersion objective",
+          "source_location": "main_text",
+          "source_quote": "with the addition of an 8kHz resonant galvanometer (Bruker)",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "behavior",
+          "technique": "Water-restricted treadmill training with random reward delivery across two multisensory contexts (A/B)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "water_restriction": ">90% pre-deprivation weight",
+            "contexts": "same belt, distinct visual/auditory/tactile/olfactory cues"
+          },
+          "input_data_type": null,
+          "output_data_type": "trained mice performing multisensory context task",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "mice were water restricted (>90% pre-deprivation weight)",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "imaging",
+          "technique": "Calcium imaging preprocessing: motion correction (modified 2D Hidden Markov Model), ROI drawing, \u0394F/F extraction, transient detection",
+          "software_tool": "SIMA",
+          "tool_version": null,
+          "parameters": {
+            "df_f": "smoothing window t1=3s, baseline size t2=60s",
+            "transient_min_duration": "1 s"
+          },
+          "input_data_type": "raw calcium imaging movies",
+          "output_data_type": "\u0394F/F traces and detected calcium transients per ROI",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "All imaging data were analyzed using the SIMA software package",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "statistics",
+          "technique": "Spatial tuning vector and mutual-information-based tuning-specificity p-value analysis of granule cells",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "bin_counts": "N = 2,4,5,8,10,20,25,100",
+            "shuffles": "100,000 transient-onset reassignments"
+          },
+          "input_data_type": "calcium transient onset times, position data",
+          "output_data_type": "spatial information estimates and significance per cell",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "we then created 100,000 random reassignments of the transient onset times",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "statistics",
+          "technique": "Cross-context remapping analysis: tuning-curve correlation and centroid shift between sequential context exposures",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "rate_maps": "100 position bins, Gaussian smoothed (sigma=3 bins)"
+          },
+          "input_data_type": "rate maps across context exposures",
+          "output_data_type": "tuning-curve correlation and centroid-shift values",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "The tuning curve correlation for each cell was defined as the Pearson correlation",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "behavior",
+          "technique": "Optogenetic inhibition of adult-born granule cells (Arch) during contextual fear conditioning and pattern-separation testing",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "light": "593.5 nm laser diode via FC/PC rotary joint",
+            "task": "contextual fear conditioning, pattern separation between similar contexts"
+          },
+          "input_data_type": null,
+          "output_data_type": "freezing behavior, discrimination scores",
+          "hardware": "Master-8 stimulator (AMPI), Coulbourn fear conditioning boxes",
+          "source_location": "main_text",
+          "source_quote": "the patch cables were interfaced to an FC/PC rotary joint",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "statistics",
+          "technique": "General statistical hypothesis testing across imaging and behavioral datasets",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "tests": "Welch's t-test, Mann-Whitney U, paired t-test, Kolmogorov-Smirnov, repeated-measures ANOVA"
+          },
+          "input_data_type": null,
+          "output_data_type": "statistical significance results",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "For imaging data, for all normally distributed data, a Welch's",
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "IMM9NRV3",
+      "year": 2017,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 12,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "molecular",
+          "technique": "Dual stereotaxic viral injection strategy for retrograde labeling of mossy cells: retrograde Cre virus into contralateral dentate gyrus and Cre-dependent GCaMP6f into the imaged dentate gyrus",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "retro_cre": "rAAV2-retro.CAG.Cre.WPRE.SV40, titer 4x10^12, right dorsal DG",
+            "gcamp": "rAAV1.Syn.Flex.GCaMP6f.WPRE.SV40, titer 2-4x10^12, left dorsal DG",
+            "coordinates": "-2.1/-2.3/-2.5 mm AP, -1.5 ML, -1.7 DV",
+            "injection_volumes": "60 nl (retro-Cre) or 80 nl (GCaMP6f) per location, 20 nl increments via Nanoject"
+          },
+          "input_data_type": null,
+          "output_data_type": "GCaMP6f-expressing retrogradely-identified mossy cells",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Chronic dentate gyrus imaging window and headpost implantation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "cannula": "1.5 mm diameter x 2.3 mm height stainless steel with 1.5 mm glass coverslip",
+            "craniotomy_diameter_mm": 1.5,
+            "window_position": "100-200 um above the hippocampal fissure",
+            "anesthesia": "isoflurane 3% induction / 1.5-2.0% maintenance",
+            "analgesia": "buprenorphine 0.05-0.1 mg/kg"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronic optical access to dorsal blade of DG and hilus",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "histology",
+          "technique": "Post-imaging histology and double immunohistochemistry (GFP/GluR2-3) with confocal quantification of single- and double-labeled hilar cells",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "fixation": "4% PFA transcardial perfusion, overnight post-fix",
+            "primary_antibodies": "chicken anti-GFP 1:1000 (Abcam ab6556), rabbit anti-GluR2/3 1:100 (Millipore AB1506)",
+            "secondary_antibodies": "Alexa 488 anti-chicken, DyLight 649 anti-rabbit (1:250)",
+            "imaging": "Leica SP5 confocal, two-channel",
+            "quantification": "independent counting by two investigators"
+          },
+          "input_data_type": "fixed brain sections",
+          "output_data_type": "confocal images and single/double-labeled hilar cell counts",
+          "hardware": "Leica SP5 confocal microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging of retrogradely identified mossy cells during head-fixed behavior",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8 kHz resonant galvanometer (Bruker)",
+            "objective": "40x NIR water immersion, 0.8 NA, 3.5 mm WD (Nikon)",
+            "laser_power_mw": "150-250",
+            "acquisition": "512x512 px, ~30 Hz, 160x160 um FOV",
+            "detector": "GaAsP PMT (Hamamatsu 7422P-40)"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw two-photon GCaMP6f time series from mossy cells",
+          "hardware": "Bruker 8 kHz resonant two-photon microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "behavior",
+          "technique": "Head-fixed treadmill behavioral training with progressive water-reward shaping",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "water_restriction": ">90% pre-deprivation weight",
+            "belt": "cue-deplete burlap treadmill belt",
+            "reward_shaping": "20-25 random rewards/lap reduced to 3 random rewards/lap",
+            "training_duration": "1-2 weeks, 20 min/day"
+          },
+          "input_data_type": null,
+          "output_data_type": "trained mice running for water reward on treadmill",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "behavior",
+          "technique": "Multi-context behavioral paradigm using a shared treadmill belt with distinct visual, auditory, tactile, and olfactory cue sets, and RFID/quadrature-based position tracking",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "contexts": "context A and B, same 3-fabric-ribbon belt sequence with shuffled tactile-cue placement",
+            "reward": "3 randomly placed rewards/lap",
+            "position_tracking": "RFID registration anchors (125 kHz, SparkFun) interpolated via quadrature-encoded wheel rotation signal (<0.5 cm resolution)"
+          },
+          "input_data_type": null,
+          "output_data_type": "context-labeled behavioral and position data synchronized with imaging",
+          "hardware": "RFID reader (ID-12LA, SparkFun); quadrature photodiode encoder",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "imaging",
+          "technique": "Calcium data preprocessing: 2D Hidden Markov Model motion correction, manual ROI drawing and cross-session matching, and iterative DF/F baseline calculation",
+          "software_tool": "SIMA",
+          "tool_version": null,
+          "parameters": {
+            "motion_correction": "2D HMM (Dombeck-style, modified for resonant-galvanometer data)",
+            "roi_tool": "SIMA ROI Buddy GUI",
+            "df_f": "smoothing window tau1=1/3 s, baseline window tau2=60 s, baseline re-estimated 3 times excluding detected transients"
+          },
+          "input_data_type": "raw two-photon time series",
+          "output_data_type": "motion-corrected, ROI-matched DF/F traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "statistics",
+          "technique": "Statistical calcium transient detection using an automated iterative noise-estimation algorithm (Dombeck et al. 2007 method)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "onset_threshold": "2 sigma of baseline fluorescence",
+            "offset_threshold": "0.5 sigma",
+            "significance": "p<0.01, based on negative/positive-deflection ratio",
+            "iteration": "3 rounds of sigma re-estimation excluding identified transients"
+          },
+          "input_data_type": "DF/F traces",
+          "output_data_type": "statistically significant calcium transients",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "statistics",
+          "technique": "Spike train estimation via maximum-likelihood deconvolution",
+          "software_tool": "MLspike",
+          "tool_version": null,
+          "parameters": {
+            "gcamp6f_nonlinearity": "[0.85, -0.006]",
+            "drift_parameter": "0.015 (multiplicative)",
+            "spike_rate_parameter": "1 (mossy cells), 0.01 (granule cells)"
+          },
+          "input_data_type": "DF/F traces",
+          "output_data_type": "estimated spike trains",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "statistics",
+          "technique": "Spatial tuning vector calculation restricted to running-related transients",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "running_epoch": ">=1 s forward locomotion, peak speed >=5 cm/s, epochs <0.5 s apart merged",
+            "transient_onset": "mean fluorescence >=2 sigma above baseline"
+          },
+          "input_data_type": "running-related calcium transients with position labels",
+          "output_data_type": "per-cell spatial tuning vectors",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "statistics",
+          "technique": "Spatial information content analysis and shuffle-based place-cell classification",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "metric": "Skaggs spatial information content, computed for N=2,4,5,8,10,20,25,100 bins",
+            "shuffle": "100,000 random reassignments of transient onset times within running epochs",
+            "bias_correction": "max information across bin sizes taken per shuffle iteration"
+          },
+          "input_data_type": "spatial tuning data",
+          "output_data_type": "spatial information p-value and place-cell classification",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 12,
+          "category": "statistics",
+          "technique": "Cross-context remapping analysis via rate-map tuning-curve correlation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "rate_map": "100 position bins, Gaussian-smoothed sigma=3 bins",
+            "remapping_metric": "Pearson correlation between tuning curves across sequential context exposures"
+          },
+          "input_data_type": "per-context rate maps",
+          "output_data_type": "tuning-curve correlation (remapping) coefficients",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "UTJ3YW3R",
+      "year": 2017,
+      "journal": "Nature Neuroscience",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    }
+  ]
+}

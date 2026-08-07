@@ -1,0 +1,444 @@
+{
+  "target_author": "Stephanie A Herrlinger",
+  "total_papers": 2,
+  "total_steps": 18,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "YZESCRFK",
+      "year": 2021,
+      "journal": "Lecture Notes in Computer Science (MICCAI 2021 proceedings, vol. 12908)",
+      "attribution": {
+        "source": "methods_text_inference",
+        "confidence": "low"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "GH4CWH6X",
+      "year": 2022,
+      "journal": "Science",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 12,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "molecular",
+          "technique": "Molecular cloning of plasmid constructs (Cre, Cre-dependent jGCaMP7b, bReaChes-mRuby3, NES-jRGECO1a, FLEX-eGFP) via subcloning/In-Fusion assembly",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "constructs": "pCAG-Cre; pAAV-CAG-FLEX-jGCaMP7b-WPRE (Addgene #104497); pAAV-CaMKIIa-bReaChes-mRuby3 (subcloned from bReaChes-EYFP); pCAG-NES-jRGECO1a; pCAG-FLEX-eGFP",
+            "cloning_kit": "In-Fusion (Takara Bio)"
+          },
+          "input_data_type": null,
+          "output_data_type": "validated plasmid constructs for electroporation/viral packaging",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "molecular",
+          "technique": "Generation of a floxed conditional Pdzd8 knockout mouse line (Pdzd8 F/F) by removing an FRT-flanked selection cassette and backcrossing to C57Bl/6",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "parental_line": "Pdzd8tm1a(EUCOMM)Wtsi (Wellcome Trust Sanger Institute)",
+            "flp_deleter_line": "B6.129S4-Gt(ROSA)26Sortm1(FLP1)Dym"
+          },
+          "input_data_type": null,
+          "output_data_type": "homozygous Pdzd8 F/F conditional knockout mouse line",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "molecular",
+          "technique": "Western blot quantification of PDZD8 protein knockout in Cre-lentivirus-transduced primary embryonic cortical cultures from Pdzd8 F/F mice",
+          "software_tool": "ImageStudio",
+          "tool_version": "v5.2",
+          "parameters": {
+            "culture": "E15.5 Pdzd8 F/F cortical neurons, papain dissociation, plated on poly-D-lysine",
+            "transduction": "lentiviral pSyn-Cre or pSyn-dCre (control), DIV6",
+            "primary_antibodies": "rabbit anti-PDZD8 1:250, mouse anti-Actin 1:10000 (MAB1501)",
+            "imaging": "Odyssey CLx (700/800 nm channels)",
+            "normalization": "total protein stain (Revert 700)"
+          },
+          "input_data_type": "protein lysates",
+          "output_data_type": "quantified PDZD8 knockout efficiency by timepoint",
+          "hardware": "Odyssey CLx imaging system",
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection and hippocampal CA1 imaging-cannula/headpost implantation, in variants for single-cell electroporation, population imaging, and electrophysiology cohorts",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "coordinates": "AP -2.2, ML -1.75 relative to bregma",
+            "single_cell_cannula": "custom stainless-steel cannula with angled pipette-entry ramp, etched glass coverslip with silicone-protected rectangular opening",
+            "population_virus": "AAV5-CaMKIIa-mCherry-Cre (16-20 nl/DV, then AAV1-CaMKIIa-GCaMP6f 75 nl/DV one week later)",
+            "ephys_virus": "AAV5-CaMKIIa-mCherry-Cre or control AAV5-CaMKII-mCherry",
+            "analgesia": "meloxicam and bupivacaine"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronic hippocampal CA1 imaging or viral-expression access",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "molecular",
+          "technique": "Two-photon-guided single-cell electroporation of CA1 pyramidal neurons for multi-plane or spine-level fluorescent-indicator/Cre-recombinase delivery",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "solution": "155 mM K-gluconate, 10 mM KCl, 10 mM HEPES, 4 mM KOH, 0.33 mM Alexa 488, pH 7.3, 316 mOsm",
+            "multiplane_plasmids": "50 ng/uL each of pCAG-Cre, pAAV-CAG-FLEX-jGCaMP7b-WPRE, pAAV-CaMKIIa-bReaChes-mRuby3",
+            "spine_plasmids": "50 ng/uL pCAG-Cre, 200 ng/uL pCAG-NES-jRGECO1a, 20 ng/uL pCAG-FLEX-eGFP",
+            "pipette": "long-taper borosilicate (Warner G200-3), 2.5-6 MOhm tip resistance",
+            "electroporation": "train of negative voltage pulses via stimulus isolator (AMPI) through a custom switch circuit",
+            "expression_check": "48 h; imaging >=7 d post-electroporation"
+          },
+          "input_data_type": null,
+          "output_data_type": "single electroporated CA1 pyramidal neurons expressing indicators/Cre",
+          "hardware": "Dagan BVC-700A amplifier; motorized micromanipulator (Scientifica)",
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "histology",
+          "technique": "BaseScope in situ hybridization validation of Pdzd8 knockout in electroporated CA1PNs with concurrent GFP immunohistochemistry, confocal imaging, and Cellpose-based signal segmentation",
+          "software_tool": "Cellpose",
+          "tool_version": null,
+          "parameters": {
+            "assay": "BaseScope Detection Reagent Kit v2-RED (ACD) with RNA-Protein Co-detection Ancillary Kit",
+            "probe": "Pdzd8 exon-3-targeting probe (ACD custom design)",
+            "ihc": "anti-GFP (chicken 1:50 or goat 1:300) with Alexa 488/647 secondaries; DAPI nuclear stain",
+            "imaging": "Nikon A1 HD25 confocal, 1 um z-steps, 8 um sections",
+            "segmentation": "Cellpose nuclear/cytoplasmic/punctate ROI detection, punctate-to-nucleus assignment by center-of-mass"
+          },
+          "input_data_type": "fixed frozen brain sections",
+          "output_data_type": "per-cell Pdzd8 probe signal counts classified by GFP(+)/GFP(-) (KO/WT) status",
+          "hardware": "Nikon A1 HD25 confocal microscope",
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "electrophysiology",
+          "technique": "Ex vivo whole-cell current-clamp recording from virally-infected CA1 pyramidal neurons in acute hippocampal slices",
+          "software_tool": "Signal (CED)",
+          "tool_version": null,
+          "parameters": {
+            "slice_thickness_um": 400,
+            "cutting_solution": "195 mM sucrose, 10 mM NaCl, 15 mM glucose, 26 mM NaHCO3, 2.5 mM KCl, 1.25 mM NaH2PO4, 1.0 mM CaCl2, 2.0 mM MgCl2",
+            "internal_solution": "120 mM K-gluconate, 20 mM KCl, 10 mM HEPES, 4 mM NaCl, 4 mM MgATP, 0.3 mM TrisGTP, 14 mM phosphocreatine, pH 7.26, 296 mOsm",
+            "pipette_resistance_MOhm": "2.0-4.0",
+            "targeting": "mCherry expression, visualized via pE-300 LED and far-red filter set",
+            "amplifier": "MultiClamp 700B, Micro1401-3 digitizer, 50 kHz digitization, 1 kHz filter"
+          },
+          "input_data_type": null,
+          "output_data_type": "whole-cell current-clamp recordings from Pdzd8 KO/WT CA1 pyramidal neurons",
+          "hardware": "MultiClamp 700B amplifier; Micro1401-3 digitizer (CED)",
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "behavior",
+          "technique": "Head-fixed virtual-reality random-foraging behavioral training on a spatially cued treadmill belt",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "track_length_m": 2,
+            "reward_scheme": "pseudorandom location, non-operant initial delivery + 3 s operant window at 50% reward rate",
+            "training_shaping": "reward locations reduced from 10 to 1 per lap over training",
+            "water_restriction": "85-90% baseline weight"
+          },
+          "input_data_type": null,
+          "output_data_type": "trained mice performing random-foraging VR task",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "imaging",
+          "technique": "In vivo two-photon Ca2+ imaging across three configurations: single-cell multi-plane (soma+dendrite piezo toggling), single-dendritic-spine (high-speed single-plane), and population imaging",
+          "software_tool": "ScanImage",
+          "tool_version": null,
+          "parameters": {
+            "main_system": "Bruker 8 kHz resonant scanner, Chameleon Ultra II (920 nm green) + Fidelity-2 (1070 nm red)",
+            "spine_system": "custom ScanImage-controlled 2P microscope, Chameleon Ultra II at 1030 nm for jRGECO1a",
+            "single_cell_multiplane": "40x objective, piezo toggling, 1.0-1.5x zoom, 5.05-11.89 Hz depending on jump distance",
+            "spine_imaging": "16x objective, 60x zoom, 128x128 px, 120 Hz, 45-60 s per dendritic segment",
+            "population_imaging": "16x objective, 1.0-1.5x zoom, 30 min sessions, goniometer-aligned"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw two-photon Ca2+ time series across imaging configurations",
+          "hardware": "Bruker 8kHz resonant 2-photon microscope; custom ScanImage 2P microscope",
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "other",
+          "technique": "Single-cell optogenetic place-field induction via targeted LED photostimulation synchronized to two-photon image acquisition",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "led": "620 nm, ultra-fast/ultra-high-power (UHP-T-620-SR, Prizmatix), 30-40 mW at sample",
+            "protocol": "5 baseline laps, then 1 s photostimulation for 5 consecutive laps at a fixed track location",
+            "synchronization": "custom pockel-blanking circuit gating LED during galvo flyback/piezo toggling",
+            "tracking_duration_h": 72
+          },
+          "input_data_type": null,
+          "output_data_type": "induced place field with pre/post-induction Ca2+ imaging data",
+          "hardware": "UHP-T-620-SR LED (Prizmatix)",
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "imaging",
+          "technique": "Motion correction and cross-day image registration: iterative target-based SIMA rigid registration for single-cell data, and affine ECC-warp cross-day alignment for population data",
+          "software_tool": "SIMA, OpenCV",
+          "tool_version": null,
+          "parameters": {
+            "single_cell": "modified rigid 2D SIMA registration seeded from somatic plane displacements, iterative decreasing-displacement refinement",
+            "frame_masking": "frame-by-frame correlation to time-averaged FoV, z-score rolling-mean threshold, low-correlation frames masked NaN",
+            "population_cross_day": "affine warp matrices via Enhanced Correlation Coefficient (ECC) maximization, 5000 iterations, OpenCV"
+          },
+          "input_data_type": "raw two-photon time series",
+          "output_data_type": "motion-corrected, cross-day-registered imaging datasets",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 12,
+          "category": "imaging",
+          "technique": "ROI curation: hand-drawn dendritic/somatic ROIs with morphological path-length annotation for single-cell data (FIJI), automated subROI segmentation, and Suite2p-based automated ROI detection with mCherry-based genotype classification for population data",
+          "software_tool": "FIJI, Suite2p",
+          "tool_version": null,
+          "parameters": {
+            "single_cell_roi": "hand-drawn on motion-corrected time-averaged FoVs, annotated with compartment type and branch-wise path length to soma",
+            "subroi_segmentation": "2 um segments along dendritic ROI long axis",
+            "population_roi": "Suite2p detection on concatenated 5-session datasets, GUI-curated",
+            "genotype_classification": "ROI overlay on aligned red (mCherry) channel to classify KO (mCherry+) vs. WT (mCherry-)"
+          },
+          "input_data_type": "motion-corrected imaging datasets",
+          "output_data_type": "curated, annotated somatic/dendritic/spine ROIs with genotype labels",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "Y9DG73R4",
+      "year": 2023,
+      "journal": "ICASSP (IEEE)",
+      "attribution": {
+        "source": "position_heuristic",
+        "confidence": "low"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "5ZPAWQC8",
+      "year": 2025,
+      "journal": "bioRxiv",
+      "attribution": {
+        "source": "position_heuristic",
+        "confidence": "low"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "FPF3RL6U",
+      "year": 2025,
+      "journal": "bioRxiv",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "K73ERVAQ",
+      "year": 2026,
+      "journal": "bioRxiv",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 6,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "statistics",
+          "technique": "Ridge-regression removal of velocity-related activity from neuropil-corrected calcium signals",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "model": "ridge regression of velocity against neuropil-corrected signal",
+            "downstream_use": "velocity-regressed DeltaF/F used for all analyses except velocity-modulation analysis itself"
+          },
+          "input_data_type": "neuropil-corrected fluorescence traces",
+          "output_data_type": "velocity-regressed DeltaF/F traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "statistics",
+          "technique": "Calculation of physiological tuning features: velocity modulation, context-mean activity, spatial rate maps, rate-map correlation/split-half reliability, sparsity, and reward selectivity/modulation indices",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "velocity_modulation": "Pearson correlation between running velocity and max-normalized DeltaF/F",
+            "immobility_exclusion": "frames with velocity <5 cm/s excluded",
+            "rate_maps": "5 cm spatial bins, Gaussian smoothing SD=10 cm",
+            "sparsity": "spatial sparsity formula over rate-map bins",
+            "reward_selectivity": "normalized difference in pre-reward-zone activity between the two reward zones"
+          },
+          "input_data_type": "velocity-regressed DeltaF/F traces with position/context labels",
+          "output_data_type": "per-cell physiological feature set",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "statistics",
+          "technique": "Generalized linear model PCA (GLM-PCA) of the cell-by-gene expression matrix to derive a transcriptomic axis (tPC2)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "input": "raw integer gene-count matrix, 610 cells x 500 genes",
+            "component_selection": "second principal component (tPC2) identified as major transcriptomic continuum axis"
+          },
+          "input_data_type": "cell-by-gene raw count matrix",
+          "output_data_type": "per-cell tPC2 transcriptomic score",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "statistics",
+          "technique": "Random-forest classification of interneuron subclass from physiological features, with leave-one-animal-out cross-validation and balanced bagging",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "features": "30 physiological features, percentile-normalized per animal",
+            "classes": "Pvalb, Sst, Lamp5, Vip/Chrm2 (merged due to low n)",
+            "cross_validation": "leave-one-animal-out (train on 3, test on 1)",
+            "ensemble": "500 bagged random forests, balanced downsampling per iteration, 600 trees, max depth 10, min leaf size 5",
+            "margin_metric": "one-vs-rest predicted-probability margin along tPC2"
+          },
+          "input_data_type": "per-cell physiological feature vectors",
+          "output_data_type": "predicted interneuron subclass and classification accuracy metrics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "statistics",
+          "technique": "MERFISH data quality control: transcript/gene count filtering, blank-probe contamination filtering, volume filtering, normalization, and doublet detection",
+          "software_tool": "Scrublet",
+          "tool_version": null,
+          "parameters": {
+            "gene_count_threshold": ">=15 unique genes, >=40 total transcripts",
+            "blank_probe_threshold": "<=5% of counts from blank probes",
+            "volume_range_um3": "100-5000",
+            "outlier_removal": "1st-99th percentile of scaled total counts",
+            "doublet_detection": "Scrublet on raw counts, up to 20 PCs, score cutoff 0.25"
+          },
+          "input_data_type": "raw MERFISH cell-by-gene count matrix",
+          "output_data_type": "QC-filtered cell-by-gene matrix",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "statistics",
+          "technique": "Unbiased hierarchical cell-type clustering and subtype assignment from MERSCOPE transcriptomic profiles",
+          "software_tool": "Scanpy",
+          "tool_version": null,
+          "parameters": {
+            "preprocessing": "per-cell normalization, log-transform, scaling, PCA (top 20 PCs), kNN graph (k=10)",
+            "resolution_selection": "stability analysis across 30-50 seeds, resolutions 0.1-1.0, silhouette score and adjusted Rand index",
+            "clustering": "Leiden algorithm, 3 hierarchical levels (class, subclass, type)",
+            "visualization": "UMAP embedding",
+            "deg_test": "Wilcoxon rank-sum test, adjusted p<0.05",
+            "annotation": "manual annotation referencing published hippocampal IN atlases, yielding 14 molecularly distinct IN types"
+          },
+          "input_data_type": "QC-filtered MERFISH expression data",
+          "output_data_type": "hierarchical cell-class/subclass/type taxonomy with marker genes",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "PNCRGARS",
+      "year": 2026,
+      "journal": "bioRxiv",
+      "attribution": {
+        "source": "position_heuristic",
+        "confidence": "low"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "VMWYLLBS",
+      "year": 2026,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    }
+  ]
+}

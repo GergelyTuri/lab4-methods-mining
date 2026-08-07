@@ -1,0 +1,1542 @@
+{
+  "target_author": "Satoshi Terada",
+  "total_papers": 8,
+  "total_steps": 77,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "ESKMCXTV",
+      "year": 2020,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 6,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection of Cre-dependent GCaMP6f into CA1 interneurons in VGAT-Cre or VIP-Cre mice",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "virus": "rAAV1-Syn-FLEX-GCaMP6f-WPRE-Sv40 (Addgene #100833, titer 1x10^13 vg/mL)",
+            "mouse_lines": "VGAT-IRES-Cre (labels VGAT+ interneurons), VIP-IRES-Cre (labels VIP+ interneurons)",
+            "analgesia": "meloxicam and bupivacaine, subcutaneous",
+            "coordinates": "AP -2.2, ML -1.75, DV -1.8/-1.6/-1.4/-1.2/-1.0/-0.8 relative to Bregma",
+            "injection_volume": "50-64 nL per DV location",
+            "delivery": "glass capillary loaded via Nanoject syringe (Drummond Scientific)",
+            "recovery_before_window_implant": "4 days"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Hippocampal imaging window and headpost implant surgery over dorsal CA1",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "craniotomy": "3 mm diameter, centered on AP -2.2, ML -1.75 relative to Bregma",
+            "cortical_removal": "negative-pressure aspiration with simultaneous ice-cold cortex buffer irrigation until white fibers overlying CA1 became visible",
+            "window": "3 mm stainless steel cannula with glass window, secured with Vetbond and dental cement; headpost affixed with dental cement",
+            "postop_monitoring": "3 days before behavioral training began"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 3,
+          "category": "behavior",
+          "technique": "Head-fixed treadmill behavioral training across cue-free, cue-rich, novel-belt remapping, and Goal-Oriented Learning (GOL) paradigms",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "water_restriction": "85%-90% of original body weight",
+            "reward_delivery": "operant licking via capacitive sensor at random locations on cue-free belt; reward frequency per lap decreased as performance improved",
+            "cue_rich_belt": "~1 week training, 2 m belt with tactile cues (pompoms, velcro, glue-gun spikes, foam strips, glitter tape)",
+            "imaging_start_criterion": "~10 laps in 10 minutes, usually after 10-14 days total training",
+            "gol_paradigm": "single fixed-location water reward per lap; reward location switched between training sessions"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 4,
+          "category": "imaging",
+          "technique": "3D AOD-based two-photon calcium imaging using a chessboard point-scanning strategy targeted to pre-identified interneuron somata",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "microscope": "custom-modified AOD microscope (Femto3D-ATLAS, Femtonics) with beam-stabilization unit",
+            "objective": "16x water-immersion (Nikon CFI75)",
+            "laser": "Coherent Ultra II, tuned to 920 nm",
+            "reference_z_stack": "800x800 px (1.25 um/px), every 4 um, from ~150-200 um above to ~300 um below the pyramidal layer, acquired under ketamine/xylazine anesthesia 24h before functional imaging",
+            "roi_coordinate_selection": "200-300 X-Y-Z cell coordinates manually selected from the Z-stack using MES software (Femtonics)",
+            "chessboard_scan": "each ROI ~40-50 um^2, 1-1.5 um/px resolution",
+            "functional_session_params": "10-15 minute sessions, 3-5 Hz frame rate (up to 40 Hz for a 30-cell subset during combined LFP experiments)"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw GCaMP6f fluorescence time series per targeted cell",
+          "hardware": "custom AOD microscope (Femto3D-ATLAS, Femtonics); GaAsP PMT detectors (Hamamatsu H10770PA-40)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 5,
+          "category": "electrophysiology",
+          "technique": "Simultaneous contralateral silicon-probe LFP recording with sharp-wave ripple (SWR) event detection, synchronized to two-photon imaging",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "probe": "4-channel silicon probe (Qtrode, Neuronexus), contralateral CA1, inserted at a 45-degree angle",
+            "recording_system": "Intan Technologies, synchronized with the AOD imaging system",
+            "sampling_rate": "20 kHz",
+            "swr_detection": "raw LFP bandpass filtered 100-250 Hz, thresholded at 3 SD above the mean, minimum duration 50 ms, followed by manual inspection of all candidate events"
+          },
+          "input_data_type": "raw local field potential signal",
+          "output_data_type": "confirmed sharp-wave ripple event times",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 6,
+          "category": "histology",
+          "technique": "Post-imaging perfusion, sectioning, multi-round immunohistochemistry, and confocal imaging for interneuron molecular subtype identification",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "perfusion": "transcardial PBS then 4% paraformaldehyde",
+            "sectioning": "75 um horizontal sections on a vibrating microtome (Leica VT1200S)",
+            "staining_rounds": "up to two sequential immunostaining rounds per section using non-overlapping antibody combinations (three strategies for VGAT-Cre mice; single round for VIP-Cre mice)",
+            "confocal_acquisition": "Nikon A1 confocal; 405/488/561/640 nm excitation lines; 10x 0.45 NA objective at 1.2-1.3x zoom; 2048x2048 px images every ~3 um through tissue depth; ~1 Airy unit pinhole; 2 GaAsP + 2 multi-alkali PMTs"
+          },
+          "input_data_type": null,
+          "output_data_type": "multi-channel confocal Z-stacks of immunolabeled tissue sections",
+          "hardware": "Nikon A1 confocal microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "paper_id": "F3ELBLNY",
+      "year": 2021,
+      "journal": "Science",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "SWL5RJLJ",
+      "year": 2021,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 4,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection of GCaMP6s/GCaMP6f into LEC, MEC, CA2, or CA3 for axon labeling in CA1",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "targets": "LEC, MEC, CA2, CA3",
+            "volume": "64 nL rAAV per site, multiple dorsoventral locations"
+          },
+          "input_data_type": null,
+          "output_data_type": "GCaMP-expressing axon terminals in CA1",
+          "hardware": "Nanoject syringe",
+          "source_location": "main_text",
+          "source_quote": "stereotaxically injecting 64 nL of rAAV",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 2,
+          "category": "imaging",
+          "technique": "Two-photon axon imaging in CA1 during head-fixed treadmill running with cue-based behavior",
+          "software_tool": "BehaviorMate",
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8-kHz resonant scanner (Bruker)",
+            "acquisition": "512x512 pixels at 30 Hz, 920 nm excitation"
+          },
+          "input_data_type": null,
+          "output_data_type": "axonal calcium imaging movies",
+          "hardware": "16x/40x Nikon objectives, GaAsP PMT",
+          "source_location": "main_text",
+          "source_quote": "Axon imaging was conducted using a two-photon microscope",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 3,
+          "category": "imaging",
+          "technique": "Suite2p-based ROI identification, neuropil-corrected fluorescence extraction, and manual curation of axon/bouton ROIs",
+          "software_tool": "Suite2p",
+          "tool_version": null,
+          "parameters": {
+            "exclusion": "ROIs with no identified calcium events removed"
+          },
+          "input_data_type": "axonal calcium imaging movies",
+          "output_data_type": "curated axon/bouton ROI fluorescence traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "Suite2p software package was used to identify ROIs",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 4,
+          "category": "statistics",
+          "technique": "Calcium-event detection (\u0394F/F thresholding) and run-stop responsiveness analysis of axonal signals",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "onset_threshold": "DF/F > 2 SD above median",
+            "offset_threshold": "DF/F < 0.5 SD beyond baseline",
+            "min_duration": "250 ms (GCaMP6f) or 1000 ms (GCaMP6s)"
+          },
+          "input_data_type": "axon/bouton ROI fluorescence traces",
+          "output_data_type": "detected calcium events, run-stop-responsive ROI calls",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "calcium events were identified by finding imaging frames where DF/F",
+          "extraction_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "paper_id": "KKAPPFAJ",
+      "year": 2022,
+      "journal": "Nature",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 18,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "molecular",
+          "technique": "Cre-dependent viral injection for axonal (CA3 Schaffer collateral bouton) or somatic CA3 pyramidal cell calcium indicator expression in Grik4-Cre mice",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "axonal_virus": "rAAV1.Syn.FLEX.GCaMP6f.WPRE.SV40 (Addgene 100833), 200 nl, left CA3 (AP -2.2, ML -2.5, DV -2.4/-2.5/-2.6)",
+            "somatic_virus": "rAAV1.Syn-FLEX-jGCaMP7f-WPRE (Addgene 104492), 30 nl/DV step, two AP/ML sites",
+            "mouse_line": "Grik4-Cre (C57BL/6-Tg(Grik4-Cre)G32-4Stl/J)"
+          },
+          "input_data_type": null,
+          "output_data_type": "GCaMP-expressing CA3 Schaffer-collateral axons in CA1 or CA3 somata",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Hippocampal imaging window and contralateral four-channel silicon probe implantation with headbar",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "window": "3.0 mm diameter, 1.5 mm height, over left dorsal hippocampus",
+            "probe": "4-channel linear silicon probe, right (contralateral) CA1, 45 degree angle (AP -2.2, ML 2.75, DV -1.0)",
+            "recovery_days": "3-4"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronic imaging access with contralateral LFP recording capability",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "behavior",
+          "technique": "Sequential sensory-place associative paradigm: random-cue (RC) versus fixed-cue (FC) sessions on textured (S) or non-textured (NS) treadmill belts, with pseudorandom or fixed-location odor/visual/reward cue presentation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "belts": "200 cm NS (burlap) or S (4 textured segments) belts",
+            "rc_condition": "3 cues pseudorandomly presented, 10 trials/cue, 0.75 s presentation, 20-50 s ISI",
+            "fc_condition": "cues at fixed evenly spaced locations (every 30 cm): visual, odor, reward",
+            "session_schedule": "RC-NS (day1), S-belt training (days 2-3), RC-S (day4), FC-S (days5-6), FC-NS (day7)",
+            "reward": "operant, 1 additional drop per 2 licks, 1 s timeout"
+          },
+          "input_data_type": null,
+          "output_data_type": "behavioral session data with cue/reward/lick timestamps synchronized to imaging",
+          "hardware": "Arduino DUE microcontroller (custom Java software)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "statistics",
+          "technique": "Generalized linear model of running velocity as a function of position bins to quantify sensory-cue-driven behavioral control",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "fitting_windows": "each 50 cm after visual stimulation onset; interval between odor stimulation and reward",
+            "normalization": "GLM-predicted velocity normalized within each mouse"
+          },
+          "input_data_type": "position-binned velocity traces",
+          "output_data_type": "GLM coefficients representing sensory-evoked acceleration/deceleration",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging of CA3 Schaffer-collateral axonal boutons in CA1 or CA3 pyramidal somata",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8 kHz resonant scanner (Bruker)",
+            "objective": "40x or 16x NIR water immersion (Nikon, 0.8 NA)",
+            "excitation": "920 nm, 50-100 mW (Chameleon Ultra II)",
+            "axonal_fov": "300x300 um, 512x512 px, 30 Hz, 50-150 um below SP in CA1 SR",
+            "somatic_fov": "450x450 um, 512x512 px, ~450 um deep in distal CA3",
+            "detector": "GaAsP PMT (Hamamatsu 7422P-40)"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw two-photon axonal/somatic GCaMP time series",
+          "hardware": "Bruker 8 kHz resonant two-photon microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "imaging",
+          "technique": "Calcium imaging preprocessing: SIMA motion correction and Suite2p-based automated ROI detection with built-in neuropil subtraction, validated against manual curation",
+          "software_tool": "SIMA, Suite2p",
+          "tool_version": null,
+          "parameters": {
+            "validation": "cross-checked against Suite2p with increased decorrelation threshold (2.0 vs default 1.0) and manual curation",
+            "tracking": "ROIs tracked within but not across days"
+          },
+          "input_data_type": "raw two-photon time series",
+          "output_data_type": "motion-corrected, neuropil-decontaminated DeltaF/F traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "statistics",
+          "technique": "Quantification of imaging field-of-view stability and residual motion artifacts via pixel-wise FOV correlation and frame-wise mean squared error",
+          "software_tool": "MATLAB",
+          "tool_version": "2019a",
+          "parameters": {
+            "fov_correlation": "pixel-wise correlation between inter-cue time-averaged FOVs",
+            "mse_metric": "mean squared error between each frame and the motion-corrected time average, binned peri-stimulus"
+          },
+          "input_data_type": "motion-corrected imaging time series",
+          "output_data_type": "FOV stability and motion-artifact quality-control metrics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "statistics",
+          "technique": "Identification of ROIs originating from the same axon via Ward's hierarchical clustering on pairwise ROI correlation, with silhouette-based estimation of the number of unique CA3 units",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "clustering": "Ward's hierarchical agglomerative clustering, flattened across K=2 to 767 clusters",
+            "k_selection": "silhouette-value percentiles per K, optimal K* at maximal median-silhouette improvement"
+          },
+          "input_data_type": "pairwise ROI correlation matrix",
+          "output_data_type": "estimated number of unique CA3 units and axon-grouped ROI clusters",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "electrophysiology",
+          "technique": "Contralateral CA1 LFP recording and wavelet-based sharp-wave-ripple (SWR) detection",
+          "software_tool": "MATLAB",
+          "tool_version": "2019a",
+          "parameters": {
+            "acquisition": "RHD2000 (Intan Technologies), 25 kHz, downsampled to 1.25 kHz",
+            "detection": "wavelet spectrogram of 80-270 Hz bandpass LFP during awake immobility, threshold >2.5 SD above baseline, duration >20 ms in 100-250 Hz band",
+            "merging": "SWRs within 200 ms merged, false positives manually discarded"
+          },
+          "input_data_type": "raw LFP signal",
+          "output_data_type": "detected SWR event times",
+          "hardware": "RHD2000 acquisition system (Intan Technologies)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "histology",
+          "technique": "Post-imaging perfusion, sectioning, and confocal imaging to confirm viral expression confinement to CA3",
+          "software_tool": "Fiji",
+          "tool_version": null,
+          "parameters": {
+            "perfusion": "40 ml ice-cold PBS then 40 ml ice-cold 4% PFA",
+            "sectioning": "75 um coronal sections, Leica VT1200S vibratome",
+            "imaging": "Nikon A1 confocal, 488 nm, 10x/0.45NA, 1x zoom, 1024x1024 px, ~3 um z-step"
+          },
+          "input_data_type": "fixed brain sections",
+          "output_data_type": "confocal z-stacks confirming viral expression",
+          "hardware": "Nikon A1 confocal microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "statistics",
+          "technique": "Shuffling-test identification of sensory-cue-preferring CA3SCs and spatial place-field detection",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "cue_psth": "15-bin (33.33 ms) Savitzky-Golay-smoothed PSTH, +/-3 s window, 1000-shuffle null (p<0.05, Bonferroni-corrected)",
+            "cue_criterion": ">=10 consecutive significant temporal bins",
+            "place_field": "1-cm position-bin PSTH, 1000 lap-shuffle null, >=5 consecutive significant bins (5 cm), Bonferroni-corrected"
+          },
+          "input_data_type": "DeltaF/F traces with cue/position labels",
+          "output_data_type": "cue-preferring CA3SC classification and detected place fields",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 12,
+          "category": "statistics",
+          "technique": "Tensor component analysis (TCA) of ROI x time x trial x cue activity to jointly extract intra-trial, inter-trial, and cue-preference factors",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "tensor_shape": "N ROIs x T time bins x K trials x S(=3) cues",
+            "constraint": "no non-negativity constraint (orthogonality constraint removed, unlike PCA)",
+            "model_selection": "ranks explored up to 15 components, minimum rank capturing trends of interest retained"
+          },
+          "input_data_type": "ROI-by-trial-by-cue activity tensor",
+          "output_data_type": "ROI/temporal/trial/cue factor decomposition",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 13,
+          "category": "statistics",
+          "technique": "K-means clustering of TCA-derived ROI factors to classify cue-CA3SC trial-by-trial response dynamics (Up/Down/Other)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "k": 5,
+            "validation": "inter-subject variability quality control; clusters dominated by animal-to-animal variance pooled as unclassified"
+          },
+          "input_data_type": "modality-specific TCA components",
+          "output_data_type": "Up/Down/Other trial-dynamics classification per cue-CA3SC",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 14,
+          "category": "statistics",
+          "technique": "Mutual information analysis between CA3SC activity and task condition (FC vs RC)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "formula": "Skaggs-style information value over position/time bins",
+            "group_comparison": "Kruskal-Wallis test"
+          },
+          "input_data_type": "DeltaF/F traces binned by position/time and task condition",
+          "output_data_type": "per-cell information value and group comparison",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 15,
+          "category": "statistics",
+          "technique": "Detection of population high-synchrony events (HSEs) associated with SWRs and quantification of individual CA3SC reactivation latency",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "smoothing": "15-bin Savitzky-Golay filter on population-averaged DeltaF/F",
+            "hse_threshold": "transient exceeding mean by >=3 SD, offset at <1.2 SD, within 0.5 s of an SWR",
+            "reactivation_criterion": "peak cross-correlation with first principal component >0.5 within +/-3 s of HSE onset"
+          },
+          "input_data_type": "population DeltaF/F traces and SWR event times",
+          "output_data_type": "detected HSEs and per-CA3SC reactivation latencies",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 16,
+          "category": "statistics",
+          "technique": "Hierarchical clustering of place fields into discrete place clusters and quantification of replay sequence order and replay score during HSEs",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "place_clustering": "Ward's hierarchical clustering on squared Euclidean distance of place-field correlation columns, up to 30 clusters, silhouette-optimized",
+            "replay_score": "max correlation of reactivated-cluster temporal order with mean place sequence, negative sign for reverse order",
+            "significance": "replay score outside 97.5% CI of a place-cluster-shuffled null distribution"
+          },
+          "input_data_type": "place fields and HSE-associated reactivated CA3SC clusters",
+          "output_data_type": "place-field clusters and significant replay event classifications",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 17,
+          "category": "statistics",
+          "technique": "Detection of recurring CA3SC activation sequences via convolutional non-negative matrix factorization (convNMF) during immobility periods",
+          "software_tool": "convNMF",
+          "tool_version": null,
+          "parameters": {
+            "decomposition": "ROI x time matrix approximated as sum of K sequential activity patterns convolved with temporal loadings",
+            "regularization": "parts-based orthogonality-penalizing correlation term on W",
+            "significance": "skewness of recurring-pattern overlap distribution vs. null (zero temporal relationship), Bonferroni-corrected p<0.01",
+            "validation": "correlation of each recurring assembly with first principal component of each HSE, Ward clustering to match assemblies to HSEs"
+          },
+          "input_data_type": "raw DeltaF/F activity during immobility",
+          "output_data_type": "detected recurring CA3SC activation assemblies and their correspondence to HSEs",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 18,
+          "category": "other",
+          "technique": "Generation of synthetic CA3 replay calcium-imaging data from a spiking network model, used to validate convNMF replay detection sensitivity/specificity",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "network": "8000 leaky integrate-and-fire pyramidal neurons + 150 interneurons, STDP-learned place-field weights, 100 randomized network instances",
+            "calcium_simulation": "AR(1) model, gamma=0.95 (tau=0.65 s), re-binned to 30 Hz, white Gaussian noise sigma=0.3 DeltaF/F",
+            "validation_metric": "ROC sensitivity/specificity of convNMF-detected replay frames vs. ground-truth spike-based replay epochs"
+          },
+          "input_data_type": null,
+          "output_data_type": "simulated CA3 replay calcium datasets and convNMF detection accuracy metrics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "paper_id": "KZYI47XK",
+      "year": 2022,
+      "journal": "Cell Reports",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 8,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection and E-Cannula (combined graphene microelectrode array/glass imaging window) implantation over dorsal CA1",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "virus": "180 nl (60 nl/site) Cre-dependent or CaMKII GCaMP6f, diluted 1:2 in cortex buffer",
+            "coordinates": "AP -2.2, ML -1.75, DV -1.0/-1.1/-1.2 relative to bregma",
+            "e_cannula_construction": "graphene microelectrode array + 3 mm coverglass (Warner 64-0720) + stainless steel cannula (3 mm base, 1.5 mm height, 45-degree inclination), assembled with Norland optical adhesive 81",
+            "craniotomy": "3.0 mm, lateral side sculpted at -1.0 mm/2.35 rad to match E-Cannula base",
+            "recovery_before_implant_days": "3-4",
+            "ground": "stainless steel jeweler's screw in cerebellum"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice with chronic combined electrical/optical hippocampal access",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "imaging",
+          "technique": "Simultaneous in vivo two-photon calcium imaging and multichannel electrophysiological recording through the E-Cannula",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8 kHz resonant two-photon scanner (Bruker)",
+            "objective": "16x NIR water immersion, 0.8 NA, 3.0 mm WD (Nikon)",
+            "excitation": "920 nm, 50-100 mW (Chameleon Ultra II, Coherent)",
+            "acquisition": "840x840 um, 512x512 px, 30 Hz",
+            "detector": "GaAsP PMT (Hamamatsu 7422P-40)",
+            "electrophysiology": "Intan RHD2132 amplifier via custom connector board, Intan Technologies multichannel system, 20 kHz, synchronized with imaging",
+            "recording_start": "10 days post-implantation, after treadmill habituation",
+            "n_mice": 4
+          },
+          "input_data_type": null,
+          "output_data_type": "synchronized two-photon calcium video and multichannel LFP/spike recordings",
+          "hardware": "Bruker 8 kHz resonant two-photon microscope; Intan RHD2132 amplifier",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "imaging",
+          "technique": "Calcium imaging preprocessing: SIMA motion correction and Suite2p ROI detection with built-in neuropil subtraction",
+          "software_tool": "SIMA, Suite2p",
+          "tool_version": null,
+          "parameters": {
+            "curation": "post-hoc Suite2p GUI curation to exclude non-somatic components"
+          },
+          "input_data_type": "raw two-photon time series",
+          "output_data_type": "motion-corrected, neuropil-decontaminated DeltaF/F traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "electrophysiology",
+          "technique": "Sharp-wave-ripple (SWR) detection and spike sorting from E-Cannula electrode array recordings",
+          "software_tool": "Kilosort2, Phy",
+          "tool_version": null,
+          "parameters": {
+            "swr_filter": "120-250 Hz 4th-order Butterworth bandpass, forward-reverse (zero-phase), Hilbert envelope",
+            "swr_threshold": "4.5 SD above mean per channel; merge if <10 ms apart; discard if <20 ms duration",
+            "array_level_event": "start/end defined by earliest/latest channel-level detection, manually curated",
+            "spike_sorting": "Kilosort2 template matching across same-day recordings, manual curation/merge-split in Phy",
+            "unit_labeling": "clusters with action-potential-like waveforms but refractory-period violations labeled multi-unit (MUA)"
+          },
+          "input_data_type": "raw multichannel electrode signals",
+          "output_data_type": "detected SWR events and sorted MUA spike clusters",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "statistics",
+          "technique": "Detection of synchronous calcium events (SCEs) and quantification of their co-occurrence with SWRs",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "sce_detection": "deconvolved spikes thresholded at 3 SD, counted within adjacent 5-frame (~160 ms) windows, 95th percentile of 20x circularly shuffled null as threshold",
+            "co_occurrence_window_ms": 200,
+            "significance": "1000 random permutations of SWR timing for empirical p-value"
+          },
+          "input_data_type": "deconvolved calcium events and SWR event times",
+          "output_data_type": "detected SCEs and SWR-SCE co-occurrence statistics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "statistics",
+          "technique": "K-means clustering of SWR events by spatiotemporal (channel-wise time delay and ripple power) features into stationary/traveling and local/global ripple types",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "features": "cross-correlation-derived channel-wise time delays and normalized ripple-band power, dynamic-time-warping-filtered for single-peak envelopes",
+            "clustering": "K-means, elbow method for cluster count, 10 repeats, best result retained",
+            "classification": "traveling if max channel-wise delay >5 ms; global if >10 active channels (power >0.6 normalized)"
+          },
+          "input_data_type": "per-channel ripple envelope features",
+          "output_data_type": "SWR events classified into 4 spatiotemporal cluster types",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "statistics",
+          "technique": "Support vector machine decoding of SWR spatiotemporal cluster type from perievent calcium activity",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "features": "mean DeltaF/F per neuron, -150 to +150 ms around SWR onset",
+            "balancing": "subsampled to match smallest ripple-cluster event count",
+            "feature_selection": "recursive feature elimination, 50-neuron step size",
+            "evaluation": "10-fold cross-validated accuracy/precision/recall vs. random classifier"
+          },
+          "input_data_type": "perievent calcium activity and SWR cluster labels",
+          "output_data_type": "decoding accuracy/precision/recall for SWR spatiotemporal type",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "statistics",
+          "technique": "Detection of cell assemblies and quantification of their firing ratio under different SWR clusters via correlation-based community detection",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "input": "per-cell DeltaF/F between -150 and +150 ms around each ripple onset",
+            "assembly_detection": "similarity-based clustering with community detection",
+            "significance": "shuffling test, n=10,000, FDR-corrected p<0.05"
+          },
+          "input_data_type": "perievent calcium activity",
+          "output_data_type": "identified cell assemblies and per-cluster firing ratios",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "8SKA2ZZG",
+      "year": 2024,
+      "journal": "Nature Neuroscience",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 4,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "molecular",
+          "technique": "Viral labeling of hippocampal CA1/CA2-3 neurons with GCaMP8m and Cre-dependent ChRmine for sparse excitatory-opsin expression",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "gcamp": "pGP-AAV-syn-jGCaMP8m-WPRE",
+            "chrmine": "pAAV-Ef1a-DIO-ChRmine-mScarlet-WPRE",
+            "cre": "pENN.AAV.hSyn.Cre.WPRE.hGH, diluted 1:2000 in sterile saline for sparse labeling"
+          },
+          "input_data_type": null,
+          "output_data_type": "sparse ChRmine/GCaMP8m co-expressing CA1/CA2-3 neurons",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection and chronic headpost/imaging cannula implantation over dorsal CA1 and CA2/3",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "injection_volume": "50 nl (10-nl pulses) via Nanoject syringe",
+            "ca1_coordinates": "-2.1 mm AP, -1.5 mm ML, -0.9/-1.05/-1.2 mm DV relative to bregma",
+            "ca23_coordinates": "-1.35 or -1.6 mm AP, -1.6 or -1.9 mm ML, -1.6 to -2.2 mm DV relative to bregma",
+            "analgesia": "meloxicam and bupivacaine, subcutaneous",
+            "cannula_diameter_mm": 3.0,
+            "cannula_height_mm": "1.5 (CA1), 2.0 (CA2/3)",
+            "recovery_before_implant_days": 3
+          },
+          "input_data_type": null,
+          "output_data_type": "chronic optical/opsin access to labeled CA1/CA2-3 neurons",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "behavior",
+          "technique": "Head-fixed behavioral paradigm with closed-loop optogenetic photostimulation triggered by odor-cue presentation, with a photostimulation-only control session",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "apparatus": "low-friction lightweight running wheel, head-fixed",
+            "odorant": "R-(-)carvone in mineral oil, delivered via compressed-air stream",
+            "trial_structure": "10 trials, 1 s presentation, 40-60 s pseudo-random inter-stimulus interval",
+            "stim_trials": "first 5 trials: photostimulation triggered by odor onset, sustained until odor removal",
+            "nostim_trials": "next 5 trials: odor alone, no photostimulation",
+            "control_session": "photostimulation alone at random 40-60 s intervals, 5 trials",
+            "pre_post_imaging": "15-min imaging sessions before and after stimulation session",
+            "locomotion_monitoring": "velocity-based active running vs. passive rest classification"
+          },
+          "input_data_type": null,
+          "output_data_type": "closed-loop optogenetic stimulation session imaging data",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "histology",
+          "technique": "Post-imaging perfusion, sectioning, and immunohistochemistry for PCP4 with confocal imaging",
+          "software_tool": "ImageJ",
+          "tool_version": null,
+          "parameters": {
+            "perfusion": "20 ml ice-cold PBS then 20 ml ice-cold 4% paraformaldehyde",
+            "sectioning": "100 um coronal sections, vibratome (Leica VT1200S)",
+            "blocking": "10% donkey serum, 0.3% Triton X-100 in PBS, 60 min",
+            "primary_antibody": "rabbit anti-PCP4, 1:500 (HPA005792, Sigma-Aldrich), 16 h at 4C",
+            "secondary_antibody": "Alexa Fluor 647 donkey anti-rabbit, 1:500 (711-605-152, Jackson ImmunoResearch), 6 h room temperature",
+            "nuclear_stain": "DAPI, 1 ug/ml, 10 min",
+            "imaging": "Nikon A1 confocal, 405/488/561/640 nm lines, 10x/0.45-NA objective, 1.0x zoom, 2048x2048 px, 3 um z-step through full section depth"
+          },
+          "input_data_type": "fixed brain sections",
+          "output_data_type": "four-channel confocal z-stacks of immunolabeled tissue",
+          "hardware": "Nikon A1 confocal microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "9U8LL9DE",
+      "year": 2025,
+      "journal": "Nature Protocols",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 8,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Chronic stereotaxic craniotomy and implantation of a custom stainless-steel SCE cannula with laser-cut glass window and silicone membrane over dorsal CA1",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "coordinates": "-2.3 mm AP, 1.6 mm ML relative to bregma, ~30-40 degrees relative to the mediolateral axis",
+            "cannula_insertion_depth_mm": 1.6,
+            "anesthesia": "isoflurane",
+            "analgesia": "local (bupivacaine) and general (meloxicam)",
+            "mouse_age_weeks": "6-12",
+            "recovery_before_sce": ">= 1 week"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronic optical/electroporation access implant over dorsal CA1",
+          "hardware": "custom 316L stainless steel SCE cannula; titanium headpost; stereotaxic instrument (Kopf)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "molecular",
+          "technique": "Two-photon-guided in vivo single-cell electroporation (SCE) of CA1 pyramidal neurons: pipet navigated through the cannula's silicone membrane under two-photon excitation, tip resistance/pressure monitored to confirm cell contact, then plasmid delivery via voltage pulse",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "excitation_wavelength_nm": 920,
+            "objectives": "4x for coarse visualization, 40x for targeting",
+            "electroporation_pulse": "-5 V, 100 Hz, 0.5 ms pulse width, 1 s duration",
+            "tip_resistance_targets": "4-7 MOhm in bath; 500 MOhm-1 GOhm during membrane penetration; 6-8 MOhm in brain; +1-1.5 MOhm on cell contact",
+            "hold_time_after_fill_s": "4-8",
+            "expression_check_timepoint": "~48 h after electroporation"
+          },
+          "input_data_type": null,
+          "output_data_type": "single plasmid-expressing CA1 pyramidal neuron",
+          "hardware": "two-photon resonant scanning microscope; micromanipulator (Scientifica PatchStar); MultiClamp 700B amplifier; Axon Digidata 1550B digitizer; ISO-Flex stimulus isolator",
+          "source_location": "main_text",
+          "source_quote": "the cell is electroporated (-5 V, 100 Hz, 0.5 ms pulse width, 1 s duration)",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "imaging",
+          "technique": "Longitudinal two-photon imaging of the electroporated neuron's soma and dendrites across days to weeks to monitor expression level and cell health",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "example_timepoints": "2 d and 18 d post-electroporation",
+            "viable_expression_window": "up to ~2 months for inert fills; peak ~36-60 h for cytotoxic optogenetic constructs"
+          },
+          "input_data_type": null,
+          "output_data_type": "single-plane time-series maximum-intensity projections of the electroporated cell",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 4,
+          "category": "imaging",
+          "technique": "Chronic in vivo two-photon functional imaging (calcium, voltage, or glutamate indicators) of the single electroporated neuron's soma and dendritic subcellular compartments in awake, behaving mice",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "indicators": "GCaMP7b/GCaMP7s (calcium), ASAP3 (voltage), iGluSnFR-A184S (glutamate)",
+            "compartments_imaged": "soma, basal dendrites, apical tuft dendrites, individual spines"
+          },
+          "input_data_type": null,
+          "output_data_type": "subcellular-resolution functional imaging traces from a single identified neuron",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 5,
+          "category": "electrophysiology",
+          "technique": "Chronic targeted whole-cell patch-clamp recording from the SCE-labeled neuron via the same visually guided pipet approach (shadow-patch), performed weeks after implantation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "pre_penetration_pulse": "+5 mV held at -70 mV",
+            "post_penetration_pressure_mbar": "~50",
+            "seal_success_rate": "~20%",
+            "characterization": "voltage responses to positive and negative current steps in current-clamp mode"
+          },
+          "input_data_type": null,
+          "output_data_type": "whole-cell current-clamp/voltage-clamp recordings from an identified single neuron",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 6,
+          "category": "other",
+          "technique": "Single-cell optogenetic manipulation of an SCE-labeled opsin-expressing neuron via widefield LED illumination, avoiding stimulation of neighboring opsin-expressing cells",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "opsins": "ChRmine-mScarlet, bReaChES-mRuby3",
+            "readout": "peristimulus zone fluorescence (Z-scored), pre/stim/post place-field induction"
+          },
+          "input_data_type": null,
+          "output_data_type": "single-cell optogenetically evoked physiological/behavioral responses",
+          "hardware": "widefield LED illumination",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 7,
+          "category": "molecular",
+          "technique": "Single-starter-neuron monosynaptic rabies tracing: TVA-receptor and glycoprotein-complementation plasmids delivered to one CA1 pyramidal neuron by SCE, followed by EnvA-pseudotyped glycoprotein-deleted rabies virus injection to label presynaptic partners",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "sce_plasmids": "pCAG-TVA800-WT-HA, pCAG-N2c(G)",
+            "rabies_virus": "EnvA-N2cdG-tdTomato",
+            "injection_delay_after_sce_days": 14
+          },
+          "input_data_type": null,
+          "output_data_type": "labeled presynaptic input neurons to a single starter CA1 pyramidal cell",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 8,
+          "category": "molecular",
+          "technique": "Single-cell conditional gene manipulation via SCE-delivered Cre in floxed mice, combined with SCE-delivered organelle/structural reporters to image the resulting subcellular phenotype",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "cre_delivery": "pCAG-Cre or pCAG-FLEX Cre-dependent reporters",
+            "organelle_reporters": "pCAG-mito-YFP, pCAG-mito-dsRed (mitochondria)",
+            "example_mouse_line": "Pdzd8 F/F vs. Pdzd8+/+"
+          },
+          "input_data_type": null,
+          "output_data_type": "single-cell genetically manipulated neuron with imaged subcellular organelle phenotype",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "paper_id": "HU4D65CV",
+      "year": 2025,
+      "journal": "Nature",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "K3YPWJ6L",
+      "year": 2026,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 8,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "imaging",
+          "technique": "Real-time 3D motion correction (3D-RTMC) using a fluorescently labeled reference neuron",
+          "software_tool": "Custom 3D-RTMC software",
+          "tool_version": null,
+          "parameters": {
+            "reference_strategy": "H2B-tdTomato-expressing neighboring soma tracked via three orthogonal 3D acousto-optical reference drifts, interleaved uniformly with imaging drifts at a tunable 'reference drift fraction' (~10% used in practice)",
+            "correction_loop": "centroid of intensity profiles along x/y/z reference drifts computed each loop and used to shift the coordinate origin of the 3D measurement in real time, closed-loop response <500 us",
+            "validation": "single global-minimum correction function required for candidate reference volumes (verified via high-resolution z-stack around the reference); reference volumes with multiple local minima excluded",
+            "initialization": "user-defined bounding box around the reference cell established at recording start; normalized 3D cross-correlation against the stored reference volume used to re-align the coordinate system before each session/break"
+          },
+          "input_data_type": "reference-neuron intensity profiles from orthogonal 3D drifts",
+          "output_data_type": "motion-corrected 3D coordinate origin for simultaneous functional imaging",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "imaging",
+          "technique": "FPGA-based hardware implementation of the 3D-RTMC closed-loop correction",
+          "software_tool": "Verilog HDL (Xilinx ISE 14.7)",
+          "tool_version": "14.7",
+          "parameters": {
+            "electronics": "PCIe-6537B digital I/O card (National Instruments) interfaced with custom analog-digital signal-synthesis ('AO') and data-acquisition ('PMT') boards built on Spartan-6 FPGAs (Xilinx)",
+            "pipeline": "three-module real-time loop (data collection, data processing/centroid computation with intensity thresholding, and intervention/feedback correction of AO drive frequencies) executed entirely on-FPGA to meet ~1 ms interaction-loop timing"
+          },
+          "input_data_type": "photomultiplier-tube intensity signals from reference and imaging drifts",
+          "output_data_type": "real-time radiofrequency drive corrections for the acousto-optical deflectors",
+          "hardware": "PCIe-6537B (National Instruments); custom Spartan-6 FPGA AO and PMT boards",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "imaging",
+          "technique": "ROI mask generation and signal extraction from line-scan data",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "grouping": "line scans corresponding to the same ROI grouped together",
+            "mask_generation": "pixels with mean fluorescence across all frames exceeding the overall mean fluorescence included in the ROI mask",
+            "extraction": "signal computed by averaging masked pixels for each frame"
+          },
+          "input_data_type": "raw dual-wavelength line-scan imaging data",
+          "output_data_type": "per-ROI raw fluorescence traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "statistics",
+          "technique": "DeltaF/F calculation and voltage-event detection",
+          "software_tool": "custom Python/Plotly GUI",
+          "tool_version": null,
+          "parameters": {
+            "df_f": "computed via a 4-s rolling median followed by a custom denoising script",
+            "slow_event_detection": "amplitude-based thresholding: interval labeled a slow event if it exceeds 3 SD at onset and drops below 0.5 SD at offset",
+            "fast_event_curation": "fast events (putative spikes) curated manually using a custom Python/Plotly GUI, minimum inter-spike interval 10 ms, minimum spike duration 10 ms",
+            "burst_definition": "large slow depolarizing events co-occurring with more than three fast events"
+          },
+          "input_data_type": "per-ROI raw fluorescence traces",
+          "output_data_type": "DeltaF/F traces with classified slow events, fast events (spikes), and bursts",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "statistics",
+          "technique": "Adaptive wavelet-threshold denoising of voltage traces",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "transform": "Morlet wavelet transformation of DeltaF/F traces to capture time-frequency components of membrane-potential dynamics",
+            "clustering": "wavelet coefficients normalized per frequency, PCA of temporal dynamics across frequency domains, optimal component count via the explained-variance elbow, followed by Ward's hierarchical clustering into 20 clusters with silhouette analysis to select the optimal cluster count; noise-dominated clusters discarded",
+            "thresholding": "per-cluster threshold set at 2 SD above the moving average of wavelet coefficients; sub-threshold frames attenuated 50-100%",
+            "reconstruction": "cleaned per-cluster wavelet coefficients converted back to fluorescence traces and recombined into a single denoised trace per ROI"
+          },
+          "input_data_type": "raw DeltaF/F voltage traces",
+          "output_data_type": "denoised voltage fluorescence traces",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "statistics",
+          "technique": "Cross-modal decoding of somatic voltage dynamics from dendritic voltage/calcium signals",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "feature_extraction": "average event waveforms (soma and dendrite, voltage and calcium) centered on somatic voltage onset, time windows of +/-500 ms (voltage) or +/-2000 ms (calcium), decomposed into the first 5 principal components",
+            "model": "fully connected feedforward neural network (two hidden layers, 64 units each, ReLU activation) trained separately per input modality (somatic calcium, dendritic calcium, dendritic voltage) to predict somatic voltage PC coefficients",
+            "evaluation": "R2 between original and decoded PC coefficients via linear regression; reconstructed somatic voltage events correlated against originals, compared across path distance and dendritic branch order"
+          },
+          "input_data_type": "PCA-decomposed somatic and dendritic voltage/calcium event waveforms",
+          "output_data_type": "decoded somatic voltage event waveforms and decoding accuracy metrics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "statistics",
+          "technique": "Quantification of residual motion and 3D-RTMC performance validation",
+          "software_tool": "MATLAB; Python",
+          "tool_version": null,
+          "parameters": {
+            "metrics": "centroid displacement along x/y/z axes; frame-to-frame displacement via cross-correlation of chessboard frames; residual motion expressed in pixels and as power spectra over 0.001-100 Hz",
+            "significance_tests": "Mann-Whitney U test on raw data and two-sample Kolmogorov-Smirnov test on 100-bin histogrammed data (MATLAB 'histcounts') comparing power spectra with vs. without 3D-RTMC",
+            "reference_distance_analysis": "linear regression of residual motion magnitude against z-distance and Euclidean distance from the reference cell"
+          },
+          "input_data_type": "chessboard-scan frame time series with and without 3D-RTMC",
+          "output_data_type": "residual motion magnitude and statistical comparisons of motion-correction performance",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "statistics",
+          "technique": "Group-level statistical testing framework",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "reporting": "exact sample sizes, definition of n, center (mean/median), and dispersion (SD/SEM) reported per figure legend"
+          },
+          "input_data_type": null,
+          "output_data_type": "statistical significance results",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "paper_id": "ZIRAQSPC",
+      "year": 2026,
+      "journal": "Science",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 21,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "molecular",
+          "technique": "Four-virus intersectional (Cre/FlpO-dependent) stereotaxic injection strategy for double-sparse, dual-color labeling of CA3 pyramidal neurons (JEDI3sub voltage indicator + tdTomato reference)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "viruses": "pAAV-Ef1a-FLPo, pENN-AAV-hSyn-Cre-WPRE-hGH, pAAV-Ef1a-fDIO-tdTomato, pAAV-DIO-Ef1a-JEDI3sub-WPRE",
+            "dilutions": "FLPo 1:2x10^5, Cre 1:4x10^4, tdTomato/JEDI3sub 1:4",
+            "coordinates": "dorsal CA3, AP -1.2/-1.5 mm, ML 1.5/1.8 mm, DV -1.8/-1.65/-1.5 mm",
+            "volumes": "50/100/50 nl per DV plane"
+          },
+          "input_data_type": null,
+          "output_data_type": "JEDI3sub/tdTomato dual-labeled CA3 pyramidal neurons",
+          "hardware": "Nanoject III syringe",
+          "source_location": "supplement",
+          "source_quote": "achieve double-sparse labeling",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Imaging-window implantation over CA3 with four-channel linear silicon-probe implantation in contralateral CA1 and custom headpost fixation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "window": "3.0 mm diameter, 1.5 mm height",
+            "probe_target": "contralateral CA1, AP -2.2 mm, ML 2.75 mm, DV -1.0 mm, 45 degree angle",
+            "recovery": "at least 1 week before behavior training"
+          },
+          "input_data_type": null,
+          "output_data_type": "mouse prepared for imaging and LFP recording",
+          "hardware": "four-channel linear silicon probe; custom headpost",
+          "source_location": "supplement",
+          "source_quote": "implanted with an imaging window",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "imaging",
+          "technique": "In vivo 3D acousto-optical two-photon line-scan voltage imaging of soma and dendritic ROIs with real-time motion correction (RTMC)",
+          "software_tool": "FocusPinner",
+          "tool_version": null,
+          "parameters": {
+            "wavelength": "940 nm",
+            "acquisition_rate": "1.01-1.958 kHz",
+            "laser_power": "30-70 mW after objective, scaled with depth",
+            "rois_per_cell": "5-14 ROIs per cell (15-28 lines per cell)",
+            "session_duration": "2-10 min"
+          },
+          "input_data_type": null,
+          "output_data_type": "line-scan voltage-imaging traces from soma and dendritic ROIs",
+          "hardware": "Femto3D-ATLAS AO microscope (Femtonics); Chameleon Ultra II Ti:sapphire laser (Coherent); 16x Nikon CFI75 0.8 NA objective",
+          "source_location": "supplement",
+          "source_quote": "Real Time Motion Correction (RTMC) using the FocusPinner platform",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "imaging",
+          "technique": "Post-imaging structural z-stack acquisition and 3D dendritic morphological reconstruction to measure path distance of recorded ROIs from the soma",
+          "software_tool": "SNT",
+          "tool_version": null,
+          "parameters": {
+            "z_step": "3 um between DV planes",
+            "fov": "200-400 x 200-400 um in x-y"
+          },
+          "input_data_type": "high-resolution structural z-stack",
+          "output_data_type": "3D path distance of each dendritic ROI from soma",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": "SNT software package to determine the 3D path distance",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "behavior",
+          "technique": "VR-based goal-oriented spatial navigation/foraging task with fixed reward-location learning, reward-translocation and global-context-switch remapping manipulations",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "water_restriction": "~85% of original body weight",
+            "track_length": "3 m",
+            "inter_track_interval": "0.5 s",
+            "reward_rate": "1 reward per lap (goal-oriented learning task)"
+          },
+          "input_data_type": null,
+          "output_data_type": "behavioral position/lap data aligned to imaging sessions",
+          "hardware": "integrated two-photon microscope and virtual reality system",
+          "source_location": "supplement",
+          "source_quote": "water-restricted to ~85% of their original body weight",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "electrophysiology",
+          "technique": "Wide-band local field potential (LFP) acquisition in contralateral CA1",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "sampling_rate": "20 kHz, downsampled to 1 kHz",
+            "channel_selection": "closest to stratum pyramidale by ripple amplitude"
+          },
+          "input_data_type": null,
+          "output_data_type": "downsampled CA1 LFP traces",
+          "hardware": "RHD2000 digital acquisition system (Intan Technologies)",
+          "source_location": "supplement",
+          "source_quote": "recorded at 20 kHz using a digital acquisition system",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "electrophysiology",
+          "technique": "Sharp-wave ripple (SWR) detection from bandpass-filtered, Hilbert-transformed CA1 LFP with amplitude/duration thresholding and manual curation of false positives",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "band": "100-250 Hz",
+            "amplitude_threshold": ">3 s.d. above baseline",
+            "min_duration": ">10 ms",
+            "state": "awake immobile, wheel stopped, VR off"
+          },
+          "input_data_type": "CA1 LFP traces",
+          "output_data_type": "detected candidate SWR events",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": "LFPs after the Hilbert transform during awake immobile states",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "histology",
+          "technique": "Retro-orbital AAV/PHP.eB-CAG-tdTomato labeling of hippocampal CA2 for post hoc confirmation that imaged cells lie within CA3",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {},
+          "input_data_type": null,
+          "output_data_type": "CA2-labeled reference tissue for depth comparison against imaged ROIs",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": "AAV/PHP.eB-CAG-tdTomato was infused by retro-orbital injection",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "histology",
+          "technique": "Immunohistochemistry against the CA2-specific marker PCP4 with confocal tile-scan imaging for post hoc subregion confirmation",
+          "software_tool": "Fiji (ImageJ)",
+          "tool_version": null,
+          "parameters": {
+            "sectioning": "100 um coronal sections, vibrating microtome",
+            "primary_antibody": "rabbit anti-PCP4, 1:500, 16 h",
+            "secondary_antibody": "Alexa Fluor 647 donkey anti-rabbit, 1:500, 6 h",
+            "counterstain": "DAPI, 1:1000"
+          },
+          "input_data_type": "perfused/sectioned brain tissue",
+          "output_data_type": "confocal fluorescence images of CA2 marker staining",
+          "hardware": "Leica VT1200S vibratome; Nikon A1 confocal microscope, 10x 0.45 NA objective",
+          "source_location": "supplement",
+          "source_quote": "rabbit primary antibody against the CA2-specific marker PCP4",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "imaging",
+          "technique": "Spatial-temporal independent component analysis (stICA)-based pixel selection and Delta-F/F signal extraction from line-scan ROI data",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "components": "5-10 independent temporal components after Gaussian smoothing",
+            "baseline": "10-s rolling median",
+            "zscore_window": "10-s rolling average and standard deviation"
+          },
+          "input_data_type": "raw line-scan pixel data",
+          "output_data_type": "Delta-F/F fluorescence traces per ROI",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": "implemented spatial-temporal independent component analysis (stICA)",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "imaging",
+          "technique": "Adaptive wavelet-coefficient thresholding to denoise fluorescence voltage traces, using Morlet wavelet decomposition and Ward's hierarchical clustering of waveform components",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "wavelet": "Morlet wavelet transform",
+            "clustering": "Ward's hierarchical clustering into 20 clusters, silhouette-selected optimal count",
+            "threshold": "moving average + 2 s.d., per frequency-domain cluster"
+          },
+          "input_data_type": "Delta-F/F fluorescence traces",
+          "output_data_type": "denoised Vm traces",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": "Ward's hierarchical clustering was applied to identify voltage event waveform patterns",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 12,
+          "category": "other",
+          "technique": "Fast-spike detection and peri-somatic timing classification (pre-AP, backpropagating AP, post-AP, isolated dendritic) via amplitude thresholding, template matching, and PCA-based clustering with manual curation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "fast_spike_band": ">100 Hz",
+            "subthreshold_band": "<40 Hz",
+            "peri_ap_window": "-25 to +25 ms",
+            "chance_threshold": "mean + 2 s.d. of non-peri-somatic intervals"
+          },
+          "input_data_type": "denoised voltage traces",
+          "output_data_type": "classified fast-spike events by timing relative to somatic AP",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": "curated using a semi-automated pipeline combining template matching",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 13,
+          "category": "statistics",
+          "technique": "PCA of coactive dendritic/somatic waveform features followed by Ward's hierarchical clustering to classify coactive dendritic subthreshold events into Driver/Follower/Synchronous functional subtypes",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "exclusion_window": "events within 5 ms (near-zero lag) of somatic onset excluded as synchronous"
+          },
+          "input_data_type": "coactive dendritic and somatic event waveforms",
+          "output_data_type": "Driver/Follower/Synchronous dendritic event labels",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": "majorly identified as \u201cDriver\u201d and \u201cFollower\u201d dendritic events",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 14,
+          "category": "statistics",
+          "technique": "Place-field detection from lap-averaged, Gaussian-smoothed spatial tuning curves via bin-wise firing-rate thresholding",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "bins": "75 bins of 4 cm over the 3 m track",
+            "smoothing": "Gaussian kernel, filter size 10 bins, s.d. = 2",
+            "field_threshold": "> median + 1 s.d. of the tuning curve",
+            "min_field_length": "10 cm",
+            "min_infield_ratio": ">=1.5x the average out-of-field firing rate"
+          },
+          "input_data_type": "lap-by-lap spatial firing-rate maps",
+          "output_data_type": "identified place fields per ROI",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": "binning the 3 m-long VR track into 75 equal 4 cm bins",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 15,
+          "category": "statistics",
+          "technique": "Random-forest regression predicting lap-by-lap somatic place-field amplitude from preceding dendritic tuning-curve AUCs across five spatial intervals and path distance, evaluated by k-fold cross-validation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "predictors": "dendritic TC AUCs at 5 spatial intervals (60, 85, 100, 130, 155 cm from PF peak) + path distance from soma",
+            "validation": "k-fold cross-validation, 80% training / 20% testing",
+            "metric": "coefficient of determination (R2)"
+          },
+          "input_data_type": "dendritic tuning-curve AUC features",
+          "output_data_type": "predicted somatic place-field amplitude; feature importances",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": "k-fold cross-validation (80% for training, 20% for testing)",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 16,
+          "category": "statistics",
+          "technique": "TreeSHAP feature-attribution analysis of the random-forest model, followed by UMAP embedding and Ward's hierarchical clustering to identify spatially-selective ('IN'/'OUT') dendritic functional subtypes",
+          "software_tool": "TreeSHAP; UMAP",
+          "tool_version": null,
+          "parameters": {
+            "embedding": "12-dimensional dendritic-feature/SHAP-value vectors projected to 3D via UMAP"
+          },
+          "input_data_type": "random-forest model and its input features",
+          "output_data_type": "SHAP dependence plots; dendritic functional-subtype clusters",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": "utilized TreeSHAP, a high-speed algorithm for estimating SHAP values",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 17,
+          "category": "statistics",
+          "technique": "Fully-connected feedforward neural network (2 hidden layers, 64 units each) decoding somatic event waveform PCA coefficients from Driver/Follower dendritic waveform PCA coefficients",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "architecture": "2 hidden layers, 64 units each",
+            "input_features": "first six PCs of Driver or Follower dendritic waveforms",
+            "evaluation": "squared error per event; mean squared error per dendrite"
+          },
+          "input_data_type": "dendritic waveform PCA coefficients",
+          "output_data_type": "decoded somatic waveform PCA coefficients",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": "fully connected FNN consisting of two hidden layers with 64 units",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 18,
+          "category": "statistics",
+          "technique": "Lap-by-lap tuning-curve classification as familiar or novel via Pearson correlation to somatic reference templates with a margin criterion",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "margin_criterion": "correlation-difference (\u0394r) > 0.3"
+          },
+          "input_data_type": "lap-by-lap spatial tuning curves",
+          "output_data_type": "per-lap familiar/novel tuning-curve classification",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": "A margin criterion (\u0394r > 0.3) was applied",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 19,
+          "category": "statistics",
+          "technique": "Sigmoid-function fitting of lap-by-lap tuning-similarity envelope traces (bounded nonlinear least-squares with grid-search initialization) to estimate the lap of remapping initiation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "model": "four-parameter sigmoid function",
+            "fit_method": "bounded nonlinear least-squares, grid search over initialization parameters",
+            "reward_translocation_criterion": "earliest post-switch lap where fitted curve falls below 10% of dynamic range",
+            "context_switch_criterion": "earliest lap where correlation to novel TC is positive, has positive first derivative, and exceeds the mean correlation"
+          },
+          "input_data_type": "lap-by-lap correlation matrix to reference tuning curves",
+          "output_data_type": "lap number of remapping initiation per ROI",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": "fit with a four-parameter sigmoid function",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 20,
+          "category": "statistics",
+          "technique": "Non-negative matrix factorization (NMF) decomposition of lap-by-lap somatic/dendritic spatial tuning dynamics into basis tuning patterns, with latent-space clustering into four remapping epochs (Familiar, Before, During, Remapped)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "epochs": "Familiar, Before, During, Remapped"
+          },
+          "input_data_type": "lap-by-lap somatic and dendritic tuning-curve dynamics",
+          "output_data_type": "latent embedding and remapping-epoch trajectories",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": "to decompose the tuning dynamics of each lap",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 21,
+          "category": "statistics",
+          "technique": "Two-sided inferential statistics with ANOVA and Tukey post hoc correction for multiple comparisons; box plots report median/IQR and bar plots report mean +/- s.e.m.",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "posthoc_test": "Tukey's test",
+            "significance_threshold": "P < 0.05"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": "Tukey\u2019s test was used post hoc",
+          "extraction_confidence": "medium"
+        }
+      ]
+    }
+  ]
+}

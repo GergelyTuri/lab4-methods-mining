@@ -1,0 +1,879 @@
+{
+  "target_author": "Matthew Lovett-Barron",
+  "total_papers": 5,
+  "total_steps": 41,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "EC39E7I5",
+      "year": 2012,
+      "journal": "Nature Neuroscience",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 13,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "molecular",
+          "technique": "Generation of Cre-driver knock-in mouse lines (Gad65-cre, Pvalb-cre, Som-cre)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "construct_design": "IRES-Cre recombinase coding sequence inserted into the 3' UTR of the respective mouse genes via homologous targeting",
+            "es_cells": "electroporated into hybrid C57BL/6-129/SV stem cells, colonies screened by PCR for correct integration",
+            "breeding": "Som-cre and Pvalb-cre maintained as a mixed strain; Gad65-cre backcrossed to and maintained as C57BL/6",
+            "reporter_cross": "loxP-STOP-loxP-tdTomato reporter line bred with Gad65-cre to express tdTomato in GABAergic cells"
+          },
+          "input_data_type": null,
+          "output_data_type": "Cre-driver knock-in mouse lines",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "molecular",
+          "technique": "Construction of viral constructs (ChR2-sfGFP and PSAML141F-GlyR, Cre-dependent and Cre-independent variants)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "chr2_construct": "codon-optimized ChR2(1-304, H134R) fused to superfolder GFP via a 10-amino-acid linker, cloned into an rAAV cassette with a human synapsin promoter, WPRE, and SV40 polyA",
+            "cre_dependent_variants": "Cre-dependent rAAV(ChR2-sfGFP), rAAV(sfGFP), rAAV(tdTomato), and rAAV(PSAML141F-GlyR) built by cloning the coding sequences in inverted orientation relative to the promoter",
+            "serotypes": "assembled with a modified helper-free system as serotype 2/1 (rAAV:ChR2-sfGFP) or serotype 2/7 (Cre-dependent constructs)"
+          },
+          "input_data_type": null,
+          "output_data_type": "packaged AAV constructs for optogenetic activation and chemogenetic silencing",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection into dorsal CA3 and CA1",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "delivery": "thin glass pipettes (10-\u00b5m tip diameter) with Nanoject II injectors (Drummond Scientific), ~30 nl high-titer virus per injection along the pipette withdrawal tract",
+            "ca3_injection": "rAAV:ChR2-sfGFP, 6 penetrations, 2 injections per penetration, bilateral dorsal CA3",
+            "ca1_injection": "rAAV(PSAML141F-GlyR)Cre and rAAV(tdTomato)Cre at 3:1 ratio, 4 penetrations, 5-7 injections per penetration; a separate cohort received rAAV(ChR2-sfGFP)Cre alone in CA1 (3 penetrations, 5 injections per penetration)",
+            "recovery": "4-6 weeks before acute slice preparation"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice expressing ChR2-sfGFP in CA3 Schaffer collaterals and/or PSAML141F-GlyR in CA1 interneurons",
+          "hardware": "Nanoject II injectors (Drummond Scientific)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "electrophysiology",
+          "technique": "Acute hippocampal slice preparation and whole-cell patch-clamp recording from CA1 pyramidal neurons and interneurons",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "slicing": "350 \u00b5m coronal slices from adult dorsal hippocampus, secured on mesh in a custom double-perfusion chamber",
+            "acsf": "125 mM NaCl, 25 mM NaHCO3, 2.5 mM KCl, 1.25 mM NaH2PO4, 1 mM MgCl2, 2 mM CaCl2, 22.5 mM glucose, 3 mM sodium pyruvate, 1 mM ascorbate, saturated with 95% O2/5% CO2, perfused at 5-7 ml/min at 32-33\u00b0C; 500 nM CGP55845 added during most recordings",
+            "visualization": "Dodt contrast optics on a Zeiss Examiner Z1, 40x (NA 0.75) for somatic and 63x (NA 1.0) for dendritic recordings",
+            "recording": "Dagan BVC-700A amplifier in active bridge mode, filtered 1-10 kHz, digitized at 50 kHz; pipette resistances ~4-7 M\u03a9 (somatic) and ~8-10 M\u03a9 (dendritic)",
+            "internal_solution": "130 mM potassium gluconate, 8 mM KCl, 4 mM NaCl, 10 mM HEPES, 4 mM MgATP, 0.3 mM TrisGTP, 14 mM phosphocreatine, 0.1 mM Alexa 594 or Alexa 488, pH 7.25; 0.2% biocytin added for interneuron recordings"
+          },
+          "input_data_type": null,
+          "output_data_type": "whole-cell electrophysiological recordings from CA1 pyramidal neurons and interneurons",
+          "hardware": "Dagan BVC-700A amplifier; Zeiss Examiner Z1 microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "imaging",
+          "technique": "Combined two-photon glutamate uncaging and single-photon GABA uncaging",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "glutamate_uncaging": "PENB-l-caged glutamate (2 mM, applied via broken pipette above slice) photolyzed at 740 nm using a dual galvanometer-based scanning system (Prairie Technologies); Alexa 594/488 excited at 920-930 nm with an Ultra II Chameleon laser (Coherent)",
+            "spatial_pattern": "asynchronous uncaging (100-ms ISI) onto up to 40 spines of well-isolated dendrites (<60 \u00b5m below slice surface) to evoke temporally isolated EPSPs, summed arithmetically and compared to the actually measured response",
+            "gaba_uncaging": "single-photon uncaging of 80 or 160 \u00b5M Rubi-GABA via a 473 nm blue laser (CrystaLaser) coupled to the scan-head, placed near (<5 \u00b5m) the excited branch, near the soma, or in the apical tuft",
+            "combined_protocol": "one-photon GABA uncaging followed by two-photon glutamate uncaging with a 1-5 ms ISI"
+          },
+          "input_data_type": null,
+          "output_data_type": "EPSPs/EPSCs from combined glutamate and GABA uncaging at defined dendritic locations",
+          "hardware": "dual galvanometer scanning system (Prairie Technologies); Chameleon Ultra II laser (Coherent); CrystaLaser 473 nm laser",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "electrophysiology",
+          "technique": "ChR2 photostimulation grid mapping of CA3 Schaffer collateral input",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "stimulation": "473 nm blue DPSS laser (CrystaLaser) coupled to the two-photon scan-head via a 20x objective, 1-ms pulses at 10-200 \u00b5W, timing/position/intensity controlled via PrairieView-TriggerSync",
+            "grid": "6x8-point stimulation grid over CA1 strata radiatum/oriens, each point stimulated once in random spatial order",
+            "protocol": "4-ms ISI for phasic photostimulation (current clamp) or 74-ms ISI for isolated EPSCs (voltage clamp, after adding 20 \u00b5M SR95531 to block GABA receptors)",
+            "paired_recording": "interneuron recorded first, then a nearby (<50 \u00b5m) pyramidal cell recorded with the same grid order/position for direct comparison"
+          },
+          "input_data_type": null,
+          "output_data_type": "photostimulation-evoked EPSCs/EPSPs and firing rates from CA1 pyramidal neurons and interneurons",
+          "hardware": "CrystaLaser 473 nm DPSS laser; two-photon scan-head with 20x objective",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "molecular",
+          "technique": "Pharmacogenetic silencing of PSAML141F-GlyR-expressing interneurons via PSEM308",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "drug_prep": "PSEM308 dissolved in DMSO, stored in 100 mM aliquots, diluted in ACSF to 3 \u00b5M final concentration",
+            "application": "bath-applied for 20-30 min for maximal effect",
+            "other_drugs": "gabazine (20 \u00b5M), D,L-AP5 (100 \u00b5M), CGP55845A (500 nM), 4-aminopyridine (2 mM), WIN-55,212-2 (1 \u00b5M); DMSO kept below 0.005% final"
+          },
+          "input_data_type": null,
+          "output_data_type": "silenced PSAML141F-GlyR-expressing interneuron population",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "histology",
+          "technique": "Immunocytochemistry and confocal imaging for knock-in mouse characterization and interneuron identification",
+          "software_tool": "ImageJ",
+          "tool_version": null,
+          "parameters": {
+            "cre_characterization": "anti-Cre recombinase primary (1:200,000) with biotinylated secondary, ABC-Elite/DAB-nickel development for light microscopy",
+            "fluorescent_ic": "primary antibodies to parvalbumin (1:300), somatostatin (1:100), or Cre (1:1,000), with Alexa 633-, DyLight 649-, or DyLight 488-conjugated secondaries",
+            "psam_glyr_detection": "Alexa 647-conjugated alpha-bungarotoxin (1:3,000) to directly detect PSAML141F-GlyR, cross-validated against tdTomato co-expression",
+            "imaging": "confocal stacks (25-35 slices, 1-\u00b5m optical thickness) acquired at 40x on a Leica DM6000 B, stitched across CA1 and collapsed to one z-plane; cell counting performed in ImageJ"
+          },
+          "input_data_type": "fixed hippocampal sections",
+          "output_data_type": "quantified interneuron subtype density and marker co-expression",
+          "hardware": "Leica DM6000 B confocal microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "histology",
+          "technique": "Post-hoc identification and reconstruction of biocytin-filled interneurons",
+          "software_tool": "Neurolucida",
+          "tool_version": null,
+          "parameters": {
+            "processing": "biocytin-filled slices fixed, washed, cryoprotected, re-sectioned (50 \u00b5m), developed with avidin-biotin complex and DAB",
+            "somatostatin_costain": "Alexa 594-streptavidin visualization of filled cells with somatostatin immunoreactivity detected via anti-SOM (1:100) and DyLight 649-conjugated secondary (n=10)",
+            "reconstruction": "some recovered neurons reconstructed in Neurolucida"
+          },
+          "input_data_type": "biocytin-filled recorded interneurons",
+          "output_data_type": "identified interneuron subtype and morphological reconstructions",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "histology",
+          "technique": "Quantification of viral labeling efficiency",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "metric": "ratio of PSAML141F-GlyR-expressing interneuron density in CA1 layers to total interneuron density in the same layers",
+            "total_density_reference": "Gad65-cre: Cre-dependent tdTomato reporter progeny (n=15); Som-cre/Pvalb-cre: somatostatin (n=8) and parvalbumin (n=6) immunocytochemistry"
+          },
+          "input_data_type": "immunolabeled hippocampal sections",
+          "output_data_type": "viral labeling efficiency estimates per Cre line",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "statistics",
+          "technique": "Input-output curve fitting and gain/offset quantification",
+          "software_tool": "Igor Pro",
+          "tool_version": "6.04",
+          "parameters": {
+            "curve_fit": "sigmoid fit of form base + max/(1 + exp(xhalf - x))/rate to firing-rate vs. input curves",
+            "gain_metric": "change in slope calculated as (control slope - experimental slope)/control slope, from the peak of the first derivative of the sigmoid fit",
+            "offset_metric": "input shift (\u0394offset) determined from the xhalf of the sigmoid fit",
+            "epsc_summation": "individual EPSCs from the 74-ms-ISI photostimulation grid summed off-line with a 4-ms ISI to produce suprathreshold input-output curves"
+          },
+          "input_data_type": "photostimulation-evoked firing rates and EPSC amplitudes",
+          "output_data_type": "input-output curve parameters (gain, offset)",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 12,
+          "category": "statistics",
+          "technique": "Relative input resistance change analysis in somatic and dendritic compartments",
+          "software_tool": "Igor Pro",
+          "tool_version": "6.04",
+          "parameters": {
+            "method": "compared mean hyperpolarization from a -100 pA current injection alone vs. current injection paired with CA3SC photostimulation (<100 pA mean input level), with the synaptic-input-alone response subtracted from paired traces",
+            "spike_removal": "action potentials blanked from 2 ms before to 5 ms after the peak and linearly interpolated",
+            "burst_duration": "full width at half-maximum depolarization calculated across the first 100 ms of CA3SC photostimulation from filtered current-clamp recordings"
+          },
+          "input_data_type": "current-clamp recordings with and without CA3SC photostimulation",
+          "output_data_type": "relative input resistance change per compartment",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 13,
+          "category": "statistics",
+          "technique": "Group-level statistical testing framework",
+          "software_tool": "Igor Pro",
+          "tool_version": "6.04",
+          "parameters": {
+            "tests": "Student's t-test or ANOVA with Tukey's post hoc test for significance of difference",
+            "significance": "P < 0.05",
+            "reporting": "all data reported as mean \u00b1 s.e.m."
+          },
+          "input_data_type": null,
+          "output_data_type": "statistical significance results",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "4UQQ3CM5",
+      "year": 2013,
+      "journal": "Nature Neuroscience",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 12,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection of rAAV1/2(Synapsin-GCaMP5) to the medial septum of Cre-dependent tdTomato reporter mice for cell-type-specific GCaMP5 expression in septal GABAergic neurons",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "mouse_lines": "hemizygous Gad65-cre (n=6), Pvalb-cre (n=14), or Som-cre (n=6) x loxP-STOP-loxP-tdTomato reporter",
+            "coordinates": "+1.00 and 0.75 AP, 0.0 ML, -4.0 to -3.0 DV, 0.2-mm steps, 30-50 nl each"
+          },
+          "input_data_type": null,
+          "output_data_type": "GCaMP5-expressing septal GABAergic neurons",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "targeted rAAV1/2(Synapsin-GCaMP5) to neurons in the medial septum",
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Chronic hippocampal imaging window and head-post implantation over left dorsal CA1",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "cannula_window": "stainless steel cannula (3-mm diameter, 1.5-mm height) fixed to 3-mm coverglass (64-0720, Warner) with UV-curable adhesive",
+            "craniotomy_diameter_mm": 3,
+            "analgesic": "buprenorphine, 0.3 mg/kg subcutaneous",
+            "anesthesia": "isoflurane"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronic optical access window over dorsal CA1",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "molecular",
+          "technique": "Monosynaptic tracing of inputs to septo-hippocampal GABAergic neurons using Cre-dependent pseudotyped rabies virus in Gad65-cre mice",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "n_mice": 4,
+            "priming_vector": "rAAV(CAG-TVA-mCherry)Cre",
+            "complementation_vector": "rAAV(EF1a-histoneGFP-2A-rabiesG(CVS11*B19))Cre, chimeric glycoprotein (CVS-11 G gene, SAD-B19 cytosolic tail)",
+            "priming_complementation_ratio": "1:4, 13 nl each, same coordinates as injection",
+            "rabies_virus": "rabies(dG-dsRed2, Addgene #32638), injected 2 weeks after priming/complementation, 15 nl",
+            "survival_after_rabies_days": 10
+          },
+          "input_data_type": null,
+          "output_data_type": "coronal brain sections for identification of presynaptic input neurons",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "molecular",
+          "technique": "Pharmaco-genetic silencing of Som+ hippocampo-septal-projecting GABAergic neurons via PSAML141F-GlyR expression and systemic PSEM89S agonist injection during in vivo imaging",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "mouse_line": "Som-cre x loxP-STOP-loxP-tdTomato (n=2)",
+            "viruses": "rAAV7/2(Synapsin-PSAML141F-GlyR)Cre bilaterally to dorsal CA1; rAAV1/2(Synapsin-GCaMP5) to medial septum",
+            "agonist": "PSEM89S, 50 mg/kg intraperitoneal"
+          },
+          "input_data_type": null,
+          "output_data_type": "in vivo imaging data under pharmacogenetically silenced vs. drug-free control conditions",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "behavior",
+          "technique": "Multi-modal sensory stimulus presentation (tone, light, air puff) via a microcontroller-driven behavioral apparatus, synchronized with two-photon imaging",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "microcontroller": "Arduino",
+            "auditory": "tone, max intensity ~110 dB",
+            "visual": "200 ms red LED flash",
+            "air_puff_valve": "solenoid valve (NVZ110-6H-M5, SMC)",
+            "inter_stimulus_interval_s": "30-45",
+            "repeats_per_modality_or_intensity": "5-10, randomized temporal order"
+          },
+          "input_data_type": null,
+          "output_data_type": "synchronized stimulus event traces",
+          "hardware": "Arduino microcontroller; NI USB-6229 DAQPAD (National Instruments)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "behavior",
+          "technique": "Head-fixed auditory trace fear conditioning using licking suppression as the fear measure, in water-restricted mice",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "n_mice": 6,
+            "conditioned_stimulus": "10 kHz tone, 20 s",
+            "unconditioned_stimulus": "air puff, 200 ms, 5 stimuli at 1 Hz",
+            "trace_interval_s": 15,
+            "conditioning_schedule": "spaced sessions across two consecutive days",
+            "water_restriction": ">80% pre-deprivation body weight",
+            "control": "treadmill belt material changed every session to prevent context conditioning"
+          },
+          "input_data_type": null,
+          "output_data_type": "licking suppression traces as a measure of conditioned fear",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "imaging",
+          "technique": "Awake, head-fixed two-photon imaging sessions with habituation protocol prior to data collection",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "habituation_start": "3-7 d after implantation",
+            "habituation_progression": "up to 1 hr of head-fixation by 3rd-4th session",
+            "licking_behavior_imaging_subset": "n=2 mice, water-restricted >80% pre-deprivation weight"
+          },
+          "input_data_type": null,
+          "output_data_type": "in vivo two-photon imaging sessions in awake, behaving mice",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 8,
+          "category": "imaging",
+          "technique": "Two-photon imaging under anesthesia (ketamine/xylazine or urethane) following awake imaging sessions",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "ketamine_xylazine": "60 mg/kg ketamine + 6 mg/kg xylazine intraperitoneal, n=9 experiments in 6 mice",
+            "urethane": "0.8-1 g/kg intraperitoneal, n=3 mice",
+            "anesthesia_depth_assessment": "loss of withdrawal reflex to paw pinch"
+          },
+          "input_data_type": null,
+          "output_data_type": "two-photon imaging data under anesthesia",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "molecular",
+          "technique": "Local pharmacology: drug application to the hippocampal surface via a punctured plastic coverslip over the imaging cannula",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "coverslip_hole_diameter_um": 200,
+            "plug": "Kwik-Sil (World Precision Instruments)",
+            "drugs": "baclofen (400 uM, Tocris); CGP52432 (30 uM, Tocris); tetrodotoxin (30 uM, Sigma)",
+            "diffusion_time_min": 30
+          },
+          "input_data_type": null,
+          "output_data_type": "imaging data under local drug application vs. control",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "electrophysiology",
+          "technique": "Chronic local field potential recording from dorsal CA1 via a tungsten microwire implanted beneath the imaging cannula coverslip, theta-filtered",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "electrode": "formvar-coated tungsten microwire (California Fine Wire), 75 um diameter, 30 kOhm impedance",
+            "implant_depth_um": "~200 beneath cannula coverslip",
+            "amplification": "1000x",
+            "digitization_kHz": 5,
+            "theta_filter": "finite impulse response filter, Kaiser window, 4-8 Hz"
+          },
+          "input_data_type": null,
+          "output_data_type": "theta-filtered LFP signal",
+          "hardware": "DAM80 extracellular amplifier (World Precision Instruments); NIDAQ A/D converter (National Instruments)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "histology",
+          "technique": "Post-imaging anatomy and immunohistochemistry for Chat to confirm cell-type-specific GCaMP5 expression",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "fixation": "4% paraformaldehyde in 0.1 M phosphate-buffered saline (pH 7.4)",
+            "section_thickness_um": 50,
+            "primary_antibody": "anti-Chat, 1:500 (Millipore AB144P)",
+            "secondary": "avidin-conjugated Alexa 660 (1:300, Invitrogen) or DyLight 594 (Jackson ImmunoResearch)",
+            "confocal_stack": "2,535 slices, 1-um optical thickness, 20x objective"
+          },
+          "input_data_type": "fixed brain sections",
+          "output_data_type": "confocal tile-stack images for GCaMP5/Chat colocalization assessment",
+          "hardware": "Leica DM6000 B confocal microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 12,
+          "category": "electrophysiology",
+          "technique": "In vitro whole-cell voltage-clamp recording from CA1 stratum oriens/alveus interneurons in acute hippocampal slices, with ChR2 photostimulation of septo-hippocampal axons",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "holding_potential_mV": -55,
+            "intracellular_solution": "138 mM potassium gluconate, 4 mM NaCl, 10 mM HEPES, 4 mM Mg2ATP, 0.3 mM Tris2GTP, 14 mM phosphocreatine, 0.1 mM Alexa 594 (low Cl-)",
+            "chr2_photostimulation": "blue DPSS laser (473 nm, CrystaLaser) coupled to the two-photon scan-head uncaging path, 60x objective"
+          },
+          "input_data_type": null,
+          "output_data_type": "whole-cell voltage-clamp recordings of light-evoked postsynaptic currents",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "6T8UW6LJ",
+      "year": 2014,
+      "journal": "Science",
+      "attribution": {
+        "source": "position_heuristic",
+        "confidence": "low"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "N5AUJWGX",
+      "year": 2014,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 2,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection and chronic hippocampal imaging window implantation for PVBC axonal bouton imaging",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "virus": "rAAV serotype 1 (rep/cap 2/1), Synapsin-GCaMP5-Cre, into dorsal CA1 of PV-TOM mice",
+            "implant_timing": "chronic hippocampal imaging window implanted over left dorsal CA1, 2 weeks post-injection"
+          },
+          "input_data_type": null,
+          "output_data_type": "PV-TOM mice with GCaMP5-expressing PV+ boutons and chronic imaging access",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging of PV+ basket-cell axonal boutons, including functional imaging during behavior and anatomical bouton-density z-stack imaging under anesthesia",
+          "software_tool": "PrairieView",
+          "tool_version": null,
+          "parameters": {
+            "laser": "Ti:Sapphire, 920 nm (Coherent)",
+            "objective": "40x, 0.8 NA (Nikon)",
+            "microscope": "two-photon laser-scanning microscope (Prairie)",
+            "functional_full_field": "256x128 px, 1.6 ms dwell, 2000-2400 frames, 165x165 um FOV, 7.63 Hz",
+            "functional_bouton_roi": "82x82 um or 41x41 um FOV, 9.7 Hz or 10.2 Hz",
+            "anatomical_zstack": "ketamine/xylazine anesthesia, 82x82 um FOV, 512x512 px, 6 ms dwell, 100 frames, 3-6 mm z-stacks, superficial and deep locations",
+            "synchronization": "custom-designed hardware/software for behavioral readout synchronized with imaging data"
+          },
+          "input_data_type": null,
+          "output_data_type": "functional GCaMP5 bouton imaging data and anatomical bouton-density z-stacks",
+          "hardware": "Prairie two-photon laser-scanning microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "YU3INJP9",
+      "year": 2016,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "ETEC7ELI",
+      "year": 2021,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 4,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "molecular",
+          "technique": "Zebrafish acute chemoconvulsant seizure induction via pentylenetetrazol (PTZ) bath application",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "animal": "Tg(elavl3:H2B-GCaMP6s) zebrafish, 7 dpf",
+            "mounting": "2.5% low-melting-point agarose, dorsal side up",
+            "ptz_concentration_mM": 15,
+            "baseline_before_ptz_min": 5
+          },
+          "input_data_type": null,
+          "output_data_type": "zebrafish exhibiting spontaneous PTZ-induced seizures",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "imaging",
+          "technique": "In vivo two-photon volumetric calcium imaging of whole zebrafish brain during baseline and PTZ-induced seizure states, with atlas registration and NMF-based signal extraction",
+          "software_tool": "CaImAn, CMTK",
+          "tool_version": null,
+          "parameters": {
+            "microscope": "Olympus FVMPE multiphoton, resonant scanner",
+            "objective": "16x, 0.8 NA (Nikon)",
+            "acquisition": "1.2x zoom (1.44 um/px), 15 z-planes (15 um spacing), 0.59 s/volume, 2500 volumes",
+            "protocol": "5 min baseline, then 15 mM PTZ bath application, 20 min continued imaging",
+            "registration": "Z-Brain atlas Tg(elavl3:H2B-RFP) volume via Computational Morphometry Toolkit (CMTK)",
+            "signal_extraction": "non-negative matrix factorization (NMF)-based denoising (CaImAn)"
+          },
+          "input_data_type": null,
+          "output_data_type": "single-cell functional calcium dynamics registered to a common brain atlas",
+          "hardware": "Olympus FVMPE multiphoton microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "surgery",
+          "technique": "Mouse intrahippocampal kainic-acid model of chronic temporal lobe epilepsy: tamoxifen-induced adult-born granule cell labeling, kainic acid injection, viral GCaMP6f injection, chronic imaging window and LFP electrode implantation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "mouse_line": "Nestin-CreERT2 x ROSA26-CAG-stopflox-tdTomato (Ai9)",
+            "tamoxifen": "3 mg IP/day for 5 consecutive days, 2 weeks before KA injection",
+            "ka_injection": "kainic acid into ventral hippocampus to induce epilepsy",
+            "virus": "rAAV(Syn-GCaMP6f) into dorsal dentate gyrus, ipsilateral to KA injection",
+            "implants": "chronic imaging window over dorsal dentate gyrus; LFP electrode adjacent to KA injection site",
+            "monitoring": "continuous video-EEG for ictogenesis, individually housed",
+            "imaging_start": "3 weeks post-KA injection, after video-EEG-verified TLE"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronically epileptic mice with dentate gyrus imaging/LFP access",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "imaging",
+          "technique": "Concurrent two-photon calcium imaging of dentate gyrus granule cells and LFP recording in head-fixed epileptic and control mice",
+          "software_tool": "OASIS",
+          "tool_version": null,
+          "parameters": {
+            "frame_rate_hz": 4,
+            "excitation": "920 nm, 50-100 mW (Chameleon Ultra II, Coherent)",
+            "objective": "40x NIR water immersion, 0.8 NA, 3.5 mm WD (Nikon)",
+            "channels": "green GCaMP6f (HQ525/70m-2p), red tdTomato (HQ607/45m-2p)",
+            "frame_size": "512x512 px, 225x225 um FOV",
+            "denoising": "OASIS",
+            "recording_duration_min": 60,
+            "control_data_source": "healthy control recordings from Danielson et al. 2016, matched dentate gyrus location"
+          },
+          "input_data_type": null,
+          "output_data_type": "denoised calcium traces and concurrent LFP recordings",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "F3ELBLNY",
+      "year": 2021,
+      "journal": "Science",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 10,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "molecular",
+          "technique": "Stereotaxic AAV injection strategy for cell-type-specific opsin/indicator expression and intersectional (Cre/Flp) targeting of SuM-projection circuits",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "injection_volume_nl": "200-400",
+            "injection_rate_nl_min": 100,
+            "needle": "10 uL Hamilton syringe, 33-35G tip",
+            "sum_coordinates": "-2.7P, 0.2L, 4.8V relative to bregma",
+            "ms_coordinates": "+0.8, 0.2L, 4.5V relative to bregma"
+          },
+          "input_data_type": null,
+          "output_data_type": "cell-type-specific opsin/indicator-expressing SuM or medial-septum neurons",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Optical fiber implantation over SuM or ACC for in vivo optogenetic stimulation/inhibition",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "fiber": "0.5 NA, 200 um core (Thorlabs)",
+            "sum_fiber_coordinates": "-2.7P, 0.2L, 4.5V",
+            "acc_fiber_coordinates": "+0.8A, 0.5L, 1.0V",
+            "recovery_weeks": ">=3"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronic optical access for SuM or ACC photostimulation",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "surgery",
+          "technique": "GRIN-lens implantation over SuM combined with contralateral CA1 LFP electrode placement guided by ripple-band monitoring",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "lens": "8.4 mm long, 0.5 mm diameter GRIN relay lens (Inscopix)",
+            "implant_depth_mm": 4.3,
+            "electrode": "bipolar twisted tungsten wire (A-M Systems)",
+            "targeting": "lowered while monitoring LFP for maximal ripple amplitude at stratum pyramidale"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronic GRIN-lens imaging access to SuM with synchronized contralateral CA1 LFP",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "molecular",
+          "technique": "Anterograde transsynaptic tracing of SuM-Tac1+ postsynaptic targets in the PAG using an intersectional AAV1-Cre-On-Flp strategy",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "sum_injection": "400 nL AAV1-CreON-Flp",
+            "pag_injection": "300 nL FlpON-ChR2-eYFP or FlpON-GCaMP6f, -4.5P, 0.4L, -3V relative to bregma",
+            "survival_weeks": "3-4"
+          },
+          "input_data_type": null,
+          "output_data_type": "labeled postsynaptic PAG neurons receiving SuM-Tac1+ input",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "surgery",
+          "technique": "Hippocampal (dentate gyrus or CA2) imaging window and headpost implantation with a contralateral 4-channel LFP electrode for sharp-wave-ripple monitoring",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "dg_window": "2.0 mm diameter, 2.3 mm height, implanted 100-200 um above the hippocampal fissure",
+            "ca2_window": "3.0 mm diameter, 1.8 mm height",
+            "coordinates": "DG -2.3P, 1.5L; CA2 -1.5P, 1.85L relative to bregma",
+            "anesthesia": "isoflurane 3.5% induction / 1.5-2.0% maintenance",
+            "analgesia": "Metacam 5 mg/kg IP, bupivacaine 2 mg/kg SC",
+            "lfp_electrode": "4-channel bundled 51 um PFA-coated tungsten wire, contralateral CA1, 45 degree angle"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronic hippocampal imaging window with synchronized contralateral LFP",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "behavior",
+          "technique": "Head-fixed treadmill/floating-ball locomotion tracking synchronized to imaging and electrophysiology",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "treadmill": "quadrature rotary encoder on wheel axle, analog-to-digital converter, synchronized to imaging frames",
+            "ball_tracking": "video camera at 60 fps, FFT-based frame-to-frame image registration for displacement/speed"
+          },
+          "input_data_type": null,
+          "output_data_type": "synchronized locomotor speed traces",
+          "hardware": "Mako Gigecam video camera",
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "electrophysiology",
+          "technique": "In vivo multichannel electrophysiological recording from hippocampus (CA1/dentate gyrus) combined with optogenetic stimulation (ChR2/stGtACR2/halorhodopsin) of SuM-Tac1+ or SuM-Tac1- circuits in head-fixed mice",
+          "software_tool": "Open Ephys, MountainSort, Phy2",
+          "tool_version": null,
+          "parameters": {
+            "probes": "32-channel linear probe (A1x32-6mm-50-177) or higher-density probe (A1x32-Poly3-10mm-50-177, Buzsaki32-CM32), Neuronexus",
+            "amplification": "10000x, 30 kHz digitization, Intan headstage",
+            "laser": "473 nm or 589 nm, 3-5 mW at fiber tip",
+            "chr2_stimulation": "square pulses, 24% duty cycle, 4/8/12 Hz",
+            "inhibition_stimulation": "constant illumination, 1-2 mW (stGtACR2) or 3-5 mW (halorhodopsin)"
+          },
+          "input_data_type": null,
+          "output_data_type": "sorted single-unit spike trains and LFP with optogenetic-timing labels",
+          "hardware": "Neuronexus silicon probes; Intan acquisition system; Shanghai Laser sources",
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "electrophysiology",
+          "technique": "In vitro acute-slice whole-cell patch-clamp recording from supramammillary neurons with optogenetic (ChR2) identification of Tac1+ versus Tac1- cell identity",
+          "software_tool": "pClamp, Clampfit",
+          "tool_version": null,
+          "parameters": {
+            "slice_thickness_um": 300,
+            "protective_recovery_solution": "NMDG-based, per Ting et al. protocol",
+            "recording_acsf": "126 mM NaCl, 26 mM NaHCO3, 10 mM glucose, 2.5 mM KCl, 2 mM MgCl2, 2 mM CaCl2, 1.25 mM NaH2PO4",
+            "internal_solution": "126 mM K-gluconate, 10 mM HEPES, 4 mM KCl, 4 mM ATP-Mg, 0.3 mM GTP-Na, 10 mM phosphocreatine, 0.2% biocytin",
+            "amplifier": "MultiClamp 700B, low-pass filtered 2 kHz, digitized at 10 kHz (Digidata 1440A)",
+            "optogenetic_id": "50 ms pulses of 465+/-15 nm illumination (DG-4 arc lamp), success/latency criteria to classify direct ChR2 responses"
+          },
+          "input_data_type": null,
+          "output_data_type": "whole-cell current-clamp recordings with optogenetically confirmed cell-type identity",
+          "hardware": "Olympus BX61WI microscope; MultiClamp 700B amplifier",
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "histology",
+          "technique": "Post hoc immunohistochemistry for GFP/eYFP and VGAT with confocal imaging and fluorescence-intensity profiling across the dentate granule cell layer",
+          "software_tool": "ImageJ (Fiji)",
+          "tool_version": null,
+          "parameters": {
+            "fixation": "4% PFA, 48-72 h",
+            "sectioning": "60 um, vibratome (Leica)",
+            "primary_antibodies": "anti-GFP (1:2000, Aves GFP-1020), anti-VGAT (1:2000, Synaptic Systems 131 011)",
+            "confocal": "Zeiss LSM 800",
+            "quantification": "Plot Profile average fluorescence intensity across granule cell layer, two AP levels"
+          },
+          "input_data_type": "fixed brain sections",
+          "output_data_type": "confocal images and granule-cell-layer fluorescence intensity profiles",
+          "hardware": "Zeiss LSM 800 confocal microscope",
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging of SuM and hippocampal (DG/CA2) neurons and axons during head-fixed locomotion, and larval zebrafish tail-vigor behavioral imaging, each with synchronized LFP or behavioral recording",
+          "software_tool": "SIMA, Suite2p, Scanbox, Stytra",
+          "tool_version": null,
+          "parameters": {
+            "sum_imaging": "Neurolabware 2-photon microscope, 16x objective, 15.49 fps, 920 nm excitation, contralateral CA1 LFP amplified 1000x at 10 kHz",
+            "hippocampus_imaging": "Bruker 8 kHz resonant scanner, 920 nm (Chameleon Ultra II), 512x512 px, 4x zoom, 210x210 um FOV, 30 Hz, synchronized 25 kHz LFP (Intan)",
+            "zebrafish_behavior": "optomotor drifting-stripe stimuli at 60 Hz, tail movement filmed at 60 fps, Stytra-coordinated stimulus/behavior acquisition"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw two-photon calcium time series and synchronized LFP/behavior; zebrafish tail-vigor traces",
+          "hardware": "Neurolabware and Bruker two-photon microscopes",
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,633 @@
+{
+  "target_author": "Patrick Kaifosh",
+  "total_papers": 5,
+  "total_steps": 31,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "EC39E7I5",
+      "year": 2012,
+      "journal": "Nature Neuroscience",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 1,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "other",
+          "technique": "Multicompartmental biophysical simulation of a CA1 pyramidal cell with distributed excitatory (AMPA/NMDA) synapses and conductance-based inhibition, used to model the effect of disinhibiting perisomatic or dendrite-targeting interneuron populations",
+          "software_tool": "NEURON",
+          "tool_version": null,
+          "parameters": {
+            "cell_geometry_and_conductances": "same CA1 cell geometry/channel conductances as Poirazi et al. 2003",
+            "excitatory_synapse_placement": "AMPA+NMDA conductances distributed across strata oriens and radiatum, spatial distribution proportional to measured anatomical density",
+            "excitatory_activation": "Poisson process, rate tuned to produce ~450 pA somatic current under voltage clamp without inhibition",
+            "inhibition_model": "constant conductance, reversal potential -75 mV, conductance proportional to anatomically measured inhibitory synapse density x measured interneuron firing rate",
+            "disinhibition_model": "increased conductance of one interneuron population as the antagonistic population is silenced"
+          },
+          "input_data_type": null,
+          "output_data_type": "simulated CA1 pyramidal cell somatic voltage/firing responses under varying inhibitory conditions",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "4UQQ3CM5",
+      "year": 2013,
+      "journal": "Nature Neuroscience",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 9,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "imaging",
+          "technique": "Design and integration of a resonant-scanning two-photon imaging acquisition system for dual-channel (GCaMP/tdTomato) calcium imaging in awake, head-fixed mice",
+          "software_tool": "PrairieView",
+          "tool_version": null,
+          "parameters": {
+            "objective": "40x (Nikon NIR Apo, 0.8 NA, 3.5 mm WD)",
+            "excitation_laser": "Chameleon Ultra II (Coherent), 920 nm, 20-40 mW average power at back focal plane",
+            "modulator": "electro-optical modulator (Model 302 RM, Conoptics)",
+            "detectors": "GaAsP PMT (Hamamatsu 7422P-40, green GCaMP); multi-alkali PMT (Hamamatsu R3896, red tdTomato)",
+            "emission_filters": "HQ525/70m-2p (green), HQ607/45m-2p (red), 575dcxr dichroic (Chroma)",
+            "frame_size_and_fov": "256x128 pixels; 165x165 um or 117x117 um field of view",
+            "frame_rate_Hz": "7.6-10",
+            "head_angle_adjustment": "goniometers (Edmund Optics), up to 10 degrees"
+          },
+          "input_data_type": null,
+          "output_data_type": "dual-channel (red/green) raw two-photon time-series images",
+          "hardware": "Ultima in vivo multiphoton microscopy system (Prairie Technologies)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "behavior",
+          "technique": "Design of a microcontroller-driven behavioral apparatus for multi-modal stimulus presentation and locomotor tracking, synchronized with two-photon imaging",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "microcontroller": "Arduino",
+            "auditory_stimulus": "tone, max intensity ~110 dB",
+            "visual_stimulus": "200 ms light flash via red LED",
+            "air_puff_valve": "solenoid valve (NVZ110-6H-M5, SMC)",
+            "locomotion_sensor": "infrared LED / phototransistor treadmill wheel encoder",
+            "synchronization": "NI USB-6229 DAQPAD (National Instruments), common trigger pulse shared with two-photon imaging"
+          },
+          "input_data_type": null,
+          "output_data_type": "synchronized behavioral/stimulus event traces and locomotion voltage signal",
+          "hardware": "Arduino microcontroller; NI USB-6229 DAQPAD",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "imaging",
+          "technique": "Two-step motion correction: frame-by-frame rigid alignment by spatial cross-correlation, followed by a row-by-row Hidden Markov Model correcting within-frame (intra-scan) motion artifacts",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "step1_frame_alignment": "maximize spatial cross-correlation between each frame and a running template averaged from previously aligned frames",
+            "step2_hmm": "first-order autoregressive (AR1) model of brain displacement per row-acquisition-time; Poisson photon-noise model for pixel intensity; MAP displacement estimated via the Viterbi algorithm",
+            "channel_combination": "product of per-channel observation likelihoods, assuming independent noise across channels",
+            "exclusion_criterion": "frames with manually confirmed uncorrected out-of-plane motion discarded",
+            "gain_estimation_subset": "estimated using only the 10% of pixel locations with smallest spatial intensity-gradient magnitude, from frames sharing the same estimated displacement as their neighbors"
+          },
+          "input_data_type": "raw dual-channel two-photon time-series",
+          "output_data_type": "motion-corrected two-photon time-series",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "imaging",
+          "technique": "Channel separation of mixed GCaMP and tdTomato signals via independent component analysis (ICA) applied to time-averaged motion-corrected images",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "noise_reduction": "GCaMP channel denoised by subtracting the time-averaged (not per-frame) red tdTomato channel, justified by the static tdTomato signal"
+          },
+          "input_data_type": "time-averaged motion-corrected dual-channel images",
+          "output_data_type": "channel-separated (unmixed) GCaMP and tdTomato signal images",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "imaging",
+          "technique": "Manual ROI selection on time-averaged, motion-corrected, channel-separated images with per-frame fluorescence signal extracted as the intensity-weighted average within each ROI",
+          "software_tool": "ImageJ",
+          "tool_version": null,
+          "parameters": {
+            "roi_selection": "hand-drawn",
+            "signal_definition": "intensity-weighted average of pixel values within each ROI at each imaging frame",
+            "exclusion_criterion": "boutons not present in the field of view for all imaging frames were discarded"
+          },
+          "input_data_type": "channel-separated, motion-corrected two-photon time-series",
+          "output_data_type": "per-ROI (per-bouton) raw fluorescence time series",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "statistics",
+          "technique": "Offset principal component analysis (oPCA): a PCA variant using a lag-1 (time-offset) cross-product covariance estimator to denoise extracted bouton signals under an independent-photon-noise assumption, retaining only the components needed to capture the full estimated signal variance",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "estimator": "lag-1 cross-product covariance estimator, unbiased under independent photon noise and slow signal dynamics relative to imaging rate",
+            "component_retention_rule": "minimal number of oPCs whose cumulative estimated relative power sums to 1 (100% of estimated signal variance)"
+          },
+          "input_data_type": "per-bouton raw fluorescence time series",
+          "output_data_type": "denoised bouton signals reconstructed from retained oPCA components",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 7,
+          "category": "statistics",
+          "technique": "Quantification of stimulus-evoked and running-related calcium responses by integrating dF/F over defined post-stimulus/running windows relative to a pre-event baseline, with per-trial significance assessed by a Z-test",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "stimulus_response_window": "2 s following stimulus onset",
+            "stimulus_baseline": "average signal during pre-stimulus period",
+            "running_response_window": "periods of detected treadmill motion",
+            "running_baseline": "average signal during periods without running",
+            "exclusions": "trials with running excluded from stimulus-response analysis; first 5 s after each stimulus excluded from running-response analysis",
+            "significance_test": "Z-test, per trial per bouton",
+            "intensity_dependence_inclusion": "boutons with a significant response to the strongest stimulus"
+          },
+          "input_data_type": "denoised per-bouton dF/F traces",
+          "output_data_type": "per-bouton stimulus- and running-evoked response magnitudes and significance calls",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "statistics",
+          "technique": "Quantification of similarity between each bouton's running-response and stimulus-response as the angle between per-bouton response vectors across the population, compared against a shuffled-identity null distribution",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "pharmacology_inclusion_criterion": "boutons with significant (P<0.05) and substantial (mean > 0.4 s.dF/F) responses under control or drug conditions",
+            "null_model": "angle recalculated after random permutation of bouton identity"
+          },
+          "input_data_type": "per-bouton running-response and stimulus-response magnitude vectors",
+          "output_data_type": "population-level running-vs-stimulus response angle metric and shuffled null distribution",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 9,
+          "category": "statistics",
+          "technique": "General hypothesis-testing procedure: two-sided comparisons throughout, with a shuffle-test framework for population-level comparisons computing empirical P values",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "test_sidedness": "two-sided",
+            "shuffle_test_p_value_rule": "twice the smaller of the two tail fractions (fraction of shuffles below vs. above the true mean)",
+            "shuffled_identity_types": "bouton identity, axon identity, or postsynaptic target identity",
+            "blinding": "data collection and analysis not performed blind to experimental condition",
+            "sample_size_determination": "no a priori statistical power analysis; sample sizes matched to prior publications"
+          },
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "No statistical test was used to determine sample size a priori",
+          "extraction_confidence": "high"
+        }
+      ]
+    },
+    {
+      "paper_id": "6T8UW6LJ",
+      "year": 2014,
+      "journal": "Science",
+      "attribution": {
+        "source": "methods_text_inference",
+        "confidence": "medium"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    },
+    {
+      "paper_id": "3LEAWLYJ",
+      "year": 2016,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 6,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "other",
+          "technique": "Numerical simulation, integration, and visualization of a two-compartment recurrent-network model of hippocampal memory encoding",
+          "software_tool": "Python, SciPy, matplotlib",
+          "tool_version": null,
+          "parameters": {},
+          "input_data_type": null,
+          "output_data_type": null,
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "other",
+          "technique": "Simulated memory encoding via random Bernoulli-distributed initial recurrent synaptic weights followed by a stochastic Hebbian weight-update rule applied after each input pattern presentation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "initial_weight_distribution": "Bernoulli (0 or 1), mean equal to equilibrium fraction of potentiated synapses",
+            "potentiation_probability_p_plus": 0.25,
+            "depression_probability_p_minus": "2 * s_p * p_plus"
+          },
+          "input_data_type": null,
+          "output_data_type": "simulated recurrent synaptic weight matrix",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 3,
+          "category": "other",
+          "technique": "Generation of tuned distal and proximal input activation patterns for model neurons using thresholded von Mises-distributed random inputs, with input similarity across simulated environments controlled by the distribution's concentration parameter",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "concentration_parameter_k_high_similarity": 1000,
+            "concentration_parameter_k_medium_similarity": 100,
+            "concentration_parameter_k_low_similarity": 1
+          },
+          "input_data_type": null,
+          "output_data_type": "binary distal and proximal input activation patterns per model neuron",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 4,
+          "category": "statistics",
+          "technique": "Calculation of recurrence frequency (probability a neuron recurs in engrams for similar memories) for both one-compartment and two-compartment model variants",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {},
+          "input_data_type": "simulated engram activation patterns",
+          "output_data_type": "recurrence frequency probability density (Figure 5C)",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "low"
+        },
+        {
+          "step_order": 5,
+          "category": "statistics",
+          "technique": "Calculation of correlation between simulated engrams, decomposed into distal and proximal input correlation contributions",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {},
+          "input_data_type": "simulated engram activation patterns",
+          "output_data_type": "engram-pair correlation coefficient",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "low"
+        },
+        {
+          "step_order": 6,
+          "category": "statistics",
+          "technique": "Numerical calculation of mutual information between single-neuron activity and distal dendritic input for one- and two-compartment network variants, integrated numerically to generate a figure",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {},
+          "input_data_type": "simulated neuron activation and distal-input distributions",
+          "output_data_type": "mutual information per active neuron (Figure 5B)",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "paper_id": "U7L3RARN",
+      "year": 2016,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 5,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "statistics",
+          "technique": "Identification of spatially tuned cells via tuning specificity and spatial information",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "running_epoch_definition": "consecutive forward-locomotion frames >=1 s duration with peak speed >=5 cm/s; epochs separated by <0.5 s merged",
+            "tuning_specificity": "magnitude of the spatial tuning vector (1 - circular variance of occupancy-normalized transients); significance via 100,000 shuffles of transient onset times within running frames",
+            "spatial_information": "Skaggs spatial information content computed across bin counts N = {2,4,5,8,10,20,25,100}; bias-corrected against 100,000 shuffled-onset null distributions",
+            "classification": "cells classified as place cells separately by each metric based on shuffle-derived p-values"
+          },
+          "input_data_type": "Ca2+ transient onset times restricted to running epochs",
+          "output_data_type": "classified place cells with tuning specificity and spatial information scores",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 2,
+          "category": "statistics",
+          "technique": "Cross-session remapping analysis: population vector correlation, centroid shift, and tuning curve correlation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "rate_maps": "100 position bins, Gaussian-smoothed (\u03c3 = 3 bins), transients per bin normalized by occupancy",
+            "pv_correlation": "1D rate maps of all cells per sublayer stacked into population vectors, all cells included regardless of tuning",
+            "centroid_shift": "angle (radians) between spatial tuning vectors across sessions, restricted to place cells by tuning specificity",
+            "tuning_curve_correlation": "Pearson correlation between rate maps across sessions, restricted to place cells by spatial information"
+          },
+          "input_data_type": "cross-session rate maps and tuning vectors",
+          "output_data_type": "PV correlation, centroid shift, and tuning curve correlation values",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 3,
+          "category": "statistics",
+          "technique": "Deep-vs-superficial task-modulation shuffle analysis (RF vs. GOL)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "shuffle_1": "null distribution of delta task modulation from randomizing deep/superficial cell identity within each experiment (100,000 shuffles)",
+            "shuffle_2": "null distribution from shuffling RF/GOL experiment identity while preserving each cell's sublayer identity (100,000 shuffles)"
+          },
+          "input_data_type": "per-cell task-modulation metrics by sublayer",
+          "output_data_type": "significance of sublayer difference in task modulation",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 4,
+          "category": "statistics",
+          "technique": "Reward-representation-versus-performance regression and shuffle analysis",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "regression": "linear regression of GOL task performance (fraction of licks in reward zone) on covariates including day of experiment",
+            "comparison_metric": "absolute difference between correlation coefficients (r-values) for the two sublayers",
+            "null_model": "null distribution of r-value differences from randomizing cell identity within each experiment (100,000 shuffles)"
+          },
+          "input_data_type": "per-cell reward-zone representation strength and behavioral performance",
+          "output_data_type": "regression coefficients and significance of sublayer difference in reward encoding",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 5,
+          "category": "statistics",
+          "technique": "Group-level statistical testing framework",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "primary_test": "paired two-sample t-test wherever possible to compare population means across animals",
+            "nonparametric_alternative": "Mann-Whitney U test when a paired t-test was not applicable",
+            "repeated_measures": "ANOVA to compare behavior across sessions and days"
+          },
+          "input_data_type": null,
+          "output_data_type": "statistical significance results",
+          "hardware": null,
+          "source_location": "supplement",
+          "source_quote": null,
+          "extraction_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "paper_id": "YU3INJP9",
+      "year": 2016,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 10,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection of GCaMP6f into dorsal dentate gyrus",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "virus": "AAV1.Syn.GCaMP6f.WPRE.SV40, titer 2-4x10^13",
+            "coordinates": "-1.5 mm AP, -2.3 mm ML, three DV depths"
+          },
+          "input_data_type": null,
+          "output_data_type": "GCaMP6f-expressing dentate granule cells",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "dorsal DG of male mice was stereotactically injected",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Hippocampal imaging window and headpost implantation over dorsal DG",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "window": "over left dorsal DG"
+          },
+          "input_data_type": null,
+          "output_data_type": "chronic imaging window over dorsal DG",
+          "hardware": "stainless-steel headpost",
+          "source_location": "main_text",
+          "source_quote": "surgically implanted with an imaging window over the left dorsal DG",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 3,
+          "category": "surgery",
+          "technique": "Optic fiber implantation over dorsal DG for optogenetic inhibition experiments",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "coordinates": "+/-1 mm ML, -1.5 mm AP, -1.7 mm DV"
+          },
+          "input_data_type": null,
+          "output_data_type": "fiber-optic-implanted mice for Arch-mediated abGC inhibition",
+          "hardware": "fiber optics",
+          "source_location": "main_text",
+          "source_quote": "surgically implanted with fiber optics targeted to the dorsal DG",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 4,
+          "category": "imaging",
+          "technique": "In vivo two-photon calcium imaging of dentate granule cells during head-fixed treadmill behavior",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8 kHz resonant galvanometer (Bruker) addition",
+            "acquisition": "1024x1024 pixels, 300x300 micron FOV, 15 Hz"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw dentate granule cell calcium imaging movies",
+          "hardware": "Nikon 40x NIR water-immersion objective",
+          "source_location": "main_text",
+          "source_quote": "with the addition of an 8kHz resonant galvanometer (Bruker)",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 5,
+          "category": "behavior",
+          "technique": "Water-restricted treadmill training with random reward delivery across two multisensory contexts (A/B)",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "water_restriction": ">90% pre-deprivation weight",
+            "contexts": "same belt, distinct visual/auditory/tactile/olfactory cues"
+          },
+          "input_data_type": null,
+          "output_data_type": "trained mice performing multisensory context task",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "mice were water restricted (>90% pre-deprivation weight)",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 6,
+          "category": "imaging",
+          "technique": "Calcium imaging preprocessing: motion correction (modified 2D Hidden Markov Model), ROI drawing, \u0394F/F extraction, transient detection",
+          "software_tool": "SIMA",
+          "tool_version": null,
+          "parameters": {
+            "df_f": "smoothing window t1=3s, baseline size t2=60s",
+            "transient_min_duration": "1 s"
+          },
+          "input_data_type": "raw calcium imaging movies",
+          "output_data_type": "\u0394F/F traces and detected calcium transients per ROI",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "All imaging data were analyzed using the SIMA software package",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 7,
+          "category": "statistics",
+          "technique": "Spatial tuning vector and mutual-information-based tuning-specificity p-value analysis of granule cells",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "bin_counts": "N = 2,4,5,8,10,20,25,100",
+            "shuffles": "100,000 transient-onset reassignments"
+          },
+          "input_data_type": "calcium transient onset times, position data",
+          "output_data_type": "spatial information estimates and significance per cell",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "we then created 100,000 random reassignments of the transient onset times",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 8,
+          "category": "statistics",
+          "technique": "Cross-context remapping analysis: tuning-curve correlation and centroid shift between sequential context exposures",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "rate_maps": "100 position bins, Gaussian smoothed (sigma=3 bins)"
+          },
+          "input_data_type": "rate maps across context exposures",
+          "output_data_type": "tuning-curve correlation and centroid-shift values",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "The tuning curve correlation for each cell was defined as the Pearson correlation",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 9,
+          "category": "behavior",
+          "technique": "Optogenetic inhibition of adult-born granule cells (Arch) during contextual fear conditioning and pattern-separation testing",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "light": "593.5 nm laser diode via FC/PC rotary joint",
+            "task": "contextual fear conditioning, pattern separation between similar contexts"
+          },
+          "input_data_type": null,
+          "output_data_type": "freezing behavior, discrimination scores",
+          "hardware": "Master-8 stimulator (AMPI), Coulbourn fear conditioning boxes",
+          "source_location": "main_text",
+          "source_quote": "the patch cables were interfaced to an FC/PC rotary joint",
+          "extraction_confidence": "medium"
+        },
+        {
+          "step_order": 10,
+          "category": "statistics",
+          "technique": "General statistical hypothesis testing across imaging and behavioral datasets",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "tests": "Welch's t-test, Mann-Whitney U, paired t-test, Kolmogorov-Smirnov, repeated-measures ANOVA"
+          },
+          "input_data_type": null,
+          "output_data_type": "statistical significance results",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": "For imaging data, for all normally distributed data, a Welch's",
+          "extraction_confidence": "medium"
+        }
+      ]
+    },
+    {
+      "paper_id": "UTJ3YW3R",
+      "year": 2017,
+      "journal": "Nature Neuroscience",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "high"
+      },
+      "step_count": 0,
+      "pipeline_steps": []
+    }
+  ]
+}
