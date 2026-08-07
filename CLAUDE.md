@@ -94,7 +94,7 @@ and spot-check quality before scaling up.
   stretches — `"Allexperimentswereconductedinaccordance..."` — a
   PDF-extraction column-merge artifact. First noticed on EV4PID4B and
   D5I4EKZM, a corpus-wide audit (`outputs/word_gluing_audit.md`) then
-  confirmed it affects 35 of the 66 recovered papers (53%), strongly
+  confirmed it affects 35 of the 65 recovered papers (53%), strongly
   correlated with Cell Press/STAR★Methods format (86% of Cell Press
   papers affected) but also present in Nature Communications, Science,
   and bioRxiv papers — and confirmed independent of the
@@ -310,17 +310,86 @@ and spot-check quality before scaling up.
       stable" above) — not a newly-discovered issue)
 - [x] Target author list finalized in config/project_config.yaml
 - [x] Coverage check run
-- [x] Methods sections isolated (stage 3) — 64/84 rows recovered
+- [x] Methods sections isolated (stage 3) — 65/84 rows recovered
       (header heuristic, manual override, or Science-supplement
       detection), 18 excluded as intentionally out of scope or defunct,
-      4 genuinely still failing/unresolved (2FGQLRRH, F3ELBLNY,
-      GH4CWH6X, KE4EERU8)
+      1 genuinely still unresolved (2FGQLRRH — the stale row already
+      flagged above, not a live-collection paper). Updated from an
+      earlier 64/18/4 split: F3ELBLNY, GH4CWH6X, and KE4EERU8 were
+      subsequently recovered and are no longer in the unresolved set.
 - [x] Attribution scheme validated on a small batch (stage 4 — 7-paper
       test batch, bugs found and fixed during review)
 - [x] Stage 4 full run — attribution extraction across all recovered,
       non-excluded papers (including LKVXCUIR, onboarded as the
       canonical record for the Kong et al. CA3 recurrent-connectivity
       study in place of 5TKU4RYR's preprint)
-- [ ] Extraction prompt validated on a small batch (stage 5)
-- [ ] Stage 5 full run — interactive pipeline-step extraction
-- [ ] Stage 6 — per-author aggregation
+- [x] Extraction prompt validated on a small batch (stage 5)
+- [x] Stage 5 full run — interactive pipeline-step extraction across
+      the 59 recovered, target-author-matched papers, producing 163
+      paper-author pipeline records (1013 total pipeline steps) in
+      `data_root/fulltext_cache/`. The remaining 6 recovered papers
+      (85Y2ALXZ, DNXQLFY7, HIMMYY8P, Q448AKAB, R6YFMBEN, TJR34ZYM) went
+      through stage 4 and correctly matched no target author, so they
+      have no pipeline file — not a gap.
+- [x] Stage 6 full run — aggregation for all 27 target authors into
+      `outputs/author_pipelines/`
+
+**Pipeline complete end-to-end.** Of the 82 papers in the live Zotero
+collection, 65 were recovered with usable Methods content and 17 were
+excluded for documented reasons (review/commentary, software
+description, retracted, not relevant, or superseded duplicate — see
+"Exclusions" above); of those 65, 59 had at least one target-author
+match and went through stage 5 extraction. That produced 163
+paper-author pipeline records (1013 total pipeline steps), which stage
+6 aggregated into 27 per-author files in `outputs/author_pipelines/` —
+one per `config/project_config.yaml` target author. See "Known
+limitations / follow-up items" below before treating this output as
+fully clean for downstream (`lab3`) use.
+
+## Known limitations / follow-up items
+
+Issues surfaced during extraction and deliberately deferred rather than
+fixed — one place to check before relying on `outputs/author_pipelines/`
+downstream. Each is a pointer back to its full write-up, not a
+re-diagnosis.
+
+1. **YCFJ2N9Z / RBL2PSLI possible duplicate studies.** Both extracted
+   and aggregated independently (not merged or excluded), flagged in
+   every affected author's aggregated output — likely the same
+   underlying study (preprint/published pair or closely related work).
+   Needs manual review before downstream use.
+2. **BIWVCPEH's `find_contributions_window()` anchor bug** (Grosmark/
+   Sparks attribution) remains unfixed — an earlier false "author
+   contributions" phrase match in the Discussion section stops the
+   search window from ever reaching the real statement. See
+   "Attribution notes flag contamination bleed-through" above.
+3. **ETEC7ELI's Fraser T Sparks abbreviated-initials false negative**
+   ("F.S." vs. the paper's expected "F.T.S.") in stage 4 — extracted
+   correctly during stage 5 by direct text verification, but the
+   underlying attribution record still shows Tier 3
+   (`position_heuristic`)/low instead of the real Tier 1 evidence. Not
+   corrected at the source.
+4. **NYAYJKM8's stage-4 gap** — Tommy L Jr Lewis and Gergely F Turi
+   both have real Tier-1-quality evidence in a reference-list-
+   interleaved Author Contributions section that stage 4 never
+   matched. Left unaddressed per user decision.
+5. **6T8UW6LJ's word-gluing + Ack-demotion interaction bug** — Patrick
+   Kaifosh's Tier 2/medium record is actually Acknowledgments-only text
+   that the existing Ack-vs-task-verb heuristic should have demoted to
+   low, but word-gluing broke the keyword match it relies on. Flagged,
+   not fixed.
+6. **ZIRAQSPC's main-text isolation is a false-positive Results
+   paragraph, not real Methods** — a line-wrapped inline cross-
+   reference evaded the header heuristic's guard (see
+   "`materialsandmethods` header match can false-positive..." above).
+   Cosmetic/inert since the supplement fix supplied the real 21-step
+   Methods extraction, but the heuristic gap itself is unfixed and
+   could recur on another paper.
+7. **EV4PID4B has notably severe word-gluing** — one of the worst
+   cases in the corpus-wide audit (`outputs/word_gluing_audit.md`).
+   Extracted successfully; worth knowing if this paper is ever
+   revisited.
+8. **Corpus-wide word-gluing affects 53% of recovered papers** —
+   documented, deliberately not fixed at the code level. See "Word-
+   gluing is a common, corpus-wide extraction defect" above for the
+   full write-up.
