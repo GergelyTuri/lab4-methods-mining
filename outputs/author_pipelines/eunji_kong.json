@@ -1,0 +1,339 @@
+{
+  "target_author": "Eunji Kong",
+  "total_papers": 1,
+  "total_steps": 17,
+  "flags": [],
+  "papers": [
+    {
+      "paper_id": "LKVXCUIR",
+      "year": 2026,
+      "journal": "Neuron",
+      "attribution": {
+        "source": "author_contributions_statement",
+        "confidence": "medium"
+      },
+      "step_count": 17,
+      "pipeline_steps": [
+        {
+          "step_order": 1,
+          "category": "surgery",
+          "technique": "Stereotaxic viral injection for GCaMP8s expression and VGLUT1 conditional knockout in CA3",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "ca3_pyramidal_imaging_virus": "Cre-dependent rAAV9-Syn-FLEX-jGCaMP8s-WPRE-SV40 (Addgene #162377, titer 2.3x10^13 vg/mL) in Grik4-cre mice",
+            "vglut1_cko_viruses": "rAAV1-hSyn-Cre (Addgene #105553), rAAV1-hSyn-DIO-mCherry (Addgene #50459), rAAV9-Syn-jGCaMP8s-WPRE-SV40 (Addgene #162374) in Slc17a7flox/flox mice",
+            "coordinates": "proximal and distal CA3 each targeted with two x-y coordinates and two DV injection sites: AP -1.46/ML -1.75/DV -2.1,-1.9 and AP -1.46/ML -1.3/DV -2.3,-2.1 relative to bregma, 60 nL per DV site",
+            "delivery": "sterile glass capillary on a Nanoject syringe (Drummond Scientific), pipette held 5-10 min post-injection before retraction",
+            "recovery": "4 days before window/headpost implant"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice expressing GCaMP8s in proximal/distal CA3 pyramidal neurons (or VGLUT1 cKO)",
+          "hardware": "Nanoject syringe (Drummond Scientific); stereotaxic instrument (Kopf Instruments)",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 2,
+          "category": "surgery",
+          "technique": "Hippocampal imaging window and headpost implantation",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "craniotomy": "3-mm craniotomy over right anterior hippocampus, centered between the injection coordinates",
+            "window": "3-mm glass-bottomed stainless-steel cannula (1.5 mm height) implanted after aspirating overlying cortex, CA1 kept intact",
+            "headpost": "titanium headpost attached with dental cement",
+            "recovery": "14-day recovery before behavioral training began; 3 days of post-operative monitoring immediately after surgery"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice with chronic hippocampal imaging window and headpost",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 3,
+          "category": "behavior",
+          "technique": "Water-restricted virtual-reality training for water reward",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "water_restriction": "85-90% of original body weight",
+            "environment": "2-meter-long linear VR corridor, consistent across training and recording, with a 2-s blank-screen inter-trial interval and teleport to the next lap",
+            "training": "10-14 days; habituation phase used non-operant water delivery on reward-zone entry plus continued licking within a 30 cm area; training phase required an operant correct lick within the reward zone to trigger reward",
+            "criterion": "mice trained to run at least 30 laps in the environment"
+          },
+          "input_data_type": null,
+          "output_data_type": "mice trained to run and lick for reward in a fixed VR corridor",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 4,
+          "category": "behavior",
+          "technique": "Context-switching behavioral paradigm with distinct familiar and novel visual cues",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "session_structure": "4 blocks per session: 15 laps Familiar, 15 laps Novel, 15 laps Familiar, 15 laps Novel, on a 200 cm track",
+            "reward_position": "fixed at 150 cm in both contexts",
+            "cue_design": "distinct visual cue sets used for the novel context between proximal- and distal-CA3 imaging cohorts; familiar context held constant within each cohort"
+          },
+          "input_data_type": null,
+          "output_data_type": "imaging and behavioral data across familiar/novel context blocks",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 5,
+          "category": "histology",
+          "technique": "Post-imaging transcardial perfusion, sectioning, and PCP4/VGLUT1 immunostaining",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "perfusion": "40 mL ice-cold PBS followed by 40 mL ice-cold 4% PFA, brain post-fixed overnight at 4\u00b0C",
+            "sectioning": "100 \u00b5m coronal hippocampal sections on a vibratome (Leica VT1200-S)",
+            "blocking": "5% normal donkey serum, 0.3% PBST, 2 hours at room temperature",
+            "pcp4_stain": "rabbit anti-PCP4 (1:500, Sigma HPA005792) overnight at 4\u00b0C, then Alexa 647-conjugated donkey anti-rabbit secondary (1:800) for 2 hours",
+            "vglut1_stain": "Cy5-conjugated rabbit anti-VGLUT1 (1:500, Synaptic Systems 135303C5) overnight at 4\u00b0C",
+            "imaging": "Nikon Ti-E A1R confocal microscope, 10x/0.45NA or 20x/0.75NA objectives, 3 \u00b5m z-stacks processed in NIS Elements or Fiji"
+          },
+          "input_data_type": "post-imaging brain tissue",
+          "output_data_type": "immunostained confocal z-stack images",
+          "hardware": "Leica VT1200-S vibratome; Nikon Ti-E A1R confocal microscope",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 6,
+          "category": "imaging",
+          "technique": "In vivo two-photon Ca2+ imaging acquisition across CA3 subregions",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "scanner": "8 kHz resonant scanner (Bruker), 25x/1.0 NA objective (Olympus XLPLN25XWMP2)",
+            "laser": "920 nm femtosecond-pulsed laser (Chameleon Ultra II, Coherent), Pockels-cell power regulation",
+            "detection": "emission filter (HQ525/70m-2p) to a GaAsP PMT (Hamamatsu 7422P-40), custom dual-stage preamp (Bruker)",
+            "acquisition": "512x512 pixels at 30 Hz",
+            "fov_targeting": "distal CA3 FOV identified first by anatomical landmarks; proximal CA3 FOV defined by a mediolateral shift of at least 400-500 \u00b5m and a dorsoventral shift of at least 200-300 \u00b5m from the distal FOV"
+          },
+          "input_data_type": null,
+          "output_data_type": "raw two-photon Ca2+ fluorescence video from proximal and distal CA3",
+          "hardware": "Bruker 8-kHz resonant scanner; Olympus 25x/1.0NA objective; Coherent Chameleon Ultra II laser; Hamamatsu GaAsP PMT 7422P-40",
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 7,
+          "category": "imaging",
+          "technique": "Motion correction, ROI drawing, and cross-day ROI registration",
+          "software_tool": "SIMA",
+          "tool_version": null,
+          "parameters": {
+            "motion_correction": "SIMA software package",
+            "roi_drawing": "manual hand-drawn ROIs over each cell's inspected time-average frame using an in-lab data visualization server program",
+            "cross_day_tracking": "ROI masks from day n aligned to day m, each neuron assigned a unique longitudinal ID (days 1, 3, 5, 7)"
+          },
+          "input_data_type": "raw two-photon Ca2+ fluorescence video",
+          "output_data_type": "motion-corrected video with longitudinally tracked somatic ROIs",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 8,
+          "category": "imaging",
+          "technique": "Fluorescence extraction and \u0394F/F calculation with neuropil correction",
+          "software_tool": "FISSA",
+          "tool_version": null,
+          "parameters": {
+            "neuropil_correction": "six surrounding patches at 50% of the original ROI size",
+            "baseline": "first percentile within a rolling 30-s window",
+            "smoothing": "exponential filter applied to the \u0394F/F trace",
+            "event_detection": "statistically significant transients detected as previously described, used for place-field calculations"
+          },
+          "input_data_type": "motion-corrected, registered ROI time series",
+          "output_data_type": "\u0394F/F traces and significant transient events per cell",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 9,
+          "category": "statistics",
+          "technique": "Spatial tuning curve calculation and place-field detection via shuffled null distribution",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "binning": "100 spatial bins (2 cm) over the 2-m track, running-filtered (>3 cm/s), excluding the teleportation interval",
+            "smoothing": "occupancy-normalized, Gaussian-smoothed (\u03b1 = 6 cm)",
+            "null_construction": "1,000 circular shuffles of per-lap activity; 95th percentile of baseline tuning values per bin as the significance threshold (p<0.05)",
+            "field_criteria": "3-24 consecutive significant bins (6-50 cm), with activity in at least 20% of laps",
+            "cell_metrics": "place-cell sensitivity (fraction of laps with an active event in the field) and specificity (fraction of a lap's events within the field), averaged across laps/fields per ROI; spatial information calculated as previously described"
+          },
+          "input_data_type": "\u0394F/F traces and detected transients",
+          "output_data_type": "spatial tuning curves, detected place fields, sensitivity/specificity/spatial-information metrics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 10,
+          "category": "statistics",
+          "technique": "Tuning-curve correlation across days",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "metric": "Pearson correlation between a place cell's tuning curves across all pairs of sessions on different days",
+            "inclusion": "cells with place fields on both compared days"
+          },
+          "input_data_type": "per-cell spatial tuning curves across sessions",
+          "output_data_type": "cross-day tuning-curve correlation values",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 11,
+          "category": "statistics",
+          "technique": "Population vector correlation across days and contexts",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "metric": "Pearson correlation between population vectors of corresponding spatial bins across session pairs, averaged across bins, reported as a function of day interval",
+            "context_comparisons": "also applied within/across contexts (F1 vs F2, N1 vs N2, F vs N)",
+            "inclusion": "cells classified as place cells on both compared sessions, or in at least one of two blocks for context comparisons"
+          },
+          "input_data_type": "population vectors of spatial tuning across sessions",
+          "output_data_type": "population vector correlation values",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 12,
+          "category": "statistics",
+          "technique": "Discrimination index for context selectivity",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "formula": "DI = (\u03bc1 - \u03bc2) / sqrt((\u03c31\u00b2 + \u03c32\u00b2)/2), where \u03bc and \u03c3 are the mean and SD of calcium response amplitude across laps in each context",
+            "significance": "1,000 lap-permuted surrogate datasets; observed DI considered significant if beyond the top/bottom 2.5% of the surrogate distribution"
+          },
+          "input_data_type": "per-lap calcium response amplitudes by context",
+          "output_data_type": "per-cell discrimination index and context-selectivity classification",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 13,
+          "category": "statistics",
+          "technique": "Population decoding of context via SVM and cross-condition generalization performance",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "decoder": "linear SVM classifying neural population activity into familiar vs. novel context, leave-one-trial-out cross-validation per imaging session",
+            "subregion_comparison": "proximal CA3 cells subsampled to match average distal CA3 ROI count before comparing decoding accuracy",
+            "ccgp_context": "linear SVM trained on one spatial bin (F-P1 vs N-P1) and tested on a non-overlapping bin (F-P2 vs N-P2) to assess context generalization across positions",
+            "ccgp_position": "decoder trained to discriminate two spatial positions in one context and tested in the other, and vice versa",
+            "significance": "1,000 shuffles of context labels, empirical accuracy compared to the resulting null distribution"
+          },
+          "input_data_type": "neural population activity patterns by lap/context",
+          "output_data_type": "context-decoding accuracy and CCGP values",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 14,
+          "category": "statistics",
+          "technique": "Deep-superficial cell classification via PCA of ROI centroid position",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "method": "PCA on x/y centroid coordinates of distal CA3 ROIs; PC1 defines a 'middle line'; signed, session-normalized distance from this line computed per ROI",
+            "classification": "top 10% of normalized signed distances classified 'superficial', bottom 10% classified 'deep'",
+            "comparison": "discrimination index compared between superficial and deep groups"
+          },
+          "input_data_type": "ROI centroid coordinates",
+          "output_data_type": "superficial/deep cell classification and group DI comparison",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 15,
+          "category": "statistics",
+          "technique": "Neural manifold dimensionality analysis via PCA",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "input": "neuron-by-time activity matrix, mean-centered across time, proximal CA3 subsampled to match distal CA3 ROI counts",
+            "decomposition": "eigen-decomposition of the neuron-neuron covariance matrix; PCA performed on time samples concatenated across trials without prior trial-averaging",
+            "metrics": "k90 (minimum PCs explaining at least 90% cumulative variance), participation ratio, and variance explained by the first 5 PCs (EV5)"
+          },
+          "input_data_type": "population \u0394F/F activity matrix",
+          "output_data_type": "manifold dimensionality metrics (k90, participation ratio, EV5)",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 16,
+          "category": "statistics",
+          "technique": "Intrinsic dimensionality estimation via TwoNN and Levina-Bickel MLE",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "twonn": "Two-Nearest-Neighbors method: linear regression of log(1-F(\u00b5)) on log(\u00b5) for the nearest/second-nearest-neighbor distance ratio \u00b5, after trimming the extreme 5% tails; fit quality assessed via R2",
+            "levina_bickel": "maximum likelihood local dimension estimate averaged across neighborhood sizes k = 5, 10, 15, 20, with stability checked across k = 2-20",
+            "diagnostics": "log-scale eigenvalue spectra inspection and a cross-method Spearman correlation matrix across k90, participation ratio, TwoNN, LB-MLE, and EV5; proximal vs. distal CA3 compared via unpaired two-tailed t-tests and Mann-Whitney U tests per measure"
+          },
+          "input_data_type": "population \u0394F/F activity matrix",
+          "output_data_type": "intrinsic dimensionality estimates and cross-method agreement diagnostics",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        },
+        {
+          "step_order": 17,
+          "category": "statistics",
+          "technique": "Group-level statistical testing framework",
+          "software_tool": null,
+          "tool_version": null,
+          "parameters": {
+            "tests": "two-sided unpaired t-test, Mann-Whitney U test, Kruskal-Wallis test with post hoc Dunn's multiple comparison tests",
+            "significance": "p < 0.05",
+            "reporting": "boxplots show 25th/50th/75th percentiles with whiskers to 1.5x interquartile range; data expressed as mean \u00b1 SEM",
+            "software": "custom Python (2.7.15 and 3.8.11) analysis and visualization code"
+          },
+          "input_data_type": null,
+          "output_data_type": "statistical significance results",
+          "hardware": null,
+          "source_location": "main_text",
+          "source_quote": null,
+          "extraction_confidence": "high"
+        }
+      ]
+    }
+  ]
+}
