@@ -250,6 +250,54 @@ and spot-check quality before scaling up.
   contamination artifacts can appear anywhere in a flagged paper's
   document, not only at the end — don't assume clean text just because
   you're not near the tail of the file.
+- **`materialsandmethods` header match can false-positive on an inline
+  cross-reference split across a line break.** ZIRAQSPC (a Science
+  paper) had `methods_extracted_main = 1` but the isolated
+  `_methods_main.txt` was not real Methods content — it was a Results
+  paragraph. `find_section_start()`'s `START_PREFIX_PHRASES` include
+  `"materialsandmethods"`, matched via `collapsed.startswith(...)`
+  against the collapsed line text. Results-section prose in this paper
+  parenthetically references the Methods section — `"(Fig. 1G and
+  materials and methods)."` — and stage 1's column-merged PDF
+  extraction happened to break the line right after "and", leaving
+  `"materials and methods)."` as the start of the next physical line
+  with its opening `"("` stranded on the previous line.
+  `is_candidate_header_line()`'s guard against inline cross-references
+  only rejects a line that itself starts with `"("`/`"["`, so it can't
+  catch a cross-reference whose opening paren fell on the prior line
+  during column-merge extraction. Diagnosed, not fixed (same posture as
+  BIWVCPEH above) — for ZIRAQSPC specifically, the genuine Methods
+  content turned out to live entirely in the paper's Science
+  supplement (see the ZIRAQSPC supplement-attachment fix below), so the
+  false-matched main-text isolation was simply disregarded in favor of
+  `_methods_supp.txt` for stage 5 extraction rather than worked around
+  with a manual override. Worth checking for on any other paper whose
+  `_methods_main.txt` reads as narrative Results prose rather than
+  procedural Methods text, per the sanity-check guidance in
+  `prompts/pipeline_extraction.md`.
+- **ZIRAQSPC's Science supplement (`science.aeh9302_sm.pdf`) was
+  missing from the original stage 1/3 fetch** — not yet attached in
+  Zotero at the time, so `methods_extracted_supp = 0` and stage 5 had
+  to extract from Results-section technique descriptions instead of a
+  real Methods section. Once the user attached the supplement in
+  Zotero, fixing this required the same targeted-reset pattern as
+  N9FA3VEL: `01_fetch_corpus.py` has no supplement-fetching capability
+  at all (that logic lives only in `03_extract_methods.py`'s
+  `process_paper()`/`extract_supplement_text()`), and neither stage 1
+  nor stage 3 has a per-paper `--key` scoping flag, so picking up the
+  new attachment meant manually resetting `methods_extracted_main` to
+  0 for this one row and re-running stage 3 over the full corpus,
+  relying on its own skip-gate (`is_methods_processed()`) to leave
+  every other already-processed paper untouched. The supplement
+  fetched cleanly and its Methods content isolated correctly (flagged
+  `possible_trailing_contamination = 1`: the isolated
+  `_methods_supp.txt` runs past the genuine "Statistics and
+  reproducibility" close straight into the Fig. S1-S20 legends, since
+  the paper has no distinct end-of-Methods header for
+  `find_section_end()` to stop at — genuine Methods content ends at
+  "Bar plots always represent mean and s.e.m unless specified
+  otherwise." and everything after that in the file is figure-legend
+  text, not usable for pipeline-step extraction).
 
 ## Current status
 

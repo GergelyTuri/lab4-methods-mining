@@ -3,7 +3,7 @@
 - Total papers in collection: 82
 - Fulltext status (current collection items): ok=82, ocr_needed=0, missing=0, paywalled=0
 - Papers with a supplement found: 36
-- Manifest/collection mismatches: 1 stale manifest row(s) (in manifest.db but no longer in the collection), 0 collection item(s) missing from manifest (run 01_fetch_corpus.py)
+- Manifest/collection mismatches: 2 stale manifest row(s) (in manifest.db but no longer in the collection), 0 collection item(s) missing from manifest (run 01_fetch_corpus.py)
 - "Verify manually" flags (supplement-heavy journal, none found locally): 22
 
 | zotero_key | title | year | has_main_pdf | has_supplement | supplement_type | fulltext_status | flag |
@@ -42,7 +42,7 @@
 | HIMMYY8P | A fast, aqueous, reversible three-day tissue clea… | 2021 | yes | no | none | ok | no supplement found — this journal commonly has supplementary methods, verify manually on publisher site |
 | HU4D65CV | Synaptic basis of feature selectivity in hippocam… | 2025 | yes | no | none | ok | no supplement found — this journal commonly has supplementary methods, verify manually on publisher site |
 | I6IQRZTG | tension: A Python package for FORCE learning. | 2022 | yes | no | none | ok | no supplement found |
-| IBUNAE3Y | Recurrent connectivity shapes spatial coding in h… | 2026 | yes | yes | pdf | ok |  |
+| IBUNAE3Y | Recurrent connectivity shapes spatial coding in h… | 2026 | yes | no | — | ok | stale manifest row — item removed from collection |
 | IKWDTTRN | The inside track: privileged neural communication… | 2014 | yes | no | none | ok | no supplement found — this journal commonly has supplementary methods, verify manually on publisher site |
 | IMM9NRV3 | In Vivo Imaging of Dentate Gyrus Mossy Cells in B… | 2017 | yes | yes | pdf | ok |  |
 | JH9IHBJH | A local circuit-basis for spatial navigation and … | 2023 | yes | no | none | ok | no supplement found |
@@ -54,6 +54,7 @@
 | KZYI47XK | E-Cannula reveals anatomical diversity in sharp-w… | 2022 | yes | yes | pdf | ok |  |
 | LB5SX2W3 | A Role for the Locus Coeruleus in Hippocampal CA1… | 2020 | yes | yes | pdf | ok |  |
 | LBKM3N66 | Functional architecture of intracellular oscillat… | 2024 | yes | no | none | ok | no supplement found |
+| LKVXCUIR | Recurrent connectivity shapes spatial coding in h… | 2026 | yes | yes | pdf | ok |  |
 | MASWIV2A | Development of anionically decorated 2-(ortho-nit… | 2011 | yes | no | none | ok | no supplement found |
 | N5AUJWGX | Parvalbumin-positive basket cells differentiate a… | 2014 | yes | yes | pdf | ok |  |
 | N9FA3VEL | Variable recruitment of distal tuft dendrites sha… | 2024 | yes | no | none | ok | no supplement found |
