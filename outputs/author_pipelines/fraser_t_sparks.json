@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "UTJ3YW3R",
+      "title": "Impaired hippocampal place cell dynamics in a mouse model of the 22q11.2 deletion.",
       "year": 2017,
       "journal": "Nature Neuroscience",
       "attribution": {
@@ -17,6 +18,7 @@
     },
     {
       "paper_id": "H7G3J9VN",
+      "title": "Volumetric Ca(2+) Imaging in the Mouse Brain Using Hybrid Multiplexed Sculpted Light Microscopy.",
       "year": 2019,
       "journal": "Cell",
       "attribution": {
@@ -91,6 +93,7 @@
     },
     {
       "paper_id": "PSG2BFK8",
+      "title": "Hippocampal adult-born granule cells drive network activity in a mouse model of chronic temporal lobe epilepsy.",
       "year": 2020,
       "journal": "Nature Communications",
       "attribution": {
@@ -288,6 +291,7 @@
     },
     {
       "paper_id": "BIWVCPEH",
+      "title": "Reactivation predicts the consolidation of unbiased long-term cognitive maps.",
       "year": 2021,
       "journal": "Nature Neuroscience",
       "attribution": {
@@ -299,6 +303,7 @@
     },
     {
       "paper_id": "ETEC7ELI",
+      "title": "Maximally selective single-cell target for circuit control in epilepsy models.",
       "year": 2021,
       "journal": "Neuron",
       "attribution": {
@@ -396,6 +401,7 @@
     },
     {
       "paper_id": "F3ELBLNY",
+      "title": "Supramammillary regulation of locomotion and hippocampal activity.",
       "year": 2021,
       "journal": "Science",
       "attribution": {
@@ -601,6 +607,7 @@
     },
     {
       "paper_id": "SWL5RJLJ",
+      "title": "Alternating sources of perisomatic inhibition during behavior.",
       "year": 2021,
       "journal": "Neuron",
       "attribution": {
@@ -681,6 +688,7 @@
     },
     {
       "paper_id": "NHDBUGYK",
+      "title": "Local feedback inhibition tightly controls rapid formation of hippocampal place fields.",
       "year": 2022,
       "journal": "Neuron",
       "attribution": {
@@ -692,6 +700,7 @@
     },
     {
       "paper_id": "WSSZP72M",
+      "title": "Reorganization of CA1 dendritic dynamics by hippocampal sharp-wave ripples during learning.",
       "year": 2022,
       "journal": "Neuron",
       "attribution": {

@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "EC39E7I5",
+      "title": "Regulation of neuronal input transformations by tunable dendritic inhibition.",
       "year": 2012,
       "journal": "Nature Neuroscience",
       "attribution": {
@@ -208,6 +209,7 @@
     },
     {
       "paper_id": "4UQQ3CM5",
+      "title": "Septo-hippocampal GABAergic signaling across multiple modalities in awake mice.",
       "year": 2013,
       "journal": "Nature Neuroscience",
       "attribution": {
@@ -451,6 +453,7 @@
     },
     {
       "paper_id": "6T8UW6LJ",
+      "title": "Dendritic inhibition in the hippocampus supports fear learning.",
       "year": 2014,
       "journal": "Science",
       "attribution": {
@@ -462,6 +465,7 @@
     },
     {
       "paper_id": "RJ39DEXI",
+      "title": "Ambient GABA modulates septo-hippocampal inhibitory terminals via presynaptic GABAb receptors.",
       "year": 2015,
       "journal": "Neuropharmacology",
       "attribution": {
@@ -473,6 +477,7 @@
     },
     {
       "paper_id": "2LKHNA25",
+      "title": "Rabies Virus CVS-N2c(\u0394G) Strain Enhances Retrograde Synaptic Transfer and Neuronal Viability.",
       "year": 2016,
       "journal": "Neuron",
       "attribution": {
@@ -791,6 +796,7 @@
     },
     {
       "paper_id": "NYAYJKM8",
+      "title": "Progressive Decrease of Mitochondrial Motility during Maturation of Cortical Axons In\u00a0Vitro and In\u00a0Vivo.",
       "year": 2016,
       "journal": "Current Biology",
       "attribution": {
@@ -802,6 +808,7 @@
     },
     {
       "paper_id": "IMM9NRV3",
+      "title": "In\u00a0Vivo Imaging of Dentate Gyrus Mossy Cells in Behaving Mice.",
       "year": 2017,
       "journal": "Neuron",
       "attribution": {
@@ -1037,6 +1044,7 @@
     },
     {
       "paper_id": "K433LNFA",
+      "title": "Vasoactive Intestinal Polypeptide-Expressing Interneurons in the Hippocampus Support Goal-Oriented Spatial Learning.",
       "year": 2019,
       "journal": "Neuron",
       "attribution": {
@@ -1376,6 +1384,7 @@
     },
     {
       "paper_id": "RFR8U95R",
+      "title": "Functional Access to Neuron Subclasses in Rodent and Primate Forebrain.",
       "year": 2019,
       "journal": "Cell Reports",
       "attribution": {
@@ -1387,6 +1396,7 @@
     },
     {
       "paper_id": "UF5YJ4HS",
+      "title": "Parallel processing of sensory cue and spatial information in the dentate gyrus.",
       "year": 2022,
       "journal": "Cell Reports",
       "attribution": {

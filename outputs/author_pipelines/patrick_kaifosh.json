@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "EC39E7I5",
+      "title": "Regulation of neuronal input transformations by tunable dendritic inhibition.",
       "year": 2012,
       "journal": "Nature Neuroscience",
       "attribution": {
@@ -38,6 +39,7 @@
     },
     {
       "paper_id": "4UQQ3CM5",
+      "title": "Septo-hippocampal GABAergic signaling across multiple modalities in awake mice.",
       "year": 2013,
       "journal": "Nature Neuroscience",
       "attribution": {
@@ -224,6 +226,7 @@
     },
     {
       "paper_id": "6T8UW6LJ",
+      "title": "Dendritic inhibition in the hippocampus supports fear learning.",
       "year": 2014,
       "journal": "Science",
       "attribution": {
@@ -235,6 +238,7 @@
     },
     {
       "paper_id": "3LEAWLYJ",
+      "title": "Mnemonic Functions for Nonlinear Dendritic Integration in Hippocampal Pyramidal Circuits.",
       "year": 2016,
       "journal": "Neuron",
       "attribution": {
@@ -339,6 +343,7 @@
     },
     {
       "paper_id": "U7L3RARN",
+      "title": "Sublayer-Specific Coding Dynamics during Spatial Navigation and Learning in Hippocampal Area CA1.",
       "year": 2016,
       "journal": "Neuron",
       "attribution": {
@@ -442,6 +447,7 @@
     },
     {
       "paper_id": "YU3INJP9",
+      "title": "Distinct Contribution of Adult-Born Hippocampal Granule Cells to Context Encoding.",
       "year": 2016,
       "journal": "Neuron",
       "attribution": {
@@ -620,6 +626,7 @@
     },
     {
       "paper_id": "UTJ3YW3R",
+      "title": "Impaired hippocampal place cell dynamics in a mouse model of the 22q11.2 deletion.",
       "year": 2017,
       "journal": "Nature Neuroscience",
       "attribution": {

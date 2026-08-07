@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "UF5YJ4HS",
+      "title": "Parallel processing of sensory cue and spatial information in the dentate gyrus.",
       "year": 2022,
       "journal": "Cell Reports",
       "attribution": {
@@ -184,6 +185,7 @@
     },
     {
       "paper_id": "NAXFDQ32",
+      "title": "Adult-born granule cells facilitate remapping of spatial and non-spatial representations in the dentate gyrus.",
       "year": 2023,
       "journal": "Neuron",
       "attribution": {

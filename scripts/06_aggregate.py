@@ -12,7 +12,9 @@ list, this script:
     total_papers, total_steps, a flags[] array surfacing known
     data-quality issues (see CLAUDE.md), and a papers[] array (one entry
     per paper this author has ANY record for, including zero-step ones),
-    sorted chronologically by year
+    sorted chronologically by year. Each paper entry's "title" is sourced
+    from manifest.db (cached there since stage 1's fetch), falling back to
+    a live Zotero lookup only if manifest.db doesn't have it.
 
 It does not deduplicate or merge pipeline_steps across papers by the same
 author, even when they describe the same technique — parameters, software
@@ -34,12 +36,21 @@ import re
 import sqlite3
 from pathlib import Path
 
+import httpx
 import jsonschema
 import yaml
+from pyzotero import zotero
 
 CONFIG_PATH = Path(__file__).resolve().parent.parent / "config" / "project_config.yaml"
 SCHEMA_PATH = Path(__file__).resolve().parent.parent / "schema" / "pipeline_step.schema.json"
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "outputs" / "author_pipelines"
+
+# Local Zotero API convention (see scripts/01_fetch_corpus.py for details):
+# "0" / "user" is the standard placeholder pyzotero/zotero-mcp use to talk
+# to the local desktop API at localhost:23119, which ignores real
+# library_id/api_key. Only used as a fallback — see fetch_title_from_zotero.
+LOCAL_LIBRARY_ID = "0"
+LOCAL_LIBRARY_TYPE = "user"
 
 # The two papers flagged as likely duplicates (preprint/published pair or
 # otherwise closely related work covering the same underlying study) by
@@ -88,11 +99,50 @@ def get_excluded_keys(manifest_path: Path) -> set[str]:
     return {row[0] for row in rows}
 
 
+def get_titles(manifest_path: Path) -> dict[str, str]:
+    """zotero_key -> title, as cached locally by stage 1's original fetch.
+    Excludes empty/null titles so callers can tell "not cached" from ""
+    and fall back to a live lookup (see fetch_title_from_zotero)."""
+    conn = sqlite3.connect(manifest_path)
+    try:
+        rows = conn.execute("SELECT zotero_key, title FROM manifest").fetchall()
+    finally:
+        conn.close()
+    return {key: title for key, title in rows if title}
+
+
+# Lazily built on first use — most runs never need it, since manifest.db
+# already carries every paper's title from stage 1's fetch (get_titles
+# above). Same local-API pattern as scripts/03_extract_methods.py and
+# scripts/04_extract_attribution.py.
+_zot_client: zotero.Zotero | None = None
+
+
+def fetch_title_from_zotero(paper_id: str) -> str:
+    global _zot_client
+    if _zot_client is None:
+        client = httpx.Client(
+            transport=httpx.HTTPTransport(http1=True, http2=False),
+            follow_redirects=True,
+        )
+        _zot_client = zotero.Zotero(
+            library_id=LOCAL_LIBRARY_ID,
+            library_type=LOCAL_LIBRARY_TYPE,
+            local=True,
+            client=client,
+        )
+    title = _zot_client.item(paper_id)["data"].get("title")
+    if not title:
+        raise SystemExit(f"Live Zotero lookup for {paper_id} returned no title either — cannot proceed without one.")
+    return title
+
+
 def build_author_output(
     target_author: str,
     all_records: list[tuple[Path, dict]],
     validator: jsonschema.protocols.Validator,
     excluded_keys: set[str],
+    titles: dict[str, str],
 ) -> dict:
     papers = []
     for path, data in all_records:
@@ -106,10 +156,13 @@ def build_author_output(
                 f"Schema validation failed for {path.name} (target_author={target_author!r}): {messages}"
             )
 
+        paper_id = data["paper_id"]
+        title = titles.get(paper_id) or fetch_title_from_zotero(paper_id)
         steps = data["pipeline_steps"]
         papers.append(
             {
-                "paper_id": data["paper_id"],
+                "paper_id": paper_id,
+                "title": title,
                 "year": data["year"],
                 "journal": data["journal"],
                 "attribution": data["attribution"],
@@ -197,6 +250,7 @@ def main() -> None:
     validator = validator_cls(schema)
 
     excluded_keys = get_excluded_keys(manifest_path)
+    titles = get_titles(manifest_path)
     all_records = load_all_pipeline_records(fulltext_dir)
     print(f"Loaded {len(all_records)} pipeline_step.json file(s) from {fulltext_dir}")
 
@@ -214,7 +268,7 @@ def main() -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
     for author in target_authors:
-        output = build_author_output(author, all_records, validator, excluded_keys)
+        output = build_author_output(author, all_records, validator, excluded_keys, titles)
         out_path = OUTPUT_DIR / f"{author_slug(author)}.json"
         out_path.write_text(json.dumps(output, indent=2), encoding="utf-8")
         print(

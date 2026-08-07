@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "YZESCRFK",
+      "title": "Non-parametric Vignetting Correction for Sparse Spatial Transcriptomics Images.",
       "year": 2021,
       "journal": "Lecture Notes in Computer Science (MICCAI 2021 proceedings, vol. 12908)",
       "attribution": {
@@ -17,6 +18,7 @@
     },
     {
       "paper_id": "GH4CWH6X",
+      "title": "Compartment-specific tuning of dendritic feature selectivity by intracellular Ca(2+) release.",
       "year": 2022,
       "journal": "Science",
       "attribution": {
@@ -260,6 +262,7 @@
     },
     {
       "paper_id": "Y9DG73R4",
+      "title": "MULTIMODAL MICROSCOPY IMAGE ALIGNMENT USING SPATIAL AND SHAPE INFORMATION AND A BRANCH-AND-BOUND ALGORITHM.",
       "year": 2023,
       "journal": "ICASSP (IEEE)",
       "attribution": {
@@ -271,6 +274,7 @@
     },
     {
       "paper_id": "5ZPAWQC8",
+      "title": "Rare mutations implicate CGE interneurons as a vulnerable axis of cognitive deficits across psychiatric disorders.",
       "year": 2025,
       "journal": "bioRxiv",
       "attribution": {
@@ -282,6 +286,7 @@
     },
     {
       "paper_id": "FPF3RL6U",
+      "title": "2P-NucTag: on-demand phototagging for molecular analysis of functionally identified cortical neurons.",
       "year": 2025,
       "journal": "bioRxiv",
       "attribution": {
@@ -293,6 +298,7 @@
     },
     {
       "paper_id": "K73ERVAQ",
+      "title": "A transcriptomic axis aligns with in vivo functional dynamics in hippocampal inhibitory circuits.",
       "year": 2026,
       "journal": "bioRxiv",
       "attribution": {
@@ -420,6 +426,7 @@
     },
     {
       "paper_id": "PNCRGARS",
+      "title": "Disorganized Inhibitory Dynamics in Hippocampal area CA1 of 22q11.2 Deletion Mutant Mice.",
       "year": 2026,
       "journal": "bioRxiv",
       "attribution": {
@@ -431,6 +438,7 @@
     },
     {
       "paper_id": "VMWYLLBS",
+      "title": "2P-NucTag: On-demand phototagging for molecular analysis of functionally identified cortical neurons.",
       "year": 2026,
       "journal": "Neuron",
       "attribution": {

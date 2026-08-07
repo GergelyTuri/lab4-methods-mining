@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "UTJ3YW3R",
+      "title": "Impaired hippocampal place cell dynamics in a mouse model of the 22q11.2 deletion.",
       "year": 2017,
       "journal": "Nature Neuroscience",
       "attribution": {
@@ -17,6 +18,7 @@
     },
     {
       "paper_id": "K433LNFA",
+      "title": "Vasoactive Intestinal Polypeptide-Expressing Interneurons in the Hippocampus Support Goal-Oriented Spatial Learning.",
       "year": 2019,
       "journal": "Neuron",
       "attribution": {
@@ -28,6 +30,7 @@
     },
     {
       "paper_id": "PSG2BFK8",
+      "title": "Hippocampal adult-born granule cells drive network activity in a mouse model of chronic temporal lobe epilepsy.",
       "year": 2020,
       "journal": "Nature Communications",
       "attribution": {
@@ -225,6 +228,7 @@
     },
     {
       "paper_id": "ETEC7ELI",
+      "title": "Maximally selective single-cell target for circuit control in epilepsy models.",
       "year": 2021,
       "journal": "Neuron",
       "attribution": {
@@ -322,6 +326,7 @@
     },
     {
       "paper_id": "HAD4KPSV",
+      "title": "Recruitment and inhibitory action of hippocampal axo-axonic cells during behavior.",
       "year": 2021,
       "journal": "Neuron",
       "attribution": {
@@ -544,6 +549,7 @@
     },
     {
       "paper_id": "KKAPPFAJ",
+      "title": "Adaptive stimulus selection for consolidation in the hippocampus.",
       "year": 2022,
       "journal": "Nature",
       "attribution": {
@@ -555,6 +561,7 @@
     },
     {
       "paper_id": "8SKA2ZZG",
+      "title": "Inhibitory plasticity supports replay generalization in the hippocampus.",
       "year": 2024,
       "journal": "Nature Neuroscience",
       "attribution": {
@@ -699,6 +706,7 @@
     },
     {
       "paper_id": "LBKM3N66",
+      "title": "Functional architecture of intracellular oscillations in hippocampal dendrites.",
       "year": 2024,
       "journal": "bioRxiv",
       "attribution": {
@@ -873,6 +881,7 @@
     },
     {
       "paper_id": "R27V283A",
+      "title": "behaviorMate: An Intranet of Things Approach for Adaptable Control of Behavioral and Navigation-Based Experiments.",
       "year": 2024,
       "journal": "bioRxiv",
       "attribution": {
@@ -884,6 +893,7 @@
     },
     {
       "paper_id": "UMWW7XYA",
+      "title": "Functional architecture of intracellular oscillations in hippocampal dendrites.",
       "year": 2024,
       "journal": "Nature Communications",
       "attribution": {
@@ -963,6 +973,7 @@
     },
     {
       "paper_id": "HU4D65CV",
+      "title": "Synaptic basis of feature selectivity in hippocampal neurons.",
       "year": 2025,
       "journal": "Nature",
       "attribution": {
@@ -974,6 +985,7 @@
     },
     {
       "paper_id": "QQIBRBDR",
+      "title": "An Intranet of Things approach for adaptable control of behavioral and navigation-based experiments.",
       "year": 2025,
       "journal": "eLife",
       "attribution": {
@@ -985,6 +997,7 @@
     },
     {
       "paper_id": "LKVXCUIR",
+      "title": "Recurrent connectivity shapes spatial coding in hippocampal CA3 subregions",
       "year": 2026,
       "journal": "Neuron",
       "attribution": {

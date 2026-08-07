@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "K433LNFA",
+      "title": "Vasoactive Intestinal Polypeptide-Expressing Interneurons in the Hippocampus Support Goal-Oriented Spatial Learning.",
       "year": 2019,
       "journal": "Neuron",
       "attribution": {
@@ -17,6 +18,7 @@
     },
     {
       "paper_id": "KE4EERU8",
+      "title": "Brainstem nucleus incertus controls contextual memory formation.",
       "year": 2019,
       "journal": "Science",
       "attribution": {
@@ -28,6 +30,7 @@
     },
     {
       "paper_id": "DAVL9W98",
+      "title": "Hippocampal Network Reorganization Underlies the Formation of a Temporal Association Memory.",
       "year": 2020,
       "journal": "Neuron",
       "attribution": {
@@ -230,6 +233,7 @@
     },
     {
       "paper_id": "D5I4EKZM",
+      "title": "Signatures of rapid plasticity in hippocampal CA1 representations during novel experiences.",
       "year": 2022,
       "journal": "Neuron",
       "attribution": {
@@ -646,6 +650,7 @@
     },
     {
       "paper_id": "WSSZP72M",
+      "title": "Reorganization of CA1 dendritic dynamics by hippocampal sharp-wave ripples during learning.",
       "year": 2022,
       "journal": "Neuron",
       "attribution": {
@@ -657,6 +662,7 @@
     },
     {
       "paper_id": "R27V283A",
+      "title": "behaviorMate: An Intranet of Things Approach for Adaptable Control of Behavioral and Navigation-Based Experiments.",
       "year": 2024,
       "journal": "bioRxiv",
       "attribution": {
@@ -704,6 +710,7 @@
     },
     {
       "paper_id": "QQIBRBDR",
+      "title": "An Intranet of Things approach for adaptable control of behavioral and navigation-based experiments.",
       "year": 2025,
       "journal": "eLife",
       "attribution": {

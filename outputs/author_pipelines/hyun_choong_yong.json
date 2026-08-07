@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "R27V283A",
+      "title": "behaviorMate: An Intranet of Things Approach for Adaptable Control of Behavioral and Navigation-Based Experiments.",
       "year": 2024,
       "journal": "bioRxiv",
       "attribution": {
@@ -150,6 +151,7 @@
     },
     {
       "paper_id": "9U8LL9DE",
+      "title": "Visually guided in vivo single-cell electroporation for monitoring and manipulating mammalian hippocampal neurons.",
       "year": 2025,
       "journal": "Nature Protocols",
       "attribution": {
@@ -161,6 +163,7 @@
     },
     {
       "paper_id": "FPF3RL6U",
+      "title": "2P-NucTag: on-demand phototagging for molecular analysis of functionally identified cortical neurons.",
       "year": 2025,
       "journal": "bioRxiv",
       "attribution": {
@@ -172,6 +175,7 @@
     },
     {
       "paper_id": "QQIBRBDR",
+      "title": "An Intranet of Things approach for adaptable control of behavioral and navigation-based experiments.",
       "year": 2025,
       "journal": "eLife",
       "attribution": {
@@ -316,6 +320,7 @@
     },
     {
       "paper_id": "K73ERVAQ",
+      "title": "A transcriptomic axis aligns with in vivo functional dynamics in hippocampal inhibitory circuits.",
       "year": 2026,
       "journal": "bioRxiv",
       "attribution": {
@@ -628,6 +633,7 @@
     },
     {
       "paper_id": "VMWYLLBS",
+      "title": "2P-NucTag: On-demand phototagging for molecular analysis of functionally identified cortical neurons.",
       "year": 2026,
       "journal": "Neuron",
       "attribution": {

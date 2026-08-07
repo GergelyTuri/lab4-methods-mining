@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "K433LNFA",
+      "title": "Vasoactive Intestinal Polypeptide-Expressing Interneurons in the Hippocampus Support Goal-Oriented Spatial Learning.",
       "year": 2019,
       "journal": "Neuron",
       "attribution": {
@@ -17,6 +18,7 @@
     },
     {
       "paper_id": "GH4CWH6X",
+      "title": "Compartment-specific tuning of dendritic feature selectivity by intracellular Ca(2+) release.",
       "year": 2022,
       "journal": "Science",
       "attribution": {
@@ -294,6 +296,7 @@
     },
     {
       "paper_id": "KKAPPFAJ",
+      "title": "Adaptive stimulus selection for consolidation in the hippocampus.",
       "year": 2022,
       "journal": "Nature",
       "attribution": {
@@ -305,6 +308,7 @@
     },
     {
       "paper_id": "N9FA3VEL",
+      "title": "Variable recruitment of distal tuft dendrites shapes new hippocampal place fields.",
       "year": 2024,
       "journal": "bioRxiv (preprint)",
       "attribution": {
@@ -798,6 +802,7 @@
     },
     {
       "paper_id": "9U8LL9DE",
+      "title": "Visually guided in vivo single-cell electroporation for monitoring and manipulating mammalian hippocampal neurons.",
       "year": 2025,
       "journal": "Nature Protocols",
       "attribution": {
@@ -1013,6 +1018,7 @@
     },
     {
       "paper_id": "EV4PID4B",
+      "title": "Distal tuft dendrites predict properties of new hippocampal place fields.",
       "year": 2025,
       "journal": "Neuron",
       "attribution": {

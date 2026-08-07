@@ -17,6 +17,7 @@
   "papers": [
     {
       "paper_id": "ESKMCXTV",
+      "title": "Large-Scale 3D Two-Photon Imaging of Molecularly Identified CA1 Interneuron Dynamics in Behaving Mice.",
       "year": 2020,
       "journal": "Neuron",
       "attribution": {
@@ -260,6 +261,7 @@
     },
     {
       "paper_id": "LB5SX2W3",
+      "title": "A Role for the Locus Coeruleus in Hippocampal CA1 Place Cell Reorganization during Spatial Reward Learning.",
       "year": 2020,
       "journal": "Neuron",
       "attribution": {
@@ -526,6 +528,7 @@
     },
     {
       "paper_id": "HAD4KPSV",
+      "title": "Recruitment and inhibitory action of hippocampal axo-axonic cells during behavior.",
       "year": 2021,
       "journal": "Neuron",
       "attribution": {
@@ -760,6 +763,7 @@
     },
     {
       "paper_id": "GH4CWH6X",
+      "title": "Compartment-specific tuning of dendritic feature selectivity by intracellular Ca(2+) release.",
       "year": 2022,
       "journal": "Science",
       "attribution": {
@@ -771,6 +775,7 @@
     },
     {
       "paper_id": "KKAPPFAJ",
+      "title": "Adaptive stimulus selection for consolidation in the hippocampus.",
       "year": 2022,
       "journal": "Nature",
       "attribution": {
@@ -782,6 +787,7 @@
     },
     {
       "paper_id": "NHDBUGYK",
+      "title": "Local feedback inhibition tightly controls rapid formation of hippocampal place fields.",
       "year": 2022,
       "journal": "Neuron",
       "attribution": {
@@ -793,6 +799,7 @@
     },
     {
       "paper_id": "SZXKSZY9",
+      "title": "Local circuit amplification of spatial selectivity in the hippocampus.",
       "year": 2022,
       "journal": "Nature",
       "attribution": {
@@ -1057,6 +1064,7 @@
     },
     {
       "paper_id": "RBL2PSLI",
+      "title": "Inhibitory control of sharp-wave ripple duration during learning in hippocampal recurrent networks.",
       "year": 2023,
       "journal": "Nature Neuroscience",
       "attribution": {
@@ -1327,6 +1335,7 @@
     },
     {
       "paper_id": "YCFJ2N9Z",
+      "title": "Organization and Plasticity of Inhibition in Hippocampal Recurrent Circuits.",
       "year": 2023,
       "journal": "bioRxiv",
       "attribution": {
@@ -1574,6 +1583,7 @@
     },
     {
       "paper_id": "9U8LL9DE",
+      "title": "Visually guided in vivo single-cell electroporation for monitoring and manipulating mammalian hippocampal neurons.",
       "year": 2025,
       "journal": "Nature Protocols",
       "attribution": {
@@ -1789,6 +1799,7 @@
     },
     {
       "paper_id": "LKVXCUIR",
+      "title": "Recurrent connectivity shapes spatial coding in hippocampal CA3 subregions",
       "year": 2026,
       "journal": "Neuron",
       "attribution": {

@@ -12,6 +12,7 @@
   "papers": [
     {
       "paper_id": "UTJ3YW3R",
+      "title": "Impaired hippocampal place cell dynamics in a mouse model of the 22q11.2 deletion.",
       "year": 2017,
       "journal": "Nature Neuroscience",
       "attribution": {
@@ -23,6 +24,7 @@
     },
     {
       "paper_id": "K433LNFA",
+      "title": "Vasoactive Intestinal Polypeptide-Expressing Interneurons in the Hippocampus Support Goal-Oriented Spatial Learning.",
       "year": 2019,
       "journal": "Neuron",
       "attribution": {
@@ -34,6 +36,7 @@
     },
     {
       "paper_id": "PSG2BFK8",
+      "title": "Hippocampal adult-born granule cells drive network activity in a mouse model of chronic temporal lobe epilepsy.",
       "year": 2020,
       "journal": "Nature Communications",
       "attribution": {
@@ -66,6 +69,7 @@
     },
     {
       "paper_id": "BIWVCPEH",
+      "title": "Reactivation predicts the consolidation of unbiased long-term cognitive maps.",
       "year": 2021,
       "journal": "Nature Neuroscience",
       "attribution": {
@@ -77,6 +81,7 @@
     },
     {
       "paper_id": "KZYI47XK",
+      "title": "E-Cannula reveals anatomical diversity in sharp-wave ripples as a driver for the recruitment of distinct hippocampal assemblies.",
       "year": 2022,
       "journal": "Cell Reports",
       "attribution": {
@@ -218,6 +223,7 @@
     },
     {
       "paper_id": "UF5YJ4HS",
+      "title": "Parallel processing of sensory cue and spatial information in the dentate gyrus.",
       "year": 2022,
       "journal": "Cell Reports",
       "attribution": {
@@ -229,6 +235,7 @@
     },
     {
       "paper_id": "NAXFDQ32",
+      "title": "Adult-born granule cells facilitate remapping of spatial and non-spatial representations in the dentate gyrus.",
       "year": 2023,
       "journal": "Neuron",
       "attribution": {
@@ -240,6 +247,7 @@
     },
     {
       "paper_id": "RBL2PSLI",
+      "title": "Inhibitory control of sharp-wave ripple duration during learning in hippocampal recurrent networks.",
       "year": 2023,
       "journal": "Nature Neuroscience",
       "attribution": {

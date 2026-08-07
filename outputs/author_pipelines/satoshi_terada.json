@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "ESKMCXTV",
+      "title": "Large-Scale 3D Two-Photon Imaging of Molecularly Identified CA1 Interneuron Dynamics in Behaving Mice.",
       "year": 2020,
       "journal": "Neuron",
       "attribution": {
@@ -139,6 +140,7 @@
     },
     {
       "paper_id": "F3ELBLNY",
+      "title": "Supramammillary regulation of locomotion and hippocampal activity.",
       "year": 2021,
       "journal": "Science",
       "attribution": {
@@ -150,6 +152,7 @@
     },
     {
       "paper_id": "SWL5RJLJ",
+      "title": "Alternating sources of perisomatic inhibition during behavior.",
       "year": 2021,
       "journal": "Neuron",
       "attribution": {
@@ -230,6 +233,7 @@
     },
     {
       "paper_id": "KKAPPFAJ",
+      "title": "Adaptive stimulus selection for consolidation in the hippocampus.",
       "year": 2022,
       "journal": "Nature",
       "attribution": {
@@ -566,6 +570,7 @@
     },
     {
       "paper_id": "KZYI47XK",
+      "title": "E-Cannula reveals anatomical diversity in sharp-wave ripples as a driver for the recruitment of distinct hippocampal assemblies.",
       "year": 2022,
       "journal": "Cell Reports",
       "attribution": {
@@ -731,6 +736,7 @@
     },
     {
       "paper_id": "8SKA2ZZG",
+      "title": "Inhibitory plasticity supports replay generalization in the hippocampus.",
       "year": 2024,
       "journal": "Nature Neuroscience",
       "attribution": {
@@ -828,6 +834,7 @@
     },
     {
       "paper_id": "9U8LL9DE",
+      "title": "Visually guided in vivo single-cell electroporation for monitoring and manipulating mammalian hippocampal neurons.",
       "year": 2025,
       "journal": "Nature Protocols",
       "attribution": {
@@ -988,6 +995,7 @@
     },
     {
       "paper_id": "HU4D65CV",
+      "title": "Synaptic basis of feature selectivity in hippocampal neurons.",
       "year": 2025,
       "journal": "Nature",
       "attribution": {
@@ -999,6 +1007,7 @@
     },
     {
       "paper_id": "K3YPWJ6L",
+      "title": "Movement-stabilized three-dimensional optical recordings of membrane potential changes and calcium dynamics in hippocampal CA1 dendrites.",
       "year": 2026,
       "journal": "Neuron",
       "attribution": {
@@ -1155,6 +1164,7 @@
     },
     {
       "paper_id": "ZIRAQSPC",
+      "title": "Parallel independent voltage computing along dendrites of CA3 pyramidal neurons",
       "year": 2026,
       "journal": "Science",
       "attribution": {

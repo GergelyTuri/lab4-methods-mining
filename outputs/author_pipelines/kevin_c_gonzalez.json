@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "GH4CWH6X",
+      "title": "Compartment-specific tuning of dendritic feature selectivity by intracellular Ca(2+) release.",
       "year": 2022,
       "journal": "Science",
       "attribution": {
@@ -249,6 +250,7 @@
     },
     {
       "paper_id": "NHDBUGYK",
+      "title": "Local feedback inhibition tightly controls rapid formation of hippocampal place fields.",
       "year": 2022,
       "journal": "Neuron",
       "attribution": {
@@ -260,6 +262,7 @@
     },
     {
       "paper_id": "LBKM3N66",
+      "title": "Functional architecture of intracellular oscillations in hippocampal dendrites.",
       "year": 2024,
       "journal": "bioRxiv",
       "attribution": {
@@ -390,6 +393,7 @@
     },
     {
       "paper_id": "SECXDAKS",
+      "title": "Activity-dependent compartmentalization of dendritic mitochondria morphology through local regulation of fusion-fission balance in neurons in vivo.",
       "year": 2024,
       "journal": "Nature Communications",
       "attribution": {
@@ -401,6 +405,7 @@
     },
     {
       "paper_id": "UMWW7XYA",
+      "title": "Functional architecture of intracellular oscillations in hippocampal dendrites.",
       "year": 2024,
       "journal": "Nature Communications",
       "attribution": {
@@ -514,6 +519,7 @@
     },
     {
       "paper_id": "9U8LL9DE",
+      "title": "Visually guided in vivo single-cell electroporation for monitoring and manipulating mammalian hippocampal neurons.",
       "year": 2025,
       "journal": "Nature Protocols",
       "attribution": {
@@ -729,6 +735,7 @@
     },
     {
       "paper_id": "HU4D65CV",
+      "title": "Synaptic basis of feature selectivity in hippocampal neurons.",
       "year": 2025,
       "journal": "Nature",
       "attribution": {
@@ -1017,6 +1024,7 @@
     },
     {
       "paper_id": "K3YPWJ6L",
+      "title": "Movement-stabilized three-dimensional optical recordings of membrane potential changes and calcium dynamics in hippocampal CA1 dendrites.",
       "year": 2026,
       "journal": "Neuron",
       "attribution": {

@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "9U8LL9DE",
+      "title": "Visually guided in vivo single-cell electroporation for monitoring and manipulating mammalian hippocampal neurons.",
       "year": 2025,
       "journal": "Nature Protocols",
       "attribution": {
@@ -221,6 +222,7 @@
     },
     {
       "paper_id": "K3YPWJ6L",
+      "title": "Movement-stabilized three-dimensional optical recordings of membrane potential changes and calcium dynamics in hippocampal CA1 dendrites.",
       "year": 2026,
       "journal": "Neuron",
       "attribution": {
@@ -341,6 +343,7 @@
     },
     {
       "paper_id": "ZIRAQSPC",
+      "title": "Parallel independent voltage computing along dendrites of CA3 pyramidal neurons",
       "year": 2026,
       "journal": "Science",
       "attribution": {

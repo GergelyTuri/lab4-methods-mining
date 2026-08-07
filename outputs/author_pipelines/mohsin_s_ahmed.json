@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "DAVL9W98",
+      "title": "Hippocampal Network Reorganization Underlies the Formation of a Temporal Association Memory.",
       "year": 2020,
       "journal": "Neuron",
       "attribution": {
@@ -143,6 +144,7 @@
     },
     {
       "paper_id": "NHDBUGYK",
+      "title": "Local feedback inhibition tightly controls rapid formation of hippocampal place fields.",
       "year": 2022,
       "journal": "Neuron",
       "attribution": {

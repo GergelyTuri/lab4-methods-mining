@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "8NDG4UEZ",
+      "title": "Synaptogenic activity of the axon guidance molecule Robo2 underlies hippocampal circuit function.",
       "year": 2021,
       "journal": "Cell Reports",
       "attribution": {
@@ -126,6 +127,7 @@
     },
     {
       "paper_id": "D5I4EKZM",
+      "title": "Signatures of rapid plasticity in hippocampal CA1 representations during novel experiences.",
       "year": 2022,
       "journal": "Neuron",
       "attribution": {
@@ -137,6 +139,7 @@
     },
     {
       "paper_id": "GH4CWH6X",
+      "title": "Compartment-specific tuning of dendritic feature selectivity by intracellular Ca(2+) release.",
       "year": 2022,
       "journal": "Science",
       "attribution": {
@@ -148,6 +151,7 @@
     },
     {
       "paper_id": "NHDBUGYK",
+      "title": "Local feedback inhibition tightly controls rapid formation of hippocampal place fields.",
       "year": 2022,
       "journal": "Neuron",
       "attribution": {
@@ -455,6 +459,7 @@
     },
     {
       "paper_id": "SZXKSZY9",
+      "title": "Local circuit amplification of spatial selectivity in the hippocampus.",
       "year": 2022,
       "journal": "Nature",
       "attribution": {
@@ -501,6 +506,7 @@
     },
     {
       "paper_id": "WSSZP72M",
+      "title": "Reorganization of CA1 dendritic dynamics by hippocampal sharp-wave ripples during learning.",
       "year": 2022,
       "journal": "Neuron",
       "attribution": {

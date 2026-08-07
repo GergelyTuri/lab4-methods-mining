@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "EC39E7I5",
+      "title": "Regulation of neuronal input transformations by tunable dendritic inhibition.",
       "year": 2012,
       "journal": "Nature Neuroscience",
       "attribution": {
@@ -259,6 +260,7 @@
     },
     {
       "paper_id": "4UQQ3CM5",
+      "title": "Septo-hippocampal GABAergic signaling across multiple modalities in awake mice.",
       "year": 2013,
       "journal": "Nature Neuroscience",
       "attribution": {
@@ -502,6 +504,7 @@
     },
     {
       "paper_id": "6T8UW6LJ",
+      "title": "Dendritic inhibition in the hippocampus supports fear learning.",
       "year": 2014,
       "journal": "Science",
       "attribution": {
@@ -513,6 +516,7 @@
     },
     {
       "paper_id": "N5AUJWGX",
+      "title": "Parvalbumin-positive basket cells differentiate among hippocampal pyramidal cells.",
       "year": 2014,
       "journal": "Neuron",
       "attribution": {
@@ -564,6 +568,7 @@
     },
     {
       "paper_id": "YU3INJP9",
+      "title": "Distinct Contribution of Adult-Born Hippocampal Granule Cells to Context Encoding.",
       "year": 2016,
       "journal": "Neuron",
       "attribution": {
@@ -575,6 +580,7 @@
     },
     {
       "paper_id": "ETEC7ELI",
+      "title": "Maximally selective single-cell target for circuit control in epilepsy models.",
       "year": 2021,
       "journal": "Neuron",
       "attribution": {
@@ -672,6 +678,7 @@
     },
     {
       "paper_id": "F3ELBLNY",
+      "title": "Supramammillary regulation of locomotion and hippocampal activity.",
       "year": 2021,
       "journal": "Science",
       "attribution": {

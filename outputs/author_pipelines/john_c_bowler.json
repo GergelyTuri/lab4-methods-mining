@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "U7L3RARN",
+      "title": "Sublayer-Specific Coding Dynamics during Spatial Navigation and Learning in Hippocampal Area CA1.",
       "year": 2016,
       "journal": "Neuron",
       "attribution": {
@@ -17,6 +18,7 @@
     },
     {
       "paper_id": "UTJ3YW3R",
+      "title": "Impaired hippocampal place cell dynamics in a mouse model of the 22q11.2 deletion.",
       "year": 2017,
       "journal": "Nature Neuroscience",
       "attribution": {
@@ -28,6 +30,7 @@
     },
     {
       "paper_id": "SWL5RJLJ",
+      "title": "Alternating sources of perisomatic inhibition during behavior.",
       "year": 2021,
       "journal": "Neuron",
       "attribution": {
@@ -108,6 +111,7 @@
     },
     {
       "paper_id": "D5I4EKZM",
+      "title": "Signatures of rapid plasticity in hippocampal CA1 representations during novel experiences.",
       "year": 2022,
       "journal": "Neuron",
       "attribution": {
@@ -172,6 +176,7 @@
     },
     {
       "paper_id": "UF5YJ4HS",
+      "title": "Parallel processing of sensory cue and spatial information in the dentate gyrus.",
       "year": 2022,
       "journal": "Cell Reports",
       "attribution": {
@@ -183,6 +188,7 @@
     },
     {
       "paper_id": "XM7ZNKAL",
+      "title": "Direct cortical inputs to hippocampal area CA1 transmit complementary signals for goal-directed navigation.",
       "year": 2023,
       "journal": "Neuron",
       "attribution": {
@@ -584,6 +590,7 @@
     },
     {
       "paper_id": "R27V283A",
+      "title": "behaviorMate: An Intranet of Things Approach for Adaptable Control of Behavioral and Navigation-Based Experiments.",
       "year": 2024,
       "journal": "bioRxiv",
       "attribution": {
@@ -634,6 +641,7 @@
     },
     {
       "paper_id": "QQIBRBDR",
+      "title": "An Intranet of Things approach for adaptable control of behavioral and navigation-based experiments.",
       "year": 2025,
       "journal": "eLife",
       "attribution": {

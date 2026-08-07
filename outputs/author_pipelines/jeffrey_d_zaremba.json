@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "6T8UW6LJ",
+      "title": "Dendritic inhibition in the hippocampus supports fear learning.",
       "year": 2014,
       "journal": "Science",
       "attribution": {
@@ -17,6 +18,7 @@
     },
     {
       "paper_id": "U7L3RARN",
+      "title": "Sublayer-Specific Coding Dynamics during Spatial Navigation and Learning in Hippocampal Area CA1.",
       "year": 2016,
       "journal": "Neuron",
       "attribution": {
@@ -120,6 +122,7 @@
     },
     {
       "paper_id": "V55JCIHQ",
+      "title": "Gating of hippocampal activity, plasticity, and memory by entorhinal cortex long-range inhibition.",
       "year": 2016,
       "journal": "Science",
       "attribution": {
@@ -131,6 +134,7 @@
     },
     {
       "paper_id": "YU3INJP9",
+      "title": "Distinct Contribution of Adult-Born Hippocampal Granule Cells to Context Encoding.",
       "year": 2016,
       "journal": "Neuron",
       "attribution": {
@@ -309,6 +313,7 @@
     },
     {
       "paper_id": "UTJ3YW3R",
+      "title": "Impaired hippocampal place cell dynamics in a mouse model of the 22q11.2 deletion.",
       "year": 2017,
       "journal": "Nature Neuroscience",
       "attribution": {

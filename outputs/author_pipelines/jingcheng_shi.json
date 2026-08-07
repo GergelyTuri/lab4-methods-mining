@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "FPF3RL6U",
+      "title": "2P-NucTag: on-demand phototagging for molecular analysis of functionally identified cortical neurons.",
       "year": 2025,
       "journal": "bioRxiv",
       "attribution": {
@@ -351,6 +352,7 @@
     },
     {
       "paper_id": "K73ERVAQ",
+      "title": "A transcriptomic axis aligns with in vivo functional dynamics in hippocampal inhibitory circuits.",
       "year": 2026,
       "journal": "bioRxiv",
       "attribution": {
@@ -362,6 +364,7 @@
     },
     {
       "paper_id": "VMWYLLBS",
+      "title": "2P-NucTag: On-demand phototagging for molecular analysis of functionally identified cortical neurons.",
       "year": 2026,
       "journal": "Neuron",
       "attribution": {

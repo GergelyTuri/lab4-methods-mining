@@ -6,6 +6,7 @@
   "papers": [
     {
       "paper_id": "F3ELBLNY",
+      "title": "Supramammillary regulation of locomotion and hippocampal activity.",
       "year": 2021,
       "journal": "Science",
       "attribution": {
@@ -17,6 +18,7 @@
     },
     {
       "paper_id": "HAD4KPSV",
+      "title": "Recruitment and inhibitory action of hippocampal axo-axonic cells during behavior.",
       "year": 2021,
       "journal": "Neuron",
       "attribution": {
@@ -461,6 +463,7 @@
     },
     {
       "paper_id": "SWL5RJLJ",
+      "title": "Alternating sources of perisomatic inhibition during behavior.",
       "year": 2021,
       "journal": "Neuron",
       "attribution": {

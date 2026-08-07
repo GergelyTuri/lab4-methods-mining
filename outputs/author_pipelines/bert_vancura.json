@@ -17,6 +17,7 @@
   "papers": [
     {
       "paper_id": "ESKMCXTV",
+      "title": "Large-Scale 3D Two-Photon Imaging of Molecularly Identified CA1 Interneuron Dynamics in Behaving Mice.",
       "year": 2020,
       "journal": "Neuron",
       "attribution": {
@@ -260,6 +261,7 @@
     },
     {
       "paper_id": "HAD4KPSV",
+      "title": "Recruitment and inhibitory action of hippocampal axo-axonic cells during behavior.",
       "year": 2021,
       "journal": "Neuron",
       "attribution": {
@@ -494,6 +496,7 @@
     },
     {
       "paper_id": "KKAPPFAJ",
+      "title": "Adaptive stimulus selection for consolidation in the hippocampus.",
       "year": 2022,
       "journal": "Nature",
       "attribution": {
@@ -505,6 +508,7 @@
     },
     {
       "paper_id": "SZXKSZY9",
+      "title": "Local circuit amplification of spatial selectivity in the hippocampus.",
       "year": 2022,
       "journal": "Nature",
       "attribution": {
@@ -550,6 +554,7 @@
     },
     {
       "paper_id": "RBL2PSLI",
+      "title": "Inhibitory control of sharp-wave ripple duration during learning in hippocampal recurrent networks.",
       "year": 2023,
       "journal": "Nature Neuroscience",
       "attribution": {
@@ -820,6 +825,7 @@
     },
     {
       "paper_id": "YCFJ2N9Z",
+      "title": "Organization and Plasticity of Inhibition in Hippocampal Recurrent Circuits.",
       "year": 2023,
       "journal": "bioRxiv",
       "attribution": {
